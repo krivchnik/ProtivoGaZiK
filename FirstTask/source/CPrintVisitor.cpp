@@ -6,8 +6,10 @@
 #include "CNumExpression.h"
 #include "CIdExpression.h"
 
-char GetOperationSign(int index) {
-	std::string signs = "+-*/";
+#include <vector>
+
+std::string GetOperationSign(int index) {
+	std::vector<std::string> signs = {"addition", "subtraction", "multiplication", "division"};
 	return signs[index];
 }
 
@@ -38,9 +40,9 @@ void CPrintVisitor::Visit(CIdExpression* expression) {
 }
 
 void CPrintVisitor::Visit(CAssignStatement* statement) {
-	file << "=" << getArrow();
+	file << "assignment" << getArrow();
 	statement->GetVariable()->Accept(this);
-	file << getEndLine() << "=" << getArrow();
+	file << getEndLine() << "assignment" << getArrow();
 	statement->GetExpression()->Accept(this);
 }
 
