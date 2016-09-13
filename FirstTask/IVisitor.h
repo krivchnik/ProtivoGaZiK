@@ -7,13 +7,13 @@
 #include "CNumExpression.h"
 #include "CIdExpression.h"
 
-class IVistor {
+class IVisitor {
 public:
 
-	virtual void visit(CCompoundStatement*) = 0;
-	virtual void visit(CAssignStatement*) = 0;
+	virtual void Visit(CCompoundStatement*) = 0;
+	virtual void Visit(CAssignStatement*) = 0;
 
-	virtual void visit(COperationExpression*) = 0;
-	virtual void visit(CNumExpression*) = 0;
-	virtual void visit(CIdExpression*) = 0;
+	virtual void Visit(COperationExpression*) = 0;
+	virtual void Visit(CNumExpression*) = 0;
+	virtual void Visit(CIdExpression*) = 0;
 };

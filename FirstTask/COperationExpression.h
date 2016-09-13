@@ -4,9 +4,7 @@
 
 #include <memory>
 
-enum OperationType {
-	+, -, *, :
-};
+enum OperationType { addition, subtraction, multiplication, division };
 
 class COperationExpression: public IExpression {
 public:

@@ -9,7 +9,7 @@ int main() {
 
 	std::shared_ptr<CNumExpression> five(new CNumExpression(5));
 	std::shared_ptr<CNumExpression> three(new CNumExpression(3));
-	std::shared_ptr<COperationExpression> addition(five, three, new CNumExpression(OperationType::+));
+	std::shared_ptr<COperationExpression> addition(five, three, new CNumExpression(OperationType::addition));
 	std::shared_ptr<CIdExpression> a_variable(std::string("a"));
 	std::shared_ptr<CAssignStatement> assign(a_variable, addition);
 
