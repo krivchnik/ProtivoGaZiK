@@ -2,8 +2,6 @@
 
 #include "IStatement.h"
 
-#include <memory>
-
 class CCompoundStatement: public IStatement {
 public:
 	CCompoundStatement(std::shared_ptr<INode> leftOperand, std::shared_ptr<INode> rightOperand);

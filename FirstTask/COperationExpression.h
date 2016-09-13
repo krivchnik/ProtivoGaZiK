@@ -2,8 +2,6 @@
 
 #include "IExpression.h"
 
-#include <memory>
-
 enum OperationType { addition, subtraction, multiplication, division };
 
 class COperationExpression: public IExpression {

@@ -1,11 +1,10 @@
 #pragma once
 
-#include "CCompoundStatement.h"
-#include "CAssignStatement.h"
-
-#include "COperationExpression.h"
-#include "CNumExpression.h"
-#include "CIdExpression.h"
+class CCompoundStatement;
+class COperationExpression;
+class CNumExpression;
+class CAssignStatement;; 
+class CIdExpression;
 
 class IVisitor {
 public:

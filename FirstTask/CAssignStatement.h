@@ -4,8 +4,6 @@
 #include "CIdExpression.h"
 #include "COperationExpression.h"
 
-#include <memory>
-
 class CAssignStatement: public IStatement {
 public:
 	CAssignStatement(std::shared_ptr<CIdExpression> variable, std::shared_ptr<COperationExpression> expression);
