@@ -1,10 +1,20 @@
 #include "CPrintVisitor.h"
 
+#include "CCompoundStatement.h"
+#include "CAssignStatement.h"
+#include "COperationExpression.h"
+#include "CNumExpression.h"
+#include "CIdExpression.h"
+
+char GetOperationSign(int index) {
+	std::string signs = "+-*/";
+	return signs[index];
+}
 
 void CPrintVisitor::StartVisit(INode* startNode, std::string filename) {
 	file.open(filename);
 	
-	file << "digraph task1 {\n";
+	file << "digraph task1 {\n\t";
 
 	startNode->Accept(this);
 
@@ -13,10 +23,10 @@ void CPrintVisitor::StartVisit(INode* startNode, std::string filename) {
 }
 
 void CPrintVisitor::Visit(COperationExpression* expression) {
-	file << expression->GetOperationType() << "->";
-	expression->leftOperand->Accept(this);
-	file << ";\n" << expression->GetOperationType() << "->";
-	expression->rightOperand->Accept(this);
+	file << GetOperationSign(expression->GetOperationType()) << getArrow();
+	expression->GetLeftOperand()->Accept(this);
+	file << getEndLine() << GetOperationSign(expression->GetOperationType()) << getArrow();
+	expression->GetRightOperand()->Accept(this);
 }
 
 void CPrintVisitor::Visit(CNumExpression* expression) {
@@ -28,15 +38,23 @@ void CPrintVisitor::Visit(CIdExpression* expression) {
 }
 
 void CPrintVisitor::Visit(CAssignStatement* statement) {
-	file << " = " << "->";
-	expression->leftOperand->Accept(this);
-	file << ";\n" << " = " << "->";
-	expression->rightOperand->Accept(this);
+	file << "=" << getArrow();
+	statement->GetVariable()->Accept(this);
+	file << getEndLine() << "=" << getArrow();
+	statement->GetExpression()->Accept(this);
 }
 
 void CPrintVisitor::Visit(CCompoundStatement* statement) {
-	file << " compound " << "->";
-	statement->leftOperand->Accept(this);
-	file << ";\n compound " << "->";
-	statement->rightOperand->Accept(this);
+	file << "compound" << getArrow();
+	statement->GetLeftOperand()->Accept(this);
+	file << getEndLine() << "compound" << getArrow();
+	statement->GetRightOperand()->Accept(this);
+}
+
+std::string CPrintVisitor::getArrow() {
+	return " -> ";
+}
+
+std::string CPrintVisitor::getEndLine() {
+	return ";\n\t";
 }

@@ -18,4 +18,7 @@ public:
 
 private:
 	std::ofstream file;
+
+	std::string getArrow();
+	std::string getEndLine();
 };
