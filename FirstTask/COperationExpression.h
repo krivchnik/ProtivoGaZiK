@@ -5,7 +5,7 @@
 #include <memory>
 
 enum OperationType {
-	'+', '-', '*', ':'
+	+, -, *, :
 };
 
 class COperationExpression: public IExpression {
@@ -14,6 +14,8 @@ public:
 	std::shared_ptr<IExpression> GetLeftOperand();
 	std::shared_ptr<IExpression> GetRightOperand();
 	OperandType GetOperationType();
+
+	void Accept(IVisitor*);
 
 private:
 	std::shared_ptr<IExpression> leftOperand;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CCompoundStatment.h"
+#include "CCompoundStatement.h"
 #include "CAssignStatement.h"
 
 #include "COperationExpression.h"

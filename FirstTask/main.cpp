@@ -1,37 +1,19 @@
-#include <iostream>
-#include <memory>
+#include "CNumExpression.h"
+#include "COperationExpression.h"
+#include "CIdExpression.h"
 
-
-class IVistor {
-	virtual void visit(COperandExpression*) = 0;
-	virtual void visit(CNumExpression*) = 0;
-	virtual void visit(CIdExpression*) = 0;
-	virtual void visit(CAssignStatement*) = 0;
-};
-
-class CPrintVisitor: public IVistor {
-
-	void visit(COperandExpression* exp) {
-		exp->leftOperand->Accept(this);
-		std::cout << exp->type << "\n";
-		exp->rightOperand->Accept(this);
-	}
-
-	void visit(CNumExpression* exp) {
-		std::cout << exp->number << "\n";
-	}
-
-	void visit(CAssignStatement* st) {
-		st->leftOperand->Accept(this);
-		std::cout << "Assign statement";
-		st->rightOperand->Accept(this);\
-	}
-};
+#include "CCompoundStatement.h"
+#include "CAssignStatement.h"
 
 int main() {
 
-	/*make tree*/
+	std::shared_ptr<CNumExpression> five(new CNumExpression(5));
+	std::shared_ptr<CNumExpression> three(new CNumExpression(3));
+	std::shared_ptr<COperationExpression> addition(five, three, new CNumExpression(OperationType::+));
+	std::shared_ptr<CIdExpression> a_variable(std::string("a"));
+	std::shared_ptr<CAssignStatement> assign(a_variable, addition);
 
-
+	CPrintVisitor visitor;
+	visitor(assign);
 	return 0;
 }
