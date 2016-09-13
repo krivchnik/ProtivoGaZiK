@@ -13,5 +13,5 @@ public:
 	void Accept(IVisitor*);
 private:
 	std::shared_ptr<CIdExpression> variable;
-	std::shared_ptr<COperandExpression> expression;
+	std::shared_ptr<COperationExpression> expression;
 };

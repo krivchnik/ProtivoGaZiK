@@ -3,7 +3,7 @@ CC = g++
 CFLAGS = --std=c++11
 
 Compiler: CNumExpression.o CIdExpression.o COperationExpression.o CAssignStatement.o CCompoundStatement.o main.o
-	$(CC) --std=c++11 $^ -o Compiler
+	$(CC) $(CFLAGS) $^ -o Compiler
 
 main.o: main.cpp
 	$(CC) -c $(CFLAGS) $^ -o $@
@@ -14,7 +14,7 @@ CNumExpression.o: CNumExpression.cpp
 CIdExpression.o: CIdExpression.cpp
 	$(CC) -c $(CFLAGS) $^ -o $@
 
-COpearationExpression.o: COperationExpression.cpp
+COperationExpression.o: COperationExpression.cpp
 	$(CC) -c $(CFLAGS) $^ -o $@
 
 CAssignStatement.o: CAssignStatement.cpp

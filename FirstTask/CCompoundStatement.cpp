@@ -1,6 +1,6 @@
 #include "CCompoundStatement.h"
 
-CCompoundStatement::CCompoundStatement(std::shared_ptr<INode> leftOperand, std::shared_ptr<INode> rightOperand) :
+CCompoundStatement::CCompoundStatement(std::shared_ptr<INode> leftOperand_, std::shared_ptr<INode> rightOperand_) :
 	leftOperand(leftOperand_), rightOperand(rightOperand_) {}
 
 std::shared_ptr<INode> CCompoundStatement::GetLeftOperand() {
