@@ -12,29 +12,29 @@ void CPrintVisitor::StartVisit(INode* startNode, std::string filename) {
 	file.close();	
 }
 
-void CPrintVisitor::visit(COperationExpression* expression) {
-	file << expression->GetType() << "->";
-	exp->leftOperand->Accept(this);
-	file << ";\n" << expression->GetType() << "->"
-	exp->rightOperand->Accept(this);
+void CPrintVisitor::Visit(COperationExpression* expression) {
+	file << expression->GetOperationType() << "->";
+	expression->leftOperand->Accept(this);
+	file << ";\n" << expression->GetOperationType() << "->";
+	expression->rightOperand->Accept(this);
 }
 
-void CPrintVisitor::visit(CNumExpression* expression) {
+void CPrintVisitor::Visit(CNumExpression* expression) {
 	file << expression->GetNumber();
 }
 
-void CPrintVisitor::visit(CIdExpression* expression) {
+void CPrintVisitor::Visit(CIdExpression* expression) {
 	file << expression->GetName();
 }
 
-void CPrintVisitor::visit(CAssignStatement* statement) {
+void CPrintVisitor::Visit(CAssignStatement* statement) {
 	file << " = " << "->";
-	exp->leftOperand->Accept(this);
-	file << ";\n" << " = " << "->"
-	exp->rightOperand->Accept(this);
+	expression->leftOperand->Accept(this);
+	file << ";\n" << " = " << "->";
+	expression->rightOperand->Accept(this);
 }
 
-void CPrintVisitor::visit(CCompoundStatement* statement) {
+void CPrintVisitor::Visit(CCompoundStatement* statement) {
 	file << " compound " << "->";
 	statement->leftOperand->Accept(this);
 	file << ";\n compound " << "->";

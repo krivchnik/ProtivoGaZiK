@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IVisitor.h"
+#include "INode.h"
 
 #include <fstream>
 

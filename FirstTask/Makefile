@@ -2,7 +2,7 @@ CC = g++
 
 CFLAGS = --std=c++11
 
-Compiler: CNumExpression.o CIdExpression.o COperationExpression.o CAssignStatement.o CCompoundStatement.o main.o
+Compiler: CNumExpression.o CIdExpression.o COperationExpression.o CAssignStatement.o CCompoundStatement.o CPrintVisitor.o main.o
 	$(CC) $(CFLAGS) $^ -o Compiler
 
 main.o: main.cpp
