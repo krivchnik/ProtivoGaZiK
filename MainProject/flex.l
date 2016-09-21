@@ -1,10 +1,11 @@
-%{
-#define YYSTYPE string
-#include <string>
-#include <cstring>
-using namespace std;
-#include "y.tab.h"
-%}
+%option noyywrap
+%option c++
+
+%top{
+	/* This code goes at the "top" of the generated file. */
+	#include <iostream>
+	using namespace std;
+}
 
 
 DIGIT            [0-9]
@@ -14,15 +15,15 @@ IntegerLiteral   [1-9]{DIGIT}*|0
 
 %%
 
-"class"      	std::cout << "CLASS";
-"extends"    	std::cout << "EXTENDS";
-"public"        std::cout << "PUBLIC";
-"static"        std::cout << "STATIC";
+class      	std::cout << "CLASS";
+extends  	std::cout << "EXTENDS";
+public         std::cout << "PUBLIC";
+static     std::cout << "STATIC";
 
-id           	std::cout << "ID";
-IntegerLiteral  std::cout << "NUMBER";
+{id}           	std::cout << "ID";
+{IntegerLiteral}  std::cout << "NUMBER";
 
-"{"				std::cout << "LFBRACE";
+"{"  			std::cout << "LFBRACE";
 "}"				std::cout << "RFBRACE";
 "("				std::cout << "LPBRACE";
 ")"				std::cout << "RPBRACE";
@@ -33,6 +34,12 @@ IntegerLiteral  std::cout << "NUMBER";
 "/"				std::cout << "SLASH";
 
 
+%%
+
+int main( int argc, char* argv[]) {
+	yylex();
+	return 0;
+}
 
 
 
