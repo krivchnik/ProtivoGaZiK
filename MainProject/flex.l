@@ -5,6 +5,7 @@
 	/* This code goes at the "top" of the generated file. */
 	#include <iostream>
 	using namespace std;
+	extern "C" int yylex();
 }
 
 
@@ -15,13 +16,13 @@ IntegerLiteral   [1-9]{DIGIT}*|0
 
 %%
 
-class      	std::cout << "CLASS";
-extends  	std::cout << "EXTENDS";
-public         std::cout << "PUBLIC";
-static     std::cout << "STATIC";
+class      	    std::cout << "CLASS";
+extends  	    std::cout << "EXTENDS";
+public          std::cout << "PUBLIC";
+static          std::cout << "STATIC";
 
 {id}           	std::cout << "ID";
-{IntegerLiteral}  std::cout << "NUMBER";
+{IntegerLiteral}std::cout << "NUMBER";
 
 "{"  			std::cout << "LFBRACE";
 "}"				std::cout << "RFBRACE";
@@ -37,9 +38,6 @@ static     std::cout << "STATIC";
 %%
 
 int main( int argc, char* argv[]) {
-	yylex();
-	return 0;
+	FlexLexer* lexer = new yyFlexLexer();
+    lexer->yylex() ;
 }
-
-
-

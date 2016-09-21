@@ -1,8 +1,9 @@
 	/* This code goes at the "top" of the generated file. */
 	#include <iostream>
 	using namespace std;
+	extern "C" int yylex();
 
-#line 6 "lex.yy.cc"
+#line 7 "lex.yy.cc"
 
 #define  YY_INT_ALIGNED short int
 
@@ -445,7 +446,7 @@ static yyconst flex_int16_t yy_chk[78] =
 #define YY_RESTORE_YY_MORE_OFFSET
 #line 1 "flex.l"
 
-#line 449 "lex.yy.cc"
+#line 450 "lex.yy.cc"
 
 #define INITIAL 0
 
@@ -577,10 +578,10 @@ YY_DECL
 		}
 
 	{
-#line 16 "flex.l"
+#line 17 "flex.l"
 
 
-#line 584 "lex.yy.cc"
+#line 585 "lex.yy.cc"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -639,80 +640,80 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 18 "flex.l"
+#line 19 "flex.l"
 std::cout << "CLASS";
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 19 "flex.l"
+#line 20 "flex.l"
 std::cout << "EXTENDS";
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 20 "flex.l"
+#line 21 "flex.l"
 std::cout << "PUBLIC";
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 21 "flex.l"
+#line 22 "flex.l"
 std::cout << "STATIC";
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 23 "flex.l"
+#line 24 "flex.l"
 std::cout << "ID";
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 24 "flex.l"
+#line 25 "flex.l"
 std::cout << "NUMBER";
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 26 "flex.l"
+#line 27 "flex.l"
 std::cout << "LFBRACE";
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 27 "flex.l"
+#line 28 "flex.l"
 std::cout << "RFBRACE";
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 28 "flex.l"
+#line 29 "flex.l"
 std::cout << "LPBRACE";
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 29 "flex.l"
+#line 30 "flex.l"
 std::cout << "RPBRACE";
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 31 "flex.l"
+#line 32 "flex.l"
 std::cout << "PLUS";
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 32 "flex.l"
+#line 33 "flex.l"
 std::cout << "MINUS";
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 33 "flex.l"
+#line 34 "flex.l"
 std::cout << "STAR";
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 34 "flex.l"
+#line 35 "flex.l"
 std::cout << "SLASH";
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 37 "flex.l"
+#line 38 "flex.l"
 ECHO;
 	YY_BREAK
-#line 716 "lex.yy.cc"
+#line 717 "lex.yy.cc"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1667,13 +1668,13 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 37 "flex.l"
+#line 38 "flex.l"
 
 
 
 int main( int argc, char* argv[]) {
-	yylex();
-	return 0;
+	FlexLexer* lexer = new yyFlexLexer();
+        lexer->yylex() ;
 }
 
 
