@@ -27,8 +27,10 @@
 	   	 if( yytext[i] == '\n' ) {
 	   		 line_number++;
 	   		 column_number = 1;
-	   	 } else {
-             printf("hey");
+	   	 } else if (yytext[i] == '\t'){
+	   	 	column_number += 4;
+	   	 } 
+	   	 else {
 	   		 column_number++;
 	   	 }
 	    }
@@ -46,25 +48,24 @@ IntegerLiteral   [1-9]{DIGIT}*|0
 
 %%
 
-class       	    printf("CLASS");
-extends  	    printf("EXTENDS");
-public          printf("PUBLIC");
-static          printf("STATIC");
+class       	{updateLocation(); printf("CLASS (%d, %d)", yylloc.first_column, yylloc.first_line);}
+extends  	    {updateLocation(); printf("EXTENDS (%d, %d)", yylloc.first_column, yylloc.first_line);}
+public          {updateLocation(); printf("PUBLIC (%d, %d)", yylloc.first_column, yylloc.first_line);}
+static          {updateLocation(); printf("STATIC (%d, %d)", yylloc.first_column, yylloc.first_line);}
 
-{id}           	{printf("ID%d", yylloc.first_column);}
-{IntegerLiteral} printf("NUMBER");
+{id}           	{updateLocation(); printf("ID (%d, %d)", yylloc.first_column, yylloc.first_line);}
+{IntegerLiteral} {updateLocation(); printf("NUMBER (%d, %d)", yylloc.first_column, yylloc.first_line);}
 
-"{"  	{	printf("LFBRACE "); }
-"}"				printf("RFBRACE");
-"("				printf("LPBRACE");
-")"				printf("RPBRACE");
+"{"  	{updateLocation(); printf("LFBRACE (%d, %d)", yylloc.first_column, yylloc.first_line);}
+"}"				{updateLocation(); printf("LFBRACE (%d, %d)", yylloc.first_column, yylloc.first_line);}
+"("				{updateLocation(); printf("LPBRACE (%d, %d)", yylloc.first_column, yylloc.first_line);}
+")"				{updateLocation(); printf("RPBRACE (%d, %d)", yylloc.first_column, yylloc.first_line);}
 
-"+"				printf("PLUS");
-"-"				printf("MINUS");
-"*"				printf("STAR");
-"/"				printf("SLASH");
-
-
+"+"				{updateLocation(); printf("PLUS (%d, %d)", yylloc.first_column, yylloc.first_line);}
+"-"				{updateLocation(); printf("MINUS (%d, %d)", yylloc.first_column, yylloc.first_line);}
+"*"				{updateLocation(); printf("STAR (%d, %d)", yylloc.first_column, yylloc.first_line);}
+"/"				{updateLocation(); printf("SLASH (%d, %d)", yylloc.first_column, yylloc.first_line);}
+"\n"|"\t"|" "           {updateLocation(); printf("%s", yytext);}
 %%
 
 int main( int argc, char* argv[]) {
