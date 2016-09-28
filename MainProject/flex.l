@@ -3,7 +3,8 @@
 %{
 	/* This code goes at the "top" of the generated file. */
 	#include <string.h>
-	#include <stdio.h>	
+	#include <stdio.h>
+	#include <ctype.h>	
 	//using namespace std;
 
     typedef struct YYLTYPE  
@@ -38,34 +39,68 @@
 	    yylloc.last_line = line_number;
 	    yylloc.last_column = column_number;
 	}
+
+	void printValueLocation(char *token_name, char *token_value) {
+		printf("%s(%s){%d,%d}", token_name, token_value, yylloc.first_column, yylloc.first_line);
+	}
+
+	void printLocation(char *token_name) {
+		printf("%s{%d,%d}", token_name, yylloc.first_column, yylloc.first_line);
+	}
+
+	void toUpper(char *str) {
+		int i = 0; 
+		while (str[i]) {
+			str[i] = toupper(str[i]);
+			++i;
+		}
+	}
+
 %}
 
 
 DIGIT              [0-9]
 LETER            [a-zA-Z_]
+STRING           \"(\\.|[^"])*\"
 id               {LETER}({DIGIT}|{LETER})*
 IntegerLiteral   [1-9]{DIGIT}*|0
+keyword          class|extends|public|private|static|int|double|boolean|void
 
 %%
 
-class       	{updateLocation(); printf("CLASS (%d, %d)", yylloc.first_column, yylloc.first_line);}
-extends  	    {updateLocation(); printf("EXTENDS (%d, %d)", yylloc.first_column, yylloc.first_line);}
-public          {updateLocation(); printf("PUBLIC (%d, %d)", yylloc.first_column, yylloc.first_line);}
-static          {updateLocation(); printf("STATIC (%d, %d)", yylloc.first_column, yylloc.first_line);}
+{keyword} {
+	updateLocation();
+	toUpper(yytext);
+	printLocation(yytext);
+}
 
-{id}           	{updateLocation(); printf("ID (%d, %d)", yylloc.first_column, yylloc.first_line);}
-{IntegerLiteral} {updateLocation(); printf("NUMBER (%d, %d)", yylloc.first_column, yylloc.first_line);}
+{STRING}         {
 
-"{"  	{updateLocation(); printf("LFBRACE (%d, %d)", yylloc.first_column, yylloc.first_line);}
-"}"				{updateLocation(); printf("LFBRACE (%d, %d)", yylloc.first_column, yylloc.first_line);}
-"("				{updateLocation(); printf("LPBRACE (%d, %d)", yylloc.first_column, yylloc.first_line);}
-")"				{updateLocation(); printf("RPBRACE (%d, %d)", yylloc.first_column, yylloc.first_line);}
+	updateLocation();
+ 
+	const unsigned int MAX_SIZE = 1000;
+	char no_quotes[MAX_SIZE];
 
-"+"				{updateLocation(); printf("PLUS (%d, %d)", yylloc.first_column, yylloc.first_line);}
-"-"				{updateLocation(); printf("MINUS (%d, %d)", yylloc.first_column, yylloc.first_line);}
-"*"				{updateLocation(); printf("STAR (%d, %d)", yylloc.first_column, yylloc.first_line);}
-"/"				{updateLocation(); printf("SLASH (%d, %d)", yylloc.first_column, yylloc.first_line);}
-"\n"|"\t"|" "           {updateLocation(); printf("%s", yytext);}
+	strcpy(no_quotes, yytext + 1);
+	no_quotes[strlen(yytext) - 2] = '\0';
+
+	printValueLocation("STRING", no_quotes);
+
+}
+
+{id}           	 {updateLocation(); printValueLocation("ID", yytext);}
+{IntegerLiteral} {updateLocation(); printValueLocation("NUMBER", yytext);}
+
+"{"              {updateLocation(); printLocation("LFBRACE");}
+"}"				 {updateLocation(); printLocation("LFBRACE");}
+"("				 {updateLocation(); printLocation("LPBRACE");}
+")"				 {updateLocation(); printLocation("RPBRACE");}
+
+"+"              {updateLocation(); printLocation("PLUS");}
+"-"              {updateLocation(); printLocation("MINUS");}
+"*"              {updateLocation(); printLocation("STAR");}
+"/"              {updateLocation(); printLocation("SLASH");}
+"\n"|"\t"|" "    {updateLocation(); printf("%s", yytext);}
 %%
 
 int main( int argc, char* argv[]) {
