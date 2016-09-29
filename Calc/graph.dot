@@ -1,0 +1,6 @@
+digraph task1 {
+	additionAAA1 -> multiplicationAAA2 -> Number1AAA3;
+	multiplicationAAA2 -> Number1AAA4;
+	additionAAA1 -> multiplicationAAA5 -> Number1AAA6;
+	multiplicationAAA5 -> Number1AAA7
+}

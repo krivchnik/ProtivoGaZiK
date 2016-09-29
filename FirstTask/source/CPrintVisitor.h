@@ -17,6 +17,11 @@ public:
 	void Visit(CIdExpression*);
 
 private:
+
+	int count_;
+
+	std::string delim = "AAA";
+
 	std::ofstream file;
 
 	std::string getArrow();

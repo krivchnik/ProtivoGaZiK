@@ -14,6 +14,9 @@ std::string GetOperationSign(int index) {
 }
 
 void CPrintVisitor::StartVisit(INode* startNode, std::string filename) {
+
+	count_ = 0;
+
 	file.open(filename);
 	
 	file << "digraph task1 {\n\t";
@@ -25,18 +28,21 @@ void CPrintVisitor::StartVisit(INode* startNode, std::string filename) {
 }
 
 void CPrintVisitor::Visit(COperationExpression* expression) {
-	file << GetOperationSign(expression->GetOperationType()) << getArrow();
+
+	int cur_count = ++count_;
+
+	file << GetOperationSign(expression->GetOperationType()) << delim << cur_count << getArrow();
 	expression->GetLeftOperand()->Accept(this);
-	file << getEndLine() << GetOperationSign(expression->GetOperationType()) << getArrow();
+	file << getEndLine() << GetOperationSign(expression->GetOperationType()) << delim << cur_count << getArrow();
 	expression->GetRightOperand()->Accept(this);
 }
 
 void CPrintVisitor::Visit(CNumExpression* expression) {
-	file << expression->GetNumber();
+	file << "Number" << expression->GetNumber() << delim << ++count_;
 }
 
 void CPrintVisitor::Visit(CIdExpression* expression) {
-	file << expression->GetName();
+	file << expression->GetName() << delim << ++count_;
 }
 
 void CPrintVisitor::Visit(CAssignStatement* statement) {
