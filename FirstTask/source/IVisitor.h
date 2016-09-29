@@ -3,7 +3,7 @@
 class CCompoundStatement;
 class COperationExpression;
 class CNumExpression;
-class CAssignStatement;; 
+class CAssignStatement;
 class CIdExpression;
 
 class IVisitor {

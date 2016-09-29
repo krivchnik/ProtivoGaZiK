@@ -2,10 +2,13 @@
 
 #include "IExpression.h"
 
-enum OperationType { addition, subtraction, multiplication, division };
 
 class COperationExpression: public IExpression {
+
 public:
+
+	enum OperationType { ADDITION, SUBTRACTION, MULTIPLICATION, DIVISON };
+
 	COperationExpression(std::shared_ptr<IExpression> leftOperand_, std::shared_ptr<IExpression> rightOperand_, OperationType type_);
 	std::shared_ptr<IExpression> GetLeftOperand();
 	std::shared_ptr<IExpression> GetRightOperand();

@@ -11,7 +11,7 @@ std::shared_ptr<IExpression> COperationExpression::GetRightOperand() {
 	return rightOperand;
 }
 
-OperationType COperationExpression::GetOperationType() {
+COperationExpression::OperationType COperationExpression::GetOperationType() {
 	return type;
 }
 
