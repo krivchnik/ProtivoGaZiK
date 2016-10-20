@@ -7,7 +7,7 @@ class COperationExpression: public IExpression {
 
 public:
 
-	enum OperationType { ADDITION, SUBTRACTION, MULTIPLICATION, DIVISON };
+	enum OperationType { ADDITION, SUBTRACTION, MULTIPLICATION, MOD, AND, OR, LESS };
 
 	COperationExpression(std::shared_ptr<IExpression> leftOperand_, std::shared_ptr<IExpression> rightOperand_, OperationType type_);
 	std::shared_ptr<IExpression> GetLeftOperand();

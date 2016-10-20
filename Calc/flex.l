@@ -100,6 +100,12 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 "-"              {updateLocation(); printLocation("MINUS");}
 "*"              {updateLocation(); printLocation("STAR");}
 "/"              {updateLocation(); printLocation("SLASH");}
+"%"            {updateLocation(); printLocation("MOD");}
+
+"<"		     {updateLocation(); printLocation("LESS");}
+"&&"	    {updateLocation(); printLocation("AND");}
+"||"	            {updateLocation(); printLocation("OR");}
+
 "\n"|"\t"|" "    {updateLocation(); printf("%s", yytext);}
 %%
 

@@ -9,9 +9,9 @@ using namespace std;
 #include <string>
 #include <memory>
 
-#include "/home/deserg/Documents/ProtivoGaZiK/FirstTask/source/INode.h"
-#include "/home/deserg/Documents/ProtivoGaZiK/FirstTask/source/IExpression.h"
-#include "/home/deserg/Documents/ProtivoGaZiK/FirstTask/source/CNumExpression.h"
-#include "/home/deserg/Documents/ProtivoGaZiK/FirstTask/source/COperationExpression.h"
-#include "/home/deserg/Documents/ProtivoGaZiK/FirstTask/source/CPrintVisitor.h"
+#include "../FirstTask/source/INode.h"
+#include "../FirstTask/source/IExpression.h"
+#include "../FirstTask/source/CNumExpression.h"
+#include "../FirstTask/source/COperationExpression.h"
+#include "../FirstTask/source/CPrintVisitor.h"
 

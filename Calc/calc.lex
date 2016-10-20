@@ -14,7 +14,13 @@ int_const	{digit}+
 
 {int_const}	{ yylval.int_val = atoi(yytext); return INTEGER_LITERAL; }
 "+"		{ return PLUS; }
-"*"		{ return MULT; }
+"*"		{ return STAR; }
+"-"		{ return MINUS; }
+"%"	{ return MOD; }
+
+"<"		{ return LESS; }
+"&&"	{ return AND; }
+"||"		{ return OR; }
 
 [ \t]*		{}
 [\n]		{ yylineno++;	}

@@ -20,18 +20,25 @@ extern shared_ptr<IExpression> ans;
 
 %token	<int_val>	INTEGER_LITERAL
 %type	<expr_val>	exp
-%left	PLUS
-%left	MULT
+
+%left    LESS AND OR
+%left	PLUS MINUS
+%left	STAR MOD
 
 %%
 
-input:		/* empty */
+input:	/* empty */
 		| exp	{ ans = shared_ptr<IExpression>($1); return 0;}
 		;
 
-exp:		INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
+exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| exp PLUS exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::ADDITION); }
-		| exp MULT exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::MULTIPLICATION); }
+		| exp MINUS exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::SUBTRACTION); }
+		| exp STAR exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::MULTIPLICATION); }
+		| exp MOD exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::MOD); }
+		| exp AND exp		{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::AND); }
+		| exp OR exp		{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::OR); }
+		| exp LESS exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::LESS); }
 		;
 
 /*

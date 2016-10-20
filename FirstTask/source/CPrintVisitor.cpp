@@ -9,7 +9,7 @@
 #include <vector>
 
 std::string GetOperationSign(int index) {
-	std::vector<std::string> signs = {"addition", "subtraction", "multiplication", "division"};
+	std::vector<std::string> signs = {"addition", "subtraction", "multiplication", "mod", "and", "or", "less"};
 	return signs[index];
 }
 
