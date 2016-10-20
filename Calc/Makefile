@@ -1,7 +1,7 @@
 # Makefile
 
 TREE_DIR = ../FirstTask/source/
-COMPILER = CNumExpression.o CIdExpression.o COperationExpression.o CAssignStatement.o CCompoundStatement.o CPrintVisitor.o
+COMPILER = CNumExpression.o CIdExpression.o COperationExpression.o CAssignStatement.o CCompoundStatement.o CPrintStatement.o CPrintVisitor.o 
 
 OBJS	= bison.o lex.o main.o $(COMPILER)
 
@@ -51,6 +51,9 @@ CAssignStatement.o: $(TREE_DIR)CAssignStatement.cpp
 	$(CC) -c $(CFLAGS) $^ -o $@
 
 CCompoundStatement.o: $(TREE_DIR)CCompoundStatement.cpp
+	$(CC) -c $(CFLAGS) $^ -o $@
+
+CPrintStatement.o: $(TREE_DIR)CPrintStatement.cpp
 	$(CC) -c $(CFLAGS) $^ -o $@
 
 CPrintVisitor.o: $(TREE_DIR)CPrintVisitor.cpp

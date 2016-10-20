@@ -6,7 +6,7 @@
 int yyerror(char *s);
 int yylex(void);
 
-extern shared_ptr<IExpression> ans;
+extern shared_ptr<IStatement> ans;
 %}
 	
 %union{
@@ -14,12 +14,16 @@ extern shared_ptr<IExpression> ans;
   string*                       op_val;
   INode*             node_val;
   IExpression*       expr_val;
+  IStatement*       stat_val;
 }
 
-%start	input 
+%start	input
 
-%token	<int_val>	INTEGER_LITERAL
+%token				LPBRACE RPBRACE SEMICOLON
+%token				PRINTLN
+%token <int_val>		INTEGER_LITERAL
 %type	<expr_val>	exp
+%type <stat_val>       	stat
 
 %left    LESS AND OR
 %left	PLUS MINUS
@@ -28,7 +32,7 @@ extern shared_ptr<IExpression> ans;
 %%
 
 input:	/* empty */
-		| exp	{ ans = shared_ptr<IExpression>($1); return 0;}
+		| stat	{ ans = shared_ptr<IStatement>($1); return 0;}
 		;
 
 exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
@@ -39,6 +43,9 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| exp AND exp		{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::AND); }
 		| exp OR exp		{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::OR); }
 		| exp LESS exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::LESS); }
+		;
+
+stat:    PRINTLN LPBRACE exp RPBRACE SEMICOLON	{$$ = new CPrintStatement(shared_ptr<IExpression>($3)); }  
 		;
 
 /*
@@ -65,7 +72,7 @@ Statement:
 	| Identifier "=" Expression ";"
 	| Identifier "[" Expression "]" "=" Expression ";"
 
-Expression: Expression ( "&&" | "<" | "+" | "-" | "*" | "%" | "||" ) Expression
+Expression:
 	| Expression "[" Expression "]"
 	| Expression "." "length"
 	| Expression "." Identifier "(" ( Expression ( "," Expression )* )? ")"

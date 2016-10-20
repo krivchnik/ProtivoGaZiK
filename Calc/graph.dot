@@ -1,4 +1,5 @@
 digraph task1 {
-	modAAA1 -> Number5AAA2;
-	modAAA1 -> Number3AAA3
+	println -> additionAAA1 -> Number5AAA2;
+	additionAAA1 -> Number3AAA3;
+	
 }

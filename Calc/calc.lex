@@ -22,6 +22,11 @@ int_const	{digit}+
 "&&"	{ return AND; }
 "||"		{ return OR; }
 
+"("		{ return LPBRACE; }
+")"		{ return RPBRACE; }
+"System.out.println"		{ return PRINTLN; }
+";"		{ return SEMICOLON; }
+
 [ \t]*		{}
 [\n]		{ yylineno++;	}
 

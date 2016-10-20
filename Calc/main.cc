@@ -5,7 +5,7 @@
 // prototype of bison-generated parser function
 int yyparse();
 
-shared_ptr<IExpression> ans;
+shared_ptr<IStatement> ans;
 
 int main(int argc, char **argv)
 {
@@ -16,6 +16,8 @@ int main(int argc, char **argv)
 	}
 
 	yyparse();
+
+	printf("after yylex\n");
 
 	CPrintVisitor visitor;
 	visitor.StartVisit(ans.get(), std::string("graph.dot"));

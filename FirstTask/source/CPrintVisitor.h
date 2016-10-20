@@ -11,6 +11,7 @@ public:
 
 	void Visit(CCompoundStatement*);
 	void Visit(CAssignStatement*);
+	void Visit(CPrintStatement*);
 
 	void Visit(COperationExpression*);
 	void Visit(CNumExpression*);

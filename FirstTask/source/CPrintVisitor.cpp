@@ -2,6 +2,8 @@
 
 #include "CCompoundStatement.h"
 #include "CAssignStatement.h"
+#include "CPrintStatement.h"
+
 #include "COperationExpression.h"
 #include "CNumExpression.h"
 #include "CIdExpression.h"
@@ -50,6 +52,12 @@ void CPrintVisitor::Visit(CAssignStatement* statement) {
 	statement->GetVariable()->Accept(this);
 	file << getEndLine() << "assignment" << getArrow();
 	statement->GetExpression()->Accept(this);
+}
+
+void CPrintVisitor::Visit(CPrintStatement* statement) {
+	file << "println" << getArrow();
+	statement->GetExpression()->Accept(this);
+	file << getEndLine();
 }
 
 void CPrintVisitor::Visit(CCompoundStatement* statement) {

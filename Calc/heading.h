@@ -13,5 +13,7 @@ using namespace std;
 #include "../FirstTask/source/IExpression.h"
 #include "../FirstTask/source/CNumExpression.h"
 #include "../FirstTask/source/COperationExpression.h"
+
+#include "../FirstTask/source/CPrintStatement.h"
 #include "../FirstTask/source/CPrintVisitor.h"
 
