@@ -11,9 +11,13 @@ using namespace std;
 
 #include "../FirstTask/source/INode.h"
 #include "../FirstTask/source/IExpression.h"
+#include "../FirstTask/source/CIdExpression.h"
 #include "../FirstTask/source/CNumExpression.h"
 #include "../FirstTask/source/COperationExpression.h"
 
+#include "../FirstTask/source/CAssignStatement.h"
 #include "../FirstTask/source/CPrintStatement.h"
+#include "../FirstTask/source/CCompoundStatement.h"
+
 #include "../FirstTask/source/CPrintVisitor.h"
 

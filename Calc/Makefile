@@ -10,14 +10,14 @@ CFLAGS	= -g -Wall -ansi -pedantic -std=c++11
 
 
 
-calc:		$(OBJS)
+calc:	$(OBJS)
 		$(CC) $(CFLAGS) $(OBJS) -o calc -lfl
 
-lex.o:		lex.c
+lex.o:	lex.c
 		$(CC) $(CFLAGS) -c lex.c -o lex.o
 
-lex.c:		calc.lex 
-		flex calc.lex
+lex.c:	flex.l
+		flex flex.l
 		cp lex.yy.c lex.c
 
 bison.o:	bison.c
