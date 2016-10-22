@@ -1,4 +1,4 @@
-#include "CPrintStatement.h"
+#include <Nodes/CPrintStatement.h>
 
 CPrintStatement::CPrintStatement(std::shared_ptr<IExpression> expressionArg) :
 	expression(expressionArg) {}

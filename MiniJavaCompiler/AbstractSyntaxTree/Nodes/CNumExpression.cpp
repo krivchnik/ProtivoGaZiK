@@ -1,4 +1,4 @@
-#include "CNumExpression.h"
+#include <Nodes/CNumExpression.h>
 
 CNumExpression::CNumExpression(int number_) :
 	number(number_) {}

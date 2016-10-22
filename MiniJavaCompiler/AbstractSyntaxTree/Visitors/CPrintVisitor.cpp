@@ -1,14 +1,12 @@
-#include "CPrintVisitor.h"
+#include <Visitors/CPrintVisitor.h>
 
-#include "CAssignStatement.h"
-#include "CCompoundStatement.h"
-#include "CPrintStatement.h"
+#include <Nodes/CAssignStatement.h>
+#include <Nodes/CCompoundStatement.h>
+#include <Nodes/CPrintStatement.h>
 
-#include "CIdExpression.h"
-#include "CNumExpression.h"
-#include "COperationExpression.h"
-
-#include <vector>
+#include <Nodes/CIdExpression.h>
+#include <Nodes/CNumExpression.h>
+#include <Nodes/COperationExpression.h>
 
 std::string GetOperationSign(int index) {
 	std::vector<std::string> signs = {"addition", "subtraction", "multiplication", "mod", "and", "or", "less"};

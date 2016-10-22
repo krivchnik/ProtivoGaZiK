@@ -5,8 +5,8 @@
       <config projectName="MiniJavaCompiler" targetName="Compiler" />
       <config projectName="MiniJavaCompiler" targetName="MiniJavaCompiler" />
       <config projectName="MiniJavaCompiler" targetName="MyLib" />
-      <config projectName="MiniJavaCompiler" targetName="MiniJavaComplier" />
       <config projectName="MiniJavaCompiler" targetName="FooParser" />
+      <config projectName="MiniJavaCompiler" targetName="MiniJavaComplier" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="false" GENERATION_PASS_SYSTEM_ENVIRONMENT="true">
@@ -15,7 +15,43 @@
     </ADDITIONAL_GENERATION_ENVIRONMENT>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bd78c8f-4a4c-452f-923c-d9a6b091b718" name="Default" comment="" />
+    <list default="true" id="2bd78c8f-4a4c-452f-923c-d9a6b091b718" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Makefile" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Parser/Makefile" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Parser/out.ps" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/CAssignStatement.cpp" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CAssignStatement.cpp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/CAssignStatement.h" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CAssignStatement.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/CCompoundStatement.cpp" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CCompoundStatement.cpp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/CCompoundStatement.h" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CCompoundStatement.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/CExpressionList.cpp" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CExpressionList.cpp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/CExpressionList.h" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CExpressionList.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/CIdExpression.cpp" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CIdExpression.cpp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/CIdExpression.h" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CIdExpression.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/CNumExpression.cpp" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNumExpression.cpp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/CNumExpression.h" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNumExpression.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/COperationExpression.cpp" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/COperationExpression.cpp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/COperationExpression.h" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/COperationExpression.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/CPrintStatement.cpp" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CPrintStatement.cpp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/CPrintStatement.h" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CPrintStatement.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/CPrintVisitor.cpp" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.cpp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/CPrintVisitor.h" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/IExpression.h" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/IExpression.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/INode.h" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/INode.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/IStatement.h" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/IStatement.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Nodes/IVisitor.h" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Visitors/IVisitor.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Parser/common_include.h" afterPath="$PROJECT_DIR$/Parser/CommonInclude.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/MiniJavaCompiler.iml" afterPath="$PROJECT_DIR$/.idea/MiniJavaCompiler.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Output/lexer.cpp" afterPath="$PROJECT_DIR$/Output/lexer.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Output/parser.cpp" afterPath="$PROJECT_DIR$/Output/parser.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser/bison.y" afterPath="$PROJECT_DIR$/Parser/bison.y" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser/flex.l" afterPath="$PROJECT_DIR$/Parser/flex.l" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser/heading.h" afterPath="$PROJECT_DIR$/Parser/heading.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser/main.cc" afterPath="$PROJECT_DIR$/Parser/main.cc" />
+    </list>
     <ignored path="MiniJavaCompiler.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,41 +72,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Makefile" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Parser/Makefile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="flex.l" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Parser/flex.l">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+            <state relative-caret-position="180">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bison.y" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Parser/bison.y">
+      <file leaf-file-name="CExpressionList.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CExpressionList.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-              <folding />
+            <state relative-caret-position="234">
+              <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
+              <folding>
+                <element signature="e#14#44#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="common_include.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Parser/common_include.h">
+      <file leaf-file-name="CommonInclude.h" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Parser/CommonInclude.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+            <state relative-caret-position="216">
+              <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -79,58 +107,68 @@
       <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="31" column="38" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
+            <state relative-caret-position="268">
+              <caret line="36" column="41" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="graph.dot" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/graph.dot">
+      <file leaf-file-name="CExpressionList.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CExpressionList.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="heading.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Parser/heading.h">
+      <file leaf-file-name="CCompoundStatement.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CCompoundStatement.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-827">
-              <caret line="11" column="57" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
+            <state relative-caret-position="36">
+              <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.cc" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Parser/main.cc">
+      <file leaf-file-name="CCompoundStatement.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CCompoundStatement.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+            <state relative-caret-position="0">
+              <caret line="0" column="16" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CPrintVisitor.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Nodes/CPrintVisitor.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="expr" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Parser/expr">
+      <file leaf-file-name="CAssignStatement.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CAssignStatement.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="72">
-              <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+              <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CAssignStatement.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CAssignStatement.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="common_include.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../MiniJavaCompiler/Parser/common_include.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="134">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -138,22 +176,44 @@
       </file>
     </leaf>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Nodes/main.cpp" />
-        <option value="$PROJECT_DIR$/Parser/heading.h" />
         <option value="$PROJECT_DIR$/Parser/Makefile" />
         <option value="$PROJECT_DIR$/Nodes/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/Output/parser.c" />
-        <option value="$PROJECT_DIR$/Parser/flex.l" />
         <option value="$PROJECT_DIR$/Output/lexer.c" />
-        <option value="$PROJECT_DIR$/Parser/bison.y" />
         <option value="$PROJECT_DIR$/Parser/common_include.h" />
         <option value="$PROJECT_DIR$/Parser/main.cc" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/Parser/expr" />
         <option value="$PROJECT_DIR$/graph.dot" />
+        <option value="$PROJECT_DIR$/Parser/bison.y" />
+        <option value="$PROJECT_DIR$/Parser/heading.h" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/Parser/CommonInclude.h" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.h" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.cpp" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/IStatement.h" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/INode.h" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/IExpression.h" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CPrintStatement.h" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CPrintStatement.cpp" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/COperationExpression.h" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/COperationExpression.cpp" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNumExpression.h" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNumExpression.cpp" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CIdExpression.h" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CIdExpression.cpp" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CExpressionList.h" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CCompoundStatement.h" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CCompoundStatement.cpp" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CAssignStatement.h" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CAssignStatement.cpp" />
+        <option value="$PROJECT_DIR$/Parser/flex.l" />
       </list>
     </option>
   </component>
@@ -161,7 +221,7 @@
     <option name="width" value="1366" />
     <option name="height" value="744" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -228,6 +288,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="AbstractSyntaxTree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Visitors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiniJavaCompiler" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiniJavaCompiler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AbstractSyntaxTree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Nodes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -240,7 +322,13 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="CPPToolchains" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MiniJavaCompiler2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/AbstractSyntaxTree/Nodes" />
+      <recent name="$PROJECT_DIR$/AbstractSyntaxTree/Visitors" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.MiniJavaCompiler">
     <configuration default="true" type="BashConfigurationType" factoryName="Bash">
@@ -444,23 +532,25 @@
       <workItem from="1477148930366" duration="11858000" />
       <workItem from="1477161126414" duration="3740000" />
       <workItem from="1477165578377" duration="610000" />
+      <workItem from="1477166642976" duration="16000" />
+      <workItem from="1477166687179" duration="1349000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17581000" />
+    <option name="totallyTimeSpent" value="18946000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24670571" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24670571" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14396285" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14285715" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3142415" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3136646" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -489,23 +579,23 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Nodes/CPrintVisitor.cpp</url>
-          <line>19</line>
+          <url>file://$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.cpp</url>
+          <line>17</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Nodes/CPrintVisitor.cpp</url>
-          <line>21</line>
+          <url>file://$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.cpp</url>
+          <line>19</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Nodes/CPrintVisitor.cpp</url>
-          <line>25</line>
+          <url>file://$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.cpp</url>
+          <line>23</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Nodes/CPrintVisitor.cpp</url>
-          <line>26</line>
+          <url>file://$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.cpp</url>
+          <line>24</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
@@ -518,107 +608,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Parser/common_include.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/out.ps">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/main.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Nodes/CAssignStatement.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/flex.l">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/bison.y">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/calc.lex" />
-    <entry file="file://$PROJECT_DIR$/main.cpp" />
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/get_image.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/full.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/graph.dot" />
-    <entry file="file://$PROJECT_DIR$/Nodes/CAssignStatement.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Nodes/CAssignStatement.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Nodes/CCompoundStatement.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Nodes/main.cpp" />
     <entry file="file://$PROJECT_DIR$/Parser/Makefile">
       <provider selected="true" editor-type-id="text-editor">
@@ -653,36 +642,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Parser/graph.dot" />
-    <entry file="file://$PROJECT_DIR$/Nodes/CAssignStatement.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Nodes/CCompoundStatement.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Nodes/CAssignStatement.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Nodes/COperationExpression.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Parser/calc.lex" />
     <entry file="file://$PROJECT_DIR$/Parser/get_image.sh">
       <provider selected="true" editor-type-id="text-editor">
@@ -703,13 +662,6 @@
     <entry file="file://$PROJECT_DIR$/Nodes/CMakeLists.txt" />
     <entry file="file://$PROJECT_DIR$/Output/lexer.c" />
     <entry file="file://$PROJECT_DIR$/Output/parser.c" />
-    <entry file="file://$PROJECT_DIR$/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-108">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Parser/out.ps">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -717,27 +669,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/flex.l">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Nodes/CPrintVisitor.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Output/lexer.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
           <caret line="2015" column="10" selection-start-line="2015" selection-start-column="6" selection-end-line="2015" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -745,56 +680,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="124">
           <caret line="1568" column="43" selection-start-line="1568" selection-start-column="39" selection-end-line="1568" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Parser/graph.dot" />
     <entry file="file://$PROJECT_DIR$/Nodes/graph.dot" />
-    <entry file="file://$PROJECT_DIR$/Parser/bison.y">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/heading.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-827">
-          <caret line="11" column="57" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Parser/Makefile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/common_include.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/main.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="31" column="38" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
           <folding />
         </state>
       </provider>
@@ -807,10 +701,237 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graph.dot">
+    <entry file="file://$PROJECT_DIR$/graph.dot" />
+    <entry file="file://$PROJECT_DIR$/Parser/main.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+        <state relative-caret-position="216">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parser/bison.y">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parser/heading.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="29" column="11" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#35#0" expanded="false" />
+            <marker date="1477167765058" expanded="true" signature="295:429" ph="{...}" />
+            <marker date="1477167765058" expanded="true" signature="2115:2254" ph="{...}" />
+            <marker date="1477167765058" expanded="true" signature="2645:2664" ph="{...}" />
+            <marker date="1477167765058" expanded="true" signature="2706:2726" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+          <folding>
+            <element signature="e#14#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Visitors/IVisitor.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/INode.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/IStatement.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CPrintStatement.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CPrintStatement.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="11" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/COperationExpression.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/COperationExpression.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNumExpression.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNumExpression.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="16" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CIdExpression.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CIdExpression.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/IExpression.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CExpressionList.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
+          <folding>
+            <element signature="e#14#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CExpressionList.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CCompoundStatement.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CCompoundStatement.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="16" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CAssignStatement.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CAssignStatement.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../MiniJavaCompiler/Parser/common_include.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parser/flex.l">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="36" column="41" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parser/CommonInclude.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
           <folding />
         </state>
       </provider>

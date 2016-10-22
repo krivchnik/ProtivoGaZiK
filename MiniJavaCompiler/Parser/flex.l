@@ -6,9 +6,8 @@
 	#include <stdio.h>
 	#include <ctype.h>
 
-    #include "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/common_include.h"
-    #include "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/heading.h"
-	//using namespace std;
+    #include <CommonInclude.h>"
+    #include <heading.h>
 
     typedef struct YYLTYPE  
 	{  

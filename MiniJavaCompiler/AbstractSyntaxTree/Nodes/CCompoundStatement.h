@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IStatement.h"
+#include <Nodes/IStatement.h>
 
 class CCompoundStatement: public IStatement {
 public:

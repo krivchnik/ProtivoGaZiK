@@ -1,8 +1,8 @@
 #pragma once
 
-#include "IStatement.h"
-#include "CIdExpression.h"
-#include "COperationExpression.h"
+#include <Nodes/IStatement.h>
+#include <Nodes/CIdExpression.h>
+#include <Nodes/COperationExpression.h>
 
 class CAssignStatement: public IStatement {
 public:

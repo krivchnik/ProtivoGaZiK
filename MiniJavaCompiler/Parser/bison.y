@@ -2,7 +2,7 @@
 /* calc.y */
 
 %{
-#include <common_include.h>
+#include <CommonInclude.h>
 int yyerror(char *s);
 int yylex(void);
 

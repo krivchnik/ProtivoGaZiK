@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Expression.h"
+#include <Nodes/IExpression.h>
+
+#include <vector>
 
 class CExpressionList {
 public:

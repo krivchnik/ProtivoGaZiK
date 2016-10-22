@@ -1,6 +1,6 @@
-#line 2 "/home/nismohl/ClionProjects/MiniJavaCompiler/Output/lexer.cpp"
+#line 2 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/lexer.cpp"
 
-#line 4 "/home/nismohl/ClionProjects/MiniJavaCompiler/Output/lexer.cpp"
+#line 4 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/lexer.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -534,15 +534,15 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
-#line 4 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 1 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+#line 4 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 	/* This code goes at the "top" of the generated file. */
 	#include <string.h>
 	#include <stdio.h>
 	#include <ctype.h>
 
-    #include "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/common_include.h"
-    #include "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/heading.h"
+    #include <CommonInclude.h>"
+    #include <heading.h>
 	//using namespace std;
 
     typedef struct YYLTYPE  
@@ -594,7 +594,7 @@ char *yytext;
 		}
 	}
 
-#line 598 "/home/nismohl/ClionProjects/MiniJavaCompiler/Output/lexer.cpp"
+#line 598 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/lexer.cpp"
 
 #define INITIAL 0
 
@@ -812,10 +812,10 @@ YY_DECL
 		}
 
 	{
-#line 72 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 72 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 
 
-#line 819 "/home/nismohl/ClionProjects/MiniJavaCompiler/Output/lexer.cpp"
+#line 819 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/lexer.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -874,7 +874,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 74 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 74 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {
 	updateLocation();
 	toUpper(yytext);
@@ -884,7 +884,7 @@ YY_RULE_SETUP
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 80 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 80 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {
 
 	updateLocation();
@@ -901,7 +901,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 95 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 95 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {
 	              updateLocation(); 
 	              size_t len = strlen(yytext);
@@ -914,101 +914,101 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 104 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 104 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation(); yylval.int_val = atoi(yytext); return INTEGER_LITERAL;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 106 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 106 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation(); return LFBRACKET;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 107 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 107 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation(); return RFBRACKET;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 108 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 108 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation(); return LPBRACKET;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 109 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 109 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation(); return RPBRACKET;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 110 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 110 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation(); return LSBRACKET;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 111 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 111 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation(); return RSBRACKET;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 113 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 113 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation(); return PLUS;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 114 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 114 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation(); return MINUS;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 115 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 115 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation(); return STAR;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 116 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 116 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation(); return MOD;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 118 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 118 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation(); return ASSIGN;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 120 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 120 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation(); return LESS;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 121 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 121 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation(); return AND;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 122 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 122 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation(); return OR;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 124 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 124 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation(); return SEMICOLON;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 126 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 126 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 { updateLocation(); return PRINTLN;}
 	YY_BREAK
 case 21:
 /* rule 21 can match eol */
 YY_RULE_SETUP
-#line 128 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 128 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {updateLocation();}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 129 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 129 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 ECHO;
 	YY_BREAK
-#line 1012 "/home/nismohl/ClionProjects/MiniJavaCompiler/Output/lexer.cpp"
+#line 1012 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/lexer.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2009,7 +2009,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 129 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/flex.l"
+#line 129 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 
 
 

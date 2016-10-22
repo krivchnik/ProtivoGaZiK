@@ -1,4 +1,4 @@
-#include "COperationExpression.h"
+#include <Nodes/COperationExpression.h>
 
 COperationExpression::COperationExpression(std::shared_ptr<IExpression> leftOperand_, std::shared_ptr<IExpression> rightOperand_, OperationType type_) :
 	leftOperand(leftOperand_), rightOperand(rightOperand_), type(type_) {}

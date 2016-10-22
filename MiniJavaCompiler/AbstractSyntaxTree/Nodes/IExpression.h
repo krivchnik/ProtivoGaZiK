@@ -1,8 +1,8 @@
 #pragma once
 
-#include "INode.h"
+#include <Nodes/INode.h>
 
-class IStatement: public INode {
+class IExpression: public INode {
 public:
 	virtual void Accept(IVisitor*) = 0;
 };

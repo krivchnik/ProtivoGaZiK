@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IExpression.h"
+#include <Nodes/IExpression.h>
 
 
 class COperationExpression: public IExpression {

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IStatement.h"
-#include "IExpression.h"
+#include <Nodes/IStatement.h>
+#include <Nodes/IExpression.h>
 
 class CPrintStatement: public IStatement {
 public:

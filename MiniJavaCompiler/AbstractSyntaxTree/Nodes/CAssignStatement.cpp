@@ -1,4 +1,4 @@
-#include "CAssignStatement.h"
+#include <Nodes/CAssignStatement.h>
 
 CAssignStatement::CAssignStatement(std::shared_ptr<CIdExpression> variable_, std::shared_ptr<IExpression> expression_) :
 	variable(variable_), expression(expression_) {}

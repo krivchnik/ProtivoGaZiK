@@ -1,4 +1,4 @@
-#include "CCompoundStatement.h"
+#include <Nodes/CCompoundStatement.h>
 
 CCompoundStatement::CCompoundStatement(std::shared_ptr<INode> leftOperand_, std::shared_ptr<INode> rightOperand_) :
 	leftOperand(leftOperand_), rightOperand(rightOperand_) {}
