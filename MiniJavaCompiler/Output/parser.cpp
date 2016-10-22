@@ -64,7 +64,7 @@
 /* Copy the first part of user declarations.  */
 #line 4 "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/bison.y" /* yacc.c:339  */
 
-#include "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/common_include.h"
+#include <common_include.h>
 int yyerror(char *s);
 int yylex(void);
 

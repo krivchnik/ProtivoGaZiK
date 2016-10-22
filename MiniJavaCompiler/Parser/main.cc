@@ -1,6 +1,6 @@
 /* main.cc */
 
-#include "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/common_include.h"
+#include <common_include.h>
 
 // prototype of bison-generated parser function
 int yyparse();
@@ -20,7 +20,6 @@ int main(int argc, char **argv)
 
 	CPrintVisitor visitor;
 
-    cout << argv[1] << "\n";
 	visitor.StartVisit(ans.get(), std::string("graph.dot"));
 
 	return 0;

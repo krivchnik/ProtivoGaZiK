@@ -2,7 +2,7 @@
 /* calc.y */
 
 %{
-#include "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/common_include.h"
+#include <common_include.h>
 int yyerror(char *s);
 int yylex(void);
 

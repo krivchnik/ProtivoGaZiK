@@ -9,15 +9,15 @@ using namespace std;
 #include <string>
 #include <memory>
 
-#include "/home/nismohl/ClionProjects/MiniJavaCompiler/Nodes/INode.h"
-#include "/home/nismohl/ClionProjects/MiniJavaCompiler/Nodes/IExpression.h"
-#include "/home/nismohl/ClionProjects/MiniJavaCompiler/Nodes/CIdExpression.h"
-#include "/home/nismohl/ClionProjects/MiniJavaCompiler/Nodes/CNumExpression.h"
-#include "/home/nismohl/ClionProjects/MiniJavaCompiler/Nodes/COperationExpression.h"
+#include <INode.h>
+#include <IExpression.h>
+#include <CIdExpression.h>
+#include <CNumExpression.h>
+#include <COperationExpression.h>
 
-#include "/home/nismohl/ClionProjects/MiniJavaCompiler/Nodes/CAssignStatement.h"
-#include "/home/nismohl/ClionProjects/MiniJavaCompiler/Nodes/CPrintStatement.h"
-#include "/home/nismohl/ClionProjects/MiniJavaCompiler/Nodes/CCompoundStatement.h"
+#include <CAssignStatement.h>
+#include <CPrintStatement.h>
+#include <CCompoundStatement.h>
 
-#include "/home/nismohl/ClionProjects/MiniJavaCompiler/Nodes/CPrintVisitor.h"
+#include <CPrintVisitor.h>
 
