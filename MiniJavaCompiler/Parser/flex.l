@@ -4,7 +4,10 @@
 	/* This code goes at the "top" of the generated file. */
 	#include <string.h>
 	#include <stdio.h>
-	#include <ctype.h>	
+	#include <ctype.h>
+
+    #include "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/common_include.h"
+    #include "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/heading.h"
 	//using namespace std;
 
     typedef struct YYLTYPE  
@@ -15,7 +18,7 @@
 	  int last_column;  
 	} YYLTYPE;
 
-    YYLTYPE yylloc;   
+    YYLTYPE yylloc;
 
     int line_number = 0;
     int column_number = 0;
@@ -59,7 +62,7 @@
 %}
 
 
-DIGIT              [0-9]
+DIGIT            [0-9]
 LETER            [a-zA-Z_]
 STRING           \"(\\.|[^"])*\"
 id               {LETER}({DIGIT}|{LETER})*
@@ -88,21 +91,43 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 
 }
 
-{id}           	 {updateLocation(); printValueLocation("ID", yytext);}
-{IntegerLiteral} {updateLocation(); printValueLocation("NUMBER", yytext);}
 
-"{"              {updateLocation(); printLocation("LFBRACE");}
-"}"				 {updateLocation(); printLocation("LFBRACE");}
-"("				 {updateLocation(); printLocation("LPBRACE");}
-")"				 {updateLocation(); printLocation("RPBRACE");}
+{id}           	 {
+	              updateLocation(); 
+	              size_t len = strlen(yytext);
+                  char *token_name = (char*)malloc(len + 1 ); /* one for extra char, one for trailing zero */
+                  strcpy(token_name, yytext);
+                  token_name[len] = '\0';
+                  yylval.op_val = token_name; 
+                  return ID;
+                  }
+{IntegerLiteral} {updateLocation(); yylval.int_val = atoi(yytext); return INTEGER_LITERAL;}
 
-"+"              {updateLocation(); printLocation("PLUS");}
-"-"              {updateLocation(); printLocation("MINUS");}
-"*"              {updateLocation(); printLocation("STAR");}
-"/"              {updateLocation(); printLocation("SLASH");}
-"\n"|"\t"|" "    {updateLocation(); printf("%s", yytext);}
+"{"              {updateLocation(); return LFBRACKET;}
+"}"				 {updateLocation(); return RFBRACKET;}
+"("				 {updateLocation(); return LPBRACKET;}
+")"				 {updateLocation(); return RPBRACKET;}
+"["				 {updateLocation(); return LSBRACKET;}
+"]"				 {updateLocation(); return RSBRACKET;}
+
+"+"              {updateLocation(); return PLUS;}
+"-"              {updateLocation(); return MINUS;}
+"*"              {updateLocation(); return STAR;}
+"%"		         {updateLocation(); return MOD;}
+
+"="		         {updateLocation(); return ASSIGN;}
+
+"<"		     	 {updateLocation(); return LESS;}
+"&&"	    	 {updateLocation(); return AND;}
+"||"	         {updateLocation(); return OR;}
+
+";"				 {updateLocation(); return SEMICOLON;}
+
+"System.out.println"	{ updateLocation(); return PRINTLN;}
+	
+"\n"|"\t"|" "    {updateLocation();}
 %%
 
-int main( int argc, char* argv[]) {
+/*int main( int argc, char* argv[]) {
     yylex();
-}
+}*/

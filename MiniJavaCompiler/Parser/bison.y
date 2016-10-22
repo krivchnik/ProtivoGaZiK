@@ -2,7 +2,7 @@
 /* calc.y */
 
 %{
-#include "heading.h"
+#include "/home/nismohl/ClionProjects/MiniJavaCompiler/Parser/common_include.h"
 int yyerror(char *s);
 int yylex(void);
 
@@ -50,16 +50,30 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| exp OR exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::OR); }
 		| exp LESS exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::LESS); }
 
-		| ID { $$ = new CIdExpression(std::string($1)); }
+		| ID 							{ $$ = new CIdExpression(std::string($1)); }
+//		| exp LSBRACKET exp RSBRACKET   { $$ = new }
+//		| exp POINT LENGTH 				{ $$ = new }
 		;
 
-stat 	: LFBRACKET stat RFBRACKET                  						{ $$ = $2; }
-    	| stat stat                        									{ $$ = new CCompoundStatement(shared_ptr<IStatement>($1), shared_ptr<IStatement>($2)); }
-//    	| IF LFBRACKET exp RFBRACKET stat ELSE stat 						{ $$ = Ast::New<Ast::CIfStatement>($3, $5, $7); } %prec IF_STATEMENT
-//    	| WHILE LFBRACKET exp RFBRACKET stat         						{ $$ = Ast::New<Ast::CWhileStatement>($3, $5); } %prec WHILE_STATEMENT 
-    	| PRINTLN LPBRACKET exp RPBRACKET SEMICOLON 						{ $$ = new CPrintStatement(shared_ptr<IExpression>($3)); }
-    	| ID ASSIGN exp SEMICOLON                						    { $$ = new CAssignStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))), shared_ptr<IExpression>($3)); }
-//    	| ID LSBRACKET exp RFBRACKET ASSIGN exp SEMICOLON 					{ $$ = Ast::New<Ast::CSetItemStatement>(std::move($1), $3, $6); }
+stat 	: LFBRACKET stat RFBRACKET                  		{ $$ = $2; }
+    	| stat stat                        					{ $$ = new CCompoundStatement(shared_ptr<IStatement>($1), 
+    																					  shared_ptr<IStatement>($2)); }
+//
+//    	| IF LFBRACKET exp RFBRACKET stat ELSE stat 		{ $$ = new CIfElseStatement(shared_ptr<IExpression>($3),
+//    																					shared_ptr<IStatement>($5),
+//    																					shared_ptr<IStatement>($7)); }
+//
+//    	| WHILE LFBRACKET exp RFBRACKET stat         		{ $$ = new CWhileStatement(shared_ptr<IExpression>($3),
+//    																				   shared_ptr<IStatement>($5)); }
+
+    	| PRINTLN LPBRACKET exp RPBRACKET SEMICOLON 		{ $$ = new CPrintStatement(shared_ptr<IExpression>($3)); }
+
+    	| ID ASSIGN exp SEMICOLON                			{ $$ = new CAssignStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))), 
+    																					shared_ptr<IExpression>($3)); }
+
+//    	| ID LSBRACKET exp RFBRACKET ASSIGN exp SEMICOLON 	{ $$ = new CAssignItemStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))),
+//    																						shared_ptr<IExpression>($3),
+//    																						shared_ptr<IExpression>($6)); }
 ;		
 /*
 Goal: MainClass ( ClassDeclaration )* <EOF> {$$ = new IExpr($1)}

@@ -1,6 +1,0 @@
-digraph task1 {
-	assignment -> a;
-	assignment -> addition -> 5;
-	addition -> multiplication -> 1;
-	multiplication -> 3
-}

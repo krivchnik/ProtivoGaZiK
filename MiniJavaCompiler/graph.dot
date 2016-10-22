@@ -6,7 +6,8 @@ digraph task1 {
 	compoundA7 -> assignmentA11 -> bA12;
 	assignmentA11 -> Number20A13;
 	compoundA1 -> assignmentA14 -> aA15;
-	assignmentA14 -> Number10A16;
+	assignmentA14 -> additionA16 -> Number10A17;
+	additionA16 -> Number2147483647A18;
 	Number5A5 [shape=box];
 	Number3A6 [shape=box];
 	aA9 [shape=box];
@@ -14,5 +15,6 @@ digraph task1 {
 	bA12 [shape=box];
 	Number20A13 [shape=box];
 	aA15 [shape=box];
-	Number10A16 [shape=box];
+	Number10A17 [shape=box];
+	Number2147483647A18 [shape=box];
 }

@@ -1,6 +1,7 @@
 # Makefile
 
-TREE_DIR = ../FirstTask/source/
+TREE_DIR = ./Nodes/
+OUT_DIR = ./Output/
 COMPILER = CNumExpression.o CIdExpression.o COperationExpression.o CAssignStatement.o CCompoundStatement.o CPrintStatement.o CPrintVisitor.o 
 
 OBJS	= bison.o lex.o main.o $(COMPILER)
@@ -13,26 +14,17 @@ CFLAGS	= -g -Wall -ansi -pedantic -std=c++11
 calc:	$(OBJS)
 		$(CC) $(CFLAGS) $(OBJS) -o calc -lfl
 
-lex.o:	lex.c
-		$(CC) $(CFLAGS) -c lex.c -o lex.o
+lex.o:	
+		$(CC) $(CFLAGS) -c 	$(OUT_DIR)lexer.c -o lex.o
 
-lex.c:	flex.l
-		flex flex.l
-		cp lex.yy.c lex.c
+bison.o:
+		$(CC) $(CFLAGS) -c $(OUT_DIR)parser.c -o bison.o
 
-bison.o:	bison.c
-		$(CC) $(CFLAGS) -c bison.c -o bison.o
+main.o:		./Parser/main.cc
+		$(CC) $(CFLAGS) -c ./Parser/main.cc -o main.o
 
-bison.c:	calc.y
-		bison -d -v calc.y
-		cp calc.tab.c bison.c
-		cmp -s calc.tab.h tok.h || cp calc.tab.h tok.h
-
-main.o:		main.cc
-		$(CC) $(CFLAGS) -c main.cc -o main.o
-
-lex.o yac.o main.o	: heading.h
-lex.o main.o		: tok.h
+lex.o yac.o main.o	: ./Parser/common_include.h
+lex.o main.o		: ./Parser/heading.h
 
 clean:
 	rm -f *.o *~ lex.c lex.yy.c bison.c tok.h calc.tab.c calc.tab.h calc.output calc
