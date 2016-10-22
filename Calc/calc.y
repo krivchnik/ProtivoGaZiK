@@ -10,24 +10,30 @@ extern shared_ptr<IStatement> ans;
 %}
 	
 %union{
-  int                           int_val;
-  string*                       op_val;
+  int                int_val;
+  char*              op_val;
   INode*             node_val;
   IExpression*       expr_val;
-  IStatement*       stat_val;
+  IStatement*        stat_val;
 }
 
 %start	input
 
-%token				LPBRACE RPBRACE SEMICOLON
+%token				LPBRACKET RPBRACKET LFBRACKET RFBRACKET LSBRACKET RSBRACKET SEMICOLON
 %token				PRINTLN
-%token <int_val>		INTEGER_LITERAL
-%type	<expr_val>	exp
-%type <stat_val>       	stat
+%token <int_val>	INTEGER_LITERAL
+%token <op_val>     ID
 
-%left    LESS AND OR
+%type  <expr_val>	exp
+%type  <stat_val>   stat
+
+%left 	OR
+%left   AND
 %left	PLUS MINUS
 %left	STAR MOD
+
+%nonassoc ASSIGN
+%nonassoc LESS
 
 %%
 
@@ -40,14 +46,21 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| exp MINUS exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::SUBTRACTION); }
 		| exp STAR exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::MULTIPLICATION); }
 		| exp MOD exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::MOD); }
-		| exp AND exp		{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::AND); }
-		| exp OR exp		{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::OR); }
+		| exp AND exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::AND); }
+		| exp OR exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::OR); }
 		| exp LESS exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::LESS); }
+
+		| ID { $$ = new CIdExpression(std::string($1)); }
 		;
 
-stat:    PRINTLN LPBRACE exp RPBRACE SEMICOLON	{$$ = new CPrintStatement(shared_ptr<IExpression>($3)); }  
-		;
-
+stat 	: LFBRACKET stat RFBRACKET                  						{ $$ = $2; }
+    	| stat stat                        									{ $$ = new CCompoundStatement(shared_ptr<IStatement>($1), shared_ptr<IStatement>($2)); }
+//    	| IF LFBRACKET exp RFBRACKET stat ELSE stat 						{ $$ = Ast::New<Ast::CIfStatement>($3, $5, $7); } %prec IF_STATEMENT
+//    	| WHILE LFBRACKET exp RFBRACKET stat         						{ $$ = Ast::New<Ast::CWhileStatement>($3, $5); } %prec WHILE_STATEMENT 
+    	| PRINTLN LPBRACKET exp RPBRACKET SEMICOLON 						{ $$ = new CPrintStatement(shared_ptr<IExpression>($3)); }
+    	| ID ASSIGN exp SEMICOLON                						    { $$ = new CAssignStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))), shared_ptr<IExpression>($3)); }
+//    	| ID LSBRACKET exp RFBRACKET ASSIGN exp SEMICOLON 					{ $$ = Ast::New<Ast::CSetItemStatement>(std::move($1), $3, $6); }
+;		
 /*
 Goal: MainClass ( ClassDeclaration )* <EOF> {$$ = new IExpr($1)}
 

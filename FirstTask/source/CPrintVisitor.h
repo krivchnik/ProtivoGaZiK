@@ -9,19 +9,19 @@ class CPrintVisitor: public IVisitor {
 public:
 	void StartVisit(INode* startNode, std::string filename);
 
-	void Visit(CCompoundStatement*);
 	void Visit(CAssignStatement*);
+	void Visit(CCompoundStatement*);
 	void Visit(CPrintStatement*);
 
-	void Visit(COperationExpression*);
-	void Visit(CNumExpression*);
 	void Visit(CIdExpression*);
+	void Visit(CNumExpression*);
+	void Visit(COperationExpression*);
 
 private:
 
 	int count_;
 
-	std::string delim = "AAA";
+	std::string delim = "A";
 
 	std::ofstream file;
 

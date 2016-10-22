@@ -1,12 +1,12 @@
 #include "CPrintVisitor.h"
 
-#include "CCompoundStatement.h"
 #include "CAssignStatement.h"
+#include "CCompoundStatement.h"
 #include "CPrintStatement.h"
 
-#include "COperationExpression.h"
-#include "CNumExpression.h"
 #include "CIdExpression.h"
+#include "CNumExpression.h"
+#include "COperationExpression.h"
 
 #include <vector>
 

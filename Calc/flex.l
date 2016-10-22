@@ -4,7 +4,10 @@
 	/* This code goes at the "top" of the generated file. */
 	#include <string.h>
 	#include <stdio.h>
-	#include <ctype.h>	
+	#include <ctype.h>
+
+	#include "heading.h"
+	#include "tok.h"	
 	//using namespace std;
 
     typedef struct YYLTYPE  
@@ -59,7 +62,7 @@
 %}
 
 
-DIGIT              [0-9]
+DIGIT            [0-9]
 LETER            [a-zA-Z_]
 STRING           \"(\\.|[^"])*\"
 id               {LETER}({DIGIT}|{LETER})*
@@ -88,27 +91,35 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 
 }
 
-{id}           	 {updateLocation(); printValueLocation("ID", yytext);}
-{IntegerLiteral} {updateLocation(); printValueLocation("NUMBER", yytext);}
 
-"{"              {updateLocation(); printLocation("LFBRACE");}
-"}"				 {updateLocation(); printLocation("LFBRACE");}
-"("				 {updateLocation(); printLocation("LPBRACE");}
-")"				 {updateLocation(); printLocation("RPBRACE");}
+{id}           	 {updateLocation(); yylval.op_val = yytext; return ID; }
+{IntegerLiteral} {updateLocation(); yylval.int_val = atoi(yytext); return INTEGER_LITERAL;}
 
-"+"              {updateLocation(); printLocation("PLUS");}
-"-"              {updateLocation(); printLocation("MINUS");}
-"*"              {updateLocation(); printLocation("STAR");}
-"/"              {updateLocation(); printLocation("SLASH");}
-"%"            {updateLocation(); printLocation("MOD");}
+"{"              {updateLocation(); return LFBRACKET;}
+"}"				 {updateLocation(); return RFBRACKET;}
+"("				 {updateLocation(); return LPBRACKET;}
+")"				 {updateLocation(); return RPBRACKET;}
+"["				 {updateLocation(); return LSBRACKET;}
+"]"				 {updateLocation(); return RSBRACKET;}
 
-"<"		     {updateLocation(); printLocation("LESS");}
-"&&"	    {updateLocation(); printLocation("AND");}
-"||"	            {updateLocation(); printLocation("OR");}
+"+"              {updateLocation(); return PLUS;}
+"-"              {updateLocation(); return MINUS;}
+"*"              {updateLocation(); return STAR;}
+"%"		         {updateLocation(); return MOD;}
 
-"\n"|"\t"|" "    {updateLocation(); printf("%s", yytext);}
+"="		         {updateLocation(); return ASSIGN;}
+
+"<"		     	 {updateLocation(); return LESS;}
+"&&"	    	 {updateLocation(); return AND;}
+"||"	         {updateLocation(); return OR;}
+
+";"				 {updateLocation(); return SEMICOLON;}
+
+"System.out.println"	{ updateLocation(); return PRINTLN;}
+	
+"\n"|"\t"|" "    {updateLocation();}
 %%
 
-int main( int argc, char* argv[]) {
+/*int main( int argc, char* argv[]) {
     yylex();
-}
+}*/
