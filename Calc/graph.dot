@@ -1,5 +1,18 @@
 digraph task1 {
-	println -> additionAAA1 -> Number5AAA2;
-	additionAAA1 -> Number3AAA3;
-	
+	compoundA1 -> compoundA2 -> println3 -> additionA4 -> Number5A5;
+	additionA4 -> Number3A6;
+	compoundA2 -> compoundA7 -> assignmentA8 -> aA9;
+	assignmentA8 -> Number10A10;
+	compoundA7 -> assignmentA11 -> bA12;
+	assignmentA11 -> Number20A13;
+	compoundA1 -> assignmentA14 -> aA15;
+	assignmentA14 -> Number10A16;
+	Number5A5 [shape=box];
+	Number3A6 [shape=box];
+	aA9 [shape=box];
+	Number10A10 [shape=box];
+	bA12 [shape=box];
+	Number20A13 [shape=box];
+	aA15 [shape=box];
+	Number10A16 [shape=box];
 }

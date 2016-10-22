@@ -2,6 +2,7 @@
 
 #include "IVisitor.h"
 #include "INode.h"
+#include <vector>
 
 #include <fstream>
 
@@ -19,8 +20,8 @@ public:
 
 private:
 
-	int count_;
-
+	int expressionId;
+    std::vector<std::string> idsOfTokenWithBoxShape;
 	std::string delim = "A";
 
 	std::ofstream file;

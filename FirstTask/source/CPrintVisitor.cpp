@@ -17,53 +17,68 @@ std::string GetOperationSign(int index) {
 
 void CPrintVisitor::StartVisit(INode* startNode, std::string filename) {
 
-	count_ = 0;
+	expressionId = 0;
 
 	file.open(filename);
 	
 	file << "digraph task1 {\n\t";
 
 	startNode->Accept(this);
-
-	file << "\n}";
+    //распечатает id тех кто будет квадратным
+    for(std::string name : idsOfTokenWithBoxShape){
+    	file << getEndLine() << name << " [shape=box]";
+    }
+	file << ";\n}";
 	file.close();	
 }
 
 void CPrintVisitor::Visit(COperationExpression* expression) {
 
-	int cur_count = ++count_;
+	int currentExpressionId = ++expressionId;
 
-	file << GetOperationSign(expression->GetOperationType()) << delim << cur_count << getArrow();
+	file << GetOperationSign(expression->GetOperationType()) << delim << currentExpressionId << getArrow();
 	expression->GetLeftOperand()->Accept(this);
-	file << getEndLine() << GetOperationSign(expression->GetOperationType()) << delim << cur_count << getArrow();
+	file << getEndLine();
+	file << GetOperationSign(expression->GetOperationType()) << delim << currentExpressionId << getArrow();
 	expression->GetRightOperand()->Accept(this);
 }
 
 void CPrintVisitor::Visit(CNumExpression* expression) {
-	file << "Number" << expression->GetNumber() << delim << ++count_;
+	++expressionId;
+	std::string newId = std::string("Number") + std::to_string(expression->GetNumber()) + delim + std::to_string(expressionId);
+	file << newId;
+    idsOfTokenWithBoxShape.push_back(newId);
 }
 
 void CPrintVisitor::Visit(CIdExpression* expression) {
-	file << expression->GetName() << delim << ++count_;
+	++expressionId;
+	std::string newId = expression->GetName() + delim + std::to_string(expressionId);
+	file << newId;
+	idsOfTokenWithBoxShape.push_back(newId);
 }
 
 void CPrintVisitor::Visit(CAssignStatement* statement) {
-	file << "assignment" << getArrow();
+	int currentExpressionId = ++expressionId;
+	file << "assignment" << delim << currentExpressionId << getArrow();
 	statement->GetVariable()->Accept(this);
-	file << getEndLine() << "assignment" << getArrow();
+	file << getEndLine();
+	file << "assignment" << delim << currentExpressionId << getArrow();
 	statement->GetExpression()->Accept(this);
 }
 
 void CPrintVisitor::Visit(CPrintStatement* statement) {
-	file << "println" << getArrow();
+	++expressionId;
+	file << "println" << expressionId <<  getArrow();
 	statement->GetExpression()->Accept(this);
-	file << getEndLine();
+	//file << getEndLine();
 }
 
 void CPrintVisitor::Visit(CCompoundStatement* statement) {
-	file << "compound" << getArrow();
+	int currentExpressionId = ++expressionId;
+	file << "compound" << delim << currentExpressionId << getArrow();
 	statement->GetLeftOperand()->Accept(this);
-	file << getEndLine() << "compound" << getArrow();
+	file << getEndLine();
+	file << "compound" << delim << currentExpressionId << getArrow();
 	statement->GetRightOperand()->Accept(this);
 }
 

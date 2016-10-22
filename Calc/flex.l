@@ -92,7 +92,15 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 }
 
 
-{id}           	 {updateLocation(); yylval.op_val = yytext; return ID; }
+{id}           	 {
+	              updateLocation(); 
+	              size_t len = strlen(yytext);
+                  char *token_name = (char*)malloc(len + 1 ); /* one for extra char, one for trailing zero */
+                  strcpy(token_name, yytext);
+                  token_name[len] = '\0';
+                  yylval.op_val = token_name; 
+                  return ID;
+                  }
 {IntegerLiteral} {updateLocation(); yylval.int_val = atoi(yytext); return INTEGER_LITERAL;}
 
 "{"              {updateLocation(); return LFBRACKET;}
