@@ -5,6 +5,7 @@
 #include <vector>
 
 #include <fstream>
+#include <Nodes/CIfElseStatement.h>
 
 class CPrintVisitor: public IVisitor {
 public:
@@ -17,6 +18,7 @@ public:
 	void Visit(CIdExpression*);
 	void Visit(CNumExpression*);
 	void Visit(COperationExpression*);
+	void Visit(CIfElseStatement*);
 
 private:
 
@@ -28,4 +30,5 @@ private:
 
 	std::string getArrow();
 	std::string getEndLine();
+
 };

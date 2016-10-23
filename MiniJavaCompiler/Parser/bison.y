@@ -20,7 +20,13 @@ extern shared_ptr<IStatement> ans;
 %start	input
 
 %token				LPBRACKET RPBRACKET LFBRACKET RFBRACKET LSBRACKET RSBRACKET SEMICOLON
-%token				PRINTLN
+                    PUBLIC PRIVATE STATIC
+                    INT BOOLEAN VOID STRING
+                    CLASS EXTENDS
+                    IF ELSE WHILE
+                    RETURN PRINTLN LENGTH
+                    THIS NEW
+                    MAIN
 %token <int_val>	INTEGER_LITERAL
 %token <op_val>     ID
 

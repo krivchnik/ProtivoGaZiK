@@ -3,6 +3,7 @@
 #include <Nodes/CAssignStatement.h>
 #include <Nodes/CCompoundStatement.h>
 #include <Nodes/CPrintStatement.h>
+#include <Nodes/CIfElseStatement.h>
 
 #include <Nodes/CIdExpression.h>
 #include <Nodes/CNumExpression.h>
@@ -80,6 +81,13 @@ void CPrintVisitor::Visit(CCompoundStatement* statement) {
 	statement->GetRightOperand()->Accept(this);
 }
 
+void CPrintVisitor::Visit(CIfElseStatement* statement) {
+	int currentExpressionId = ++expressionId;
+	file << "ifExpression" << delim << currentExpressionId << getArrow();
+	statement->getExpression()->Accept(this);
+	file << getEndLine();
+	//TODO доделать
+}
 std::string CPrintVisitor::getArrow() {
 	return " -> ";
 }
