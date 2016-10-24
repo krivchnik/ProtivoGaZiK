@@ -126,29 +126,29 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 	
 "\n"|"\t"|" "    {updateLocation();}
 
-public              { RETURN(PUBLIC); }
-private             { RETURN(PRIVATE); }
-static              { RETURN(STATIC); }
+"public"              { RETURN(PUBLIC); }
+"private"             { RETURN(PRIVATE); }
+"static"              { RETURN(STATIC); }
 
-int                 { RETURN(INT); }
-boolean             { RETURN(BOOLEAN); }
-void                { RETURN(VOID); }
-String              { RETURN(STRING); }
+"int"                 { RETURN(INT); }
+"boolean"             { RETURN(BOOLEAN); }
+"void"                { RETURN(VOID); }
+"string"              { RETURN(STRING); }
 
-class               { RETURN(CLASS); }
-extends             { RETURN(EXTENDS); }
+"class"               { RETURN(CLASS); }
+"extends"             { RETURN(EXTENDS); }
 
-if                  { RETURN(IF); }
-else                { RETURN(ELSE); }
-while               { RETURN(WHILE); }
-return              { RETURN(RETURN); }
+"if"                  { RETURN(IF); }
+"else"                { RETURN(ELSE); }
+"while"               { RETURN(WHILE); }
+"return"              { RETURN(RETURN); }
 
-length              { RETURN(LENGTH); }
+"length"              { RETURN(LENGTH); }
 
-this                { RETURN(THIS); }
-new                 { RETURN(NEW); }
+"this"                { RETURN(THIS); }
+"new"                 { RETURN(NEW); }
 
-main                { RETURN(MAIN); }
+"main"                { RETURN(MAIN); }
 %%
 
 /*int main( int argc, char* argv[]) {
