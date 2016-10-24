@@ -70,6 +70,34 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 
 %%
 
+"System.out.println"	{ updateLocation(); return PRINTLN;}
+
+"\n"|"\t"|" "    {updateLocation();}
+
+"public"              { updateLocation(); return(PUBLIC); }
+"private"             { updateLocation(); return(PRIVATE); }
+"static"              { updateLocation(); return(STATIC); }
+
+"int"                 { updateLocation(); return(INT); }
+"boolean"             { updateLocation(); return(BOOLEAN); }
+"void"                { updateLocation(); return(VOID); }
+"string"              { updateLocation(); return(STRING); }
+
+"class"               { updateLocation(); return(CLASS); }
+"extends"             { updateLocation(); return(EXTENDS); }
+
+"if"                  { updateLocation(); return(IF); }
+"else"                { updateLocation(); return(ELSE); }
+"while"               { updateLocation(); return(WHILE); }
+"return"              { updateLocation(); return(RETURN); }
+
+"length"              { updateLocation(); return(LENGTH); }
+
+"this"                { updateLocation(); return(THIS); }
+"new"                 { updateLocation(); return(NEW); }
+
+"main"                { updateLocation(); return(MAIN); }
+
 {keyword} {
 	updateLocation();
 	toUpper(yytext);
@@ -122,33 +150,6 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 
 ";"				 {updateLocation(); return SEMICOLON;}
 
-"System.out.println"	{ updateLocation(); return PRINTLN;}
-	
-"\n"|"\t"|" "    {updateLocation();}
-
-"public"              { RETURN(PUBLIC); }
-"private"             { RETURN(PRIVATE); }
-"static"              { RETURN(STATIC); }
-
-"int"                 { RETURN(INT); }
-"boolean"             { RETURN(BOOLEAN); }
-"void"                { RETURN(VOID); }
-"string"              { RETURN(STRING); }
-
-"class"               { RETURN(CLASS); }
-"extends"             { RETURN(EXTENDS); }
-
-"if"                  { RETURN(IF); }
-"else"                { RETURN(ELSE); }
-"while"               { RETURN(WHILE); }
-"return"              { RETURN(RETURN); }
-
-"length"              { RETURN(LENGTH); }
-
-"this"                { RETURN(THIS); }
-"new"                 { RETURN(NEW); }
-
-"main"                { RETURN(MAIN); }
 %%
 
 /*int main( int argc, char* argv[]) {
