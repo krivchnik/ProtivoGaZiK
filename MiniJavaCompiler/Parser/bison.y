@@ -65,7 +65,7 @@ stat 	: LFBRACKET stat RFBRACKET                  		{ $$ = $2; }
     	| stat stat                        					{ $$ = new CCompoundStatement(shared_ptr<IStatement>($1), 
     																					  shared_ptr<IStatement>($2)); }
 //
-//    	| IF LFBRACKET exp RFBRACKET stat ELSE stat 		{ $$ = new CIfElseStatement(shared_ptr<IExpression>($3),
+//    	| IF LPBRACKET exp RPBRACKET stat ELSE stat 		{ $$ = new CIfElseStatement(shared_ptr<IExpression>($3),
 //    																					shared_ptr<IStatement>($5),
 //    																					shared_ptr<IStatement>($7)); }
 //

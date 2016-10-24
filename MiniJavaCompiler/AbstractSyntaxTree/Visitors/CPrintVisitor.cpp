@@ -81,12 +81,18 @@ void CPrintVisitor::Visit(CCompoundStatement* statement) {
 	statement->GetRightOperand()->Accept(this);
 }
 
+
 void CPrintVisitor::Visit(CIfElseStatement* statement) {
 	int currentExpressionId = ++expressionId;
 	file << "ifExpression" << delim << currentExpressionId << getArrow();
 	statement->getExpression()->Accept(this);
 	file << getEndLine();
-	//TODO доделать
+    file << "ifStatement" << delim << currentExpressionId << getArrow();
+    statement->getIfStatement()->Accept(this);
+    file << getEndLine();
+    file << "elseStatement" << delim << currentExpressionId << getArrow();
+    statement->getElseStatement()->Accept(this);
+    file << getEndLine();
 }
 std::string CPrintVisitor::getArrow() {
 	return " -> ";

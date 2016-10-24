@@ -1,4 +1,10 @@
 {
+
+    if(a > 2) {
+       a = 4;
+    } else {
+       a = 5;
+    }
 	System.out.println(5 + 3);
 	a = 10;
 	b = 20;
