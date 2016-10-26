@@ -21,3 +21,7 @@ const std::shared_ptr<IStatement> &CIfElseStatement::getIfStatement() const {
 const std::shared_ptr<IStatement> &CIfElseStatement::getElseStatement() const {
     return elseStatement;
 }
+
+void CIfElseStatement::Accept(IVisitor * visitor) {
+    visitor->Visit(this);
+}
