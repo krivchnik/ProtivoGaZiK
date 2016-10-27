@@ -133,8 +133,9 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 "&&"	    	 {updateLocation(); return AND;}
 "||"	         {updateLocation(); return OR;}
 
-";"				 {updateLocation(); return SEMICOLON;}
-"."              {updateLocation(); return POINT;}
+";"				 { updateLocation(); return SEMICOLON; }
+"."              { updateLocation(); return POINT; }
+
 {STRING}         {
 
 	updateLocation();
