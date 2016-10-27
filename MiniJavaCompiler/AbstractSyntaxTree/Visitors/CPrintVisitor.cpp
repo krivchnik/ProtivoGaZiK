@@ -9,6 +9,7 @@
 #include <Nodes/CIdExpression.h>
 #include <Nodes/CNumExpression.h>
 #include <Nodes/COperationExpression.h>
+#include <Nodes/CLengthExpression.h>
 
 std::string GetOperationSign(int index) {
 	std::vector<std::string> signs = {"addition", "subtraction", "multiplication", "mod", "and", "or", "less"};
@@ -57,6 +58,13 @@ void CPrintVisitor::Visit(CIdExpression* expression) {
 	idsOfTokenWithBoxShape.push_back(newId);
 }
 
+
+void CPrintVisitor::Visit(CLengthExpression* expression) {
+	++expressionId;
+	expression->getExpression()->Accept(this);
+	file << "getLength" + delim + std::to_string(expressionId);
+	file << getEndLine();
+}
 void CPrintVisitor::Visit(CAssignStatement* statement) {
 	int currentExpressionId = ++expressionId;
 	file << "assignment" << delim << currentExpressionId << getArrow();
@@ -115,4 +123,5 @@ std::string CPrintVisitor::getArrow() const {
 std::string CPrintVisitor::getEndLine() const {
 	return ";\n\t";
 }
+
 

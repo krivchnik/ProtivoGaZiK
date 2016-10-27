@@ -58,7 +58,7 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 
 		| ID 							{ $$ = new CIdExpression(std::string($1)); }
 //		| exp LSBRACKET exp RSBRACKET   { $$ = new }
-//		| exp POINT LENGTH 				{ $$ = new }
+		| exp POINT LENGTH 				{ $$ = new CLengthExpression(shared_ptr<IExpression>($1)); }
 		;
 
 stat 	: LFBRACKET stat RFBRACKET                  		{ $$ = $2; }

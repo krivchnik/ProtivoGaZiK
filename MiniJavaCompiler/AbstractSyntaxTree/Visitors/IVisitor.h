@@ -13,6 +13,7 @@ class CWhileStatement;
 class CIdExpression;
 class CNumExpression;
 class COperationExpression;
+class CLengthExpression;
 
 class IVisitor {
 public:
@@ -26,4 +27,6 @@ public:
 	virtual void Visit(CIdExpression*) = 0;
 	virtual void Visit(CNumExpression*) = 0;
 	virtual void Visit(COperationExpression*) = 0;
+    virtual void Visit(CLengthExpression*) = 0;
+
 };
