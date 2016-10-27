@@ -2,7 +2,6 @@
 
 #include <Nodes/IExpression.h>
 
-
 class COperationExpression: public IExpression {
 
 public:

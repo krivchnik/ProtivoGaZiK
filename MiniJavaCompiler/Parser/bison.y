@@ -23,6 +23,7 @@ extern shared_ptr<IStatement> ans;
                     PUBLIC PRIVATE STATIC
                     INT BOOLEAN VOID STRING
 	                TRUE FALSE
+	                NOT
                     CLASS EXTENDS
                     IF ELSE WHILE
                     RETURN PRINTLN LENGTH
@@ -45,7 +46,7 @@ extern shared_ptr<IStatement> ans;
 %%
 
 input:	/* empty */
-		| Main	{ ans = shared_ptr<IStatement>($1); return 0;}
+		| stat	{ ans = shared_ptr<IStatement>($1); return 0;}
 		;
 
 exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
@@ -59,7 +60,7 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
         | TRUE      					{ $$ = new CBoolExpression(true); }
         | FALSE 						{ $$ = new CBoolExpression(false); }
 		| ID 							{ $$ = new CIdExpression(std::string($1)); }
-//		| exp LSBRACKET exp RSBRACKET   { $$ = new }
+		| NOT exp   					{ $$ = new CNotExpression(shared_ptr<IExpression>($2)); }
 		| exp POINT LENGTH 				{ $$ = new CLengthExpression(shared_ptr<IExpression>($1)); }
 		;
 

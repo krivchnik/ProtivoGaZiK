@@ -12,7 +12,9 @@ using namespace std;
 #include <Nodes/INode.h>
 #include <Nodes/IExpression.h>
 #include <Nodes/CIdExpression.h>
+#include <Nodes/CBoolExpression.h>
 #include <Nodes/CNumExpression.h>
+#include <Nodes/CNotExpression.h>
 #include <Nodes/COperationExpression.h>
 #include <Nodes/CLengthExpression.h>
 

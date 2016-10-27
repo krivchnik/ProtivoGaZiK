@@ -130,6 +130,8 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 "*"              {updateLocation(); return STAR;}
 "%"		         {updateLocation(); return MOD;}
 
+"!"				 {updateLocation(); return NOT;}
+
 "="		         {updateLocation(); return ASSIGN;}
 
 "<"		     	 {updateLocation(); return LESS;}

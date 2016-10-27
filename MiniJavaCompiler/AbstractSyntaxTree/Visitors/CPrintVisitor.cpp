@@ -10,6 +10,7 @@
 #include <Nodes/CIdExpression.h>
 #include <Nodes/CBoolExpression.h>
 #include <Nodes/CNumExpression.h>
+#include <Nodes/CNotExpression.h>
 #include <Nodes/COperationExpression.h>
 #include <Nodes/CLengthExpression.h>
 
@@ -67,6 +68,11 @@ void CPrintVisitor::Visit(CIdExpression* expression) {
 	idsOfTokenWithBoxShape.push_back(newId);
 }
 
+void CPrintVisitor::Visit(CNotExpression* expression) {
+    ++expressionId;
+    file << "not" << expressionId << getArrow();
+    expression->GetExpression()->Accept(this);
+}
 
 void CPrintVisitor::Visit(CLengthExpression* expression) {
 	++expressionId;

@@ -18,18 +18,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bd78c8f-4a4c-452f-923c-d9a6b091b718" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CBoolExpression.cpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CBoolExpression.h" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/MiniJavaCompiler.iml" afterPath="$PROJECT_DIR$/.idea/MiniJavaCompiler.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNotExpression.cpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNotExpression.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/COperationExpression.h" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/COperationExpression.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.cpp" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.h" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AbstractSyntaxTree/Visitors/IVisitor.h" afterPath="$PROJECT_DIR$/AbstractSyntaxTree/Visitors/IVisitor.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Output/lexer.cpp" afterPath="$PROJECT_DIR$/Output/lexer.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Output/parser.cpp" afterPath="$PROJECT_DIR$/Output/parser.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser/CommonInclude.h" afterPath="$PROJECT_DIR$/Parser/CommonInclude.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser/bison.y" afterPath="$PROJECT_DIR$/Parser/bison.y" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser/expr" afterPath="$PROJECT_DIR$/Parser/expr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser/flex.l" afterPath="$PROJECT_DIR$/Parser/flex.l" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser/heading.h" afterPath="$PROJECT_DIR$/Parser/heading.h" />
     </list>
     <ignored path="MiniJavaCompiler.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,27 +53,50 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="flex.l" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Parser/flex.l">
+      <file leaf-file-name="bison.y" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Parser/bison.y">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1116">
+              <caret line="62" column="72" selection-start-line="62" selection-start-column="72" selection-end-line="62" selection-end-column="72" />
+              <folding>
+                <marker date="1477596794743" expanded="true" signature="152:307" ph="{...}" />
+                <marker date="1477596794743" expanded="true" signature="3558:4741" ph="/.../" />
+                <marker date="1477596794743" expanded="true" signature="4769:5002" ph="{...}" />
+                <marker date="1477596794743" expanded="true" signature="5025:5057" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommonInclude.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Parser/CommonInclude.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="234">
-              <caret line="85" column="45" selection-start-line="85" selection-start-column="45" selection-end-line="85" selection-end-column="45" />
+              <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bison.y" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Parser/bison.y">
+      <file leaf-file-name="CNotExpression.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNotExpression.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
+            <state relative-caret-position="90">
+              <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
               <folding>
-                <marker date="1477593818638" expanded="true" signature="152:307" ph="{...}" />
-                <marker date="1477593818638" expanded="true" signature="3509:4692" ph="/.../" />
-                <marker date="1477593818638" expanded="true" signature="4720:4953" ph="{...}" />
-                <marker date="1477593818638" expanded="true" signature="4976:5008" ph="{...}" />
+                <marker date="1477595678959" expanded="true" signature="193:219" ph="{...}" />
+                <marker date="1477595678959" expanded="true" signature="268:297" ph="{...}" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -80,47 +105,17 @@
         <entry file="file://$PROJECT_DIR$/Parser/expr">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="252">
-              <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+              <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="graph.dot" pinned="false" current-in-tab="false">
+      <file leaf-file-name="graph.dot" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../graph.dot">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="33" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="COperationExpression.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/COperationExpression.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CBoolExpression.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CBoolExpression.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <state relative-caret-position="252">
+              <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -129,14 +124,29 @@
       <file leaf-file-name="CPrintVisitor.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="60" column="1" selection-start-line="60" selection-start-column="1" selection-end-line="60" selection-end-column="1" />
+            <state relative-caret-position="216">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="33" />
               <folding>
-                <marker date="1477592164335" expanded="true" signature="478:612" ph="{...}" />
-                <marker date="1477592164335" expanded="true" signature="685:937" ph="{...}" />
-                <marker date="1477592164335" expanded="true" signature="999:1371" ph="{...}" />
-                <marker date="1477592164335" expanded="true" signature="1427:1633" ph="{...}" />
-                <marker date="1477592164335" expanded="true" signature="4669:4689" ph="{...}" />
+                <marker date="1477596033469" expanded="true" signature="512:646" ph="{...}" />
+                <marker date="1477596033469" expanded="true" signature="719:971" ph="{...}" />
+                <marker date="1477596033469" expanded="true" signature="1033:1405" ph="{...}" />
+                <marker date="1477596033469" expanded="true" signature="1461:1667" ph="{...}" />
+                <marker date="1477596033469" expanded="true" signature="1724:1924" ph="{...}" />
+                <marker date="1477596033469" expanded="true" signature="1979:2140" ph="{...}" />
+                <marker date="1477596033469" expanded="true" signature="4877:4897" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CPrintVisitor.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+              <folding>
+                <element signature="e#87#117#0" expanded="true" />
+                <marker date="1477596111062" expanded="true" signature="219:1591" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -145,19 +155,21 @@
       <file leaf-file-name="IVisitor.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Visitors/IVisitor.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="29" column="43" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
+            <state relative-caret-position="36">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CBoolExpression.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CBoolExpression.h">
+      <file leaf-file-name="CNotExpression.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNotExpression.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="216">
+              <caret line="12" column="2" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
+              <folding>
+                <marker date="1477594738464" expanded="true" signature="87:285" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -179,7 +191,6 @@
         <option value="$PROJECT_DIR$/Parser/main.cc" />
         <option value="$PROJECT_DIR$/graph.dot" />
         <option value="$PROJECT_DIR$/Parser/heading.h" />
-        <option value="$PROJECT_DIR$/Parser/CommonInclude.h" />
         <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/IStatement.h" />
         <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/INode.h" />
         <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/IExpression.h" />
@@ -200,14 +211,17 @@
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CBoolExpression.h" />
         <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CBoolExpression.cpp" />
-        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.h" />
+        <option value="$PROJECT_DIR$/Parser/flex.l" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/COperationExpression.h" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNotExpression.h" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNotExpression.cpp" />
         <option value="$PROJECT_DIR$/AbstractSyntaxTree/Visitors/IVisitor.h" />
         <option value="$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.cpp" />
-        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Nodes/COperationExpression.h" />
+        <option value="$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.h" />
+        <option value="$PROJECT_DIR$/Parser/CommonInclude.h" />
+        <option value="$PROJECT_DIR$/Parser/bison.y" />
         <option value="$PROJECT_DIR$/Parser/expr" />
         <option value="$PROJECT_DIR$/../graph.dot" />
-        <option value="$PROJECT_DIR$/Parser/flex.l" />
-        <option value="$PROJECT_DIR$/Parser/bison.y" />
       </list>
     </option>
   </component>
@@ -582,7 +596,7 @@
       <workItem from="1477243915308" duration="65000" />
       <workItem from="1477588529234" duration="1246000" />
       <workItem from="1477590140618" duration="2287000" />
-      <workItem from="1477592789061" duration="780000" />
+      <workItem from="1477592789061" duration="3667000" />
     </task>
     <task id="LOCAL-00001" summary="change ast file structure">
       <created>1477168358774</created>
@@ -591,17 +605,24 @@
       <option name="project" value="LOCAL" />
       <updated>1477168358774</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add CBoolExpression">
+      <created>1477593882333</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1477593882334</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24035000" />
+    <option name="totallyTimeSpent" value="26922000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="744" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24633431" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24633431" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286385" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14241001" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -636,7 +657,8 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="change ast file structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="change ast file structure" />
+    <MESSAGE value="add CBoolExpression" />
+    <option name="LAST_COMMIT_MESSAGE" value="add CBoolExpression" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -649,8 +671,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Nodes/main.cpp" />
-    <entry file="file://$PROJECT_DIR$/Nodes/CMakeLists.txt" />
     <entry file="file://$PROJECT_DIR$/Output/lexer.c" />
     <entry file="file://$PROJECT_DIR$/Output/parser.c" />
     <entry file="file://$PROJECT_DIR$/Parser/out.ps" />
@@ -683,13 +703,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="11" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/COperationExpression.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -757,14 +770,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/CommonInclude.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt" />
     <entry file="file://$PROJECT_DIR$/Parser/heading.h">
       <provider selected="true" editor-type-id="text-editor">
@@ -785,6 +790,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="41">
           <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -827,21 +833,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNumExpression.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="1" selection-start-line="0" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNumExpression.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/INode.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -874,16 +865,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="23" column="33" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
-          <folding>
-            <element signature="e#87#117#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CBoolExpression.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
@@ -900,60 +881,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Visitors/IVisitor.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="29" column="43" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="60" column="1" selection-start-line="60" selection-start-column="1" selection-end-line="60" selection-end-column="1" />
-          <folding>
-            <marker date="1477592164335" expanded="true" signature="478:612" ph="{...}" />
-            <marker date="1477592164335" expanded="true" signature="685:937" ph="{...}" />
-            <marker date="1477592164335" expanded="true" signature="999:1371" ph="{...}" />
-            <marker date="1477592164335" expanded="true" signature="1427:1633" ph="{...}" />
-            <marker date="1477592164335" expanded="true" signature="4669:4689" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/COperationExpression.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/expr">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../graph.dot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="33" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Parser/flex.l">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
@@ -962,16 +889,138 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Parser/bison.y">
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNumExpression.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/COperationExpression.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/COperationExpression.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <marker date="1477594738456" expanded="true" signature="93:597" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNumExpression.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
-          <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
+          <caret line="13" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
           <folding>
-            <marker date="1477593818638" expanded="true" signature="152:307" ph="{...}" />
-            <marker date="1477593818638" expanded="true" signature="3509:4692" ph="/.../" />
-            <marker date="1477593818638" expanded="true" signature="4720:4953" ph="{...}" />
-            <marker date="1477593818638" expanded="true" signature="4976:5008" ph="{...}" />
+            <element signature="e#87#117#0" expanded="true" />
+            <marker date="1477596111062" expanded="true" signature="219:1591" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Visitors/IVisitor.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Visitors/CPrintVisitor.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="33" />
+          <folding>
+            <marker date="1477596033469" expanded="true" signature="512:646" ph="{...}" />
+            <marker date="1477596033469" expanded="true" signature="719:971" ph="{...}" />
+            <marker date="1477596033469" expanded="true" signature="1033:1405" ph="{...}" />
+            <marker date="1477596033469" expanded="true" signature="1461:1667" ph="{...}" />
+            <marker date="1477596033469" expanded="true" signature="1724:1924" ph="{...}" />
+            <marker date="1477596033469" expanded="true" signature="1979:2140" ph="{...}" />
+            <marker date="1477596033469" expanded="true" signature="4877:4897" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parser/bison.y">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1116">
+          <caret line="62" column="72" selection-start-line="62" selection-start-column="72" selection-end-line="62" selection-end-column="72" />
+          <folding>
+            <marker date="1477596794743" expanded="true" signature="152:307" ph="{...}" />
+            <marker date="1477596794743" expanded="true" signature="3558:4741" ph="/.../" />
+            <marker date="1477596794743" expanded="true" signature="4769:5002" ph="{...}" />
+            <marker date="1477596794743" expanded="true" signature="5025:5057" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parser/CommonInclude.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNotExpression.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="2" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
+          <folding>
+            <marker date="1477594738464" expanded="true" signature="87:285" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AbstractSyntaxTree/Nodes/CNotExpression.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+          <folding>
+            <marker date="1477595678959" expanded="true" signature="193:219" ph="{...}" />
+            <marker date="1477595678959" expanded="true" signature="268:297" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parser/expr">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../graph.dot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
