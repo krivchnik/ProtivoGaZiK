@@ -23,6 +23,7 @@ extern shared_ptr<IStatement> ans;
 %token				LPBRACKET RPBRACKET LFBRACKET RFBRACKET LSBRACKET RSBRACKET SEMICOLON
                     PUBLIC PRIVATE STATIC
                     INT BOOLEAN VOID STRING
+	                TRUE FALSE
                     CLASS EXTENDS
                     IF ELSE WHILE
                     RETURN PRINTLN LENGTH
@@ -56,7 +57,8 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| exp AND exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::AND); }
 		| exp OR exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::OR); }
 		| exp LESS exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::LESS); }
-
+        | TRUE      					{ $$ = new CBoolExpression(true); }
+        | FALSE 						{ $$ = new CBoolExpression(false); }
 		| ID 							{ $$ = new CIdExpression(std::string($1)); }
 //		| exp LSBRACKET exp RSBRACKET   { $$ = new }
 		| exp POINT LENGTH 				{ $$ = new CLengthExpression(shared_ptr<IExpression>($1)); }

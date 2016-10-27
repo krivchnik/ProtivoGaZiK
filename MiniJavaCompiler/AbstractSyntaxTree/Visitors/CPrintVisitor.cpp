@@ -9,6 +9,7 @@
 #include <Nodes/CListStatement.h>
 
 #include <Nodes/CIdExpression.h>
+#include <Nodes/CBoolExpression.h>
 #include <Nodes/CNumExpression.h>
 #include <Nodes/COperationExpression.h>
 #include <Nodes/CLengthExpression.h>
@@ -27,7 +28,7 @@ void CPrintVisitor::StartVisit(INode* startNode, std::string filename) {
 	file << "digraph task1 {\n\t";
 
 	startNode->Accept(this);
-    //распечатает id тех кто будет квадратным
+
     for(std::string name : idsOfTokenWithBoxShape){
     	file << getEndLine() << name << " [shape=box]";
     }
@@ -51,6 +52,13 @@ void CPrintVisitor::Visit(CNumExpression* expression) {
 	std::string newId = std::string("Number") + std::to_string(expression->GetNumber()) + delim + std::to_string(expressionId);
 	file << newId;
     idsOfTokenWithBoxShape.push_back(newId);
+}
+
+void CPrintVisitor::Visit(CBoolExpression* expression) {
+	++expressionId;
+	std::string newId = std::string("Bool") + std::to_string(expression->GetValue()) + delim + std::to_string(expressionId);
+	file << newId;
+	idsOfTokenWithBoxShape.push_back(newId);
 }
 
 void CPrintVisitor::Visit(CIdExpression* expression) {

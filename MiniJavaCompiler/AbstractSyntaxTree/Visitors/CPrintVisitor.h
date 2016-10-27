@@ -22,6 +22,7 @@ public:
 
 	void Visit(CIdExpression*);
 	void Visit(CNumExpression*);
+	void Visit(CBoolExpression*);
 	void Visit(COperationExpression*);
 	void Visit(CLengthExpression*);
 
