@@ -9,12 +9,12 @@
     #include <CommonInclude.h>
     #include <heading.h>
 
-    typedef struct YYLTYPE  
-	{  
-	  int first_line;  
-	  int first_column;  
-	  int last_line;  
-	  int last_column;  
+    typedef struct YYLTYPE
+	{
+	  int first_line;
+	  int first_column;
+	  int last_line;
+	  int last_column;
 	} YYLTYPE;
 
     YYLTYPE yylloc;
@@ -32,7 +32,7 @@
 	   		 column_number = 1;
 	   	 } else if (yytext[i] == '\t'){
 	   	 	column_number += 4;
-	   	 } 
+	   	 }
 	   	 else {
 	   		 column_number++;
 	   	 }
@@ -51,7 +51,7 @@
 	}
 
 	void toUpper(char *str) {
-		int i = 0; 
+		int i = 0;
 		while (str[i]) {
 			str[i] = toupper(str[i]);
 			++i;
@@ -78,10 +78,13 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 "private"             { updateLocation(); return(PRIVATE); }
 "static"              { updateLocation(); return(STATIC); }
 
+"void"                { updateLocation(); return(VOID); }
 "int"                 { updateLocation(); return(INT); }
 "boolean"             { updateLocation(); return(BOOLEAN); }
-"void"                { updateLocation(); return(VOID); }
 "string"              { updateLocation(); return(STRING); }
+
+"true"                { updateLocation(); return(TRUE); }
+"false"               { updateLocation(); return(FALSE); }
 
 "class"               { updateLocation(); return(CLASS); }
 "extends"             { updateLocation(); return(EXTENDS); }
@@ -105,7 +108,7 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 }
 
 {id}           	 {
-	              updateLocation(); 
+	              updateLocation();
 	              size_t len = strlen(yytext);
                   char *token_name = (char*)malloc(len + 1 ); /* one for extra char, one for trailing zero */
                   strcpy(token_name, yytext);

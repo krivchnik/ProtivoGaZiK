@@ -11,6 +11,8 @@
     }
 	a = 10;
 	b = 20;
+
+	BOOL_VARIABLE = true;
 }
 {
 	System.out.println(5 + 3);
