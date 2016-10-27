@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_HOME_NISMOHL_CLIONPROJECTS_PROTIVOGAZIK_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED
-# define YY_YY_HOME_NISMOHL_CLIONPROJECTS_PROTIVOGAZIK_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED
+#ifndef YY_YY_HOME_KAGUDKOV_CLIONPROJECTS_PROTIVOGAZIK_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED
+# define YY_YY_HOME_KAGUDKOV_CLIONPROJECTS_PROTIVOGAZIK_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -59,31 +59,28 @@ extern int yydebug;
     BOOLEAN = 269,
     VOID = 270,
     STRING = 271,
-    TRUE = 272,
-    FALSE = 273,
-    NOT = 274,
-    CLASS = 275,
-    EXTENDS = 276,
-    IF = 277,
-    ELSE = 278,
-    WHILE = 279,
-    RETURN = 280,
-    PRINTLN = 281,
-    LENGTH = 282,
-    THIS = 283,
-    NEW = 284,
-    MAIN = 285,
-    POINT = 286,
-    INTEGER_LITERAL = 287,
-    ID = 288,
-    OR = 289,
-    AND = 290,
-    PLUS = 291,
-    MINUS = 292,
-    STAR = 293,
-    MOD = 294,
-    ASSIGN = 295,
-    LESS = 296
+    CLASS = 272,
+    EXTENDS = 273,
+    IF = 274,
+    ELSE = 275,
+    WHILE = 276,
+    RETURN = 277,
+    PRINTLN = 278,
+    LENGTH = 279,
+    THIS = 280,
+    NEW = 281,
+    MAIN = 282,
+    POINT = 283,
+    INTEGER_LITERAL = 284,
+    ID = 285,
+    OR = 286,
+    AND = 287,
+    PLUS = 288,
+    MINUS = 289,
+    STAR = 290,
+    MOD = 291,
+    ASSIGN = 292,
+    LESS = 293
   };
 #endif
 
@@ -92,15 +89,16 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 12 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1909  */
+#line 12 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1909  */
 
   int                int_val;
   char*              op_val;
   INode*             node_val;
   IExpression*       expr_val;
   IStatement*        stat_val;
+  CListStatement*    stat_list;
 
-#line 104 "/home/nismohl/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
+#line 102 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -113,4 +111,4 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_HOME_NISMOHL_CLIONPROJECTS_PROTIVOGAZIK_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED  */
+#endif /* !YY_YY_HOME_KAGUDKOV_CLIONPROJECTS_PROTIVOGAZIK_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED  */

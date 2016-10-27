@@ -18,6 +18,7 @@ public:
 	void Visit(CPrintStatement*);
 	void Visit(CIfElseStatement*);
 	void Visit(CWhileStatement*);
+	void Visit(CListStatement*);
 
 	void Visit(CIdExpression*);
 	void Visit(CNumExpression*);

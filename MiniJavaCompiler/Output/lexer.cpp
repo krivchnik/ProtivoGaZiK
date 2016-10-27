@@ -1091,17 +1091,17 @@ YY_RULE_SETUP
 case 37:
 YY_RULE_SETUP
 #line 136 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(); return SEMICOLON;}
+{ updateLocation(); return SEMICOLON; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 137 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(); return POINT;}
+{ updateLocation(); return POINT; }
 	YY_BREAK
 case 39:
 /* rule 39 can match eol */
 YY_RULE_SETUP
-#line 138 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+#line 139 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {
 
 	updateLocation();
@@ -1118,7 +1118,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 151 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+#line 152 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 ECHO;
 	YY_BREAK
 #line 1125 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/lexer.cpp"
@@ -2122,7 +2122,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 151 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+#line 152 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 
 
 
