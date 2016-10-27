@@ -17,6 +17,8 @@ ADD_CUSTOM_COMMAND(
         COMMAND ${BISON_EXECUTABLE}
             --defines=${PARSER_SOURCE_DIR}/heading.h
             --output=${BisonOutput}
+            -v
+            -d
         ${PARSER_SOURCE_DIR}/bison.y
         COMMENT "Generating parser.cpp"
     )

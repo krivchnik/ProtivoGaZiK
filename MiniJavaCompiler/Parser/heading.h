@@ -96,8 +96,9 @@ union YYSTYPE
   INode*             node_val;
   IExpression*       expr_val;
   IStatement*        stat_val;
+  CListStatement*    stat_list;
 
-#line 101 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
+#line 102 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

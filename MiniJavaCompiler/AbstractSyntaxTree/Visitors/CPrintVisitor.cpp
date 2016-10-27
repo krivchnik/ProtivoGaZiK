@@ -6,6 +6,7 @@
 #include <Nodes/CPrintStatement.h>
 #include <Nodes/CIfElseStatement.h>
 #include <Nodes/CWhileStatement.h>
+#include <Nodes/CListStatement.h>
 
 #include <Nodes/CIdExpression.h>
 #include <Nodes/CNumExpression.h>
@@ -64,7 +65,6 @@ void CPrintVisitor::Visit(CLengthExpression* expression) {
 	++expressionId;
 	expression->getExpression()->Accept(this);
 	file << "getLength" + delim + std::to_string(expressionId);
-	file << getEndLine();
 }
 
 void CPrintVisitor::Visit(CAssignStatement* statement) {
@@ -87,7 +87,6 @@ void CPrintVisitor::Visit(CAssignItemStatement* statement) {
     file << getEndLine();
     file << "assignmentItem" << delim << currentExpressionId << getArrow();
     statement->getAssignedExpression()->Accept(this);
-    file << getEndLine();
 }
 
 void CPrintVisitor::Visit(CPrintStatement* statement) {
@@ -127,7 +126,17 @@ void CPrintVisitor::Visit(CWhileStatement* statement) {
 	file << getEndLine();
 	file << "WhileBody" << delim << currentExpressionId << getArrow();
 	statement->getBody()->Accept(this);
-	file << getEndLine();
+}
+
+void CPrintVisitor::Visit(CListStatement* statement) {
+    int currentExpressionId = ++expressionId;
+    for(size_t i = 0; i < statement->GetStatements().size() - 1; ++i){
+        file << "ListStatement" << delim << currentExpressionId << getArrow();
+        statement->GetStatements()[i]->Accept(this);
+        file << getEndLine();
+    }
+	file << "ListStatement" << delim << currentExpressionId << getArrow();
+	statement->GetStatements()[statement->GetStatements().size() - 1]->Accept(this);
 
 }
 
@@ -138,5 +147,6 @@ std::string CPrintVisitor::getArrow() const {
 std::string CPrintVisitor::getEndLine() const {
 	return ";\n\t";
 }
+
 
 

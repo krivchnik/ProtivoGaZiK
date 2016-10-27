@@ -15,6 +15,7 @@ extern shared_ptr<IStatement> ans;
   INode*             node_val;
   IExpression*       expr_val;
   IStatement*        stat_val;
+  CListStatement*    stat_list;
 }
 
 %start	input
@@ -32,6 +33,7 @@ extern shared_ptr<IStatement> ans;
 
 %type  <expr_val>	exp
 %type  <stat_val>   stat
+%type  <stat_list> statList
 
 %left 	OR
 %left   AND
@@ -43,8 +45,7 @@ extern shared_ptr<IStatement> ans;
 
 %%
 
-input:	/* empty */
-		| stat	{ ans = shared_ptr<IStatement>($1); return 0;}
+input:	statList	{ ans = shared_ptr<IStatement>($1); return 0;}
 		;
 
 exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
@@ -61,9 +62,12 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| exp POINT LENGTH 				{ $$ = new CLengthExpression(shared_ptr<IExpression>($1)); }
 		;
 
-stat 	: LFBRACKET stat RFBRACKET                  		{ $$ = $2; }
-    	| stat stat                        					{ $$ = new CCompoundStatement(shared_ptr<IStatement>($1), 
-    																					  shared_ptr<IStatement>($2)); }
+statList : %empty { $$ = new CListStatement(); }
+         | statList stat { $$ = std::move($1); $$->Add(shared_ptr<IStatement> ($2)); }
+         ;
+
+stat 	: LFBRACKET statList RFBRACKET                       { $$ = $2; }
+
     	| IF LPBRACKET exp RPBRACKET stat ELSE stat 		{ $$ = new CIfElseStatement(shared_ptr<IExpression>($3),
     																					shared_ptr<IStatement>($5),
     																					shared_ptr<IStatement>($7)); }
