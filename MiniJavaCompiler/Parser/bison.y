@@ -60,6 +60,8 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| exp LESS exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::LESS); }
         | TRUE      					{ $$ = new CBoolExpression(true); }
         | FALSE 						{ $$ = new CBoolExpression(false); }
+
+		| exp POINT LENGTH 				{ $$ = new CLengthExpression(shared_ptr<IExpression>($1)); }
 		| ID 							{ $$ = new CIdExpression(std::string($1)); }
 		| NOT exp   					{ $$ = new CNotExpression(shared_ptr<IExpression>($2)); }
 		| exp POINT LENGTH 				{ $$ = new CLengthExpression(shared_ptr<IExpression>($1)); }

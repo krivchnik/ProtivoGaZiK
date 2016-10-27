@@ -78,7 +78,7 @@ void CPrintVisitor::Visit(CNotExpression* expression) {
 void CPrintVisitor::Visit(CLengthExpression* expression) {
 	++expressionId;
 	expression->getExpression()->Accept(this);
-	file << "getLength" + delim + std::to_string(expressionId);
+	file << getArrow() << "getLength" + delim + std::to_string(expressionId);
 }
 
 void CPrintVisitor::Visit(CAssignStatement* statement) {

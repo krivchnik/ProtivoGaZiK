@@ -1,18 +1,5 @@
 {
-    if (a || 2)
-    {
-       a = 5;
-       b = 20;
-    }
-    else
-    {
-       c = 100;
-       b = 10;
-    }
-    a = 10;
-    a = 10;
-    a = 10;
-    a = 10;
+    a = 10.length;
 }
 {
 	System.out.println(5 + 3);
