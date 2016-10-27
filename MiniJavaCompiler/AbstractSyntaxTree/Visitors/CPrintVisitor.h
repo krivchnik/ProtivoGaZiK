@@ -1,34 +1,41 @@
 #pragma once
+//реализация интерфейса обхода графа, создает дерево обхода для графвиза
 
 #include <Visitors/IVisitor.h>
 #include <Nodes/INode.h>
 #include <vector>
 
 #include <fstream>
-#include <Nodes/CIfElseStatement.h>
 
 class CPrintVisitor: public IVisitor {
 public:
+	//принимает корень дерева и имя файла с выводом для графвиза
 	void StartVisit(INode* startNode, std::string filename);
-
+	//Сюда нужно добавить методы visit для всех классов, которые мы хотим отображать в дереве.
 	void Visit(CAssignStatement*);
 	void Visit(CCompoundStatement*);
 	void Visit(CPrintStatement*);
+	void Visit(CIfElseStatement*);
+	void Visit(CWhileStatement*);
 
 	void Visit(CIdExpression*);
 	void Visit(CNumExpression*);
 	void Visit(COperationExpression*);
-	void Visit(CIfElseStatement*);
 
 private:
 
 	int expressionId;
+	//в этот вектор нужно добавить все имена токенов, которые мы хотим отрисовывать в форме прямоугольника, а не эллипса
     std::vector<std::string> idsOfTokenWithBoxShape;
+	//При использовании графвиза у нас возникла проблема - разные с нашей точки зрения токены, имеющие одно и то же имя
+	// сливались в одну ноду на дереве, моэтому после каждого токена мы пишем его id в формате tokenName + A + id
+	// в качестве разделителя не получилось использовать " " |_ и тому подобные символы
 	std::string delim = "A";
 
 	std::ofstream file;
-
-	std::string getArrow();
-	std::string getEndLine();
+    //метод рисует стрелочку межда именами нод в файле вывода
+	std::string getArrow() const;
+	//метод заканчиват эту строку в файле вывода и переходит на следующую
+	std::string getEndLine() const;
 
 };

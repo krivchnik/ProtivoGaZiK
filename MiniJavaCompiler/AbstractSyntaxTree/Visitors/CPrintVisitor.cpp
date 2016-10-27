@@ -4,6 +4,7 @@
 #include <Nodes/CCompoundStatement.h>
 #include <Nodes/CPrintStatement.h>
 #include <Nodes/CIfElseStatement.h>
+#include <Nodes/CWhileStatement.h>
 
 #include <Nodes/CIdExpression.h>
 #include <Nodes/CNumExpression.h>
@@ -94,10 +95,24 @@ void CPrintVisitor::Visit(CIfElseStatement* statement) {
     statement->getElseStatement()->Accept(this);
     file << getEndLine();
 }
-std::string CPrintVisitor::getArrow() {
+
+
+void CPrintVisitor::Visit(CWhileStatement* statement) {
+	int currentExpressionId = ++expressionId;
+	file << "WhileCondition" << delim << currentExpressionId << getArrow();
+	statement->getCondition()->Accept(this);
+	file << getEndLine();
+	file << "WhileBody" << delim << currentExpressionId << getArrow();
+	statement->getBody()->Accept(this);
+	file << getEndLine();
+
+}
+
+std::string CPrintVisitor::getArrow() const {
 	return " -> ";
 }
 
-std::string CPrintVisitor::getEndLine() {
+std::string CPrintVisitor::getEndLine() const {
 	return ";\n\t";
 }
+

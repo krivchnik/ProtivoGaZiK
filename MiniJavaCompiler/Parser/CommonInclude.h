@@ -18,6 +18,7 @@ using namespace std;
 #include <Nodes/CAssignStatement.h>
 #include <Nodes/CPrintStatement.h>
 #include <Nodes/CCompoundStatement.h>
+#include <Nodes/CIfElseStatement.h>
 
 #include <Visitors/CPrintVisitor.h>
 

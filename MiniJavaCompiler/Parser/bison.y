@@ -69,8 +69,8 @@ stat 	: LFBRACKET stat RFBRACKET                  		{ $$ = $2; }
     																					shared_ptr<IStatement>($7)); }
 
 
-//    	| WHILE LFBRACKET exp RFBRACKET stat         		{ $$ = new CWhileStatement(shared_ptr<IExpression>($3),
-//    																				   shared_ptr<IStatement>($5)); }
+    	| WHILE LPBRACKET exp RPBRACKET stat         		{ $$ = new CWhileStatement(shared_ptr<IExpression>($3),
+    																				   shared_ptr<IStatement>($5)); }
 
     	| PRINTLN LPBRACKET exp RPBRACKET SEMICOLON 		{ $$ = new CPrintStatement(shared_ptr<IExpression>($3)); }
 
