@@ -134,8 +134,7 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 "||"	         {updateLocation(); return OR;}
 
 ";"				 {updateLocation(); return SEMICOLON;}
-
-
+"."              {updateLocation(); return POINT;}
 {STRING}         {
 
 	updateLocation();

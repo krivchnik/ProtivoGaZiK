@@ -1,6 +1,7 @@
 #include <Visitors/CPrintVisitor.h>
 
 #include <Nodes/CAssignStatement.h>
+#include <Nodes/CAssignItemStatement.h>
 #include <Nodes/CCompoundStatement.h>
 #include <Nodes/CPrintStatement.h>
 #include <Nodes/CIfElseStatement.h>
@@ -65,6 +66,7 @@ void CPrintVisitor::Visit(CLengthExpression* expression) {
 	file << "getLength" + delim + std::to_string(expressionId);
 	file << getEndLine();
 }
+
 void CPrintVisitor::Visit(CAssignStatement* statement) {
 	int currentExpressionId = ++expressionId;
 	file << "assignment" << delim << currentExpressionId << getArrow();
@@ -72,6 +74,20 @@ void CPrintVisitor::Visit(CAssignStatement* statement) {
 	file << getEndLine();
 	file << "assignment" << delim << currentExpressionId << getArrow();
 	statement->GetExpression()->Accept(this);
+}
+
+
+void CPrintVisitor::Visit(CAssignItemStatement* statement) {
+    int currentExpressionId = ++expressionId;
+    file << "assignmentItem" << delim << currentExpressionId << getArrow();
+    statement->getId()->Accept(this);
+    file << "[";
+    statement->getExpressionInBrackets()->Accept(this);
+    file << "]";
+    file << getEndLine();
+    file << "assignmentItem" << delim << currentExpressionId << getArrow();
+    statement->getAssignedExpression()->Accept(this);
+    file << getEndLine();
 }
 
 void CPrintVisitor::Visit(CPrintStatement* statement) {

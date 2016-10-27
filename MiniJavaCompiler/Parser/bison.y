@@ -26,7 +26,7 @@ extern shared_ptr<IStatement> ans;
                     IF ELSE WHILE
                     RETURN PRINTLN LENGTH
                     THIS NEW
-                    MAIN
+                    MAIN POINT
 %token <int_val>	INTEGER_LITERAL
 %token <op_val>     ID
 
@@ -68,7 +68,6 @@ stat 	: LFBRACKET stat RFBRACKET                  		{ $$ = $2; }
     																					shared_ptr<IStatement>($5),
     																					shared_ptr<IStatement>($7)); }
 
-
     	| WHILE LPBRACKET exp RPBRACKET stat         		{ $$ = new CWhileStatement(shared_ptr<IExpression>($3),
     																				   shared_ptr<IStatement>($5)); }
 
@@ -77,9 +76,9 @@ stat 	: LFBRACKET stat RFBRACKET                  		{ $$ = $2; }
     	| ID ASSIGN exp SEMICOLON                			{ $$ = new CAssignStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))), 
     																					shared_ptr<IExpression>($3)); }
 
-//    	| ID LSBRACKET exp RFBRACKET ASSIGN exp SEMICOLON 	{ $$ = new CAssignItemStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))),
-//    																						shared_ptr<IExpression>($3),
-//    																						shared_ptr<IExpression>($6)); }
+    	| ID LSBRACKET exp RFBRACKET ASSIGN exp SEMICOLON 	{ $$ = new CAssignItemStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))),
+     																						shared_ptr<IExpression>($3),
+    																						shared_ptr<IExpression>($6)); }
 ;		
 /*
 Goal: MainClass ( ClassDeclaration )* <EOF> {$$ = new IExpr($1)}

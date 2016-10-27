@@ -52,17 +52,35 @@ extern int yydebug;
     LSBRACKET = 262,
     RSBRACKET = 263,
     SEMICOLON = 264,
-    PRINTLN = 265,
-    INTEGER_LITERAL = 266,
-    ID = 267,
-    OR = 268,
-    AND = 269,
-    PLUS = 270,
-    MINUS = 271,
-    STAR = 272,
-    MOD = 273,
-    ASSIGN = 274,
-    LESS = 275
+    PUBLIC = 265,
+    PRIVATE = 266,
+    STATIC = 267,
+    INT = 268,
+    BOOLEAN = 269,
+    VOID = 270,
+    STRING = 271,
+    CLASS = 272,
+    EXTENDS = 273,
+    IF = 274,
+    ELSE = 275,
+    WHILE = 276,
+    RETURN = 277,
+    PRINTLN = 278,
+    LENGTH = 279,
+    THIS = 280,
+    NEW = 281,
+    MAIN = 282,
+    POINT = 283,
+    INTEGER_LITERAL = 284,
+    ID = 285,
+    OR = 286,
+    AND = 287,
+    PLUS = 288,
+    MINUS = 289,
+    STAR = 290,
+    MOD = 291,
+    ASSIGN = 292,
+    LESS = 293
   };
 #endif
 
@@ -79,7 +97,7 @@ union YYSTYPE
   IExpression*       expr_val;
   IStatement*        stat_val;
 
-#line 83 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
+#line 101 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

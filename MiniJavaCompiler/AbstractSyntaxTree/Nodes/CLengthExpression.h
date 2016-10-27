@@ -4,7 +4,7 @@
 
 class CLengthExpression : public IExpression {
 public:
-    CLengthExpression(const std::shared_ptr <IExpression> &expression);
+    CLengthExpression(std::shared_ptr <IExpression> expression);
 
     std::shared_ptr <IExpression> getExpression();
 

@@ -4,6 +4,7 @@
 
 //здесь объявления всех statement
 class CAssignStatement;
+class CAssignItemStatement;
 class CCompoundStatement;
 class CPrintStatement;
 class CIfElseStatement;
@@ -19,7 +20,8 @@ class IVisitor {
 public:
 
 	virtual void Visit(CAssignStatement*) = 0;
-	virtual void Visit(CCompoundStatement*) = 0;
+    virtual void Visit(CAssignItemStatement*) = 0;
+    virtual void Visit(CCompoundStatement*) = 0;
 	virtual void Visit(CPrintStatement*) = 0;
 	virtual void Visit(CIfElseStatement*) = 0;
     virtual void Visit(CWhileStatement* ) = 0;

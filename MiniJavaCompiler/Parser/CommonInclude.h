@@ -17,6 +17,7 @@ using namespace std;
 #include <Nodes/CLengthExpression.h>
 
 #include <Nodes/CAssignStatement.h>
+#include <Nodes/CAssignItemStatement.h>
 #include <Nodes/CPrintStatement.h>
 #include <Nodes/CCompoundStatement.h>
 #include <Nodes/CIfElseStatement.h>

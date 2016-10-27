@@ -4,7 +4,7 @@ void CWhileStatement::Accept(IVisitor* visitor) {
     visitor->Visit(this);
 }
 
-CWhileStatement::CWhileStatement(const std::shared_ptr<IExpression> &condition, const std::shared_ptr<IStatement> &body)
+CWhileStatement::CWhileStatement(std::shared_ptr<IExpression> condition, std::shared_ptr<IStatement> body)
         : condition(condition), body(body) {}
 
 std::shared_ptr<IExpression> CWhileStatement::getCondition()  {
