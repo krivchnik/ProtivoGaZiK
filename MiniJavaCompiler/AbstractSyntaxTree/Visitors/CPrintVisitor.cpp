@@ -122,23 +122,23 @@ void CPrintVisitor::Visit(CCompoundStatement* statement) {
 
 void CPrintVisitor::Visit(CIfElseStatement* statement) {
 	int currentExpressionId = ++expressionId;
-	file << "if" << delim << currentExpressionId << getArrow();
+	file << "if" << delim << currentExpressionId << getArrow() << "condition" << currentExpressionId << getArrow();
 	statement->getExpression()->Accept(this);
 	file << getEndLine();
-    file << "if" << delim << currentExpressionId << getArrow();
+    file << "if" << delim << currentExpressionId << getArrow() << "ifStatement" << currentExpressionId << getArrow();
     statement->getIfStatement()->Accept(this);
     file << getEndLine();
-    file << "if" << delim << currentExpressionId << getArrow();
+    file << "if" << delim << currentExpressionId << getArrow() << "elseStatement" << currentExpressionId << getArrow();
     statement->getElseStatement()->Accept(this);
 }
 
 
 void CPrintVisitor::Visit(CWhileStatement* statement) {
 	int currentExpressionId = ++expressionId;
-	file << "WhileCondition" << delim << currentExpressionId << getArrow();
+	file << "While" << delim << currentExpressionId << getArrow() << "condition" << currentExpressionId << getArrow();
 	statement->getCondition()->Accept(this);
 	file << getEndLine();
-	file << "WhileBody" << delim << currentExpressionId << getArrow();
+	file << "While" << delim << currentExpressionId << getArrow() << "body" << currentExpressionId << getArrow();
 	statement->getBody()->Accept(this);
 }
 

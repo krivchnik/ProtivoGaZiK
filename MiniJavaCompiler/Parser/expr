@@ -1,8 +1,13 @@
 {
+    while( a < 10) {
+         a = a + 1;
+    }
     a = 10.length;
 }
 {
-	System.out.println(5 + 3);
-	a = 10 + 22222222;
-	a = 20;
+    if (a < 2) {
+        a = 1;
+    } else {
+        b = 2;
+    }
 }
