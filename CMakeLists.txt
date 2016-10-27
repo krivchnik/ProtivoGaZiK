@@ -1,13 +1,13 @@
 # cmake_minimum_required(VERSION <specify CMake version here>)
-project(.)
+project(MiniJavaCompiler)
 
 set(CMAKE_CXX_COMPILER "/usr/bin/g++-5")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -ansi -pedantic -std=c++11")
 SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS}" )
 
-SET(PARSER_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Parser")
-SET(PARSER_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Output")
-SET(PARSER_NODES_DIR  "${CMAKE_CURRENT_SOURCE_DIR}/AbstractSyntaxTree")
+SET(PARSER_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/MiniJavaCompiler/Parser")
+SET(PARSER_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/MiniJavaCompiler/Output")
+SET(PARSER_NODES_DIR  "${CMAKE_CURRENT_SOURCE_DIR}/MiniJavaCompiler/AbstractSyntaxTree")
 
 SET(BisonOutput ${PARSER_OUTPUT_DIR}/parser.cpp)
 SET(BISON_EXECUTABLE /usr/bin/bison)

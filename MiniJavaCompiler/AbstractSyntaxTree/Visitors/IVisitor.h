@@ -13,7 +13,6 @@ class CListStatement;
 
 //здесь объявления все expression
 class CIdExpression;
-class CBoolExpression;
 class CNumExpression;
 class COperationExpression;
 class CLengthExpression;
@@ -30,7 +29,6 @@ public:
     virtual void Visit(CListStatement*) = 0;
 
 	virtual void Visit(CIdExpression*) = 0;
-	virtual void Visit(CBoolExpression*) = 0;
 	virtual void Visit(CNumExpression*) = 0;
 	virtual void Visit(COperationExpression*) = 0;
     virtual void Visit(CLengthExpression*) = 0;
