@@ -41,6 +41,8 @@ extern shared_ptr<IStatement> ans;
 %left   AND
 %left	PLUS MINUS
 %left	STAR MOD
+%left	POINT
+%left	NOT
 
 %nonassoc ASSIGN
 %nonassoc LESS
@@ -64,7 +66,6 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| exp POINT LENGTH 				{ $$ = new CLengthExpression(shared_ptr<IExpression>($1)); }
 		| ID 							{ $$ = new CIdExpression(std::string($1)); }
 		| NOT exp   					{ $$ = new CNotExpression(shared_ptr<IExpression>($2)); }
-		| exp POINT LENGTH 				{ $$ = new CLengthExpression(shared_ptr<IExpression>($1)); }
 		;
 
 statList : %empty { $$ = new CListStatement(); }
