@@ -65,7 +65,6 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| exp POINT LENGTH 				     { $$ = new CLengthExpression(shared_ptr<IExpression>($1)); }
 		| ID 							     { $$ = new CIdExpression(std::string($1)); }
 		| NOT exp   					     { $$ = new CNotExpression(shared_ptr<IExpression>($2)); }
-		//TODO сделать так чтобы между new и [] не нужно было ставить пробел, сейчас работает только так new [size]
 		| NEW INT LSBRACKET exp RSBRACKET    { $$ = new CArrayConstructionExpression(shared_ptr<IExpression>($4)); }
 
 		;

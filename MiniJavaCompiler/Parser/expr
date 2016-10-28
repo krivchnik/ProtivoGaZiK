@@ -1,5 +1,5 @@
 {
-    b = new int [10];
+    b = new int[10];
 }
 {
     if (a < 2) {
