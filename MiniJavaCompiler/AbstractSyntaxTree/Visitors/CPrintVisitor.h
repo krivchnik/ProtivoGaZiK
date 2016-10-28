@@ -26,6 +26,7 @@ public:
     void Visit(CNotExpression*);
 	void Visit(COperationExpression*);
 	void Visit(CLengthExpression*);
+	void Visit(CArrayConstructionExpression*);
 
 private:
 

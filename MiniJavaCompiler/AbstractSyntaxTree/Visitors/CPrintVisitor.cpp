@@ -14,6 +14,7 @@
 #include <Nodes/CNotExpression.h>
 #include <Nodes/COperationExpression.h>
 #include <Nodes/CLengthExpression.h>
+#include <Nodes/CArrayConstructionExpression.h>
 
 std::string GetOperationSign(int index) {
 	std::vector<std::string> signs = {"addition", "subtraction", "multiplication", "mod", "and", "or", "less"};
@@ -79,6 +80,14 @@ void CPrintVisitor::Visit(CLengthExpression* expression) {
 	++expressionId;
 	expression->getExpression()->Accept(this);
 	file << getArrow() << "getLength" + delim + std::to_string(expressionId);
+}
+
+void CPrintVisitor::Visit(CArrayConstructionExpression* expression) {
+    ++expressionId;
+    file << "newIntArray" + delim + std::to_string(expressionId) + getArrow() +
+            "withSize" + std::to_string(expressionId) + getArrow();
+    expression->getSize()->Accept(this);
+
 }
 
 void CPrintVisitor::Visit(CAssignStatement* statement) {
@@ -161,6 +170,7 @@ std::string CPrintVisitor::getArrow() const {
 std::string CPrintVisitor::getEndLine() const {
 	return ";\n\t";
 }
+
 
 
 

@@ -37,12 +37,11 @@ extern shared_ptr<IStatement> ans;
 %type  <stat_val>   stat
 %type  <stat_list> statList
 
+%left	POINT
 %left 	OR
 %left   AND
-%left	PLUS MINUS
+%left	NOT PLUS MINUS
 %left	STAR MOD
-%left	POINT
-%left	NOT
 
 %nonassoc ASSIGN
 %nonassoc LESS
@@ -60,12 +59,15 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| exp AND exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::AND); }
 		| exp OR exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::OR); }
 		| exp LESS exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::LESS); }
-        | TRUE      					{ $$ = new CBoolExpression(true); }
-        | FALSE 						{ $$ = new CBoolExpression(false); }
+        | TRUE      	{ $$ = new CBoolExpression(true); }
+        | FALSE 		{ $$ = new CBoolExpression(false); }
 
-		| exp POINT LENGTH 				{ $$ = new CLengthExpression(shared_ptr<IExpression>($1)); }
-		| ID 							{ $$ = new CIdExpression(std::string($1)); }
-		| NOT exp   					{ $$ = new CNotExpression(shared_ptr<IExpression>($2)); }
+		| exp POINT LENGTH 				     { $$ = new CLengthExpression(shared_ptr<IExpression>($1)); }
+		| ID 							     { $$ = new CIdExpression(std::string($1)); }
+		| NOT exp   					     { $$ = new CNotExpression(shared_ptr<IExpression>($2)); }
+		//TODO сделать так чтобы между new и [] не нужно было ставить пробел, сейчас работает только так new [size]
+		| NEW INT LSBRACKET exp RSBRACKET    { $$ = new CArrayConstructionExpression(shared_ptr<IExpression>($4)); }
+
 		;
 
 statList : %empty { $$ = new CListStatement(); }
@@ -86,7 +88,7 @@ stat 	: LFBRACKET statList RFBRACKET                       { $$ = $2; }
     	| ID ASSIGN exp SEMICOLON                			{ $$ = new CAssignStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))), 
     																					shared_ptr<IExpression>($3)); }
 
-    	| ID LSBRACKET exp RFBRACKET ASSIGN exp SEMICOLON 	{ $$ = new CAssignItemStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))),
+    	| ID LSBRACKET exp RSBRACKET ASSIGN exp SEMICOLON 	{ $$ = new CAssignItemStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))),
      																						shared_ptr<IExpression>($3),
     																						shared_ptr<IExpression>($6)); }
 ;		

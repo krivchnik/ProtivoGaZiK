@@ -1,8 +1,5 @@
 {
-    while( a < 10) {
-         a = a + 1;
-    }
-    a = 10.length;
+    b = new int [10];
 }
 {
     if (a < 2) {

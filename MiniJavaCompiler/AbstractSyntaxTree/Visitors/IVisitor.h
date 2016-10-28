@@ -18,6 +18,7 @@ class CNumExpression;
 class CNotExpression;
 class COperationExpression;
 class CLengthExpression;
+class CArrayConstructionExpression;
 
 class IVisitor {
 public:
@@ -36,5 +37,6 @@ public:
     virtual void Visit(CNotExpression*) = 0;
 	virtual void Visit(COperationExpression*) = 0;
     virtual void Visit(CLengthExpression*) = 0;
+    virtual void Visit(CArrayConstructionExpression*) = 0;
 
 };
