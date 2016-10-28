@@ -420,16 +420,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  3
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   138
+#define YYLAST   139
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  42
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  5
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  24
+#define YYNRULES  25
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  62
+#define YYNSTATES  65
 
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
@@ -480,8 +480,8 @@ static const yytype_uint8 yytranslate[] =
 static const yytype_uint8 yyrline[] =
 {
        0,    51,    51,    54,    55,    56,    57,    58,    59,    60,
-      61,    62,    63,    65,    66,    67,    69,    73,    74,    77,
-      79,    83,    86,    88,    91
+      61,    62,    63,    65,    66,    67,    68,    69,    72,    73,
+      76,    78,    82,    85,    87,    90
 };
 #endif
 
@@ -513,10 +513,10 @@ static const yytype_uint16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF -29
+#define YYPACT_NINF -34
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-29)))
+  (!!((Yystate) == (-34)))
 
 #define YYTABLE_NINF -1
 
@@ -527,13 +527,13 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-     -29,     4,   103,   -29,   -29,     9,    13,    14,    12,   -29,
-      93,   105,   105,   105,   105,   105,   -29,   -29,   -29,   105,
-       5,   -29,   -29,     1,    10,    23,    42,    66,    92,    21,
-     103,     2,   105,   105,   105,   105,   105,   105,   105,   103,
-      25,   -10,   -29,   105,    32,   -29,    30,   -28,    92,    92,
-      15,    15,    29,   -29,   -29,   105,    55,   103,    75,   -29,
-     -29,   -29
+     -34,    18,   104,   -34,   -34,    16,    26,    30,     2,   -34,
+      96,   106,   106,   106,   106,   106,   -34,   -34,   -34,   106,
+      -3,   -34,   -34,     0,    12,    24,    36,    57,   -33,    45,
+      51,   104,    37,   106,   106,   106,   106,   106,   106,   106,
+     104,    59,    17,   -34,   106,    65,    53,   -34,    76,   -24,
+     -33,   -33,    39,    39,    40,   -34,   -34,   106,    48,   -34,
+     104,    69,   -34,   -34,   -34
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -541,19 +541,19 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-      17,     0,     2,     1,    17,     0,     0,     0,     0,    18,
-       0,     0,     0,     0,     0,     0,    19,    11,    12,     0,
+      18,     0,     2,     1,    18,     0,     0,     0,     0,    19,
+       0,     0,     0,     0,     0,     0,    20,    11,    12,     0,
        0,     3,    14,     0,     0,     0,     0,     0,    15,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,    23,     0,     0,    13,     9,     8,     4,     5,
-       6,     7,    10,    21,    22,     0,     0,     0,     0,    16,
-      20,    24
+       0,     0,     0,    24,     0,     0,     0,    13,     9,     8,
+       4,     5,     6,     7,    10,    22,    23,     0,     0,    17,
+       0,     0,    16,    21,    25
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -29,   -29,   -12,    49,   -24
+     -34,   -34,   -12,    86,   -20
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
@@ -567,38 +567,38 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      24,    25,    26,    27,     3,    30,    44,    28,    34,    35,
-      36,    37,    11,    38,    39,    53,    12,    13,    29,    14,
-      46,    47,    48,    49,    50,    51,    52,    40,    43,    45,
-      55,    56,    31,    60,    54,    32,    33,    34,    35,    36,
-      37,    31,    38,    58,    32,    33,    34,    35,    36,    37,
-      41,    38,    15,    10,    31,    57,    38,    32,    33,    34,
-      35,    36,    37,    59,    38,    33,    34,    35,    36,    37,
-      -1,    38,     0,    31,     0,    42,    32,    33,    34,    35,
-      36,    37,     0,    38,    61,     0,    31,     0,     0,    32,
-      33,    34,    35,    36,    37,     0,    38,    31,     4,    16,
-      32,    33,    34,    35,    36,    37,    31,    38,     4,    32,
-      33,    34,    35,    36,    37,     5,    38,     6,     0,     7,
-       0,     0,    17,    18,    19,     5,     8,     6,     0,     7,
-      36,    37,     0,    38,    20,     0,     8,    21,    22
+      24,    25,    26,    27,    31,    37,    38,    28,    39,    14,
+      29,    46,    35,    36,    37,    38,    40,    39,     3,    11,
+      55,    48,    49,    50,    51,    52,    53,    54,    41,    12,
+      30,    32,    58,    13,    33,    34,    35,    36,    37,    38,
+      63,    39,    15,    32,    42,    61,    33,    34,    35,    36,
+      37,    38,    44,    39,    45,    32,    62,    57,    33,    34,
+      35,    36,    37,    38,    47,    39,    43,    32,    56,    59,
+      33,    34,    35,    36,    37,    38,    60,    39,    64,    32,
+      39,    -1,    33,    34,    35,    36,    37,    38,    32,    39,
+      10,    33,    34,    35,    36,    37,    38,     0,    39,     0,
+      32,     4,    16,    33,    34,    35,    36,    37,    38,     4,
+      39,    34,    35,    36,    37,    38,     0,    39,     5,     0,
+       6,     0,     7,    17,    18,    19,     5,     0,     6,     8,
+       7,     0,     0,     0,     0,    20,     0,     8,    21,    22
 };
 
 static const yytype_int8 yycheck[] =
 {
-      12,    13,    14,    15,     0,     4,    30,    19,    36,    37,
-      38,    39,     3,    41,     4,    39,     3,     3,    13,     7,
-      32,    33,    34,    35,    36,    37,    38,     4,     7,    27,
-      40,    43,    31,    57,     9,    34,    35,    36,    37,    38,
-      39,    31,    41,    55,    34,    35,    36,    37,    38,    39,
-       8,    41,    40,     4,    31,    23,    41,    34,    35,    36,
-      37,    38,    39,     8,    41,    35,    36,    37,    38,    39,
-      41,    41,    -1,    31,    -1,     9,    34,    35,    36,    37,
-      38,    39,    -1,    41,     9,    -1,    31,    -1,    -1,    34,
-      35,    36,    37,    38,    39,    -1,    41,    31,     5,     6,
-      34,    35,    36,    37,    38,    39,    31,    41,     5,    34,
-      35,    36,    37,    38,    39,    22,    41,    24,    -1,    26,
-      -1,    -1,    17,    18,    19,    22,    33,    24,    -1,    26,
-      38,    39,    -1,    41,    29,    -1,    33,    32,    33
+      12,    13,    14,    15,     4,    38,    39,    19,    41,     7,
+      13,    31,    36,    37,    38,    39,     4,    41,     0,     3,
+      40,    33,    34,    35,    36,    37,    38,    39,     4,     3,
+      33,    31,    44,     3,    34,    35,    36,    37,    38,    39,
+      60,    41,    40,    31,     8,    57,    34,    35,    36,    37,
+      38,    39,     7,    41,     3,    31,     8,    40,    34,    35,
+      36,    37,    38,    39,    27,    41,     9,    31,     9,     4,
+      34,    35,    36,    37,    38,    39,    23,    41,     9,    31,
+      41,    41,    34,    35,    36,    37,    38,    39,    31,    41,
+       4,    34,    35,    36,    37,    38,    39,    -1,    41,    -1,
+      31,     5,     6,    34,    35,    36,    37,    38,    39,     5,
+      41,    35,    36,    37,    38,    39,    -1,    41,    22,    -1,
+      24,    -1,    26,    17,    18,    19,    22,    -1,    24,    33,
+      26,    -1,    -1,    -1,    -1,    29,    -1,    33,    32,    33
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -608,26 +608,26 @@ static const yytype_uint8 yystos[] =
        0,    43,    45,     0,     5,    22,    24,    26,    33,    46,
       45,     3,     3,     3,     7,    40,     6,    17,    18,    19,
       29,    32,    33,    44,    44,    44,    44,    44,    44,    13,
-       4,    31,    34,    35,    36,    37,    38,    39,    41,     4,
-       4,     8,     9,     7,    46,    27,    44,    44,    44,    44,
-      44,    44,    44,    46,     9,    40,    44,    23,    44,     8,
-      46,     9
+      33,     4,    31,    34,    35,    36,    37,    38,    39,    41,
+       4,     4,     8,     9,     7,     3,    46,    27,    44,    44,
+      44,    44,    44,    44,    44,    46,     9,    40,    44,     4,
+      23,    44,     8,    46,     9
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
        0,    42,    43,    44,    44,    44,    44,    44,    44,    44,
-      44,    44,    44,    44,    44,    44,    44,    45,    45,    46,
-      46,    46,    46,    46,    46
+      44,    44,    44,    44,    44,    44,    44,    44,    45,    45,
+      46,    46,    46,    46,    46,    46
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
        0,     2,     1,     1,     3,     3,     3,     3,     3,     3,
-       3,     1,     1,     3,     1,     2,     5,     0,     2,     3,
-       7,     5,     5,     4,     7
+       3,     1,     1,     3,     1,     2,     5,     4,     0,     2,
+       3,     7,     5,     5,     4,     7
 };
 
 
@@ -1388,67 +1388,73 @@ yyreduce:
     break;
 
   case 16:
-#line 69 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 68 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CArrayConstructionExpression(shared_ptr<IExpression>((yyvsp[-1].expr_val))); }
 #line 1394 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 73 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
-    { (yyval.stat_list) = new CListStatement(); }
+#line 69 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+    { (yyval.expr_val) = new CConstructClassExpression(shared_ptr<CIdExpression>((yyvsp[-2].op_val))); }
 #line 1400 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 74 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
-    { (yyval.stat_list) = std::move((yyvsp[-1].stat_list)); (yyval.stat_list)->Add(shared_ptr<IStatement> ((yyvsp[0].stat_val))); }
+#line 72 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+    { (yyval.stat_list) = new CListStatement(); }
 #line 1406 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 77 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
-    { (yyval.stat_val) = (yyvsp[-1].stat_list); }
+#line 73 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+    { (yyval.stat_list) = std::move((yyvsp[-1].stat_list)); (yyval.stat_list)->Add(shared_ptr<IStatement> ((yyvsp[0].stat_val))); }
 #line 1412 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 79 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
-    { (yyval.stat_val) = new CIfElseStatement(shared_ptr<IExpression>((yyvsp[-4].expr_val)),
-    																					shared_ptr<IStatement>((yyvsp[-2].stat_val)),
-    																					shared_ptr<IStatement>((yyvsp[0].stat_val))); }
-#line 1420 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 76 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+    { (yyval.stat_val) = (yyvsp[-1].stat_list); }
+#line 1418 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 83 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
-    { (yyval.stat_val) = new CWhileStatement(shared_ptr<IExpression>((yyvsp[-2].expr_val)),
-    																				   shared_ptr<IStatement>((yyvsp[0].stat_val))); }
-#line 1427 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 78 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+    { (yyval.stat_val) = new CIfElseStatement(shared_ptr<IExpression>((yyvsp[-4].expr_val)),
+    																					shared_ptr<IStatement>((yyvsp[-2].stat_val)),
+    																					shared_ptr<IStatement>((yyvsp[0].stat_val))); }
+#line 1426 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 86 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
-    { (yyval.stat_val) = new CPrintStatement(shared_ptr<IExpression>((yyvsp[-2].expr_val))); }
+#line 82 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+    { (yyval.stat_val) = new CWhileStatement(shared_ptr<IExpression>((yyvsp[-2].expr_val)),
+    																				   shared_ptr<IStatement>((yyvsp[0].stat_val))); }
 #line 1433 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 88 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
-    { (yyval.stat_val) = new CAssignStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string((yyvsp[-3].op_val)))), 
-    																					shared_ptr<IExpression>((yyvsp[-1].expr_val))); }
-#line 1440 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 85 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+    { (yyval.stat_val) = new CPrintStatement(shared_ptr<IExpression>((yyvsp[-2].expr_val))); }
+#line 1439 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 91 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 87 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+    { (yyval.stat_val) = new CAssignStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string((yyvsp[-3].op_val)))), 
+    																					shared_ptr<IExpression>((yyvsp[-1].expr_val))); }
+#line 1446 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 25:
+#line 90 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_val) = new CAssignItemStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string((yyvsp[-6].op_val)))),
      																						shared_ptr<IExpression>((yyvsp[-4].expr_val)),
     																						shared_ptr<IExpression>((yyvsp[-1].expr_val))); }
-#line 1448 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1454 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 1452 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1458 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1676,7 +1682,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 135 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1906  */
+#line 134 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1906  */
 
 
 int yyerror(string s)

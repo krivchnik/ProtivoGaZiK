@@ -15,6 +15,7 @@
 #include <Nodes/COperationExpression.h>
 #include <Nodes/CLengthExpression.h>
 #include <Nodes/CArrayConstructionExpression.h>
+#include <Nodes/CConstructClassExpression.h>
 
 std::string GetOperationSign(int index) {
 	std::vector<std::string> signs = {"addition", "subtraction", "multiplication", "mod", "and", "or", "less"};
@@ -88,6 +89,13 @@ void CPrintVisitor::Visit(CArrayConstructionExpression* expression) {
             "withSize" + std::to_string(expressionId) + getArrow();
     expression->getSize()->Accept(this);
 
+}
+
+
+void CPrintVisitor::Visit(CConstructClassExpression* expression) {
+    ++expressionId;
+    file << "constructClass" + delim + std::to_string(expressionId) + getArrow() +
+             expression->getClassID()->GetName() + std::to_string(expressionId) + getArrow();
 }
 
 void CPrintVisitor::Visit(CAssignStatement* statement) {

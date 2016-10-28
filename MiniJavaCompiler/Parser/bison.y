@@ -66,7 +66,7 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| ID 							     { $$ = new CIdExpression(std::string($1)); }
 		| NOT exp   					     { $$ = new CNotExpression(shared_ptr<IExpression>($2)); }
 		| NEW INT LSBRACKET exp RSBRACKET    { $$ = new CArrayConstructionExpression(shared_ptr<IExpression>($4)); }
-
+		//| NEW ID LPBRACKET RPBRACKET         { $$ = new CConstructClassExpression(shared_ptr<CIdExpression>($2)); }
 		;
 
 statList : %empty { $$ = new CListStatement(); }

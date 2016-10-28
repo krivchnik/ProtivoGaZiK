@@ -25,6 +25,7 @@ using namespace std;
 #include <Nodes/CWhileStatement.h>
 #include <Nodes/CListStatement.h>
 #include <Nodes/CArrayConstructionExpression.h>
+#include <Nodes/CConstructClassExpression.h>
 
 #include <Visitors/CPrintVisitor.h>
 

@@ -19,6 +19,7 @@ class CNotExpression;
 class COperationExpression;
 class CLengthExpression;
 class CArrayConstructionExpression;
+class CConstructClassExpression;
 
 class IVisitor {
 public:
@@ -30,6 +31,7 @@ public:
 	virtual void Visit(CIfElseStatement*) = 0;
     virtual void Visit(CWhileStatement*) = 0;
     virtual void Visit(CListStatement*) = 0;
+    virtual void Visit(CConstructClassExpression*) = 0;
 
 	virtual void Visit(CIdExpression*) = 0;
     virtual void Visit(CBoolExpression*) = 0;
