@@ -35,7 +35,8 @@ extern shared_ptr<IStatement> ans;
 
 %type  <expr_val>	exp
 %type  <stat_val>   stat
-%type  <stat_list> statList
+%type  <stat_list>  statList
+%type  <op_val>  typeName
 
 %left	POINT
 %left 	OR
@@ -74,6 +75,13 @@ statList : %empty { $$ = new CListStatement(); }
          | statList stat { $$ = std::move($1); $$->Add(shared_ptr<IStatement> ($2)); }
          ;
 
+typeName
+    : INT LSBRACKET RSBRACKET                    { $$ = shared_ptr<std::string>("int[]"); }
+    | BOOLEAN                                    { $$ = shared_ptr<std::string>("boolean"); }
+    | INT                                        { $$ = shared_ptr<std::string>("int"); }
+    | ID                                         { $$ = $1; }
+;
+
 stat 	: LFBRACKET statList RFBRACKET                       { $$ = $2; }
 
     	| IF LPBRACKET exp RPBRACKET stat ELSE stat 		{ $$ = new CIfElseStatement(shared_ptr<IExpression>($3),
@@ -91,7 +99,7 @@ stat 	: LFBRACKET statList RFBRACKET                       { $$ = $2; }
     	| ID LSBRACKET exp RSBRACKET ASSIGN exp SEMICOLON 	{ $$ = new CAssignItemStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))),
      																						shared_ptr<IExpression>($3),
     																						shared_ptr<IExpression>($6)); }
-;		
+        ;
 /*
 Goal: MainClass ( ClassDeclaration )* <EOF> {$$ = new IExpr($1)}
 
