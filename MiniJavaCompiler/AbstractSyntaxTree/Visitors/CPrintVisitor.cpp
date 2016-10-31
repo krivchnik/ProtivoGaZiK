@@ -95,7 +95,7 @@ void CPrintVisitor::Visit(CArrayConstructionExpression* expression) {
 void CPrintVisitor::Visit(CConstructClassExpression* expression) {
     ++expressionId;
     file << "constructClass" + delim + std::to_string(expressionId) + getArrow() +
-             expression->getClassID()->GetName() + std::to_string(expressionId) + getArrow();
+             expression->getClassID()->GetName() + std::to_string(expressionId);
 }
 
 void CPrintVisitor::Visit(CAssignStatement* statement) {
