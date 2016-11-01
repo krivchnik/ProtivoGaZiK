@@ -30,7 +30,7 @@ extern shared_ptr<IStatement> ans;
                     IF ELSE WHILE
                     RETURN PRINTLN LENGTH
                     THIS NEW
-                    MAIN POINT
+                    MAIN POINT COMMA
 %token <int_val>	INTEGER_LITERAL
 %token <op_val>     ID
 
@@ -38,7 +38,7 @@ extern shared_ptr<IStatement> ans;
 %type  <stat_val>   	stat
 %type  <stat_list>  	statList
 %type  <op_val>  		typeName
-%type  <var_decl_list> 	varDeclList
+%type  <var_decl_list> 	varDeclList paramList nonEmptyParamList
 
 %left	POINT
 %left 	OR
@@ -51,14 +51,24 @@ extern shared_ptr<IStatement> ans;
 
 %%
 
-input:	varDeclList	{ ans = shared_ptr<IStatement>($1); return 0;}
+input:	paramList	{ ans = shared_ptr<IStatement>($1); return 0;}
 		;
 
 
 varDeclList
     : %empty                            { $$ = new CListVarDecl(); }
     | varDeclList typeName ID SEMICOLON { $$ = std::move($1); $$->Add(shared_ptr<CVarDecl>(new CVarDecl(std::string($2), std::string($3)))); }
-;
+    ;
+
+paramList
+ 	: %empty   							{}
+ 	| nonEmptyParamList                 { $$ = std::move($1); }
+ 	;
+
+nonEmptyParamList
+	: typeName ID 								{ $$ = new CListVarDecl(); $$->Add(shared_ptr<CVarDecl>(new CVarDecl(std::string($1), std::string($2)))); }
+    | nonEmptyParamList COMMA typeName ID       { $$ = std::move($1); $$->Add(shared_ptr<CVarDecl>(new CVarDecl(std::string($3), std::string($4)))); }
+	;
 
 exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| exp PLUS exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::ADDITION); }

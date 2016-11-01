@@ -137,6 +137,7 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 
 ";"				 { updateLocation(); return SEMICOLON; }
 "."              { updateLocation(); return POINT; }
+","				 { updateLocation(); return COMMA; }
 
 {STRING}         {
 
