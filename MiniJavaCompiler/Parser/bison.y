@@ -16,6 +16,7 @@ extern shared_ptr<IStatement> ans;
   IExpression*       expr_val;
   IStatement*        stat_val;
   CListStatement*    stat_list;
+  CListVarDecl*      var_decl_list;
 }
 
 %start	input
@@ -33,10 +34,11 @@ extern shared_ptr<IStatement> ans;
 %token <int_val>	INTEGER_LITERAL
 %token <op_val>     ID
 
-%type  <expr_val>	exp
-%type  <stat_val>   stat
-%type  <stat_list>  statList
-%type  <op_val>  typeName
+%type  <expr_val>		exp
+%type  <stat_val>   	stat
+%type  <stat_list>  	statList
+%type  <op_val>  		typeName
+%type  <var_decl_list> 	varDeclList
 
 %left	POINT
 %left 	OR
@@ -49,8 +51,14 @@ extern shared_ptr<IStatement> ans;
 
 %%
 
-input:	statList	{ ans = shared_ptr<IStatement>($1); return 0;}
+input:	varDeclList	{ ans = shared_ptr<IStatement>($1); return 0;}
 		;
+
+
+varDeclList
+    : %empty                            { $$ = new CListVarDecl(); }
+    | varDeclList typeName ID SEMICOLON { $$ = std::move($1); $$->Add(shared_ptr<CVarDecl>(new CVarDecl(std::string($2), std::string($3)))); }
+;
 
 exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| exp PLUS exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::ADDITION); }
@@ -76,9 +84,9 @@ statList : %empty { $$ = new CListStatement(); }
          ;
 
 typeName
-    : INT LSBRACKET RSBRACKET                    { $$ = shared_ptr<std::string>("int[]"); }
-    | BOOLEAN                                    { $$ = shared_ptr<std::string>("boolean"); }
-    | INT                                        { $$ = shared_ptr<std::string>("int"); }
+    : INT LSBRACKET RSBRACKET                    { $$ = "int[]"; }
+    | BOOLEAN                                    { $$ = "boolean"; }
+    | INT                                        { $$ = "int"; }
     | ID                                         { $$ = $1; }
 ;
 

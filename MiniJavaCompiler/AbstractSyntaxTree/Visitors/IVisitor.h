@@ -1,7 +1,6 @@
 #pragma once
 //Интерфейс обхода дерева разбора
 
-
 //здесь объявления всех statement
 class CAssignStatement;
 class CAssignItemStatement;
@@ -10,6 +9,8 @@ class CPrintStatement;
 class CIfElseStatement;
 class CWhileStatement;
 class CListStatement;
+class CVarDecl;
+class CListVarDecl;
 
 //здесь объявления все expression
 class CIdExpression;
@@ -32,6 +33,8 @@ public:
     virtual void Visit(CWhileStatement*) = 0;
     virtual void Visit(CListStatement*) = 0;
     virtual void Visit(CConstructClassExpression*) = 0;
+	virtual void Visit(CListVarDecl*) = 0;
+	virtual void Visit(CVarDecl*) = 0;
 
 	virtual void Visit(CIdExpression*) = 0;
     virtual void Visit(CBoolExpression*) = 0;

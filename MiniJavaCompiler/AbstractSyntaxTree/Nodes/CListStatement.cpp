@@ -4,9 +4,6 @@
 
 #include <Nodes/CListStatement.h>
 
-
-
-
 void CListStatement::Accept(IVisitor* visitor) {
     visitor->Visit(this);
 }

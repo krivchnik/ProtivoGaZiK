@@ -7,6 +7,8 @@
 #include <Nodes/CIfElseStatement.h>
 #include <Nodes/CWhileStatement.h>
 #include <Nodes/CListStatement.h>
+#include <Nodes/CVarDecl.h>
+#include <Nodes/CListVarDecl.h>
 
 #include <Nodes/CIdExpression.h>
 #include <Nodes/CBoolExpression.h>
@@ -168,7 +170,26 @@ void CPrintVisitor::Visit(CListStatement* statement) {
     }
 	file << "ListStatement" << delim << currentExpressionId << getArrow();
 	statement->GetStatements()[statement->GetStatements().size() - 1]->Accept(this);
+}
 
+void CPrintVisitor::Visit(CVarDecl* decl) {
+    int currentExpressionId = ++expressionId;
+    file << "VariableDeclaration" << delim << currentExpressionId << getArrow();
+    file << decl->GetTypeName() << delim << ++expressionId << getEndLine();
+    file << "VariableDeclaration" << delim << currentExpressionId << getArrow();
+    file << decl->GetVariableName() << delim << ++expressionId;
+}
+
+void CPrintVisitor::Visit(CListVarDecl* declarationList) {
+    int currentExpressionId = ++expressionId;
+    auto declarations = declarationList->GetDeclarations();
+    for(size_t i = 0; i < declarations.size() - 1; ++i){
+        file << "ListVarDecl" << delim << currentExpressionId << getArrow();
+        declarations[i]->Accept(this);
+        file << getEndLine();
+    }
+    file << "ListVarDecl" << delim << currentExpressionId << getArrow();
+    declarations[declarations.size() - 1]->Accept(this);
 }
 
 std::string CPrintVisitor::getArrow() const {

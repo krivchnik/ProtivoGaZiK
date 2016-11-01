@@ -17,6 +17,8 @@ using namespace std;
 #include <Nodes/CNotExpression.h>
 #include <Nodes/COperationExpression.h>
 #include <Nodes/CLengthExpression.h>
+#include <Nodes/CArrayConstructionExpression.h>
+#include <Nodes/CConstructClassExpression.h>
 
 #include <Nodes/CAssignStatement.h>
 #include <Nodes/CAssignItemStatement.h>
@@ -24,8 +26,8 @@ using namespace std;
 #include <Nodes/CIfElseStatement.h>
 #include <Nodes/CWhileStatement.h>
 #include <Nodes/CListStatement.h>
-#include <Nodes/CArrayConstructionExpression.h>
-#include <Nodes/CConstructClassExpression.h>
+#include <Nodes/CVarDecl.h>
+#include <Nodes/CListVarDecl.h>
 
 #include <Visitors/CPrintVisitor.h>
 

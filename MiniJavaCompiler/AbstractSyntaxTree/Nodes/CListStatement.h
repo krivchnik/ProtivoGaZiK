@@ -14,14 +14,4 @@ public:
 
 private:
     std::vector<std::shared_ptr<IStatement> > statements;
-  /*  std::shared_ptr<CListStatement> prev;
-    std::shared_ptr<IStatement> last;
-*/
 };
-/*CListStatement
-{
-CListStatement BEFORE;
-Istatement Last;
-
-}
-*/
