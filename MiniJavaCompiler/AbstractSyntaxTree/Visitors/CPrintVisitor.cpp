@@ -228,11 +228,9 @@ void CPrintVisitor::Visit( CMethod* statement ) {
     statement->getId()->Accept(this);
     file << getEndLine();
 
-
     file << "CMethod" << delim << currentExpressionId << getArrow() << "Params" << currentExpressionId << getArrow();
     statement->getParameters()->Accept(this);
     file << getEndLine();
-
 
     file << "CMethod" << delim << currentExpressionId << getArrow() << "VariablesDeclarations" << currentExpressionId << getArrow();
     statement->getListDeclarations()->Accept(this);
@@ -241,7 +239,6 @@ void CPrintVisitor::Visit( CMethod* statement ) {
     file << "CMethod" << delim << currentExpressionId << getArrow() << "ListStatementsInMethod" << currentExpressionId << getArrow();
     statement->getListStatements()->Accept(this);
     file << getEndLine();
-
 
     file << "CMethod" << delim << currentExpressionId << getArrow() << "ReturnExpression" << currentExpressionId << getArrow();
     statement->getReturnExpression()->Accept(this);
