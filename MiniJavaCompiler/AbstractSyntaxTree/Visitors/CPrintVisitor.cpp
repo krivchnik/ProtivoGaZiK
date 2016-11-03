@@ -165,13 +165,23 @@ void CPrintVisitor::Visit(CWhileStatement* statement) {
 
 void CPrintVisitor::Visit(CListStatement* statement) {
     int currentExpressionId = ++expressionId;
-    for(size_t i = 0; i < statement->GetStatements().size() - 1; ++i){
-        file << "ListStatement" << delim << currentExpressionId << getArrow();
-        statement->GetStatements()[i]->Accept(this);
-        file << getEndLine();
+
+    auto statements = statement->GetStatements();
+    size_t numberOfIterations = statements.size();
+
+    for(size_t i = 0; i < numberOfIterations; ++i) {
+        if (i != numberOfIterations - 1) {
+            file << "ListStatement" << delim << currentExpressionId << getArrow();
+            statements[i]->Accept(this);
+            file << getEndLine();
+        } else {
+            file << "ListStatement" << delim << currentExpressionId << getArrow();
+            statements[numberOfIterations - 1]->Accept(this);
+        }
     }
-	file << "ListStatement" << delim << currentExpressionId << getArrow();
-	statement->GetStatements()[statement->GetStatements().size() - 1]->Accept(this);
+    if (numberOfIterations == 0) {
+        file << "Empty" << delim << currentExpressionId;
+    }
 }
 
 void CPrintVisitor::Visit(CVarDecl* decl) {
@@ -184,14 +194,23 @@ void CPrintVisitor::Visit(CVarDecl* decl) {
 
 void CPrintVisitor::Visit(CListVarDecl* declarationList) {
     int currentExpressionId = ++expressionId;
+
     auto declarations = declarationList->GetDeclarations();
-    for(size_t i = 0; i < declarations.size() - 1; ++i){
-        file << "ListVarDecl" << delim << currentExpressionId << getArrow();
-        declarations[i]->Accept(this);
-        file << getEndLine();
+    size_t numberOfIterations = declarations.size();
+
+    for(size_t i = 0; i < numberOfIterations; ++i) {
+        if (i != numberOfIterations - 1) {
+            file << "ListVar" << delim << currentExpressionId << getArrow();
+            declarations[i]->Accept(this);
+            file << getEndLine();
+        } else {
+            file << "ListVar" << delim << currentExpressionId << getArrow();
+            declarations[numberOfIterations - 1]->Accept(this);
+        }
     }
-    file << "ListVarDecl" << delim << currentExpressionId << getArrow();
-    declarations[declarations.size() - 1]->Accept(this);
+    if (numberOfIterations == 0) {
+        file << "Empty" << delim << currentExpressionId;
+    }
 }
 
 
@@ -218,7 +237,6 @@ void CPrintVisitor::Visit( CMethod* statement ) {
     file << "CMethod" << delim << currentExpressionId << getArrow() << "VariablesDeclarations" << currentExpressionId << getArrow();
     statement->getListDeclarations()->Accept(this);
     file << getEndLine();
-
 
     file << "CMethod" << delim << currentExpressionId << getArrow() << "ListStatementsInMethod" << currentExpressionId << getArrow();
     statement->getListStatements()->Accept(this);

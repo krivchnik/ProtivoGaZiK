@@ -53,7 +53,7 @@ extern shared_ptr<IStatement> ans;
 
 %%
 
-input:	methodDeclaration	{ ans = shared_ptr<IStatement>($1); return 0;}
+input:	methodDeclaration	{ ans = shared_ptr<CMethod>($1); return 0;}
 		;
 
 

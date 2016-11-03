@@ -3,6 +3,7 @@
 //
 
 #include <Nodes/CMethod.h>
+#include <iostream>
 
 CMethod::CMethod(const std::string &visibility, const std::string &typeName,
                  const std::shared_ptr<CIdExpression> &id, const std::shared_ptr<CListVarDecl> &parameters,
@@ -12,7 +13,9 @@ CMethod::CMethod(const std::string &visibility, const std::string &typeName,
                                                                          id(id), parameters(parameters),
                                                                          listDeclarations(listDeclarations),
                                                                          listStatements(listStatements),
-                                                                         returnExpression(returnExpression) {}
+                                                                         returnExpression(returnExpression) {
+    std::cout << listStatements->GetStatements().size() << "\n";
+}
 void CMethod::Accept(IVisitor* visitor) {
     visitor->Visit(this);
 }
