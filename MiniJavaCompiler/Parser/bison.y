@@ -16,6 +16,7 @@ extern shared_ptr<IStatement> ans;
   IExpression*       expr_val;
   IStatement*        stat_val;
   CListStatement*    stat_list;
+  CListMethod*       method_list;
   CListVarDecl*      var_decl_list;
   CMethod*           method;
 }
@@ -39,6 +40,7 @@ extern shared_ptr<IStatement> ans;
 %type  <stat_val>   	stat
 %type  <stat_list>  	statList
 %type  <method>  	    methodDeclaration
+%type  <method_list>  	methodList
 %type  <op_val>  		typeName visibility
 %type  <var_decl_list> 	varDeclList paramList nonEmptyParamList
 
@@ -53,7 +55,7 @@ extern shared_ptr<IStatement> ans;
 
 %%
 
-input:	methodDeclaration	{ ans = shared_ptr<IStatement>($1); return 0;}
+input:	methodList	{ ans = shared_ptr<IStatement>($1); return 0;}
 		;
 
 
@@ -108,8 +110,12 @@ visibility
     | PRIVATE                                    { $$ = "private"; }
 ;
 
+
+methodList : %empty { $$ = new CListMethod(); }
+         | methodList methodDeclaration { $$ = std::move($1); $$->Add(shared_ptr<IStatement> ($2)); }
+         ;
+
 methodDeclaration
-    //TODO Visibility
     : visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET
             varDeclList
             statList

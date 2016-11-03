@@ -23,6 +23,7 @@ public:
 	void Visit(CVarDecl*);
 	void Visit(CListVarDecl*);
 	void Visit(CMethod*);
+	void Visit(CListMethod*);
 
 	void Visit(CIdExpression*);
 	void Visit(CNumExpression*);

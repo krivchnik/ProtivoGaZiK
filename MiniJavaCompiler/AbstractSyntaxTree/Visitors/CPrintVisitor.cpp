@@ -11,6 +11,7 @@
 #include <Nodes/CVarDecl.h>
 #include <Nodes/CListVarDecl.h>
 #include <Nodes/CMethod.h>
+#include <Nodes/CListMethod.h>
 
 #include <Nodes/CIdExpression.h>
 #include <Nodes/CBoolExpression.h>
@@ -198,11 +199,11 @@ void CPrintVisitor::Visit(CListVarDecl* declarationList) {
 void CPrintVisitor::Visit( CMethod* statement ) {
     int currentExpressionId = ++expressionId;
     file << "CMethod" << delim << currentExpressionId << getArrow() << "Visibility" << currentExpressionId << getArrow();
-    file << statement->getVisibility();
+    file << statement->getVisibility() << delim << currentExpressionId;
     file << getEndLine();
 
     file << "CMethod" << delim << currentExpressionId << getArrow() << "TypeName" << currentExpressionId << getArrow();
-    file << statement->getTypeName();
+    file << statement->getTypeName() << delim << currentExpressionId ;
     file << getEndLine();
 
     file << "CMethod" << delim << currentExpressionId << getArrow() << "ID" << currentExpressionId << getArrow();
@@ -231,6 +232,19 @@ void CPrintVisitor::Visit( CMethod* statement ) {
 
 }
 
+
+void CPrintVisitor::Visit(CListMethod *statement) {
+    int currentExpressionId = ++expressionId;
+    auto methods = statement->GetMethods();
+    for(size_t i = 0; i < methods.size() - 1; ++i){
+        file << "ListMethod" << delim << currentExpressionId << getArrow();
+        methods[i]->Accept(this);
+        file << getEndLine();
+    }
+    file << "ListMethod" << delim << currentExpressionId << getArrow();
+    methods[methods.size() - 1]->Accept(this);
+}
+
 std::string CPrintVisitor::getArrow() const {
 	return " -> ";
 }
@@ -238,6 +252,7 @@ std::string CPrintVisitor::getArrow() const {
 std::string CPrintVisitor::getEndLine() const {
 	return ";\n\t";
 }
+
 
 
 

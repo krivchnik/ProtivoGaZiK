@@ -28,6 +28,7 @@ using namespace std;
 #include <Nodes/CListStatement.h>
 
 #include <Nodes/CMethod.h>
+#include <Nodes/CListMethod.h>
 #include <Nodes/CVarDecl.h>
 #include <Nodes/CListVarDecl.h>
 

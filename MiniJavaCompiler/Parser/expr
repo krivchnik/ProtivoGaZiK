@@ -1,8 +1,17 @@
 public int a (int a, int b) {
     int a;
     int b;
-    while( a < 5) {
-        a = 1;
+    while( a < b ) {
+        a = 3;
+    }
+    return a + b;
+}
+
+public int a (int a, int b) {
+    int a;
+    int b;
+    while( a < b ) {
+        a = 3;
     }
     return a + b;
 }

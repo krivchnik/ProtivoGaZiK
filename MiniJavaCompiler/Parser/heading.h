@@ -101,10 +101,11 @@ union YYSTYPE
   IExpression*       expr_val;
   IStatement*        stat_val;
   CListStatement*    stat_list;
+  CListMethod*       method_list;
   CListVarDecl*      var_decl_list;
   CMethod*           method;
 
-#line 108 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
+#line 109 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
