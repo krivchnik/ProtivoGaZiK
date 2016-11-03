@@ -56,14 +56,13 @@ extern shared_ptr<IStatement> ans;
 input:	methodDeclaration	{ ans = shared_ptr<CMethod>($1); return 0;}
 		;
 
-
 varDeclList
     : %empty                            { $$ = new CListVarDecl(); }
     | varDeclList typeName ID SEMICOLON { $$ = std::move($1); $$->Add(shared_ptr<CVarDecl>(new CVarDecl(std::string($2), std::string($3)))); }
     ;
 
 paramList
- 	: %empty   							{}
+ 	: %empty   							{ $$ = new CListVarDecl(); }
  	| nonEmptyParamList                 { $$ = std::move($1); }
  	;
 
