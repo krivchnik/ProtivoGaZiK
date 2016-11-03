@@ -12,6 +12,7 @@
 #include <Nodes/CListVarDecl.h>
 #include <Nodes/CMethod.h>
 #include <Nodes/CListMethodDecl.h>
+#include <Nodes/CClass.h>
 
 #include <Nodes/CIdExpression.h>
 #include <Nodes/CBoolExpression.h>
@@ -264,6 +265,27 @@ void CPrintVisitor::Visit(CListMethodDecl* declarationList) {
     if (numberOfIterations == 0) {
         file << "Empty" << delim << currentExpressionId;
     }
+}
+
+void CPrintVisitor::Visit( CClass* statement ) {
+    int currentExpressionId = ++expressionId;
+
+    file << "CClass" << delim << currentExpressionId << getArrow() << "ID" << currentExpressionId << getArrow();
+    statement->getId()->Accept(this);
+    file << getEndLine();
+
+    if (statement->getBaseId().get() != nullptr) {
+        file << "CClass" << delim << currentExpressionId << getArrow() << "BaseID" << currentExpressionId << getArrow();
+        statement->getBaseId()->Accept(this);
+        file << getEndLine();
+    }
+
+    file << "CClass" << delim << currentExpressionId << getArrow() << "Fields" << currentExpressionId << getArrow();
+    statement->getFields()->Accept(this);
+    file << getEndLine();
+
+    file << "CClass" << delim << currentExpressionId << getArrow() << "Methods" << currentExpressionId << getArrow();
+    statement->getMethods()->Accept(this);
 }
 
 

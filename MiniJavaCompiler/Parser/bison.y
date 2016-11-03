@@ -19,7 +19,7 @@ extern shared_ptr<IStatement> ans;
   CListVarDecl*      var_decl_list;
   CMethod*           method;
   CListMethodDecl*   method_decl_list;
-  //CClass*			 class_decl;
+  CClass*			 class_decl;
 }
 
 %start	input
@@ -34,6 +34,10 @@ extern shared_ptr<IStatement> ans;
                     RETURN PRINTLN LENGTH
                     THIS NEW
                     MAIN POINT COMMA
+                    ASSIGN LESS
+                    OR AND NOT
+                    PLUS MINUS STAR
+
 %token <int_val>	INTEGER_LITERAL
 %token <op_val>     ID
 
@@ -47,7 +51,7 @@ extern shared_ptr<IStatement> ans;
 %type  <method>  	    	methodDeclaration
 %type  <method_decl_list>	methodDeclList
 
-//%type  <class_decl>			classDeclaration
+%type  <class_decl>			classDeclaration
 
 %left	POINT
 %left 	OR
@@ -60,22 +64,30 @@ extern shared_ptr<IStatement> ans;
 
 %%
 
-input:	methodDeclList	{ ans = shared_ptr<CListMethodDecl>($1); return 0;}
+input:	classDeclaration	{ ans = shared_ptr<CClass>($1); return 0;}
 		;
 
-/*classDeclaration
+classDeclaration
     : CLASS ID LFBRACKET
-    	//TODO: temporary only one method can be correctly processed
         varDeclList methodDeclList
       RFBRACKET {
-      	$$ = new CClass(std::string($2), std::shared_ptr<CListVarDecl>($4), std::shared_ptr<CMethod>($5));
+      	$$ = new CClass(
+      		std::shared_ptr<CIdExpression>(new CIdExpression(std::string($2))),
+			std::shared_ptr<CListVarDecl>($4), 
+			std::shared_ptr<CListMethodDecl>($5)
+		);
     }
     | CLASS ID EXTENDS ID LFBRACKET
         varDeclList methodDeclList
       RFBRACKET {
-      	$$ = new CClass(std::string($2), std::string($4), std::shared_ptr<CListVarDecl>($6), std::shared_ptr<CMethod>($7));
+      	$$ = new CClass(
+      		std::shared_ptr<CIdExpression>(new CIdExpression(std::string($2))), 
+      		std::shared_ptr<CIdExpression>(new CIdExpression(std::string($4))), 
+      		std::shared_ptr<CListVarDecl>($6), 
+      		std::shared_ptr<CListMethodDecl>($7)
+      	);
     }
-;*/
+;
 
 methodDeclList
 	: %empty                            { $$ = new CListMethodDecl(); }

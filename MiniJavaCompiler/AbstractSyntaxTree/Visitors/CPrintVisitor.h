@@ -24,6 +24,7 @@ public:
 	void Visit(CListVarDecl*);
 	void Visit(CMethod*);
 	void Visit(CListMethodDecl*);
+    void Visit(CClass*);
 
 	void Visit(CIdExpression*);
 	void Visit(CNumExpression*);

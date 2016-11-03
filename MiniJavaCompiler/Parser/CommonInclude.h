@@ -31,6 +31,7 @@ using namespace std;
 #include <Nodes/CListVarDecl.h>
 #include <Nodes/CMethod.h>
 #include <Nodes/CListMethodDecl.h>
+#include <Nodes/CClass.h>
 
 #include <Visitors/CPrintVisitor.h>
 
