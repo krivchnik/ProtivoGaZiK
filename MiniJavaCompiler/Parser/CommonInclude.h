@@ -26,6 +26,8 @@ using namespace std;
 #include <Nodes/CIfElseStatement.h>
 #include <Nodes/CWhileStatement.h>
 #include <Nodes/CListStatement.h>
+
+#include <Nodes/CMethod.h>
 #include <Nodes/CVarDecl.h>
 #include <Nodes/CListVarDecl.h>
 

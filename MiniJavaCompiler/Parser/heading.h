@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_HOME_NISMOHL_CLIONPROJECTS_PROTIVOGAZIK_2_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED
-# define YY_YY_HOME_NISMOHL_CLIONPROJECTS_PROTIVOGAZIK_2_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED
+#ifndef YY_YY_HOME_KAGUDKOV_CLIONPROJECTS_PROTIVOGAZIK_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED
+# define YY_YY_HOME_KAGUDKOV_CLIONPROJECTS_PROTIVOGAZIK_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -74,16 +74,17 @@ extern int yydebug;
     NEW = 284,
     MAIN = 285,
     POINT = 286,
-    INTEGER_LITERAL = 287,
-    ID = 288,
-    OR = 289,
-    AND = 290,
-    PLUS = 291,
-    MINUS = 292,
-    STAR = 293,
-    MOD = 294,
-    ASSIGN = 295,
-    LESS = 296
+    COMMA = 287,
+    INTEGER_LITERAL = 288,
+    ID = 289,
+    OR = 290,
+    AND = 291,
+    PLUS = 292,
+    MINUS = 293,
+    STAR = 294,
+    MOD = 295,
+    ASSIGN = 296,
+    LESS = 297
   };
 #endif
 
@@ -92,7 +93,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 12 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1909  */
+#line 12 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1909  */
 
   int                int_val;
   char*              op_val;
@@ -101,8 +102,9 @@ union YYSTYPE
   IStatement*        stat_val;
   CListStatement*    stat_list;
   CListVarDecl*      var_decl_list;
+  CMethod*           method;
 
-#line 106 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
+#line 108 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -115,4 +117,4 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_HOME_NISMOHL_CLIONPROJECTS_PROTIVOGAZIK_2_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED  */
+#endif /* !YY_YY_HOME_KAGUDKOV_CLIONPROJECTS_PROTIVOGAZIK_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED  */

@@ -17,6 +17,7 @@ extern shared_ptr<IStatement> ans;
   IStatement*        stat_val;
   CListStatement*    stat_list;
   CListVarDecl*      var_decl_list;
+  CMethod*           method;
 }
 
 %start	input
@@ -37,6 +38,7 @@ extern shared_ptr<IStatement> ans;
 %type  <expr_val>		exp
 %type  <stat_val>   	stat
 %type  <stat_list>  	statList
+%type  <method>  	    methodDeclaration
 %type  <op_val>  		typeName
 %type  <var_decl_list> 	varDeclList paramList nonEmptyParamList
 
@@ -51,7 +53,7 @@ extern shared_ptr<IStatement> ans;
 
 %%
 
-input:	paramList	{ ans = shared_ptr<IStatement>($1); return 0;}
+input:	statList	{ ans = shared_ptr<IStatement>($1); return 0;}
 		;
 
 
@@ -99,6 +101,27 @@ typeName
     | INT                                        { $$ = "int"; }
     | ID                                         { $$ = $1; }
 ;
+
+
+methodDeclaration
+    //TODO Visibility
+    //TODO Parametrs
+    : ID typeName ID LPBRACKET paramList RPBRACKET LFBRACKET
+            varDeclList
+            statList
+            RETURN exp SEMICOLON
+      RFBRACKET {
+        $$ = new CMethod<IStatement>(
+            shared_ptr<CIdExpression>(new CIdExpression(std::string($1))),
+            std::string($2),
+            shared_ptr<CIdExpression>(new CIdExpression(std::string($3))),
+            shared_ptr<CListVarDecl>(std::move($5)),
+            shared_ptr<CListVarDecl>($8),
+            shared_ptr<CListStatement>($9),
+            shared_ptr<IExpression>($11)
+        );
+    }
+    ;
 
 stat 	: LFBRACKET statList RFBRACKET                       { $$ = $2; }
 
