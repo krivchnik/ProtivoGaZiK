@@ -103,7 +103,7 @@ typeName
 ;
 
 
-methodDeclaration
+/*methodDeclaration
     //TODO Visibility
     //TODO Parametrs
     : ID typeName ID LPBRACKET paramList RPBRACKET LFBRACKET
@@ -122,7 +122,7 @@ methodDeclaration
         );
     }
     ;
-
+*/
 stat 	: LFBRACKET statList RFBRACKET                       { $$ = $2; }
 
     	| IF LPBRACKET exp RPBRACKET stat ELSE stat 		{ $$ = new CIfElseStatement(shared_ptr<IExpression>($3),
