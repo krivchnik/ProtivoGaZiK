@@ -4,7 +4,7 @@
 
 #include <Nodes/CMethod.h>
 
-CMethod::CMethod(const std::shared_ptr<CIdExpression> &visibility, const std::string &typeName,
+CMethod::CMethod(const std::string &visibility, const std::string &typeName,
                  const std::shared_ptr<CIdExpression> &id, const std::shared_ptr<CListVarDecl> &parameters,
                  const std::shared_ptr<CListVarDecl> &listDeclarations,
                  const std::shared_ptr<CListStatement> &listStatements,
@@ -13,3 +13,34 @@ CMethod::CMethod(const std::shared_ptr<CIdExpression> &visibility, const std::st
                                                                          listDeclarations(listDeclarations),
                                                                          listStatements(listStatements),
                                                                          returnExpression(returnExpression) {}
+void CMethod::Accept(IVisitor* visitor) {
+    visitor->Visit(this);
+}
+
+const std::string &CMethod::getVisibility() const {
+    return visibility;
+}
+
+const std::string &CMethod::getTypeName() const {
+    return typeName;
+}
+
+const std::shared_ptr<CIdExpression> &CMethod::getId() const {
+    return id;
+}
+
+const std::shared_ptr<CListVarDecl> &CMethod::getParameters() const {
+    return parameters;
+}
+
+const std::shared_ptr<CListVarDecl> &CMethod::getListDeclarations() const {
+    return listDeclarations;
+}
+
+const std::shared_ptr<CListStatement> &CMethod::getListStatements() const {
+    return listStatements;
+}
+
+const std::shared_ptr<IExpression> &CMethod::getReturnExpression() const {
+    return returnExpression;
+}

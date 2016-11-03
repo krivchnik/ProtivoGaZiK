@@ -39,7 +39,7 @@ extern shared_ptr<IStatement> ans;
 %type  <stat_val>   	stat
 %type  <stat_list>  	statList
 %type  <method>  	    methodDeclaration
-%type  <op_val>  		typeName
+%type  <op_val>  		typeName visibility
 %type  <var_decl_list> 	varDeclList paramList nonEmptyParamList
 
 %left	POINT
@@ -53,7 +53,7 @@ extern shared_ptr<IStatement> ans;
 
 %%
 
-input:	statList	{ ans = shared_ptr<IStatement>($1); return 0;}
+input:	methodDeclaration	{ ans = shared_ptr<IStatement>($1); return 0;}
 		;
 
 
@@ -103,16 +103,20 @@ typeName
 ;
 
 
-/*methodDeclaration
+visibility
+    : PUBLIC                                     { $$ = "public"; }
+    | PRIVATE                                    { $$ = "private"; }
+;
+
+methodDeclaration
     //TODO Visibility
-    //TODO Parametrs
-    : ID typeName ID LPBRACKET paramList RPBRACKET LFBRACKET
+    : visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET
             varDeclList
             statList
             RETURN exp SEMICOLON
       RFBRACKET {
-        $$ = new CMethod<IStatement>(
-            shared_ptr<CIdExpression>(new CIdExpression(std::string($1))),
+        $$ = new CMethod(
+            std::string($1),
             std::string($2),
             shared_ptr<CIdExpression>(new CIdExpression(std::string($3))),
             shared_ptr<CListVarDecl>(std::move($5)),
@@ -122,7 +126,7 @@ typeName
         );
     }
     ;
-*/
+
 stat 	: LFBRACKET statList RFBRACKET                       { $$ = $2; }
 
     	| IF LPBRACKET exp RPBRACKET stat ELSE stat 		{ $$ = new CIfElseStatement(shared_ptr<IExpression>($3),

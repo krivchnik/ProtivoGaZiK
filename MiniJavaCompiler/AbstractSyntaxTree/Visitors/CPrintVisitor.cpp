@@ -7,8 +7,10 @@
 #include <Nodes/CIfElseStatement.h>
 #include <Nodes/CWhileStatement.h>
 #include <Nodes/CListStatement.h>
+
 #include <Nodes/CVarDecl.h>
 #include <Nodes/CListVarDecl.h>
+#include <Nodes/CMethod.h>
 
 #include <Nodes/CIdExpression.h>
 #include <Nodes/CBoolExpression.h>
@@ -192,6 +194,43 @@ void CPrintVisitor::Visit(CListVarDecl* declarationList) {
     declarations[declarations.size() - 1]->Accept(this);
 }
 
+
+void CPrintVisitor::Visit( CMethod* statement ) {
+    int currentExpressionId = ++expressionId;
+    file << "CMethod" << delim << currentExpressionId << getArrow() << "Visibility" << currentExpressionId << getArrow();
+    file << statement->getVisibility();
+    file << getEndLine();
+
+    file << "CMethod" << delim << currentExpressionId << getArrow() << "TypeName" << currentExpressionId << getArrow();
+    file << statement->getTypeName();
+    file << getEndLine();
+
+    file << "CMethod" << delim << currentExpressionId << getArrow() << "ID" << currentExpressionId << getArrow();
+    statement->getId()->Accept(this);
+    file << getEndLine();
+
+
+    file << "CMethod" << delim << currentExpressionId << getArrow() << "Params" << currentExpressionId << getArrow();
+    statement->getParameters()->Accept(this);
+    file << getEndLine();
+
+
+    file << "CMethod" << delim << currentExpressionId << getArrow() << "VariablesDeclarations" << currentExpressionId << getArrow();
+    statement->getListDeclarations()->Accept(this);
+    file << getEndLine();
+
+
+    file << "CMethod" << delim << currentExpressionId << getArrow() << "ListStatementsInMethod" << currentExpressionId << getArrow();
+    statement->getListStatements()->Accept(this);
+    file << getEndLine();
+
+
+    file << "CMethod" << delim << currentExpressionId << getArrow() << "ReturnExpression" << currentExpressionId << getArrow();
+    statement->getReturnExpression()->Accept(this);
+
+
+}
+
 std::string CPrintVisitor::getArrow() const {
 	return " -> ";
 }
@@ -199,6 +238,7 @@ std::string CPrintVisitor::getArrow() const {
 std::string CPrintVisitor::getEndLine() const {
 	return ";\n\t";
 }
+
 
 
 
