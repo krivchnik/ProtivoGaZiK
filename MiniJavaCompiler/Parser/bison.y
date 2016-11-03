@@ -18,6 +18,8 @@ extern shared_ptr<IStatement> ans;
   CListStatement*    stat_list;
   CListVarDecl*      var_decl_list;
   CMethod*           method;
+  CListMethodDecl*   method_decl_list;
+  //CClass*			 class_decl;
 }
 
 %start	input
@@ -35,12 +37,17 @@ extern shared_ptr<IStatement> ans;
 %token <int_val>	INTEGER_LITERAL
 %token <op_val>     ID
 
-%type  <expr_val>		exp
-%type  <stat_val>   	stat
-%type  <stat_list>  	statList
-%type  <method>  	    methodDeclaration
-%type  <op_val>  		typeName visibility
-%type  <var_decl_list> 	varDeclList paramList nonEmptyParamList
+%type  <expr_val>			exp
+%type  <stat_val>   		stat
+%type  <stat_list>  		statList
+%type  <op_val>  			typeName visibility
+
+%type  <var_decl_list> 		varDeclList paramList nonEmptyParamList
+
+%type  <method>  	    	methodDeclaration
+%type  <method_decl_list>	methodDeclList
+
+//%type  <class_decl>			classDeclaration
 
 %left	POINT
 %left 	OR
@@ -53,8 +60,26 @@ extern shared_ptr<IStatement> ans;
 
 %%
 
-input:	methodDeclaration	{ ans = shared_ptr<CMethod>($1); return 0;}
+input:	methodDeclList	{ ans = shared_ptr<CListMethodDecl>($1); return 0;}
 		;
+
+/*classDeclaration
+    : CLASS ID LFBRACKET
+    	//TODO: temporary only one method can be correctly processed
+        varDeclList methodDeclList
+      RFBRACKET {
+      	$$ = new CClass(std::string($2), std::shared_ptr<CListVarDecl>($4), std::shared_ptr<CMethod>($5));
+    }
+    | CLASS ID EXTENDS ID LFBRACKET
+        varDeclList methodDeclList
+      RFBRACKET {
+      	$$ = new CClass(std::string($2), std::string($4), std::shared_ptr<CListVarDecl>($6), std::shared_ptr<CMethod>($7));
+    }
+;*/
+
+methodDeclList
+	: %empty                            { $$ = new CListMethodDecl(); }
+	| methodDeclList methodDeclaration  { $$ = std::move($1); $$->Add(shared_ptr<CMethod>($2)); }
 
 varDeclList
     : %empty                            { $$ = new CListVarDecl(); }
@@ -144,45 +169,6 @@ stat 	: LFBRACKET statList RFBRACKET                       { $$ = $2; }
      																						shared_ptr<IExpression>($3),
     																						shared_ptr<IExpression>($6)); }
         ;
-/*
-Goal: MainClass ( ClassDeclaration )* <EOF> {$$ = new IExpr($1)}
-
-MainClass: "class" Identifier "{" "public" "static" "void" "main" "(" "String" "[" "]" Identifier ")" "{" Statement "}" "}"
-
-ClassDeclaration: "class" Identifier ( "extends" Identifier )? "{" ( VarDeclaration )* ( MethodDeclaration )* "}"
-
-VarDeclaration: Type Identifier ";"
-
-MethodDeclaration: "public" | “private” Type Identifier "(" ( Type Identifier ( "," Type Identifier )* )? ")" "{" ( VarDeclaration )*( Statement )* "return" Expression ";" "}"
-
-Type: "int" "[" "]"
-| "boolean"
-| "int"
-| Identifier
-
-Statement: 
-	"{" ( Statement )* "}"
-	| "if" "(" Expression ")" Statement "else" Statement
-	| "while" "(" Expression ")" Statement
-	| "System.out.println" "(" Expression ")" ";"
-	| Identifier "=" Expression ";"
-	| Identifier "[" Expression "]" "=" Expression ";"
-
-Expression:
-	| Expression "[" Expression "]"
-	| Expression "." "length"
-	| Expression "." Identifier "(" ( Expression ( "," Expression )* )? ")"
-	| <INTEGER_LITERAL>
-	| "true"
-	| "false"
-	| Identifier
-	| "this"
-	| "new" "int" "[" Expression "]"
-	| "new" Identifier "(" ")"
-	| "!" Expression | "(" Expression ")"
-
-Identifier ::= <IDENTIFIER>
-*/
 
 %%
 
