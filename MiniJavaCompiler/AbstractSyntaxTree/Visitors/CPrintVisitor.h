@@ -14,7 +14,6 @@ public:
 	//Сюда нужно добавить методы visit для всех классов, которые мы хотим отображать в дереве.
 	void Visit(CAssignStatement*);
 	void Visit(CAssignItemStatement*);
-	void Visit(CCompoundStatement*);
 	void Visit(CPrintStatement*);
 	void Visit(CIfElseStatement*);
 	void Visit(CWhileStatement*);

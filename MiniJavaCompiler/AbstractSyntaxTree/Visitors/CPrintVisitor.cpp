@@ -2,7 +2,6 @@
 
 #include <Nodes/CAssignStatement.h>
 #include <Nodes/CAssignItemStatement.h>
-#include <Nodes/CCompoundStatement.h>
 #include <Nodes/CPrintStatement.h>
 #include <Nodes/CIfElseStatement.h>
 #include <Nodes/CWhileStatement.h>
@@ -115,7 +114,6 @@ void CPrintVisitor::Visit(CAssignStatement* statement) {
 	statement->GetExpression()->Accept(this);
 }
 
-
 void CPrintVisitor::Visit(CAssignItemStatement* statement) {
     int currentExpressionId = ++expressionId;
     file << getNodeNameWithLabel("assignmentItem", currentExpressionId, "assignmentItem") << getArrow();
@@ -133,16 +131,6 @@ void CPrintVisitor::Visit(CPrintStatement* statement) {
 	file << getNodeNameWithLabel("println", expressionId, "println") <<  getArrow();
 	statement->GetExpression()->Accept(this);
 }
-
-void CPrintVisitor::Visit(CCompoundStatement* statement) {
-	int currentExpressionId = ++expressionId;
-	file << getNodeNameWithLabel("compound", currentExpressionId, "compound") << getArrow();
-	statement->GetLeftOperand()->Accept(this);
-	file << getEndLine();
-	file << getNodeNameWithLabel("compound", currentExpressionId, "compound") << getArrow();
-	statement->GetRightOperand()->Accept(this);
-}
-
 
 void CPrintVisitor::Visit(CIfElseStatement* statement) {
 	int currentExpressionId = ++expressionId;
