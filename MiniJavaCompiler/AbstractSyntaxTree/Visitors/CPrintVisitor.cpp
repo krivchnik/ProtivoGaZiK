@@ -14,6 +14,7 @@
 #include <Nodes/CListMethodDecl.h>
 #include <Nodes/CClass.h>
 #include <Nodes/CMainClass.h>
+#include <Nodes/CProgram.h>
 
 #include <Nodes/CIdExpression.h>
 #include <Nodes/CBoolExpression.h>
@@ -305,6 +306,10 @@ void CPrintVisitor::Visit( CMainClass* statement ) {
     statement->GetStatement()->Accept(this);
 }
 
+
+void CPrintVisitor::Visit(CProgram *) {
+
+}
 
 
 

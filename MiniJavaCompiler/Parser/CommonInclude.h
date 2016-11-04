@@ -33,6 +33,7 @@ using namespace std;
 #include <Nodes/CListMethodDecl.h>
 #include <Nodes/CClass.h>
 #include <Nodes/CMainClass.h>
+#include <Nodes/CProgram.h>
 
 #include <Visitors/CPrintVisitor.h>
 

@@ -139,6 +139,8 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 "."              { updateLocation(); return POINT; }
 ","				 { updateLocation(); return COMMA; }
 
+<<EOF>> 		 { updateLocation(); return END; }
+
 {STRING}         {
 
 	updateLocation();

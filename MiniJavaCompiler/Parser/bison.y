@@ -35,6 +35,7 @@ extern shared_ptr<IStatement> ans;
                     ASSIGN LESS
                     OR AND NOT
                     PLUS MINUS STAR
+                    END
 
 %token <int_val>	INTEGER_LITERAL
 %token <op_val>     ID
@@ -67,7 +68,7 @@ extern shared_ptr<IStatement> ans;
 
 %%
 
-input:	mainClass { ans = shared_ptr<IStatement>($1); return 0;}
+input:	mainClass classDeclList { ans = shared_ptr<CProgram>($1, $2); return 0;}
 		;
 
 mainClass:	CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET
