@@ -65,7 +65,7 @@ extern shared_ptr<IStatement> ans;
 
 %%
 
-input:	classDeclList { ans = shared_ptr<IStatement>($1); return 0;}
+input:	statList { ans = shared_ptr<IStatement>($1); return 0;}
 		;
 
 classDeclList : %empty 				 				{ $$ = new CListStatement(std::string("Classes")); }

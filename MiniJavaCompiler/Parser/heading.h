@@ -61,30 +61,33 @@ extern int yydebug;
     STRING = 271,
     TRUE = 272,
     FALSE = 273,
-    NOT = 274,
-    CLASS = 275,
-    EXTENDS = 276,
-    IF = 277,
-    ELSE = 278,
-    WHILE = 279,
-    RETURN = 280,
-    PRINTLN = 281,
-    LENGTH = 282,
-    THIS = 283,
-    NEW = 284,
-    MAIN = 285,
-    POINT = 286,
-    COMMA = 287,
-    INTEGER_LITERAL = 288,
-    ID = 289,
-    OR = 290,
-    AND = 291,
+    CLASS = 274,
+    EXTENDS = 275,
+    IF = 276,
+    ELSE = 277,
+    WHILE = 278,
+    RETURN = 279,
+    PRINTLN = 280,
+    LENGTH = 281,
+    THIS = 282,
+    NEW = 283,
+    MAIN = 284,
+    POINT = 285,
+    COMMA = 286,
+    ASSIGN = 287,
+    LESS = 288,
+    OR = 289,
+    AND = 290,
+    NOT = 291,
     PLUS = 292,
     MINUS = 293,
     STAR = 294,
-    MOD = 295,
-    ASSIGN = 296,
-    LESS = 297
+    INTEGER_LITERAL = 295,
+    ID = 296,
+    MOD = 297,
+    VAR_DECL_LIST = 298,
+    METHOD_DECL = 299,
+    STAT_LIST = 300
   };
 #endif
 
@@ -101,11 +104,10 @@ union YYSTYPE
   IExpression*       expr_val;
   IStatement*        stat_val;
   CListStatement*    stat_list;
-  CListMethod*       method_list;
-  CListVarDecl*      var_decl_list;
   CMethod*           method;
+  CClass*			 class_decl;
 
-#line 109 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
+#line 111 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

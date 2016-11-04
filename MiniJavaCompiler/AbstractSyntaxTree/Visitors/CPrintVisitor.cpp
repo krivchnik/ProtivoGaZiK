@@ -58,7 +58,7 @@ void CPrintVisitor::Visit(COperationExpression* expression) {
 
 void CPrintVisitor::Visit(CNumExpression* expression) {
 	++expressionId;
-	std::string newId = std::string("Number") + std::to_string(expression->GetNumber()) + delim + std::to_string(expressionId);
+	std::string newId = getNodeNameWithLabel(std::to_string(expression->GetNumber()), expressionId, "Number");
 	file << newId;
     idsOfTokenWithBoxShape.push_back(newId);
 }
@@ -297,8 +297,8 @@ std::string CPrintVisitor::getEndLine() const {
 	return ";\n\t";
 }
 
-std::string CPrintVisitor::getNodeNameWithLabel(std::string label, int id) const {
-    return "{" + std::string("Number") + label + delim +
+std::string CPrintVisitor::getNodeNameWithLabel(std::string label, int id, std::string nodeName ) const {
+    return "{" + nodeName + label + delim +
            std::to_string(id) +"[label=\"" + label + "\"]" +  "}";
 }
 

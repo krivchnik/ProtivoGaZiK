@@ -1,6 +1,2 @@
-public int a (int a, int b) {
-    int a;
-    int b;
-    a = 1 + 2;
-    return a + b;
-}
+a = 1 + 1;
+b = 1 + 2;

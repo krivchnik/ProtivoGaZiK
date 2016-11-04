@@ -51,5 +51,5 @@ private:
 	//метод заканчиват эту строку в файле вывода и переходит на следующую
 	std::string getEndLine() const;
 
-	std::string getNodeNameWithLabel(std::string label, int id) const;
+	std::string getNodeNameWithLabel(std::string label, int id, std::string nodeName ) const;
 };
