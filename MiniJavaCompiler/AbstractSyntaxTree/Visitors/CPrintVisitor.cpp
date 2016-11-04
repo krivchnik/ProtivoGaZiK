@@ -67,21 +67,21 @@ void CPrintVisitor::Visit(CNumExpression* expression) {
 
 void CPrintVisitor::Visit(CBoolExpression* expression) {
 	++expressionId;
-	std::string newId = std::string("Bool") + std::to_string(expression->GetValue()) + delim + std::to_string(expressionId);
+	std::string newId = getNodeNameWithLabel(std::to_string(expression->GetValue()), expressionId, "Bool");
 	file << newId;
 	idsOfTokenWithBoxShape.push_back(newId);
 }
 
 void CPrintVisitor::Visit(CIdExpression* expression) {
 	++expressionId;
-	std::string newId = expression->GetName() + delim + std::to_string(expressionId);
+	std::string newId = getNodeNameWithLabel(expression->GetName(), expressionId, "");
 	file << newId;
 	idsOfTokenWithBoxShape.push_back(newId);
 }
 
 void CPrintVisitor::Visit(CNotExpression* expression) {
     ++expressionId;
-    file << "not" << expressionId << getArrow();
+    file << getNodeNameWithLabel("not", expressionId, "not") << getArrow();
     expression->GetExpression()->Accept(this);
 }
 
@@ -93,8 +93,8 @@ void CPrintVisitor::Visit(CLengthExpression* expression) {
 
 void CPrintVisitor::Visit(CArrayConstructionExpression* expression) {
     ++expressionId;
-    file << "newIntArray" + delim + std::to_string(expressionId) + getArrow() +
-            "withSize" + std::to_string(expressionId) + getArrow();
+    file << getNodeNameWithLabel("newIntArray", expressionId, "newIntArray") + getArrow() +
+            getNodeNameWithLabel("withSize", expressionId, "withSize")  + getArrow();
     expression->getSize()->Accept(this);
 
 }
@@ -102,68 +102,72 @@ void CPrintVisitor::Visit(CArrayConstructionExpression* expression) {
 
 void CPrintVisitor::Visit(CConstructClassExpression* expression) {
     ++expressionId;
-    file << "constructClass" + delim + std::to_string(expressionId) + getArrow() +
-             expression->getClassID()->GetName() + std::to_string(expressionId);
+    file << getNodeNameWithLabel("constructClass", expressionId, "constructClass") + getArrow() +
+            getNodeNameWithLabel(expression->getClassID()->GetName(), expressionId, expression->getClassID()->GetName());
 }
 
 void CPrintVisitor::Visit(CAssignStatement* statement) {
 	int currentExpressionId = ++expressionId;
-	file << "assignment" << delim << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("assignment", currentExpressionId, "assignment") << getArrow();
 	statement->GetVariable()->Accept(this);
 	file << getEndLine();
-	file << "assignment" << delim << currentExpressionId << getArrow();
+	file << getNodeNameWithLabel("assignment", currentExpressionId, "assignment") << getArrow();
 	statement->GetExpression()->Accept(this);
 }
 
 
 void CPrintVisitor::Visit(CAssignItemStatement* statement) {
     int currentExpressionId = ++expressionId;
-    file << "assignmentItem" << delim << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("assignmentItem", currentExpressionId, "assignmentItem") << getArrow();
     statement->getId()->Accept(this);
     file << "[";
     statement->getExpressionInBrackets()->Accept(this);
     file << "]";
     file << getEndLine();
-    file << "assignmentItem" << delim << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("assignmentItem", currentExpressionId, "assignmentItem") << getArrow();
     statement->getAssignedExpression()->Accept(this);
 }
 
 void CPrintVisitor::Visit(CPrintStatement* statement) {
 	++expressionId;
-	file << "println" << expressionId <<  getArrow();
+	file << getNodeNameWithLabel("println", expressionId, "println") <<  getArrow();
 	statement->GetExpression()->Accept(this);
-	//file << getEndLine();
 }
 
 void CPrintVisitor::Visit(CCompoundStatement* statement) {
 	int currentExpressionId = ++expressionId;
-	file << "compound" << delim << currentExpressionId << getArrow();
+	file << getNodeNameWithLabel("compound", currentExpressionId, "compound") << getArrow();
 	statement->GetLeftOperand()->Accept(this);
 	file << getEndLine();
-	file << "compound" << delim << currentExpressionId << getArrow();
+	file << getNodeNameWithLabel("compound", currentExpressionId, "compound") << getArrow();
 	statement->GetRightOperand()->Accept(this);
 }
 
 
 void CPrintVisitor::Visit(CIfElseStatement* statement) {
 	int currentExpressionId = ++expressionId;
-	file << "if" << delim << currentExpressionId << getArrow() << "condition" << currentExpressionId << getArrow();
+	file << getNodeNameWithLabel("if", currentExpressionId, "if") << getArrow() <<
+         getNodeNameWithLabel("condition", currentExpressionId, "condition") << getArrow();
 	statement->getExpression()->Accept(this);
 	file << getEndLine();
-    file << "if" << delim << currentExpressionId << getArrow() << "ifStatement" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("if", currentExpressionId, "if") << getArrow() <<
+         getNodeNameWithLabel("ifStatement", currentExpressionId, "ifStatement") << getArrow();
     statement->getIfStatement()->Accept(this);
     file << getEndLine();
-    file << "if" << delim << currentExpressionId << getArrow() << "elseStatement" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("if", currentExpressionId, "if") << getArrow() <<
+         getNodeNameWithLabel("elseStatement", currentExpressionId, "elseStatement") << getArrow();
     statement->getElseStatement()->Accept(this);
 }
 
 
 void CPrintVisitor::Visit(CWhileStatement* statement) {
 	int currentExpressionId = ++expressionId;
-	file << "While" << delim << currentExpressionId << getArrow() << "condition" << currentExpressionId << getArrow();
+	file << getNodeNameWithLabel("While", currentExpressionId, "While") << currentExpressionId << getArrow() <<
+         getNodeNameWithLabel("condition", currentExpressionId, "condition") << getArrow();
 	statement->getCondition()->Accept(this);
 	file << getEndLine();
-	file << "While" << delim << currentExpressionId << getArrow() << "body" << currentExpressionId << getArrow();
+	file << getNodeNameWithLabel("While", currentExpressionId, "While") << getArrow() <<
+         getNodeNameWithLabel("While", currentExpressionId, "While") << getArrow();
 	statement->getBody()->Accept(this);
 }
 
@@ -175,24 +179,24 @@ void CPrintVisitor::Visit(CListStatement* statement) {
 
     for(size_t i = 0; i < numberOfIterations; ++i) {
         if (i != numberOfIterations - 1) {
-            file << "List" << statement->GetStatementType() << delim << currentExpressionId << getArrow();
+            file << getNodeNameWithLabel("List" + statement->GetStatementType(), currentExpressionId, "List") << getArrow();
             statements[i]->Accept(this);
             file << getEndLine();
         } else {
-            file << "List" << statement->GetStatementType() << delim << currentExpressionId << getArrow();
+            file << getNodeNameWithLabel("List" + statement->GetStatementType(), currentExpressionId, "List") << getArrow();
             statements[numberOfIterations - 1]->Accept(this);
         }
     }
     if (numberOfIterations == 0) {
-        file << "Empty" << delim << currentExpressionId;
+        file << getNodeNameWithLabel("Empty", currentExpressionId, "Empty");
     }
 }
 
 void CPrintVisitor::Visit(CVarDecl* decl) {
     int currentExpressionId = ++expressionId;
-    file << "VariableDeclaration" << delim << currentExpressionId << getArrow();
-    file << decl->GetTypeName() << delim << ++expressionId << getEndLine();
-    file << "VariableDeclaration" << delim << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("VariableDeclaration", currentExpressionId, "VariableDeclaration") << getArrow();
+    file << getNodeNameWithLabel(decl->GetTypeName(), ++expressionId, decl->GetTypeName()) << getEndLine();
+    file << getNodeNameWithLabel("VariableDeclaration", currentExpressionId, "VariableDeclaration") << getArrow();
     file << decl->GetVariableName() << delim << ++expressionId;
 }
 
