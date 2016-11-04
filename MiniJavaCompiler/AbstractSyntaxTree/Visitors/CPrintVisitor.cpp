@@ -325,7 +325,19 @@ void CPrintVisitor::Visit( CMainClass* statement ) {
 }
 
 
-void CPrintVisitor::Visit(CProgram *) {
+void CPrintVisitor::Visit(CProgram *statement) {
+    int currentExpressionId = ++expressionId;
+
+    file << getNodeNameWithLabel("CProgram",currentExpressionId,"CProgram") << getArrow() <<
+         getNodeNameWithLabel("MainClass",currentExpressionId,"MainClass") << getArrow();
+    statement->GetMainClass()->Accept(this);
+    file << getEndLine();
+
+    file << getNodeNameWithLabel("CProgram",currentExpressionId,"CProgram") << getArrow() <<
+         getNodeNameWithLabel("MinorClass",currentExpressionId,"MinorClass") << getArrow();
+    statement->GetMinorClasses()->Accept(this);
+    file << getEndLine();
+
 
 }
 

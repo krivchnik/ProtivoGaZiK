@@ -23,4 +23,3 @@ private:
 };
 
 
-#endif //MINIJAVACOMPILER_CPROGRAM_H

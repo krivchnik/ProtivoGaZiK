@@ -82,12 +82,13 @@ extern int yydebug;
     PLUS = 292,
     MINUS = 293,
     STAR = 294,
-    INTEGER_LITERAL = 295,
-    ID = 296,
-    MOD = 297,
-    VAR_DECL_LIST = 298,
-    METHOD_DECL = 299,
-    STAT_LIST = 300
+    END = 295,
+    INTEGER_LITERAL = 296,
+    ID = 297,
+    MOD = 298,
+    VAR_DECL_LIST = 299,
+    METHOD_DECL = 300,
+    STAT_LIST = 301
   };
 #endif
 
@@ -106,8 +107,9 @@ union YYSTYPE
   CListStatement*    stat_list;
   CMethod*           method;
   CClass*			 class_decl;
+  CMainClass*		 main_class;
 
-#line 111 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
+#line 113 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
