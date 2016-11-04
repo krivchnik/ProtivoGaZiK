@@ -193,9 +193,9 @@ void CPrintVisitor::Visit(CListStatement* statement) {
 
 void CPrintVisitor::Visit(CVarDecl* decl) {
     int currentExpressionId = ++expressionId;
-    file << "VariableDeclaration" << delim << currentExpressionId << getArrow();
-    file << decl->GetTypeName() << delim << ++expressionId << getEndLine();
-    file << "VariableDeclaration" << delim << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("VariableDeclaration", currentExpressionId, "VariableDeclaration") << getArrow();
+    file << getNodeNameWithLabel(decl->GetTypeName(), ++expressionId, decl->GetTypeName()) << getEndLine();
+    file << getNodeNameWithLabel("VariableDeclaration", currentExpressionId, "VariableDeclaration") << getArrow();
     file << decl->GetVariableName() << delim << ++expressionId;
 }
 
