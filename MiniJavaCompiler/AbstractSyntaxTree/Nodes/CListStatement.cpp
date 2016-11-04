@@ -16,4 +16,9 @@ const std::vector<std::shared_ptr<IStatement>> &CListStatement::GetStatements() 
     return statements;
 }
 
-CListStatement::CListStatement() {}
+CListStatement::CListStatement(const std::string &statementType)
+        : statementType(statementType) {}
+
+const std::string &CListStatement::GetStatementType() const {
+    return statementType;
+}

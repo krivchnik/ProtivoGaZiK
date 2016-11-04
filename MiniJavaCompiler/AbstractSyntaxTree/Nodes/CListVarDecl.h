@@ -1,6 +1,9 @@
 //
 // Created by nismohl on 01.11.16.
 //
+
+// Deprecated since 04.11.16
+
 #pragma once
 
 #include <Nodes/IStatement.h>

@@ -16,9 +16,7 @@ extern shared_ptr<IStatement> ans;
   IExpression*       expr_val;
   IStatement*        stat_val;
   CListStatement*    stat_list;
-  CListVarDecl*      var_decl_list;
   CMethod*           method;
-  CListMethodDecl*   method_decl_list;
   CClass*			 class_decl;
 }
 
@@ -45,10 +43,10 @@ extern shared_ptr<IStatement> ans;
 %type  <stat_list>  		statList
 %type  <op_val>  			typeName visibility
 
-%type  <var_decl_list> 		varDeclList paramList nonEmptyParamList
+%type  <stat_list> 			varDeclList paramList nonEmptyParamList
 
 %type  <method>  	    	methodDeclaration
-%type  <method_decl_list>	methodDeclList
+%type  <stat_list>			methodDeclList
 
 %type  <class_decl>			classDeclaration
 %type  <stat_list>			classDeclList
@@ -70,7 +68,7 @@ extern shared_ptr<IStatement> ans;
 input:	classDeclList { ans = shared_ptr<IStatement>($1); return 0;}
 		;
 
-classDeclList : %empty 				 				{ $$ = new CListStatement(); }
+classDeclList : %empty 				 				{ $$ = new CListStatement(std::string("Classes")); }
          	  | classDeclList classDeclaration 		{ $$ = std::move($1); $$->Add(shared_ptr<IStatement> ($2)); }
 ;
 
@@ -80,8 +78,8 @@ classDeclaration
       RFBRACKET {
       	$$ = new CClass(
       		std::shared_ptr<CIdExpression>(new CIdExpression(std::string($2))),
-			std::shared_ptr<CListVarDecl>($4), 
-			std::shared_ptr<CListMethodDecl>($5)
+			std::shared_ptr<CListStatement>($4), 
+			std::shared_ptr<CListStatement>($5)
 		);
     }
     | CLASS ID EXTENDS ID LFBRACKET
@@ -90,29 +88,29 @@ classDeclaration
       	$$ = new CClass(
       		std::shared_ptr<CIdExpression>(new CIdExpression(std::string($2))), 
       		std::shared_ptr<CIdExpression>(new CIdExpression(std::string($4))), 
-      		std::shared_ptr<CListVarDecl>($6), 
-      		std::shared_ptr<CListMethodDecl>($7)
+      		std::shared_ptr<CListStatement>($6), 
+      		std::shared_ptr<CListStatement>($7)
       	);
     }
 ;
 
 methodDeclList
-	: %empty                            { $$ = new CListMethodDecl(); }
+	: %empty                            { $$ = new CListStatement(std::string("Methods")); }
 	| methodDeclList methodDeclaration  { $$ = std::move($1); $$->Add(shared_ptr<CMethod>($2)); }
 
 varDeclList
-    : %empty                            { $$ = new CListVarDecl(); }
+    : %empty                            { $$ = new CListStatement(std::string("Variables")); }
     | varDeclList typeName ID SEMICOLON { $$ = std::move($1); $$->Add(shared_ptr<CVarDecl>(
     									  new CVarDecl(std::string($2), std::string($3)))); } %prec VAR_DECL_LIST
     ;
 
 paramList
- 	: %empty   							{ $$ = new CListVarDecl(); }
+ 	: %empty   							{ $$ = new CListStatement(std::string("Parameters")); }
  	| nonEmptyParamList                 { $$ = std::move($1); }
  	;
 
 nonEmptyParamList
-	: typeName ID 								{ $$ = new CListVarDecl(); $$->Add(shared_ptr<CVarDecl>(new CVarDecl(std::string($1), std::string($2)))); }
+	: typeName ID 								{ $$ = new CListStatement(std::string("Parameters")); $$->Add(shared_ptr<CVarDecl>(new CVarDecl(std::string($1), std::string($2)))); }
     | nonEmptyParamList COMMA typeName ID       { $$ = std::move($1); $$->Add(shared_ptr<CVarDecl>(new CVarDecl(std::string($3), std::string($4)))); }
 	;
 
@@ -135,7 +133,7 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		                                                                        (new CIdExpression(std::string($2)))); }
 		;
 
-statList : %empty 				 { $$ = new CListStatement(); }
+statList : %empty 				 { $$ = new CListStatement(std::string("Statements")); }
          | statList stat 		 { $$ = std::move($1); $$->Add(shared_ptr<IStatement> ($2)); }
 ;
 
@@ -163,8 +161,8 @@ methodDeclaration
             std::string($1),
             std::string($2),
             shared_ptr<CIdExpression>(new CIdExpression(std::string($3))),
-            shared_ptr<CListVarDecl>(std::move($5)),
-            shared_ptr<CListVarDecl>($8),
+            shared_ptr<CListStatement>(std::move($5)),
+            shared_ptr<CListStatement>($8),
             shared_ptr<CListStatement>($9),
             shared_ptr<IExpression>($11)
         );

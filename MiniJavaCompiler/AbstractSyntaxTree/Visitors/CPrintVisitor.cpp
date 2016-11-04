@@ -173,11 +173,11 @@ void CPrintVisitor::Visit(CListStatement* statement) {
 
     for(size_t i = 0; i < numberOfIterations; ++i) {
         if (i != numberOfIterations - 1) {
-            file << "ListStatement" << delim << currentExpressionId << getArrow();
+            file << "List" << statement->GetStatementType() << delim << currentExpressionId << getArrow();
             statements[i]->Accept(this);
             file << getEndLine();
         } else {
-            file << "ListStatement" << delim << currentExpressionId << getArrow();
+            file << "List" << statement->GetStatementType() << delim << currentExpressionId << getArrow();
             statements[numberOfIterations - 1]->Accept(this);
         }
     }
