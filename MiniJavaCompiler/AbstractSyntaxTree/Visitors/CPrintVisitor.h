@@ -21,9 +21,7 @@ public:
 	void Visit(CListStatement*);
 
 	void Visit(CVarDecl*);
-	void Visit(CListVarDecl*);
 	void Visit(CMethod*);
-	void Visit(CListMethodDecl*);
     void Visit(CClass*);
 	void Visit(CMainClass*);
     void Visit(CProgram*);

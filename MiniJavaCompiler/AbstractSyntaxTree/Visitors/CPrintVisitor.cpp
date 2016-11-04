@@ -9,9 +9,7 @@
 #include <Nodes/CListStatement.h>
 
 #include <Nodes/CVarDecl.h>
-#include <Nodes/CListVarDecl.h>
 #include <Nodes/CMethod.h>
-#include <Nodes/CListMethodDecl.h>
 #include <Nodes/CClass.h>
 #include <Nodes/CMainClass.h>
 #include <Nodes/CProgram.h>
@@ -202,29 +200,6 @@ void CPrintVisitor::Visit(CVarDecl* decl) {
     file << getNodeNameWithLabel(decl->GetTypeName(), ++expressionId, decl->GetVariableName());
 }
 
-//Depricated
-void CPrintVisitor::Visit(CListVarDecl* declarationList) {
-    int currentExpressionId = ++expressionId;
-
-    auto declarations = declarationList->GetDeclarations();
-    size_t numberOfIterations = declarations.size();
-
-    for(size_t i = 0; i < numberOfIterations; ++i) {
-        if (i != numberOfIterations - 1) {
-            file << "ListVar" << delim << currentExpressionId << getArrow();
-            declarations[i]->Accept(this);
-            file << getEndLine();
-        } else {
-            file << "ListVar" << delim << currentExpressionId << getArrow();
-            declarations[numberOfIterations - 1]->Accept(this);
-        }
-    }
-    if (numberOfIterations == 0) {
-        file << "Empty" << delim << currentExpressionId;
-    }
-}
-
-
 void CPrintVisitor::Visit( CMethod* statement ) {
     int currentExpressionId = ++expressionId;
     file << getNodeNameWithLabel("CMethod",currentExpressionId,"CMethod") << getArrow() <<
@@ -260,27 +235,6 @@ void CPrintVisitor::Visit( CMethod* statement ) {
     file << getNodeNameWithLabel("CMethod",currentExpressionId,"CMethod") << getArrow() <<
          getNodeNameWithLabel("ReturnExpression",currentExpressionId,"ReturnExpression") << getArrow();
     statement->getReturnExpression()->Accept(this);
-}
-
-void CPrintVisitor::Visit(CListMethodDecl* declarationList) {
-    int currentExpressionId = ++expressionId;
-
-    auto declarations = declarationList->GetDeclarations();
-    size_t numberOfIterations = declarations.size();
-
-    for(size_t i = 0; i < numberOfIterations; ++i) {
-        if (i != numberOfIterations - 1) {
-            file << "ListMethods" << delim << currentExpressionId << getArrow();
-            declarations[i]->Accept(this);
-            file << getEndLine();
-        } else {
-            file << "ListMethods" << delim << currentExpressionId << getArrow();
-            declarations[numberOfIterations - 1]->Accept(this);
-        }
-    }
-    if (numberOfIterations == 0) {
-        file << "Empty" << delim << currentExpressionId;
-    }
 }
 
 void CPrintVisitor::Visit( CClass* statement ) {

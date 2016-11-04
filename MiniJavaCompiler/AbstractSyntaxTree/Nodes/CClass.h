@@ -5,8 +5,8 @@
 #pragma once
 
 #include <Nodes/IStatement.h>
-#include <Nodes/CListVarDecl.h>
-#include <Nodes/CListMethodDecl.h>
+#include <Nodes/CIdExpression.h>
+#include <Nodes/CListStatement.h>
 
 class CClass : public IStatement {
 public:

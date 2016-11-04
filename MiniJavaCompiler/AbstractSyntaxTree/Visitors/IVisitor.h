@@ -40,9 +40,7 @@ public:
     virtual void Visit(CListStatement*) = 0;
 
 	virtual void Visit(CVarDecl*) = 0;
-	virtual void Visit(CListVarDecl*) = 0;
     virtual void Visit(CMethod*) = 0;
-	virtual void Visit(CListMethodDecl*) = 0;
     virtual void Visit(CClass*) = 0;
 	virtual void Visit(CMainClass*) = 0;
     virtual void Visit(CProgram*) = 0;

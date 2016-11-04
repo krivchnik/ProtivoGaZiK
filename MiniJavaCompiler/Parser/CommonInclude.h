@@ -28,9 +28,7 @@ using namespace std;
 #include <Nodes/CListStatement.h>
 
 #include <Nodes/CVarDecl.h>
-#include <Nodes/CListVarDecl.h>
 #include <Nodes/CMethod.h>
-#include <Nodes/CListMethodDecl.h>
 #include <Nodes/CClass.h>
 #include <Nodes/CMainClass.h>
 #include <Nodes/CProgram.h>

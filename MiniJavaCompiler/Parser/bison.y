@@ -46,12 +46,12 @@ extern shared_ptr<CProgram> ans;
 %type  <op_val>  			typeName visibility
 
 %type  <stat_list> 			varDeclList paramList nonEmptyParamList
+%type  <stat_list>			methodDeclList
+%type  <stat_list>			classDeclList
 
 %type  <method>  	    	methodDeclaration
-%type  <stat_list>			methodDeclList
 
 %type  <class_decl>			classDeclaration
-%type  <stat_list>			classDeclList
 %type  <main_class>	     	mainClass
 
 %left	POINT

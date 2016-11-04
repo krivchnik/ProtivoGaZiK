@@ -4,7 +4,6 @@
 #include <Nodes/IExpression.h>
 #include <Nodes/CIdExpression.h>
 #include <Nodes/CListStatement.h>
-#include <Nodes/CListVarDecl.h>
 
 class CMethod : public IStatement {
 public:
