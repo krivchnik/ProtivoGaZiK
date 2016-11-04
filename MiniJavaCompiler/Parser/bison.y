@@ -28,7 +28,6 @@ extern shared_ptr<IStatement> ans;
                     PUBLIC PRIVATE STATIC
                     INT BOOLEAN VOID STRING
 	                TRUE FALSE
-	                NOT
                     CLASS EXTENDS
                     IF ELSE WHILE
                     RETURN PRINTLN LENGTH
@@ -62,9 +61,12 @@ extern shared_ptr<IStatement> ans;
 %nonassoc ASSIGN
 %nonassoc LESS
 
+%precedence VAR_DECL_LIST
+%precedence METHOD_DECL
+
 %%
 
-input:	classDeclaration	{ ans = shared_ptr<CClass>($1); return 0;}
+input:	methodDeclList	{ ans = shared_ptr<IStatement>($1); return 0;}
 		;
 
 classDeclaration
@@ -95,7 +97,8 @@ methodDeclList
 
 varDeclList
     : %empty                            { $$ = new CListVarDecl(); }
-    | varDeclList typeName ID SEMICOLON { $$ = std::move($1); $$->Add(shared_ptr<CVarDecl>(new CVarDecl(std::string($2), std::string($3)))); }
+    | varDeclList typeName ID SEMICOLON { $$ = std::move($1); $$->Add(shared_ptr<CVarDecl>(
+    									  new CVarDecl(std::string($2), std::string($3)))); } %prec VAR_DECL_LIST
     ;
 
 paramList
@@ -127,9 +130,9 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		                                                                        (new CIdExpression(std::string($2)))); }
 		;
 
-statList : %empty { $$ = new CListStatement(); }
-         | statList stat { $$ = std::move($1); $$->Add(shared_ptr<IStatement> ($2)); }
-         ;
+statList : %empty 				 { $$ = new CListStatement(); }
+         | statList stat 		 { $$ = std::move($1); $$->Add(shared_ptr<IStatement> ($2)); }
+;
 
 typeName
     : INT LSBRACKET RSBRACKET                    { $$ = "int[]"; }
@@ -160,10 +163,10 @@ methodDeclaration
             shared_ptr<CListStatement>($9),
             shared_ptr<IExpression>($11)
         );
-    }
+    } %prec METHOD_DECL
     ;
 
-stat 	: LFBRACKET statList RFBRACKET                       { $$ = $2; }
+stat 	: LFBRACKET statList RFBRACKET                      { $$ = $2; }
 
     	| IF LPBRACKET exp RPBRACKET stat ELSE stat 		{ $$ = new CIfElseStatement(shared_ptr<IExpression>($3),
     																					shared_ptr<IStatement>($5),
@@ -175,11 +178,11 @@ stat 	: LFBRACKET statList RFBRACKET                       { $$ = $2; }
     	| PRINTLN LPBRACKET exp RPBRACKET SEMICOLON 		{ $$ = new CPrintStatement(shared_ptr<IExpression>($3)); }
 
     	| ID ASSIGN exp SEMICOLON                			{ $$ = new CAssignStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))), 
-    																					shared_ptr<IExpression>($3)); }
+    																					shared_ptr<IExpression>($3)); } %prec STAT_LIST
 
     	| ID LSBRACKET exp RSBRACKET ASSIGN exp SEMICOLON 	{ $$ = new CAssignItemStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))),
      																						shared_ptr<IExpression>($3),
-    																						shared_ptr<IExpression>($6)); }
+    																						shared_ptr<IExpression>($6)); } %prec STAT_LIST
         ;
 
 %%
