@@ -27,10 +27,11 @@ using namespace std;
 #include <Nodes/CWhileStatement.h>
 #include <Nodes/CListStatement.h>
 
-#include <Nodes/CMethod.h>
-#include <Nodes/CListMethod.h>
 #include <Nodes/CVarDecl.h>
 #include <Nodes/CListVarDecl.h>
+#include <Nodes/CMethod.h>
+#include <Nodes/CListMethodDecl.h>
+#include <Nodes/CClass.h>
 
 #include <Visitors/CPrintVisitor.h>
 

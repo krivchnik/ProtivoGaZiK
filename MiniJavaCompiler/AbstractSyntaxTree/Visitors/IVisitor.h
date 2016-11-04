@@ -25,8 +25,6 @@ class COperationExpression;
 class CLengthExpression;
 class CArrayConstructionExpression;
 class CConstructClassExpression;
-class CMethod;
-class CListMethod;
 
 class IVisitor {
 public:
@@ -44,7 +42,6 @@ public:
     virtual void Visit(CMethod*) = 0;
 	virtual void Visit(CListMethodDecl*) = 0;
     virtual void Visit(CClass*) = 0;
-    virtual void Visit(CListMethod*) = 0;
 
 	virtual void Visit(CIdExpression*) = 0;
     virtual void Visit(CBoolExpression*) = 0;
