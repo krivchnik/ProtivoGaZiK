@@ -5,8 +5,8 @@
 #include <Nodes/CMethod.h>
 
 CMethod::CMethod(const std::string &visibility, const std::string &typeName,
-                 const std::shared_ptr<CIdExpression> &id, const std::shared_ptr<CListVarDecl> &parameters,
-                 const std::shared_ptr<CListVarDecl> &listDeclarations,
+                 const std::shared_ptr<CIdExpression> &id, const std::shared_ptr<CListStatement> &parameters,
+                 const std::shared_ptr<CListStatement> &listDeclarations,
                  const std::shared_ptr<CListStatement> &listStatements,
                  const std::shared_ptr<IExpression> &returnExpression) : visibility(visibility), typeName(typeName),
                                                                          id(id), parameters(parameters),
@@ -29,11 +29,11 @@ const std::shared_ptr<CIdExpression> &CMethod::getId() const {
     return id;
 }
 
-const std::shared_ptr<CListVarDecl> &CMethod::getParameters() const {
+const std::shared_ptr<CListStatement> &CMethod::getParameters() const {
     return parameters;
 }
 
-const std::shared_ptr<CListVarDecl> &CMethod::getListDeclarations() const {
+const std::shared_ptr<CListStatement> &CMethod::getListDeclarations() const {
     return listDeclarations;
 }
 
