@@ -65,21 +65,21 @@ void CPrintVisitor::Visit(CNumExpression* expression) {
 
 void CPrintVisitor::Visit(CBoolExpression* expression) {
 	++expressionId;
-	std::string newId = std::string("Bool") + std::to_string(expression->GetValue()) + delim + std::to_string(expressionId);
+	std::string newId = getNodeNameWithLabel(std::to_string(expression->GetValue()), expressionId, "Bool");
 	file << newId;
 	idsOfTokenWithBoxShape.push_back(newId);
 }
 
 void CPrintVisitor::Visit(CIdExpression* expression) {
 	++expressionId;
-	std::string newId = expression->GetName() + delim + std::to_string(expressionId);
+	std::string newId = getNodeNameWithLabel(expression->GetName(), expressionId, "");
 	file << newId;
 	idsOfTokenWithBoxShape.push_back(newId);
 }
 
 void CPrintVisitor::Visit(CNotExpression* expression) {
     ++expressionId;
-    file << "not" << expressionId << getArrow();
+    file << getNodeNameWithLabel("not", expressionId, "not") << getArrow();
     expression->GetExpression()->Accept(this);
 }
 
@@ -91,8 +91,8 @@ void CPrintVisitor::Visit(CLengthExpression* expression) {
 
 void CPrintVisitor::Visit(CArrayConstructionExpression* expression) {
     ++expressionId;
-    file << "newIntArray" + delim + std::to_string(expressionId) + getArrow() +
-            "withSize" + std::to_string(expressionId) + getArrow();
+    file << getNodeNameWithLabel("newIntArray", expressionId, "newIntArray") + getArrow() +
+            getNodeNameWithLabel("withSize", expressionId, "withSize")  + getArrow();
     expression->getSize()->Accept(this);
 
 }
@@ -100,45 +100,44 @@ void CPrintVisitor::Visit(CArrayConstructionExpression* expression) {
 
 void CPrintVisitor::Visit(CConstructClassExpression* expression) {
     ++expressionId;
-    file << "constructClass" + delim + std::to_string(expressionId) + getArrow() +
-             expression->getClassID()->GetName() + std::to_string(expressionId);
+    file << getNodeNameWithLabel("constructClass", expressionId, "constructClass") + getArrow() +
+            getNodeNameWithLabel(expression->getClassID()->GetName(), expressionId, expression->getClassID()->GetName());
 }
 
 void CPrintVisitor::Visit(CAssignStatement* statement) {
 	int currentExpressionId = ++expressionId;
-	file << "assignment" << delim << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("assignment", currentExpressionId, "assignment") << getArrow();
 	statement->GetVariable()->Accept(this);
 	file << getEndLine();
-	file << "assignment" << delim << currentExpressionId << getArrow();
+	file << getNodeNameWithLabel("assignment", currentExpressionId, "assignment") << getArrow();
 	statement->GetExpression()->Accept(this);
 }
 
 
 void CPrintVisitor::Visit(CAssignItemStatement* statement) {
     int currentExpressionId = ++expressionId;
-    file << "assignmentItem" << delim << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("assignmentItem", currentExpressionId, "assignmentItem") << getArrow();
     statement->getId()->Accept(this);
     file << "[";
     statement->getExpressionInBrackets()->Accept(this);
     file << "]";
     file << getEndLine();
-    file << "assignmentItem" << delim << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("assignmentItem", currentExpressionId, "assignmentItem") << getArrow();
     statement->getAssignedExpression()->Accept(this);
 }
 
 void CPrintVisitor::Visit(CPrintStatement* statement) {
 	++expressionId;
-	file << "println" << expressionId <<  getArrow();
+	file << getNodeNameWithLabel("println", expressionId, "println") <<  getArrow();
 	statement->GetExpression()->Accept(this);
-	//file << getEndLine();
 }
 
 void CPrintVisitor::Visit(CCompoundStatement* statement) {
 	int currentExpressionId = ++expressionId;
-	file << "compound" << delim << currentExpressionId << getArrow();
+	file << getNodeNameWithLabel("compound", currentExpressionId, "compound") << getArrow();
 	statement->GetLeftOperand()->Accept(this);
 	file << getEndLine();
-	file << "compound" << delim << currentExpressionId << getArrow();
+	file << getNodeNameWithLabel("compound", currentExpressionId, "compound") << getArrow();
 	statement->GetRightOperand()->Accept(this);
 }
 
