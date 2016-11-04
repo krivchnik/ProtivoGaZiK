@@ -297,6 +297,12 @@ std::string CPrintVisitor::getEndLine() const {
 	return ";\n\t";
 }
 
+std::string CPrintVisitor::getNodeNameWithLabel(std::string label, int id) const {
+    return "{" + std::string("Number") + label + delim +
+           std::to_string(id) +"[label=\"" + label + "\"]" +  "}";
+}
+
+
 
 
 
