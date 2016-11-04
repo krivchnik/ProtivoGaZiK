@@ -51,6 +51,7 @@ extern shared_ptr<IStatement> ans;
 %type  <method_decl_list>	methodDeclList
 
 %type  <class_decl>			classDeclaration
+%type  <stat_list>			classDeclList
 
 %left	POINT
 %left 	OR
@@ -66,8 +67,12 @@ extern shared_ptr<IStatement> ans;
 
 %%
 
-input:	methodDeclList	{ ans = shared_ptr<IStatement>($1); return 0;}
+input:	classDeclList { ans = shared_ptr<IStatement>($1); return 0;}
 		;
+
+classDeclList : %empty 				 				{ $$ = new CListStatement(); }
+         	  | classDeclList classDeclaration 		{ $$ = std::move($1); $$->Add(shared_ptr<IStatement> ($2)); }
+;
 
 classDeclaration
     : CLASS ID LFBRACKET
