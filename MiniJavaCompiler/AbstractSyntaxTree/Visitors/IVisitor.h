@@ -15,6 +15,7 @@ class CListVarDecl;
 class CMethod;
 class CListMethodDecl;
 class CClass;
+class CMainClass;
 
 //здесь объявления все expression
 class CIdExpression;
@@ -42,6 +43,7 @@ public:
     virtual void Visit(CMethod*) = 0;
 	virtual void Visit(CListMethodDecl*) = 0;
     virtual void Visit(CClass*) = 0;
+	virtual void Visit(CMainClass*) = 0;
 
 	virtual void Visit(CIdExpression*) = 0;
     virtual void Visit(CBoolExpression*) = 0;

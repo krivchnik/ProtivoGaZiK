@@ -81,7 +81,7 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 "int"                 { updateLocation(); return(INT); }
 "boolean"             { updateLocation(); return(BOOLEAN); }
 "void"                { updateLocation(); return(VOID); }
-"string"              { updateLocation(); return(STRING); }
+"String"              { updateLocation(); return(STRING); }
 
 "class"               { updateLocation(); return(CLASS); }
 "extends"             { updateLocation(); return(EXTENDS); }

@@ -18,6 +18,7 @@ extern shared_ptr<IStatement> ans;
   CListStatement*    stat_list;
   CMethod*           method;
   CClass*			 class_decl;
+  CMainClass*		 main_class;
 }
 
 %start	input
@@ -50,6 +51,7 @@ extern shared_ptr<IStatement> ans;
 
 %type  <class_decl>			classDeclaration
 %type  <stat_list>			classDeclList
+%type  <main_class>	     	mainClass
 
 %left	POINT
 %left 	OR
@@ -65,8 +67,14 @@ extern shared_ptr<IStatement> ans;
 
 %%
 
-input:	statList { ans = shared_ptr<IStatement>($1); return 0;}
+input:	mainClass { ans = shared_ptr<IStatement>($1); return 0;}
 		;
+
+mainClass:	CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET
+			{ $$ = new CMainClass(shared_ptr<CIdExpression>(new CIdExpression(std::string($2))),
+								  shared_ptr<CIdExpression>(new CIdExpression(std::string($12))),
+				 				  shared_ptr<IStatement>($15)); }
+;
 
 classDeclList : %empty 				 				{ $$ = new CListStatement(std::string("Classes")); }
          	  | classDeclList classDeclaration 		{ $$ = std::move($1); $$->Add(shared_ptr<IStatement> ($2)); }
