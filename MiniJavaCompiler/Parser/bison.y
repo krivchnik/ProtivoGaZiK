@@ -6,7 +6,7 @@
 int yyerror(char *s);
 int yylex(void);
 
-extern shared_ptr<IStatement> ans;
+extern shared_ptr<CProgram> ans;
 %}
 	
 %union{
@@ -68,7 +68,7 @@ extern shared_ptr<IStatement> ans;
 
 %%
 
-input:	mainClass classDeclList { ans = shared_ptr<CProgram>(shared_ptr<CMainClass>($1), shared_ptr<CListStatement>($2)); return 0;}
+input:	mainClass classDeclList { ans = shared_ptr<CProgram>(new CProgram(shared_ptr<CMainClass>($1), shared_ptr<CListStatement>($2))); return 0;}
 		;
 
 mainClass:	CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET

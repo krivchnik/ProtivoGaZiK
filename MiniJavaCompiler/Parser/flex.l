@@ -154,6 +154,7 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 	printValueLocation("STRING", no_quotes);
 
 }
+
 %%
 
 /*int main( int argc, char* argv[]) {

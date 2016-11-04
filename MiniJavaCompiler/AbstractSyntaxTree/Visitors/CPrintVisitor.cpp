@@ -51,11 +51,13 @@ void CPrintVisitor::Visit(COperationExpression* expression) {
 
 	int currentExpressionId = ++expressionId;
 
-	file << GetOperationSign(expression->GetOperationType()) << delim << currentExpressionId << getArrow();
+	file << getNodeNameWithLabel(GetOperationSign(expression->GetOperationType()), currentExpressionId,
+                                 GetOperationSign(expression->GetOperationType()))  << getArrow();
 	expression->GetLeftOperand()->Accept(this);
 	file << getEndLine();
-	file << GetOperationSign(expression->GetOperationType()) << delim << currentExpressionId << getArrow();
-	expression->GetRightOperand()->Accept(this);
+    file << getNodeNameWithLabel(GetOperationSign(expression->GetOperationType()), currentExpressionId,
+                                 GetOperationSign(expression->GetOperationType()))  << getArrow();
+    expression->GetRightOperand()->Accept(this);
 }
 
 void CPrintVisitor::Visit(CNumExpression* expression) {
@@ -199,6 +201,7 @@ void CPrintVisitor::Visit(CVarDecl* decl) {
     file << getNodeNameWithLabel("VariableDeclaration", currentExpressionId, "VariableDeclaration") << getArrow();
     file << getNodeNameWithLabel(decl->GetTypeName(), ++expressionId, decl->GetVariableName());
 }
+
 //Depricated
 void CPrintVisitor::Visit(CListVarDecl* declarationList) {
     int currentExpressionId = ++expressionId;
@@ -336,11 +339,7 @@ void CPrintVisitor::Visit(CProgram *statement) {
     file << getNodeNameWithLabel("CProgram",currentExpressionId,"CProgram") << getArrow() <<
          getNodeNameWithLabel("MinorClass",currentExpressionId,"MinorClass") << getArrow();
     statement->GetMinorClasses()->Accept(this);
-    file << getEndLine();
-
-
 }
-
 
 
 std::string CPrintVisitor::getArrow() const {
