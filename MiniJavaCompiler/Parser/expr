@@ -1,17 +1,12 @@
-a = 1 + 1;
-b = 1 + 2;
-c = new int[10];
-
-if(a < b) {
-   a = 10;
-}
-else {
-   b = 10;
+class Main {
+    public static void main(String[] args) {
+        System.out.println(3);
+    }
 }
 
-if(a < b) {
-   a = 10;
-}
-else {
-   b = 10;
+
+class Test {
+    public int d() {
+        return 2 + 2;
+    }
 }
