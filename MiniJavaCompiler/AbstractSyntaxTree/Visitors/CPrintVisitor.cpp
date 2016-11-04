@@ -13,6 +13,7 @@
 #include <Nodes/CMethod.h>
 #include <Nodes/CListMethodDecl.h>
 #include <Nodes/CClass.h>
+#include <Nodes/CMainClass.h>
 
 #include <Nodes/CIdExpression.h>
 #include <Nodes/CBoolExpression.h>
@@ -291,6 +292,24 @@ void CPrintVisitor::Visit( CClass* statement ) {
     file << "CClass" << delim << currentExpressionId << getArrow() << "Methods" << currentExpressionId << getArrow();
     statement->getMethods()->Accept(this);
 }
+
+
+void CPrintVisitor::Visit( CMainClass* statement ) {
+    int currentExpressionId = ++expressionId;
+
+    file << "CMainClass" << delim << currentExpressionId << getArrow() << "ID" << currentExpressionId << getArrow();
+    statement->GetClassId()->Accept(this);
+    file << getEndLine();
+
+    file << "CMainClass" << delim << currentExpressionId << getArrow() << "ArgID" << currentExpressionId << getArrow();
+    statement->GetArgId()->Accept(this);
+    file << getEndLine();
+
+    file << "CMainClass" << delim << currentExpressionId << getArrow() << "Statement" << currentExpressionId << getArrow();
+    statement->GetStatement()->Accept(this);
+}
+
+
 
 
 std::string CPrintVisitor::getArrow() const {
