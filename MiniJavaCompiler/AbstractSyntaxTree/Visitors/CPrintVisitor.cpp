@@ -144,23 +144,28 @@ void CPrintVisitor::Visit(CCompoundStatement* statement) {
 
 void CPrintVisitor::Visit(CIfElseStatement* statement) {
 	int currentExpressionId = ++expressionId;
-	file << "if" << delim << currentExpressionId << getArrow() << "condition" << currentExpressionId << getArrow();
+	file << getNodeNameWithLabel("if", currentExpressionId, "if") << getArrow() <<
+         getNodeNameWithLabel("condition", currentExpressionId, "condition") << getArrow();
 	statement->getExpression()->Accept(this);
 	file << getEndLine();
-    file << "if" << delim << currentExpressionId << getArrow() << "ifStatement" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("if", currentExpressionId, "if") << getArrow() <<
+         getNodeNameWithLabel("ifStatement", currentExpressionId, "ifStatement") << getArrow();
     statement->getIfStatement()->Accept(this);
     file << getEndLine();
-    file << "if" << delim << currentExpressionId << getArrow() << "elseStatement" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("if", currentExpressionId, "if") << getArrow() <<
+         getNodeNameWithLabel("elseStatement", currentExpressionId, "elseStatement") << getArrow();
     statement->getElseStatement()->Accept(this);
 }
 
 
 void CPrintVisitor::Visit(CWhileStatement* statement) {
 	int currentExpressionId = ++expressionId;
-	file << "While" << delim << currentExpressionId << getArrow() << "condition" << currentExpressionId << getArrow();
+	file << getNodeNameWithLabel("While", currentExpressionId, "While") << currentExpressionId << getArrow() <<
+         getNodeNameWithLabel("condition", currentExpressionId, "condition") << getArrow();
 	statement->getCondition()->Accept(this);
 	file << getEndLine();
-	file << "While" << delim << currentExpressionId << getArrow() << "body" << currentExpressionId << getArrow();
+	file << getNodeNameWithLabel("While", currentExpressionId, "While") << getArrow() <<
+         getNodeNameWithLabel("While", currentExpressionId, "While") << getArrow();
 	statement->getBody()->Accept(this);
 }
 
@@ -172,16 +177,16 @@ void CPrintVisitor::Visit(CListStatement* statement) {
 
     for(size_t i = 0; i < numberOfIterations; ++i) {
         if (i != numberOfIterations - 1) {
-            file << "List" << statement->GetStatementType() << delim << currentExpressionId << getArrow();
+            file << getNodeNameWithLabel("List" + statement->GetStatementType(), currentExpressionId, "List") << getArrow();
             statements[i]->Accept(this);
             file << getEndLine();
         } else {
-            file << "List" << statement->GetStatementType() << delim << currentExpressionId << getArrow();
+            file << getNodeNameWithLabel("List" + statement->GetStatementType(), currentExpressionId, "List") << getArrow();
             statements[numberOfIterations - 1]->Accept(this);
         }
     }
     if (numberOfIterations == 0) {
-        file << "Empty" << delim << currentExpressionId;
+        file << getNodeNameWithLabel("Empty", currentExpressionId, "Empty");
     }
 }
 
