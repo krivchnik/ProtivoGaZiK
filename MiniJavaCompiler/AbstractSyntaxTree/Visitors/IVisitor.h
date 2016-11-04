@@ -9,8 +9,12 @@ class CPrintStatement;
 class CIfElseStatement;
 class CWhileStatement;
 class CListStatement;
+
 class CVarDecl;
 class CListVarDecl;
+class CMethod;
+class CListMethodDecl;
+class CClass;
 
 //здесь объявления все expression
 class CIdExpression;
@@ -35,9 +39,11 @@ public:
     virtual void Visit(CWhileStatement*) = 0;
     virtual void Visit(CListStatement*) = 0;
 
-	virtual void Visit(CListVarDecl*) = 0;
 	virtual void Visit(CVarDecl*) = 0;
+	virtual void Visit(CListVarDecl*) = 0;
     virtual void Visit(CMethod*) = 0;
+	virtual void Visit(CListMethodDecl*) = 0;
+    virtual void Visit(CClass*) = 0;
     virtual void Visit(CListMethod*) = 0;
 
 	virtual void Visit(CIdExpression*) = 0;

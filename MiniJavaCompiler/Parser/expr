@@ -1,17 +1,6 @@
 public int a (int a, int b) {
     int a;
     int b;
-    while( a < b ) {
-        a = 3;
-    }
-    return a + b;
-}
-
-public int a (int a, int b) {
-    int a;
-    int b;
-    while( a < b ) {
-        a = 3;
-    }
+    a = 1 + 2;
     return a + b;
 }
