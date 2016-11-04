@@ -197,9 +197,9 @@ void CPrintVisitor::Visit(CVarDecl* decl) {
     file << getNodeNameWithLabel("VariableDeclaration", currentExpressionId, "VariableDeclaration") << getArrow();
     file << getNodeNameWithLabel(decl->GetTypeName(), ++expressionId, decl->GetTypeName()) << getEndLine();
     file << getNodeNameWithLabel("VariableDeclaration", currentExpressionId, "VariableDeclaration") << getArrow();
-    file << decl->GetVariableName() << delim << ++expressionId;
+    file << getNodeNameWithLabel(decl->GetTypeName(), ++expressionId, decl->GetVariableName());
 }
-
+//Depricated
 void CPrintVisitor::Visit(CListVarDecl* declarationList) {
     int currentExpressionId = ++expressionId;
 
@@ -224,31 +224,38 @@ void CPrintVisitor::Visit(CListVarDecl* declarationList) {
 
 void CPrintVisitor::Visit( CMethod* statement ) {
     int currentExpressionId = ++expressionId;
-    file << "CMethod" << delim << currentExpressionId << getArrow() << "Visibility" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("CMethod",currentExpressionId,"CMethod") << getArrow() <<
+             getNodeNameWithLabel("Visibility",currentExpressionId,"Visibility") << getArrow();
     file << statement->getVisibility();
     file << getEndLine();
 
-    file << "CMethod" << delim << currentExpressionId << getArrow() << "TypeName" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("CMethod",currentExpressionId,"CMethod") << getArrow() <<
+         getNodeNameWithLabel("TypeName",currentExpressionId,"TypeName") << getArrow();
     file << statement->getTypeName();
     file << getEndLine();
 
-    file << "CMethod" << delim << currentExpressionId << getArrow() << "ID" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("CMethod",currentExpressionId,"CMethod") << getArrow() <<
+         getNodeNameWithLabel("ID",currentExpressionId,"ID") << getArrow();
     statement->getId()->Accept(this);
     file << getEndLine();
 
-    file << "CMethod" << delim << currentExpressionId << getArrow() << "Params" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("CMethod",currentExpressionId,"CMethod") << getArrow() <<
+         getNodeNameWithLabel("Params",currentExpressionId,"Params") << getArrow();
     statement->getParameters()->Accept(this);
     file << getEndLine();
 
-    file << "CMethod" << delim << currentExpressionId << getArrow() << "VariablesDeclarations" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("CMethod",currentExpressionId,"CMethod") << getArrow()
+         << getNodeNameWithLabel("VariablesDeclarations",currentExpressionId,"VariablesDeclarations") << getArrow();
     statement->getListDeclarations()->Accept(this);
     file << getEndLine();
 
-    file << "CMethod" << delim << currentExpressionId << getArrow() << "ListStatementsInMethod" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("CMethod",currentExpressionId,"CMethod") << getArrow() <<
+         getNodeNameWithLabel("ListStatementsInMethod",currentExpressionId,"ListStatementsInMethod") << getArrow();
     statement->getListStatements()->Accept(this);
     file << getEndLine();
 
-    file << "CMethod" << delim << currentExpressionId << getArrow() << "ReturnExpression" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("CMethod",currentExpressionId,"CMethod") << getArrow() <<
+         getNodeNameWithLabel("ReturnExpression",currentExpressionId,"ReturnExpression") << getArrow();
     statement->getReturnExpression()->Accept(this);
 }
 
@@ -276,21 +283,25 @@ void CPrintVisitor::Visit(CListMethodDecl* declarationList) {
 void CPrintVisitor::Visit( CClass* statement ) {
     int currentExpressionId = ++expressionId;
 
-    file << "CClass" << delim << currentExpressionId << getArrow() << "ID" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("CClass",currentExpressionId,"CClass") << getArrow() <<
+         getNodeNameWithLabel("ID",currentExpressionId,"ID") << getArrow();
     statement->getId()->Accept(this);
     file << getEndLine();
 
     if (statement->getBaseId().get() != nullptr) {
-        file << "CClass" << delim << currentExpressionId << getArrow() << "BaseID" << currentExpressionId << getArrow();
+        file << getNodeNameWithLabel("CClass",currentExpressionId,"CClass") << getArrow() <<
+             getNodeNameWithLabel("BaseID",currentExpressionId,"BaseID") << getArrow();
         statement->getBaseId()->Accept(this);
         file << getEndLine();
     }
 
-    file << "CClass" << delim << currentExpressionId << getArrow() << "Fields" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("CClass",currentExpressionId,"CClass") << getArrow() <<
+         getNodeNameWithLabel("Fields",currentExpressionId,"Fields") << getArrow();
     statement->getFields()->Accept(this);
     file << getEndLine();
 
-    file << "CClass" << delim << currentExpressionId << getArrow() << "Methods" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("CClass",currentExpressionId,"CClass") << getArrow() <<
+         getNodeNameWithLabel("Methods",currentExpressionId,"Methods") << getArrow();
     statement->getMethods()->Accept(this);
 }
 
@@ -298,15 +309,18 @@ void CPrintVisitor::Visit( CClass* statement ) {
 void CPrintVisitor::Visit( CMainClass* statement ) {
     int currentExpressionId = ++expressionId;
 
-    file << "CMainClass" << delim << currentExpressionId << getArrow() << "ID" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("CMainClass",currentExpressionId,"CMainClass") << getArrow() <<
+         getNodeNameWithLabel("ID",currentExpressionId,"ID") << getArrow();
     statement->GetClassId()->Accept(this);
     file << getEndLine();
 
-    file << "CMainClass" << delim << currentExpressionId << getArrow() << "ArgID" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("CMainClass",currentExpressionId,"CMainClass") << getArrow() <<
+         getNodeNameWithLabel("ArgID",currentExpressionId,"ArgID") << getArrow();
     statement->GetArgId()->Accept(this);
     file << getEndLine();
 
-    file << "CMainClass" << delim << currentExpressionId << getArrow() << "Statement" << currentExpressionId << getArrow();
+    file << getNodeNameWithLabel("CMainClass",currentExpressionId,"CMainClass") << getArrow() <<
+         getNodeNameWithLabel("Statement",currentExpressionId,"Statement") << getArrow();
     statement->GetStatement()->Accept(this);
 }
 
