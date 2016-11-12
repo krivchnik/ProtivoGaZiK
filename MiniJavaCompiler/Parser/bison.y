@@ -78,7 +78,7 @@ mainClass:	CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET
 ;
 
 classDeclList : %empty 				 				{ $$ = new CListStatement(std::string("Classes")); }
-         	  | classDeclList classDeclaration 		{ $$ = std::move($1); $$->Add(shared_ptr<IStatement> ($2)); }
+         	  | classDeclaration classDeclList 		{ $$ = std::move($2); $$->Add(shared_ptr<IStatement> ($1)); }
 ;
 
 classDeclaration
@@ -105,7 +105,7 @@ classDeclaration
 
 methodDeclList
 	: %empty                            { $$ = new CListStatement(std::string("Methods")); }
-	| methodDeclList methodDeclaration  { $$ = std::move($1); $$->Add(shared_ptr<CMethod>($2)); }
+	| methodDeclaration methodDeclList  { $$ = std::move($2); $$->Add(shared_ptr<CMethod>($1)); }
 
 varDeclList
     : %empty                            { $$ = new CListStatement(std::string("Variables")); }
@@ -140,10 +140,13 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| NEW INT LSBRACKET exp RSBRACKET    { $$ = new CArrayConstructionExpression(shared_ptr<IExpression>($4)); }
 		| NEW ID LPBRACKET RPBRACKET         { $$ = new CConstructClassExpression(shared_ptr<CIdExpression>
 		                                                                        (new CIdExpression(std::string($2)))); }
+
+		//| exp POINT ID LPBRACKET ( Expression ( "," Expression )* )? RPBRACKET
+
 		;
 
 statList : %empty 				 { $$ = new CListStatement(std::string("Statements")); }
-         | statList stat 		 { $$ = std::move($1); $$->Add(shared_ptr<IStatement> ($2)); }
+         | stat statList		 { $$ = std::move($2); $$->Add(shared_ptr<IStatement> ($1)); }
 ;
 
 typeName
