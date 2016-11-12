@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include <set>
+#include <map>
 
 class CGetClassesVisitor : public IVisitor {
 
@@ -16,7 +17,7 @@ public:
 
     CGetClassesVisitor();
 
-    std::vector<CClass> getClasses() { return m_classes; }
+    std::map<CIdExpression, CClass> getClasses() { return classes; }
 
     void Visit(CAssignStatement*);
     void Visit(CAssignItemStatement*);
@@ -46,7 +47,8 @@ public:
     void Visit(CGetItemExpression*);
 
 private:
-    std::vector<CClass> m_classes;
+
+    std::map<CIdExpression, CClass> classes;
 
 };
 

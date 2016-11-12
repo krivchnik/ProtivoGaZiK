@@ -10,7 +10,10 @@ public:
 	std::string GetName();
 
 	void Accept(IVisitor*);
-	
+
+	bool operator < (CIdExpression other) const {
+		return name < other.name;
+	}
 private:
 	std::string name;
 };

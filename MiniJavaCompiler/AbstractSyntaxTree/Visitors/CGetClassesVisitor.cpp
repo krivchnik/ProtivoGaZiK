@@ -126,6 +126,7 @@ void CGetClassesVisitor::Visit( CMethodCallExpression* exp) {
 }
 
 void CGetClassesVisitor::Visit( CClass* statement ) {
+
     statement->getId()->Accept(this);
     if (statement->getBaseId().get() != nullptr) {
         statement->getBaseId()->Accept(this);
