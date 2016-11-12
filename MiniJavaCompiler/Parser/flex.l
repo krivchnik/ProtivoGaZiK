@@ -67,12 +67,14 @@ STRING           \"(\\.|[^"])*\"
 id               {LETER}({DIGIT}|{LETER})*
 IntegerLiteral   [1-9]{DIGIT}*|0
 keyword          class|extends|public|private|static|int|double|boolean|void
+comment          \/\/.*\n
 
 %%
+              { updateLocation(); }
 
 "System.out.println"	{ updateLocation(); return PRINTLN;}
 
-"\n"|"\t"|" "    {updateLocation();}
+{comment}               {updateLocation();}
 
 "public"              { updateLocation(); return(PUBLIC); }
 "private"             { updateLocation(); return(PRIVATE); }
