@@ -19,6 +19,7 @@ using namespace std;
 #include <Nodes/CLengthExpression.h>
 #include <Nodes/CArrayConstructionExpression.h>
 #include <Nodes/CConstructClassExpression.h>
+#include <Nodes/CMethodCallExpression.h>
 
 #include <Nodes/CAssignStatement.h>
 #include <Nodes/CAssignItemStatement.h>

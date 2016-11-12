@@ -27,6 +27,7 @@ class COperationExpression;
 class CLengthExpression;
 class CArrayConstructionExpression;
 class CConstructClassExpression;
+class CMethodCallExpression;
 
 class IVisitor {
 public:
@@ -52,5 +53,6 @@ public:
     virtual void Visit(CLengthExpression*) = 0;
     virtual void Visit(CArrayConstructionExpression*) = 0;
 	virtual void Visit(CConstructClassExpression*) = 0;
+    virtual void Visit(CMethodCallExpression*) = 0;
 
 };

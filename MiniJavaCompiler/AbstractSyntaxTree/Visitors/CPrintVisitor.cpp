@@ -21,6 +21,7 @@
 #include <Nodes/CLengthExpression.h>
 #include <Nodes/CArrayConstructionExpression.h>
 #include <Nodes/CConstructClassExpression.h>
+#include <Nodes/CMethodCallExpression.h>
 
 std::string GetOperationSign(int index) {
 	std::vector<std::string> signs = {"addition", "subtraction", "multiplication", "mod", "and", "or", "less"};
@@ -223,6 +224,24 @@ void CPrintVisitor::Visit( CMethod* statement ) {
     file << getNodeNameWithLabel("CMethod",currentExpressionId,"CMethod") << getArrow() <<
          getNodeNameWithLabel("ReturnExpression",currentExpressionId,"ReturnExpression") << getArrow();
     statement->getReturnExpression()->Accept(this);
+}
+
+
+void CPrintVisitor::Visit( CMethodCallExpression* exp) {
+    int currentExpressionId = ++expressionId;
+    file << getNodeNameWithLabel("CMethodCallExpression",currentExpressionId,"CMethodCallExpression") << getArrow() <<
+         getNodeNameWithLabel("Object",currentExpressionId,"Object") << getArrow();
+    exp->getObject()->Accept(this);
+    file << getEndLine();
+
+    file << getNodeNameWithLabel("CMethodCallExpression",currentExpressionId,"CMethodCallExpression") << getArrow() <<
+         getNodeNameWithLabel("MethodId",currentExpressionId,"MethodId") << getArrow();
+    exp->getMethodId()->Accept(this);
+    file << getEndLine();
+
+    file << getNodeNameWithLabel("CMethodCallExpression",currentExpressionId,"CMethodCallExpression") << getArrow() <<
+         getNodeNameWithLabel("Arguments",currentExpressionId,"Arguments") << getArrow();
+    exp->getArguments()->Accept(this);
 }
 
 void CPrintVisitor::Visit( CClass* statement ) {

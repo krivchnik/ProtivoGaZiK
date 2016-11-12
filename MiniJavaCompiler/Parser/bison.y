@@ -10,15 +10,16 @@ extern shared_ptr<CProgram> ans;
 %}
 	
 %union{
-  int                int_val;
-  char*              op_val;
-  INode*             node_val;
-  IExpression*       expr_val;
-  IStatement*        stat_val;
-  CListStatement*    stat_list;
-  CMethod*           method;
-  CClass*			 class_decl;
-  CMainClass*		 main_class;
+  int                     int_val;
+  char*                   op_val;
+  INode*                  node_val;
+  IExpression*            expr_val;
+  IStatement*             stat_val;
+  CListStatement*         stat_list;
+  CMethod*                method;
+  CClass*			      class_decl;
+  CMainClass*		      main_class;
+  CMethodCallExpression   method_call;
 }
 
 %start	input
@@ -45,6 +46,7 @@ extern shared_ptr<CProgram> ans;
 %type  <stat_list>  		statList
 %type  <op_val>  			typeName visibility
 
+%type  <stat_list>          expList nonEmptyExpList
 %type  <stat_list> 			varDeclList paramList nonEmptyParamList
 %type  <stat_list>			methodDeclList
 %type  <stat_list>			classDeclList
@@ -140,10 +142,20 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| NEW INT LSBRACKET exp RSBRACKET    { $$ = new CArrayConstructionExpression(shared_ptr<IExpression>($4)); }
 		| NEW ID LPBRACKET RPBRACKET         { $$ = new CConstructClassExpression(shared_ptr<CIdExpression>
 		                                                                        (new CIdExpression(std::string($2)))); }
-
-		//| exp POINT ID LPBRACKET ( Expression ( "," Expression )* )? RPBRACKET
-
+		| exp POINT ID LPBRACKET expList RPBRACKET  { $$ = new CMethodCallExpression(shared_ptr<IExpression>($1),
+																					 shared_ptr<CIdExpression>(new CIdExpression($3)), 
+																				     shared_ptr<CListStatement>($5)); }
 		;
+
+expList
+ 	: %empty   							{ $$ = new CListStatement(std::string("Arguments")); }
+ 	| nonEmptyExpList                   { $$ = std::move($1); }
+ 	;
+
+nonEmptyExpList
+	: exp 								{ $$ = new CListStatement(std::string("Arguments")); $$->Add(shared_ptr<IExpression>($1)); }
+    | nonEmptyExpList COMMA exp         { $$ = std::move($1); $$->Add(shared_ptr<IExpression>($3)); }
+
 
 statList : %empty 				 { $$ = new CListStatement(std::string("Statements")); }
          | stat statList		 { $$ = std::move($2); $$->Add(shared_ptr<IStatement> ($1)); }

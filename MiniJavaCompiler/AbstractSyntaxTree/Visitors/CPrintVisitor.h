@@ -33,6 +33,7 @@ public:
 	void Visit(CLengthExpression*);
 	void Visit(CArrayConstructionExpression*);
 	void Visit(CConstructClassExpression*);
+    void Visit(CMethodCallExpression*);
 
 private:
 
