@@ -105,10 +105,12 @@ void CPrintVisitor::Visit(CAssignItemStatement* statement) {
     int currentExpressionId = ++expressionId;
     file << getNodeNameWithLabel("assignmentItem", currentExpressionId, "assignmentItem") << getArrow();
     statement->getId()->Accept(this);
-    file << "[";
+    file << getArrow();
+
+    file << getNodeNameWithLabel("indexItem", currentExpressionId, "indexItem") << getArrow();
     statement->getExpressionInBrackets()->Accept(this);
-    file << "]";
     file << getEndLine();
+
     file << getNodeNameWithLabel("assignmentItem", currentExpressionId, "assignmentItem") << getArrow();
     statement->getAssignedExpression()->Accept(this);
 }

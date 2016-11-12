@@ -140,7 +140,8 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| ID 							     { $$ = new CIdExpression(std::string($1)); }
 		| NOT exp   					     { $$ = new CNotExpression(shared_ptr<IExpression>($2)); }
 		| NEW INT LSBRACKET exp RSBRACKET    { $$ = new CArrayConstructionExpression(shared_ptr<IExpression>($4)); }
-		| exp LSBRACKET exp RPBRACKET		 { $$ = new CGetItemExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3)); }	
+		| exp LSBRACKET exp RSBRACKET		 { $$ = new CGetItemExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3)); }	
+		| LPBRACKET exp RPBRACKET			 { $$ = $2; }
 
 		| NEW ID LPBRACKET RPBRACKET         { $$ = new CConstructClassExpression(shared_ptr<CIdExpression>
 		                                                                        (new CIdExpression(std::string($2)))); }
