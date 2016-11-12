@@ -1,7 +1,16 @@
 Terminals unused in grammar
 
-   THIS
    END
+
+
+State 96 conflicts: 1 shift/reduce
+State 119 conflicts: 1 shift/reduce
+State 120 conflicts: 1 shift/reduce
+State 121 conflicts: 1 shift/reduce
+State 122 conflicts: 1 shift/reduce
+State 123 conflicts: 1 shift/reduce
+State 124 conflicts: 1 shift/reduce
+State 125 conflicts: 1 shift/reduce
 
 
 Grammar
@@ -10,7 +19,7 @@ Grammar
 
     1 input: mainClass classDeclList
 
-    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET
+    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
 
     3 classDeclList: %empty
     4              | classDeclaration classDeclList
@@ -40,116 +49,128 @@ Grammar
    22    | exp LESS exp
    23    | TRUE
    24    | FALSE
-   25    | exp POINT LENGTH
-   26    | ID
-   27    | NOT exp
-   28    | NEW INT LSBRACKET exp RSBRACKET
-   29    | NEW ID LPBRACKET RPBRACKET
+   25    | THIS
+   26    | exp POINT LENGTH
+   27    | ID
+   28    | NOT exp
+   29    | NEW INT LSBRACKET exp RSBRACKET
+   30    | exp LSBRACKET exp RSBRACKET
+   31    | LPBRACKET exp RPBRACKET
+   32    | NEW ID LPBRACKET RPBRACKET
+   33    | exp POINT ID LPBRACKET expList RPBRACKET
 
-   30 statList: %empty
-   31         | stat statList
+   34 expList: %empty
+   35        | nonEmptyExpList
 
-   32 typeName: INT LSBRACKET RSBRACKET
-   33         | BOOLEAN
-   34         | INT
-   35         | ID
+   36 nonEmptyExpList: exp
+   37                | nonEmptyExpList COMMA exp
 
-   36 visibility: PUBLIC
-   37           | PRIVATE
+   38 statList: %empty
+   39         | stat statList
 
-   38 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList RETURN exp SEMICOLON RFBRACKET
+   40 typeName: INT LSBRACKET RSBRACKET
+   41         | BOOLEAN
+   42         | INT
+   43         | ID
 
-   39 stat: LFBRACKET statList RFBRACKET
-   40     | IF LPBRACKET exp RPBRACKET stat ELSE stat
-   41     | WHILE LPBRACKET exp RPBRACKET stat
-   42     | PRINTLN LPBRACKET exp RPBRACKET SEMICOLON
-   43     | ID ASSIGN exp SEMICOLON
-   44     | ID LSBRACKET exp RSBRACKET ASSIGN exp SEMICOLON
+   44 visibility: PUBLIC
+   45           | PRIVATE
+
+   46 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList RETURN exp SEMICOLON RFBRACKET
+
+   47 stat: LFBRACKET statList RFBRACKET
+   48     | IF LPBRACKET exp RPBRACKET stat ELSE stat
+   49     | WHILE LPBRACKET exp RPBRACKET stat
+   50     | PRINTLN LPBRACKET exp RPBRACKET SEMICOLON
+   51     | ID ASSIGN exp SEMICOLON
+   52     | ID LSBRACKET exp RSBRACKET ASSIGN exp SEMICOLON
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
 error (256)
-LPBRACKET (258) 2 29 38 40 41 42
-RPBRACKET (259) 2 29 38 40 41 42
-LFBRACKET (260) 2 5 6 38 39
-RFBRACKET (261) 2 5 6 38 39
-LSBRACKET (262) 2 28 32 44
-RSBRACKET (263) 2 28 32 44
-SEMICOLON (264) 10 38 42 43 44
-PUBLIC (265) 2 36
-PRIVATE (266) 37
+LPBRACKET (258) 2 31 32 33 46 48 49 50
+RPBRACKET (259) 2 31 32 33 46 48 49 50
+LFBRACKET (260) 2 5 6 46 47
+RFBRACKET (261) 2 5 6 46 47
+LSBRACKET (262) 2 29 30 40 52
+RSBRACKET (263) 2 29 30 40 52
+SEMICOLON (264) 10 46 50 51 52
+PUBLIC (265) 2 44
+PRIVATE (266) 45
 STATIC (267) 2
-INT (268) 28 32 34
-BOOLEAN (269) 33
+INT (268) 29 40 42
+BOOLEAN (269) 41
 VOID (270) 2
 STRING (271) 2
 TRUE (272) 23
 FALSE (273) 24
 CLASS (274) 2 5 6
 EXTENDS (275) 6
-IF (276) 40
-ELSE (277) 40
-WHILE (278) 41
-RETURN (279) 38
-PRINTLN (280) 42
-LENGTH (281) 25
-THIS (282)
-NEW (283) 28 29
+IF (276) 48
+ELSE (277) 48
+WHILE (278) 49
+RETURN (279) 46
+PRINTLN (280) 50
+LENGTH (281) 26
+THIS (282) 25
+NEW (283) 29 32
 MAIN (284) 2
-POINT (285) 25
-COMMA (286) 14
-ASSIGN (287) 43 44
+POINT (285) 26 33
+COMMA (286) 14 37
+ASSIGN (287) 51 52
 LESS (288) 22
 OR (289) 21
 AND (290) 20
-NOT (291) 27
+NOT (291) 28
 PLUS (292) 16
 MINUS (293) 17
 STAR (294) 18
 END (295)
 INTEGER_LITERAL (296) 15
-ID (297) 2 5 6 10 13 14 26 29 35 38 43 44
+ID (297) 2 5 6 10 13 14 27 32 33 43 46 51 52
 MOD (298) 19
-VAR_DECL_LIST (299)
-METHOD_DECL (300)
-STAT_LIST (301)
 
 
 Nonterminals, with rules where they appear
 
-$accept (47)
+$accept (44)
     on left: 0
-input (48)
+input (45)
     on left: 1, on right: 0
-mainClass (49)
+mainClass (46)
     on left: 2, on right: 1
-classDeclList (50)
+classDeclList (47)
     on left: 3 4, on right: 1 4
-classDeclaration (51)
+classDeclaration (48)
     on left: 5 6, on right: 4
-methodDeclList (52)
+methodDeclList (49)
     on left: 7 8, on right: 5 6 8
-varDeclList (53)
-    on left: 9 10, on right: 5 6 10 38
-paramList (54)
-    on left: 11 12, on right: 38
-nonEmptyParamList (55)
+varDeclList (50)
+    on left: 9 10, on right: 5 6 10 46
+paramList (51)
+    on left: 11 12, on right: 46
+nonEmptyParamList (52)
     on left: 13 14, on right: 12 14
-exp (56)
-    on left: 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29, on right:
-    16 17 18 19 20 21 22 25 27 28 38 40 41 42 43 44
-statList (57)
-    on left: 30 31, on right: 31 38 39
-typeName (58)
-    on left: 32 33 34 35, on right: 10 13 14 38
-visibility (59)
-    on left: 36 37, on right: 38
-methodDeclaration (60)
-    on left: 38, on right: 8
-stat (61)
-    on left: 39 40 41 42 43 44, on right: 2 31 40 41
+exp (53)
+    on left: 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32
+    33, on right: 16 17 18 19 20 21 22 26 28 29 30 31 33 36 37 46 48
+    49 50 51 52
+expList (54)
+    on left: 34 35, on right: 33
+nonEmptyExpList (55)
+    on left: 36 37, on right: 35 37
+statList (56)
+    on left: 38 39, on right: 2 39 46 47
+typeName (57)
+    on left: 40 41 42 43, on right: 10 13 14 46
+visibility (58)
+    on left: 44 45, on right: 46
+methodDeclaration (59)
+    on left: 46, on right: 8
+stat (60)
+    on left: 47 48 49 50 51 52, on right: 39 48 49
 
 
 State 0
@@ -164,7 +185,7 @@ State 0
 
 State 1
 
-    2 mainClass: CLASS . ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET
+    2 mainClass: CLASS . ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
 
     ID  shift, and go to state 4
 
@@ -190,7 +211,7 @@ State 3
 
 State 4
 
-    2 mainClass: CLASS ID . LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET
+    2 mainClass: CLASS ID . LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
 
     LFBRACKET  shift, and go to state 9
 
@@ -231,7 +252,7 @@ State 8
 
 State 9
 
-    2 mainClass: CLASS ID LFBRACKET . PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET
+    2 mainClass: CLASS ID LFBRACKET . PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
 
     PUBLIC  shift, and go to state 12
 
@@ -254,7 +275,7 @@ State 11
 
 State 12
 
-    2 mainClass: CLASS ID LFBRACKET PUBLIC . STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET
+    2 mainClass: CLASS ID LFBRACKET PUBLIC . STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
 
     STATIC  shift, and go to state 15
 
@@ -277,7 +298,7 @@ State 14
 
 State 15
 
-    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC . VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET
+    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC . VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
 
     VOID  shift, and go to state 18
 
@@ -310,47 +331,47 @@ State 17
 
 State 18
 
-    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID . MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET
+    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID . MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
 
     MAIN  shift, and go to state 29
 
 
 State 19
 
-   36 visibility: PUBLIC .
+   44 visibility: PUBLIC .
 
-    $default  reduce using rule 36 (visibility)
+    $default  reduce using rule 44 (visibility)
 
 
 State 20
 
-   37 visibility: PRIVATE .
+   45 visibility: PRIVATE .
 
-    $default  reduce using rule 37 (visibility)
+    $default  reduce using rule 45 (visibility)
 
 
 State 21
 
-   32 typeName: INT . LSBRACKET RSBRACKET
-   34         | INT .
+   40 typeName: INT . LSBRACKET RSBRACKET
+   42         | INT .
 
     LSBRACKET  shift, and go to state 30
 
-    $default  reduce using rule 34 (typeName)
+    $default  reduce using rule 42 (typeName)
 
 
 State 22
 
-   33 typeName: BOOLEAN .
+   41 typeName: BOOLEAN .
 
-    $default  reduce using rule 33 (typeName)
+    $default  reduce using rule 41 (typeName)
 
 
 State 23
 
-   35 typeName: ID .
+   43 typeName: ID .
 
-    $default  reduce using rule 35 (typeName)
+    $default  reduce using rule 43 (typeName)
 
 
 State 24
@@ -369,7 +390,7 @@ State 25
 
 State 26
 
-   38 methodDeclaration: visibility . typeName ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList RETURN exp SEMICOLON RFBRACKET
+   46 methodDeclaration: visibility . typeName ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList RETURN exp SEMICOLON RFBRACKET
 
     INT      shift, and go to state 21
     BOOLEAN  shift, and go to state 22
@@ -403,14 +424,14 @@ State 28
 
 State 29
 
-    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN . LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET
+    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN . LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
 
     LPBRACKET  shift, and go to state 36
 
 
 State 30
 
-   32 typeName: INT LSBRACKET . RSBRACKET
+   40 typeName: INT LSBRACKET . RSBRACKET
 
     RSBRACKET  shift, and go to state 37
 
@@ -431,7 +452,7 @@ State 32
 
 State 33
 
-   38 methodDeclaration: visibility typeName . ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList RETURN exp SEMICOLON RFBRACKET
+   46 methodDeclaration: visibility typeName . ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList RETURN exp SEMICOLON RFBRACKET
 
     ID  shift, and go to state 39
 
@@ -464,16 +485,16 @@ State 35
 
 State 36
 
-    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET . STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET
+    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET . STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
 
     STRING  shift, and go to state 41
 
 
 State 37
 
-   32 typeName: INT LSBRACKET RSBRACKET .
+   40 typeName: INT LSBRACKET RSBRACKET .
 
-    $default  reduce using rule 32 (typeName)
+    $default  reduce using rule 40 (typeName)
 
 
 State 38
@@ -485,7 +506,7 @@ State 38
 
 State 39
 
-   38 methodDeclaration: visibility typeName ID . LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList RETURN exp SEMICOLON RFBRACKET
+   46 methodDeclaration: visibility typeName ID . LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList RETURN exp SEMICOLON RFBRACKET
 
     LPBRACKET  shift, and go to state 42
 
@@ -499,14 +520,14 @@ State 40
 
 State 41
 
-    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING . LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET
+    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING . LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
 
     LSBRACKET  shift, and go to state 44
 
 
 State 42
 
-   38 methodDeclaration: visibility typeName ID LPBRACKET . paramList RPBRACKET LFBRACKET varDeclList statList RETURN exp SEMICOLON RFBRACKET
+   46 methodDeclaration: visibility typeName ID LPBRACKET . paramList RPBRACKET LFBRACKET varDeclList statList RETURN exp SEMICOLON RFBRACKET
 
     INT      shift, and go to state 21
     BOOLEAN  shift, and go to state 22
@@ -528,14 +549,14 @@ State 43
 
 State 44
 
-    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET . RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET
+    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET . RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
 
     RSBRACKET  shift, and go to state 48
 
 
 State 45
 
-   38 methodDeclaration: visibility typeName ID LPBRACKET paramList . RPBRACKET LFBRACKET varDeclList statList RETURN exp SEMICOLON RFBRACKET
+   46 methodDeclaration: visibility typeName ID LPBRACKET paramList . RPBRACKET LFBRACKET varDeclList statList RETURN exp SEMICOLON RFBRACKET
 
     RPBRACKET  shift, and go to state 49
 
@@ -559,14 +580,14 @@ State 47
 
 State 48
 
-    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET . ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET
+    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET . ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
 
     ID  shift, and go to state 52
 
 
 State 49
 
-   38 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET . LFBRACKET varDeclList statList RETURN exp SEMICOLON RFBRACKET
+   46 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET . LFBRACKET varDeclList statList RETURN exp SEMICOLON RFBRACKET
 
     LFBRACKET  shift, and go to state 53
 
@@ -591,14 +612,14 @@ State 51
 
 State 52
 
-    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID . RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET
+    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID . RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
 
     RPBRACKET  shift, and go to state 55
 
 
 State 53
 
-   38 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET . varDeclList statList RETURN exp SEMICOLON RFBRACKET
+   46 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET . varDeclList statList RETURN exp SEMICOLON RFBRACKET
 
     $default  reduce using rule 9 (varDeclList)
 
@@ -614,7 +635,7 @@ State 54
 
 State 55
 
-    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET . LFBRACKET stat RFBRACKET RFBRACKET
+    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET . LFBRACKET statList RFBRACKET RFBRACKET
 
     LFBRACKET  shift, and go to state 58
 
@@ -622,7 +643,7 @@ State 55
 State 56
 
    10 varDeclList: varDeclList . typeName ID SEMICOLON
-   38 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList . statList RETURN exp SEMICOLON RFBRACKET
+   46 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList . statList RETURN exp SEMICOLON RFBRACKET
 
     LFBRACKET  shift, and go to state 59
     INT        shift, and go to state 21
@@ -632,7 +653,7 @@ State 56
     PRINTLN    shift, and go to state 62
     ID         shift, and go to state 63
 
-    $default  reduce using rule 30 (statList)
+    $default  reduce using rule 38 (statList)
 
     statList  go to state 64
     typeName  go to state 25
@@ -648,7 +669,7 @@ State 57
 
 State 58
 
-    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET . stat RFBRACKET RFBRACKET
+    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET . statList RFBRACKET RFBRACKET
 
     LFBRACKET  shift, and go to state 59
     IF         shift, and go to state 60
@@ -656,12 +677,15 @@ State 58
     PRINTLN    shift, and go to state 62
     ID         shift, and go to state 66
 
-    stat  go to state 67
+    $default  reduce using rule 38 (statList)
+
+    statList  go to state 67
+    stat      go to state 65
 
 
 State 59
 
-   39 stat: LFBRACKET . statList RFBRACKET
+   47 stat: LFBRACKET . statList RFBRACKET
 
     LFBRACKET  shift, and go to state 59
     IF         shift, and go to state 60
@@ -669,7 +693,7 @@ State 59
     PRINTLN    shift, and go to state 62
     ID         shift, and go to state 66
 
-    $default  reduce using rule 30 (statList)
+    $default  reduce using rule 38 (statList)
 
     statList  go to state 68
     stat      go to state 65
@@ -677,47 +701,47 @@ State 59
 
 State 60
 
-   40 stat: IF . LPBRACKET exp RPBRACKET stat ELSE stat
+   48 stat: IF . LPBRACKET exp RPBRACKET stat ELSE stat
 
     LPBRACKET  shift, and go to state 69
 
 
 State 61
 
-   41 stat: WHILE . LPBRACKET exp RPBRACKET stat
+   49 stat: WHILE . LPBRACKET exp RPBRACKET stat
 
     LPBRACKET  shift, and go to state 70
 
 
 State 62
 
-   42 stat: PRINTLN . LPBRACKET exp RPBRACKET SEMICOLON
+   50 stat: PRINTLN . LPBRACKET exp RPBRACKET SEMICOLON
 
     LPBRACKET  shift, and go to state 71
 
 
 State 63
 
-   35 typeName: ID .
-   43 stat: ID . ASSIGN exp SEMICOLON
-   44     | ID . LSBRACKET exp RSBRACKET ASSIGN exp SEMICOLON
+   43 typeName: ID .
+   51 stat: ID . ASSIGN exp SEMICOLON
+   52     | ID . LSBRACKET exp RSBRACKET ASSIGN exp SEMICOLON
 
     LSBRACKET  shift, and go to state 72
     ASSIGN     shift, and go to state 73
 
-    $default  reduce using rule 35 (typeName)
+    $default  reduce using rule 43 (typeName)
 
 
 State 64
 
-   38 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList . RETURN exp SEMICOLON RFBRACKET
+   46 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList . RETURN exp SEMICOLON RFBRACKET
 
     RETURN  shift, and go to state 74
 
 
 State 65
 
-   31 statList: stat . statList
+   39 statList: stat . statList
 
     LFBRACKET  shift, and go to state 59
     IF         shift, and go to state 60
@@ -725,7 +749,7 @@ State 65
     PRINTLN    shift, and go to state 62
     ID         shift, and go to state 66
 
-    $default  reduce using rule 30 (statList)
+    $default  reduce using rule 38 (statList)
 
     statList  go to state 75
     stat      go to state 65
@@ -733,8 +757,8 @@ State 65
 
 State 66
 
-   43 stat: ID . ASSIGN exp SEMICOLON
-   44     | ID . LSBRACKET exp RSBRACKET ASSIGN exp SEMICOLON
+   51 stat: ID . ASSIGN exp SEMICOLON
+   52     | ID . LSBRACKET exp RSBRACKET ASSIGN exp SEMICOLON
 
     LSBRACKET  shift, and go to state 72
     ASSIGN     shift, and go to state 73
@@ -742,218 +766,209 @@ State 66
 
 State 67
 
-    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat . RFBRACKET RFBRACKET
+    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList . RFBRACKET RFBRACKET
 
     RFBRACKET  shift, and go to state 76
 
 
 State 68
 
-   39 stat: LFBRACKET statList . RFBRACKET
+   47 stat: LFBRACKET statList . RFBRACKET
 
     RFBRACKET  shift, and go to state 77
 
 
 State 69
 
-   40 stat: IF LPBRACKET . exp RPBRACKET stat ELSE stat
+   48 stat: IF LPBRACKET . exp RPBRACKET stat ELSE stat
 
-    TRUE             shift, and go to state 78
-    FALSE            shift, and go to state 79
-    NEW              shift, and go to state 80
-    NOT              shift, and go to state 81
-    INTEGER_LITERAL  shift, and go to state 82
-    ID               shift, and go to state 83
-
-    exp  go to state 84
-
-
-State 70
-
-   41 stat: WHILE LPBRACKET . exp RPBRACKET stat
-
-    TRUE             shift, and go to state 78
-    FALSE            shift, and go to state 79
-    NEW              shift, and go to state 80
-    NOT              shift, and go to state 81
-    INTEGER_LITERAL  shift, and go to state 82
-    ID               shift, and go to state 83
-
-    exp  go to state 85
-
-
-State 71
-
-   42 stat: PRINTLN LPBRACKET . exp RPBRACKET SEMICOLON
-
-    TRUE             shift, and go to state 78
-    FALSE            shift, and go to state 79
-    NEW              shift, and go to state 80
-    NOT              shift, and go to state 81
-    INTEGER_LITERAL  shift, and go to state 82
-    ID               shift, and go to state 83
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
 
     exp  go to state 86
 
 
-State 72
+State 70
 
-   44 stat: ID LSBRACKET . exp RSBRACKET ASSIGN exp SEMICOLON
+   49 stat: WHILE LPBRACKET . exp RPBRACKET stat
 
-    TRUE             shift, and go to state 78
-    FALSE            shift, and go to state 79
-    NEW              shift, and go to state 80
-    NOT              shift, and go to state 81
-    INTEGER_LITERAL  shift, and go to state 82
-    ID               shift, and go to state 83
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
 
     exp  go to state 87
 
 
-State 73
+State 71
 
-   43 stat: ID ASSIGN . exp SEMICOLON
+   50 stat: PRINTLN LPBRACKET . exp RPBRACKET SEMICOLON
 
-    TRUE             shift, and go to state 78
-    FALSE            shift, and go to state 79
-    NEW              shift, and go to state 80
-    NOT              shift, and go to state 81
-    INTEGER_LITERAL  shift, and go to state 82
-    ID               shift, and go to state 83
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
 
     exp  go to state 88
 
 
-State 74
+State 72
 
-   38 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList RETURN . exp SEMICOLON RFBRACKET
+   52 stat: ID LSBRACKET . exp RSBRACKET ASSIGN exp SEMICOLON
 
-    TRUE             shift, and go to state 78
-    FALSE            shift, and go to state 79
-    NEW              shift, and go to state 80
-    NOT              shift, and go to state 81
-    INTEGER_LITERAL  shift, and go to state 82
-    ID               shift, and go to state 83
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
 
     exp  go to state 89
 
 
+State 73
+
+   51 stat: ID ASSIGN . exp SEMICOLON
+
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
+
+    exp  go to state 90
+
+
+State 74
+
+   46 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList RETURN . exp SEMICOLON RFBRACKET
+
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
+
+    exp  go to state 91
+
+
 State 75
 
-   31 statList: stat statList .
+   39 statList: stat statList .
 
-    $default  reduce using rule 31 (statList)
+    $default  reduce using rule 39 (statList)
 
 
 State 76
 
-    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET . RFBRACKET
+    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET . RFBRACKET
 
-    RFBRACKET  shift, and go to state 90
+    RFBRACKET  shift, and go to state 92
 
 
 State 77
 
-   39 stat: LFBRACKET statList RFBRACKET .
+   47 stat: LFBRACKET statList RFBRACKET .
 
-    $default  reduce using rule 39 (stat)
+    $default  reduce using rule 47 (stat)
 
 
 State 78
+
+   31 exp: LPBRACKET . exp RPBRACKET
+
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
+
+    exp  go to state 93
+
+
+State 79
 
    23 exp: TRUE .
 
     $default  reduce using rule 23 (exp)
 
 
-State 79
+State 80
 
    24 exp: FALSE .
 
     $default  reduce using rule 24 (exp)
 
 
-State 80
-
-   28 exp: NEW . INT LSBRACKET exp RSBRACKET
-   29    | NEW . ID LPBRACKET RPBRACKET
-
-    INT  shift, and go to state 91
-    ID   shift, and go to state 92
-
-
 State 81
 
-   27 exp: NOT . exp
+   25 exp: THIS .
 
-    TRUE             shift, and go to state 78
-    FALSE            shift, and go to state 79
-    NEW              shift, and go to state 80
-    NOT              shift, and go to state 81
-    INTEGER_LITERAL  shift, and go to state 82
-    ID               shift, and go to state 83
-
-    exp  go to state 93
+    $default  reduce using rule 25 (exp)
 
 
 State 82
+
+   29 exp: NEW . INT LSBRACKET exp RSBRACKET
+   32    | NEW . ID LPBRACKET RPBRACKET
+
+    INT  shift, and go to state 94
+    ID   shift, and go to state 95
+
+
+State 83
+
+   28 exp: NOT . exp
+
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
+
+    exp  go to state 96
+
+
+State 84
 
    15 exp: INTEGER_LITERAL .
 
     $default  reduce using rule 15 (exp)
 
 
-State 83
-
-   26 exp: ID .
-
-    $default  reduce using rule 26 (exp)
-
-
-State 84
-
-   16 exp: exp . PLUS exp
-   17    | exp . MINUS exp
-   18    | exp . STAR exp
-   19    | exp . MOD exp
-   20    | exp . AND exp
-   21    | exp . OR exp
-   22    | exp . LESS exp
-   25    | exp . POINT LENGTH
-   40 stat: IF LPBRACKET exp . RPBRACKET stat ELSE stat
-
-    RPBRACKET  shift, and go to state 94
-    POINT      shift, and go to state 95
-    LESS       shift, and go to state 96
-    OR         shift, and go to state 97
-    AND        shift, and go to state 98
-    PLUS       shift, and go to state 99
-    MINUS      shift, and go to state 100
-    STAR       shift, and go to state 101
-    MOD        shift, and go to state 102
-
-
 State 85
 
-   16 exp: exp . PLUS exp
-   17    | exp . MINUS exp
-   18    | exp . STAR exp
-   19    | exp . MOD exp
-   20    | exp . AND exp
-   21    | exp . OR exp
-   22    | exp . LESS exp
-   25    | exp . POINT LENGTH
-   41 stat: WHILE LPBRACKET exp . RPBRACKET stat
+   27 exp: ID .
 
-    RPBRACKET  shift, and go to state 103
-    POINT      shift, and go to state 95
-    LESS       shift, and go to state 96
-    OR         shift, and go to state 97
-    AND        shift, and go to state 98
-    PLUS       shift, and go to state 99
-    MINUS      shift, and go to state 100
-    STAR       shift, and go to state 101
-    MOD        shift, and go to state 102
+    $default  reduce using rule 27 (exp)
 
 
 State 86
@@ -965,18 +980,21 @@ State 86
    20    | exp . AND exp
    21    | exp . OR exp
    22    | exp . LESS exp
-   25    | exp . POINT LENGTH
-   42 stat: PRINTLN LPBRACKET exp . RPBRACKET SEMICOLON
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
+   48 stat: IF LPBRACKET exp . RPBRACKET stat ELSE stat
 
-    RPBRACKET  shift, and go to state 104
-    POINT      shift, and go to state 95
-    LESS       shift, and go to state 96
-    OR         shift, and go to state 97
-    AND        shift, and go to state 98
-    PLUS       shift, and go to state 99
-    MINUS      shift, and go to state 100
-    STAR       shift, and go to state 101
-    MOD        shift, and go to state 102
+    RPBRACKET  shift, and go to state 97
+    LSBRACKET  shift, and go to state 98
+    POINT      shift, and go to state 99
+    LESS       shift, and go to state 100
+    OR         shift, and go to state 101
+    AND        shift, and go to state 102
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
 
 State 87
@@ -988,18 +1006,21 @@ State 87
    20    | exp . AND exp
    21    | exp . OR exp
    22    | exp . LESS exp
-   25    | exp . POINT LENGTH
-   44 stat: ID LSBRACKET exp . RSBRACKET ASSIGN exp SEMICOLON
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
+   49 stat: WHILE LPBRACKET exp . RPBRACKET stat
 
-    RSBRACKET  shift, and go to state 105
-    POINT      shift, and go to state 95
-    LESS       shift, and go to state 96
-    OR         shift, and go to state 97
-    AND        shift, and go to state 98
-    PLUS       shift, and go to state 99
-    MINUS      shift, and go to state 100
-    STAR       shift, and go to state 101
-    MOD        shift, and go to state 102
+    RPBRACKET  shift, and go to state 107
+    LSBRACKET  shift, and go to state 98
+    POINT      shift, and go to state 99
+    LESS       shift, and go to state 100
+    OR         shift, and go to state 101
+    AND        shift, and go to state 102
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
 
 State 88
@@ -1011,18 +1032,21 @@ State 88
    20    | exp . AND exp
    21    | exp . OR exp
    22    | exp . LESS exp
-   25    | exp . POINT LENGTH
-   43 stat: ID ASSIGN exp . SEMICOLON
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
+   50 stat: PRINTLN LPBRACKET exp . RPBRACKET SEMICOLON
 
-    SEMICOLON  shift, and go to state 106
-    POINT      shift, and go to state 95
-    LESS       shift, and go to state 96
-    OR         shift, and go to state 97
-    AND        shift, and go to state 98
-    PLUS       shift, and go to state 99
-    MINUS      shift, and go to state 100
-    STAR       shift, and go to state 101
-    MOD        shift, and go to state 102
+    RPBRACKET  shift, and go to state 108
+    LSBRACKET  shift, and go to state 98
+    POINT      shift, and go to state 99
+    LESS       shift, and go to state 100
+    OR         shift, and go to state 101
+    AND        shift, and go to state 102
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
 
 State 89
@@ -1034,39 +1058,80 @@ State 89
    20    | exp . AND exp
    21    | exp . OR exp
    22    | exp . LESS exp
-   25    | exp . POINT LENGTH
-   38 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList RETURN exp . SEMICOLON RFBRACKET
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
+   52 stat: ID LSBRACKET exp . RSBRACKET ASSIGN exp SEMICOLON
 
-    SEMICOLON  shift, and go to state 107
-    POINT      shift, and go to state 95
-    LESS       shift, and go to state 96
-    OR         shift, and go to state 97
-    AND        shift, and go to state 98
-    PLUS       shift, and go to state 99
-    MINUS      shift, and go to state 100
-    STAR       shift, and go to state 101
-    MOD        shift, and go to state 102
+    LSBRACKET  shift, and go to state 98
+    RSBRACKET  shift, and go to state 109
+    POINT      shift, and go to state 99
+    LESS       shift, and go to state 100
+    OR         shift, and go to state 101
+    AND        shift, and go to state 102
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
 
 State 90
 
-    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET .
+   16 exp: exp . PLUS exp
+   17    | exp . MINUS exp
+   18    | exp . STAR exp
+   19    | exp . MOD exp
+   20    | exp . AND exp
+   21    | exp . OR exp
+   22    | exp . LESS exp
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
+   51 stat: ID ASSIGN exp . SEMICOLON
 
-    $default  reduce using rule 2 (mainClass)
+    LSBRACKET  shift, and go to state 98
+    SEMICOLON  shift, and go to state 110
+    POINT      shift, and go to state 99
+    LESS       shift, and go to state 100
+    OR         shift, and go to state 101
+    AND        shift, and go to state 102
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
 
 State 91
 
-   28 exp: NEW INT . LSBRACKET exp RSBRACKET
+   16 exp: exp . PLUS exp
+   17    | exp . MINUS exp
+   18    | exp . STAR exp
+   19    | exp . MOD exp
+   20    | exp . AND exp
+   21    | exp . OR exp
+   22    | exp . LESS exp
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
+   46 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList RETURN exp . SEMICOLON RFBRACKET
 
-    LSBRACKET  shift, and go to state 108
+    LSBRACKET  shift, and go to state 98
+    SEMICOLON  shift, and go to state 111
+    POINT      shift, and go to state 99
+    LESS       shift, and go to state 100
+    OR         shift, and go to state 101
+    AND        shift, and go to state 102
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
 
 State 92
 
-   29 exp: NEW ID . LPBRACKET RPBRACKET
+    2 mainClass: CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET .
 
-    LPBRACKET  shift, and go to state 109
+    $default  reduce using rule 2 (mainClass)
 
 
 State 93
@@ -1078,137 +1143,63 @@ State 93
    20    | exp . AND exp
    21    | exp . OR exp
    22    | exp . LESS exp
-   25    | exp . POINT LENGTH
-   27    | NOT exp .
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   31    | LPBRACKET exp . RPBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
-    LESS  shift, and go to state 96
-    STAR  shift, and go to state 101
-    MOD   shift, and go to state 102
-
-    $default  reduce using rule 27 (exp)
+    RPBRACKET  shift, and go to state 112
+    LSBRACKET  shift, and go to state 98
+    POINT      shift, and go to state 99
+    LESS       shift, and go to state 100
+    OR         shift, and go to state 101
+    AND        shift, and go to state 102
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
 
 State 94
 
-   40 stat: IF LPBRACKET exp RPBRACKET . stat ELSE stat
+   29 exp: NEW INT . LSBRACKET exp RSBRACKET
 
-    LFBRACKET  shift, and go to state 59
-    IF         shift, and go to state 60
-    WHILE      shift, and go to state 61
-    PRINTLN    shift, and go to state 62
-    ID         shift, and go to state 66
-
-    stat  go to state 110
+    LSBRACKET  shift, and go to state 113
 
 
 State 95
 
-   25 exp: exp POINT . LENGTH
+   32 exp: NEW ID . LPBRACKET RPBRACKET
 
-    LENGTH  shift, and go to state 111
+    LPBRACKET  shift, and go to state 114
 
 
 State 96
 
-   22 exp: exp LESS . exp
+   16 exp: exp . PLUS exp
+   17    | exp . MINUS exp
+   18    | exp . STAR exp
+   19    | exp . MOD exp
+   20    | exp . AND exp
+   21    | exp . OR exp
+   22    | exp . LESS exp
+   26    | exp . POINT LENGTH
+   28    | NOT exp .
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
-    TRUE             shift, and go to state 78
-    FALSE            shift, and go to state 79
-    NEW              shift, and go to state 80
-    NOT              shift, and go to state 81
-    INTEGER_LITERAL  shift, and go to state 82
-    ID               shift, and go to state 83
+    LSBRACKET  shift, and go to state 98
+    LESS       shift, and go to state 100
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
-    exp  go to state 112
+    LSBRACKET  [reduce using rule 28 (exp)]
+    $default   reduce using rule 28 (exp)
 
 
 State 97
 
-   21 exp: exp OR . exp
-
-    TRUE             shift, and go to state 78
-    FALSE            shift, and go to state 79
-    NEW              shift, and go to state 80
-    NOT              shift, and go to state 81
-    INTEGER_LITERAL  shift, and go to state 82
-    ID               shift, and go to state 83
-
-    exp  go to state 113
-
-
-State 98
-
-   20 exp: exp AND . exp
-
-    TRUE             shift, and go to state 78
-    FALSE            shift, and go to state 79
-    NEW              shift, and go to state 80
-    NOT              shift, and go to state 81
-    INTEGER_LITERAL  shift, and go to state 82
-    ID               shift, and go to state 83
-
-    exp  go to state 114
-
-
-State 99
-
-   16 exp: exp PLUS . exp
-
-    TRUE             shift, and go to state 78
-    FALSE            shift, and go to state 79
-    NEW              shift, and go to state 80
-    NOT              shift, and go to state 81
-    INTEGER_LITERAL  shift, and go to state 82
-    ID               shift, and go to state 83
-
-    exp  go to state 115
-
-
-State 100
-
-   17 exp: exp MINUS . exp
-
-    TRUE             shift, and go to state 78
-    FALSE            shift, and go to state 79
-    NEW              shift, and go to state 80
-    NOT              shift, and go to state 81
-    INTEGER_LITERAL  shift, and go to state 82
-    ID               shift, and go to state 83
-
-    exp  go to state 116
-
-
-State 101
-
-   18 exp: exp STAR . exp
-
-    TRUE             shift, and go to state 78
-    FALSE            shift, and go to state 79
-    NEW              shift, and go to state 80
-    NOT              shift, and go to state 81
-    INTEGER_LITERAL  shift, and go to state 82
-    ID               shift, and go to state 83
-
-    exp  go to state 117
-
-
-State 102
-
-   19 exp: exp MOD . exp
-
-    TRUE             shift, and go to state 78
-    FALSE            shift, and go to state 79
-    NEW              shift, and go to state 80
-    NOT              shift, and go to state 81
-    INTEGER_LITERAL  shift, and go to state 82
-    ID               shift, and go to state 83
-
-    exp  go to state 118
-
-
-State 103
-
-   41 stat: WHILE LPBRACKET exp RPBRACKET . stat
+   48 stat: IF LPBRACKET exp RPBRACKET . stat ELSE stat
 
     LFBRACKET  shift, and go to state 59
     IF         shift, and go to state 60
@@ -1216,73 +1207,265 @@ State 103
     PRINTLN    shift, and go to state 62
     ID         shift, and go to state 66
 
-    stat  go to state 119
+    stat  go to state 115
+
+
+State 98
+
+   30 exp: exp LSBRACKET . exp RSBRACKET
+
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
+
+    exp  go to state 116
+
+
+State 99
+
+   26 exp: exp POINT . LENGTH
+   33    | exp POINT . ID LPBRACKET expList RPBRACKET
+
+    LENGTH  shift, and go to state 117
+    ID      shift, and go to state 118
+
+
+State 100
+
+   22 exp: exp LESS . exp
+
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
+
+    exp  go to state 119
+
+
+State 101
+
+   21 exp: exp OR . exp
+
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
+
+    exp  go to state 120
+
+
+State 102
+
+   20 exp: exp AND . exp
+
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
+
+    exp  go to state 121
+
+
+State 103
+
+   16 exp: exp PLUS . exp
+
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
+
+    exp  go to state 122
 
 
 State 104
 
-   42 stat: PRINTLN LPBRACKET exp RPBRACKET . SEMICOLON
+   17 exp: exp MINUS . exp
 
-    SEMICOLON  shift, and go to state 120
-
-
-State 105
-
-   44 stat: ID LSBRACKET exp RSBRACKET . ASSIGN exp SEMICOLON
-
-    ASSIGN  shift, and go to state 121
-
-
-State 106
-
-   43 stat: ID ASSIGN exp SEMICOLON .
-
-    $default  reduce using rule 43 (stat)
-
-
-State 107
-
-   38 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList RETURN exp SEMICOLON . RFBRACKET
-
-    RFBRACKET  shift, and go to state 122
-
-
-State 108
-
-   28 exp: NEW INT LSBRACKET . exp RSBRACKET
-
-    TRUE             shift, and go to state 78
-    FALSE            shift, and go to state 79
-    NEW              shift, and go to state 80
-    NOT              shift, and go to state 81
-    INTEGER_LITERAL  shift, and go to state 82
-    ID               shift, and go to state 83
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
 
     exp  go to state 123
 
 
+State 105
+
+   18 exp: exp STAR . exp
+
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
+
+    exp  go to state 124
+
+
+State 106
+
+   19 exp: exp MOD . exp
+
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
+
+    exp  go to state 125
+
+
+State 107
+
+   49 stat: WHILE LPBRACKET exp RPBRACKET . stat
+
+    LFBRACKET  shift, and go to state 59
+    IF         shift, and go to state 60
+    WHILE      shift, and go to state 61
+    PRINTLN    shift, and go to state 62
+    ID         shift, and go to state 66
+
+    stat  go to state 126
+
+
+State 108
+
+   50 stat: PRINTLN LPBRACKET exp RPBRACKET . SEMICOLON
+
+    SEMICOLON  shift, and go to state 127
+
+
 State 109
 
-   29 exp: NEW ID LPBRACKET . RPBRACKET
+   52 stat: ID LSBRACKET exp RSBRACKET . ASSIGN exp SEMICOLON
 
-    RPBRACKET  shift, and go to state 124
+    ASSIGN  shift, and go to state 128
 
 
 State 110
 
-   40 stat: IF LPBRACKET exp RPBRACKET stat . ELSE stat
+   51 stat: ID ASSIGN exp SEMICOLON .
 
-    ELSE  shift, and go to state 125
+    $default  reduce using rule 51 (stat)
 
 
 State 111
 
-   25 exp: exp POINT LENGTH .
+   46 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList RETURN exp SEMICOLON . RFBRACKET
 
-    $default  reduce using rule 25 (exp)
+    RFBRACKET  shift, and go to state 129
 
 
 State 112
+
+   31 exp: LPBRACKET exp RPBRACKET .
+
+    $default  reduce using rule 31 (exp)
+
+
+State 113
+
+   29 exp: NEW INT LSBRACKET . exp RSBRACKET
+
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
+
+    exp  go to state 130
+
+
+State 114
+
+   32 exp: NEW ID LPBRACKET . RPBRACKET
+
+    RPBRACKET  shift, and go to state 131
+
+
+State 115
+
+   48 stat: IF LPBRACKET exp RPBRACKET stat . ELSE stat
+
+    ELSE  shift, and go to state 132
+
+
+State 116
+
+   16 exp: exp . PLUS exp
+   17    | exp . MINUS exp
+   18    | exp . STAR exp
+   19    | exp . MOD exp
+   20    | exp . AND exp
+   21    | exp . OR exp
+   22    | exp . LESS exp
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   30    | exp LSBRACKET exp . RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
+
+    LSBRACKET  shift, and go to state 98
+    RSBRACKET  shift, and go to state 133
+    POINT      shift, and go to state 99
+    LESS       shift, and go to state 100
+    OR         shift, and go to state 101
+    AND        shift, and go to state 102
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
+
+
+State 117
+
+   26 exp: exp POINT LENGTH .
+
+    $default  reduce using rule 26 (exp)
+
+
+State 118
+
+   33 exp: exp POINT ID . LPBRACKET expList RPBRACKET
+
+    LPBRACKET  shift, and go to state 134
+
+
+State 119
 
    16 exp: exp . PLUS exp
    17    | exp . MINUS exp
@@ -1292,14 +1475,19 @@ State 112
    21    | exp . OR exp
    22    | exp . LESS exp
    22    | exp LESS exp .
-   25    | exp . POINT LENGTH
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
+
+    LSBRACKET  shift, and go to state 98
 
     LESS  error (nonassociative)
 
-    $default  reduce using rule 22 (exp)
+    LSBRACKET  [reduce using rule 22 (exp)]
+    $default   reduce using rule 22 (exp)
 
 
-State 113
+State 120
 
    16 exp: exp . PLUS exp
    17    | exp . MINUS exp
@@ -1309,19 +1497,23 @@ State 113
    21    | exp . OR exp
    21    | exp OR exp .
    22    | exp . LESS exp
-   25    | exp . POINT LENGTH
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
-    LESS   shift, and go to state 96
-    AND    shift, and go to state 98
-    PLUS   shift, and go to state 99
-    MINUS  shift, and go to state 100
-    STAR   shift, and go to state 101
-    MOD    shift, and go to state 102
+    LSBRACKET  shift, and go to state 98
+    LESS       shift, and go to state 100
+    AND        shift, and go to state 102
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
-    $default  reduce using rule 21 (exp)
+    LSBRACKET  [reduce using rule 21 (exp)]
+    $default   reduce using rule 21 (exp)
 
 
-State 114
+State 121
 
    16 exp: exp . PLUS exp
    17    | exp . MINUS exp
@@ -1331,18 +1523,22 @@ State 114
    20    | exp AND exp .
    21    | exp . OR exp
    22    | exp . LESS exp
-   25    | exp . POINT LENGTH
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
-    LESS   shift, and go to state 96
-    PLUS   shift, and go to state 99
-    MINUS  shift, and go to state 100
-    STAR   shift, and go to state 101
-    MOD    shift, and go to state 102
+    LSBRACKET  shift, and go to state 98
+    LESS       shift, and go to state 100
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
-    $default  reduce using rule 20 (exp)
+    LSBRACKET  [reduce using rule 20 (exp)]
+    $default   reduce using rule 20 (exp)
 
 
-State 115
+State 122
 
    16 exp: exp . PLUS exp
    16    | exp PLUS exp .
@@ -1352,16 +1548,20 @@ State 115
    20    | exp . AND exp
    21    | exp . OR exp
    22    | exp . LESS exp
-   25    | exp . POINT LENGTH
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
-    LESS  shift, and go to state 96
-    STAR  shift, and go to state 101
-    MOD   shift, and go to state 102
+    LSBRACKET  shift, and go to state 98
+    LESS       shift, and go to state 100
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
-    $default  reduce using rule 16 (exp)
+    LSBRACKET  [reduce using rule 16 (exp)]
+    $default   reduce using rule 16 (exp)
 
 
-State 116
+State 123
 
    16 exp: exp . PLUS exp
    17    | exp . MINUS exp
@@ -1371,16 +1571,20 @@ State 116
    20    | exp . AND exp
    21    | exp . OR exp
    22    | exp . LESS exp
-   25    | exp . POINT LENGTH
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
-    LESS  shift, and go to state 96
-    STAR  shift, and go to state 101
-    MOD   shift, and go to state 102
+    LSBRACKET  shift, and go to state 98
+    LESS       shift, and go to state 100
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
-    $default  reduce using rule 17 (exp)
+    LSBRACKET  [reduce using rule 17 (exp)]
+    $default   reduce using rule 17 (exp)
 
 
-State 117
+State 124
 
    16 exp: exp . PLUS exp
    17    | exp . MINUS exp
@@ -1390,14 +1594,18 @@ State 117
    20    | exp . AND exp
    21    | exp . OR exp
    22    | exp . LESS exp
-   25    | exp . POINT LENGTH
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
-    LESS  shift, and go to state 96
+    LSBRACKET  shift, and go to state 98
+    LESS       shift, and go to state 100
 
-    $default  reduce using rule 18 (exp)
+    LSBRACKET  [reduce using rule 18 (exp)]
+    $default   reduce using rule 18 (exp)
 
 
-State 118
+State 125
 
    16 exp: exp . PLUS exp
    17    | exp . MINUS exp
@@ -1407,49 +1615,55 @@ State 118
    20    | exp . AND exp
    21    | exp . OR exp
    22    | exp . LESS exp
-   25    | exp . POINT LENGTH
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
-    LESS  shift, and go to state 96
+    LSBRACKET  shift, and go to state 98
+    LESS       shift, and go to state 100
 
-    $default  reduce using rule 19 (exp)
-
-
-State 119
-
-   41 stat: WHILE LPBRACKET exp RPBRACKET stat .
-
-    $default  reduce using rule 41 (stat)
+    LSBRACKET  [reduce using rule 19 (exp)]
+    $default   reduce using rule 19 (exp)
 
 
-State 120
+State 126
 
-   42 stat: PRINTLN LPBRACKET exp RPBRACKET SEMICOLON .
+   49 stat: WHILE LPBRACKET exp RPBRACKET stat .
 
-    $default  reduce using rule 42 (stat)
-
-
-State 121
-
-   44 stat: ID LSBRACKET exp RSBRACKET ASSIGN . exp SEMICOLON
-
-    TRUE             shift, and go to state 78
-    FALSE            shift, and go to state 79
-    NEW              shift, and go to state 80
-    NOT              shift, and go to state 81
-    INTEGER_LITERAL  shift, and go to state 82
-    ID               shift, and go to state 83
-
-    exp  go to state 126
+    $default  reduce using rule 49 (stat)
 
 
-State 122
+State 127
 
-   38 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList RETURN exp SEMICOLON RFBRACKET .
+   50 stat: PRINTLN LPBRACKET exp RPBRACKET SEMICOLON .
 
-    $default  reduce using rule 38 (methodDeclaration)
+    $default  reduce using rule 50 (stat)
 
 
-State 123
+State 128
+
+   52 stat: ID LSBRACKET exp RSBRACKET ASSIGN . exp SEMICOLON
+
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
+
+    exp  go to state 135
+
+
+State 129
+
+   46 methodDeclaration: visibility typeName ID LPBRACKET paramList RPBRACKET LFBRACKET varDeclList statList RETURN exp SEMICOLON RFBRACKET .
+
+    $default  reduce using rule 46 (methodDeclaration)
+
+
+State 130
 
    16 exp: exp . PLUS exp
    17    | exp . MINUS exp
@@ -1458,30 +1672,33 @@ State 123
    20    | exp . AND exp
    21    | exp . OR exp
    22    | exp . LESS exp
-   25    | exp . POINT LENGTH
-   28    | NEW INT LSBRACKET exp . RSBRACKET
+   26    | exp . POINT LENGTH
+   29    | NEW INT LSBRACKET exp . RSBRACKET
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
-    RSBRACKET  shift, and go to state 127
-    POINT      shift, and go to state 95
-    LESS       shift, and go to state 96
-    OR         shift, and go to state 97
-    AND        shift, and go to state 98
-    PLUS       shift, and go to state 99
-    MINUS      shift, and go to state 100
-    STAR       shift, and go to state 101
-    MOD        shift, and go to state 102
-
-
-State 124
-
-   29 exp: NEW ID LPBRACKET RPBRACKET .
-
-    $default  reduce using rule 29 (exp)
+    LSBRACKET  shift, and go to state 98
+    RSBRACKET  shift, and go to state 136
+    POINT      shift, and go to state 99
+    LESS       shift, and go to state 100
+    OR         shift, and go to state 101
+    AND        shift, and go to state 102
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
 
-State 125
+State 131
 
-   40 stat: IF LPBRACKET exp RPBRACKET stat ELSE . stat
+   32 exp: NEW ID LPBRACKET RPBRACKET .
+
+    $default  reduce using rule 32 (exp)
+
+
+State 132
+
+   48 stat: IF LPBRACKET exp RPBRACKET stat ELSE . stat
 
     LFBRACKET  shift, and go to state 59
     IF         shift, and go to state 60
@@ -1489,10 +1706,37 @@ State 125
     PRINTLN    shift, and go to state 62
     ID         shift, and go to state 66
 
-    stat  go to state 128
+    stat  go to state 137
 
 
-State 126
+State 133
+
+   30 exp: exp LSBRACKET exp RSBRACKET .
+
+    $default  reduce using rule 30 (exp)
+
+
+State 134
+
+   33 exp: exp POINT ID LPBRACKET . expList RPBRACKET
+
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
+
+    $default  reduce using rule 34 (expList)
+
+    exp              go to state 138
+    expList          go to state 139
+    nonEmptyExpList  go to state 140
+
+
+State 135
 
    16 exp: exp . PLUS exp
    17    | exp . MINUS exp
@@ -1501,36 +1745,133 @@ State 126
    20    | exp . AND exp
    21    | exp . OR exp
    22    | exp . LESS exp
-   25    | exp . POINT LENGTH
-   44 stat: ID LSBRACKET exp RSBRACKET ASSIGN exp . SEMICOLON
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
+   52 stat: ID LSBRACKET exp RSBRACKET ASSIGN exp . SEMICOLON
 
-    SEMICOLON  shift, and go to state 129
-    POINT      shift, and go to state 95
-    LESS       shift, and go to state 96
-    OR         shift, and go to state 97
-    AND        shift, and go to state 98
-    PLUS       shift, and go to state 99
-    MINUS      shift, and go to state 100
-    STAR       shift, and go to state 101
-    MOD        shift, and go to state 102
-
-
-State 127
-
-   28 exp: NEW INT LSBRACKET exp RSBRACKET .
-
-    $default  reduce using rule 28 (exp)
+    LSBRACKET  shift, and go to state 98
+    SEMICOLON  shift, and go to state 141
+    POINT      shift, and go to state 99
+    LESS       shift, and go to state 100
+    OR         shift, and go to state 101
+    AND        shift, and go to state 102
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
 
-State 128
+State 136
 
-   40 stat: IF LPBRACKET exp RPBRACKET stat ELSE stat .
+   29 exp: NEW INT LSBRACKET exp RSBRACKET .
 
-    $default  reduce using rule 40 (stat)
+    $default  reduce using rule 29 (exp)
 
 
-State 129
+State 137
 
-   44 stat: ID LSBRACKET exp RSBRACKET ASSIGN exp SEMICOLON .
+   48 stat: IF LPBRACKET exp RPBRACKET stat ELSE stat .
 
-    $default  reduce using rule 44 (stat)
+    $default  reduce using rule 48 (stat)
+
+
+State 138
+
+   16 exp: exp . PLUS exp
+   17    | exp . MINUS exp
+   18    | exp . STAR exp
+   19    | exp . MOD exp
+   20    | exp . AND exp
+   21    | exp . OR exp
+   22    | exp . LESS exp
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
+   36 nonEmptyExpList: exp .
+
+    LSBRACKET  shift, and go to state 98
+    POINT      shift, and go to state 99
+    LESS       shift, and go to state 100
+    OR         shift, and go to state 101
+    AND        shift, and go to state 102
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
+
+    $default  reduce using rule 36 (nonEmptyExpList)
+
+
+State 139
+
+   33 exp: exp POINT ID LPBRACKET expList . RPBRACKET
+
+    RPBRACKET  shift, and go to state 142
+
+
+State 140
+
+   35 expList: nonEmptyExpList .
+   37 nonEmptyExpList: nonEmptyExpList . COMMA exp
+
+    COMMA  shift, and go to state 143
+
+    $default  reduce using rule 35 (expList)
+
+
+State 141
+
+   52 stat: ID LSBRACKET exp RSBRACKET ASSIGN exp SEMICOLON .
+
+    $default  reduce using rule 52 (stat)
+
+
+State 142
+
+   33 exp: exp POINT ID LPBRACKET expList RPBRACKET .
+
+    $default  reduce using rule 33 (exp)
+
+
+State 143
+
+   37 nonEmptyExpList: nonEmptyExpList COMMA . exp
+
+    LPBRACKET        shift, and go to state 78
+    TRUE             shift, and go to state 79
+    FALSE            shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    NOT              shift, and go to state 83
+    INTEGER_LITERAL  shift, and go to state 84
+    ID               shift, and go to state 85
+
+    exp  go to state 144
+
+
+State 144
+
+   16 exp: exp . PLUS exp
+   17    | exp . MINUS exp
+   18    | exp . STAR exp
+   19    | exp . MOD exp
+   20    | exp . AND exp
+   21    | exp . OR exp
+   22    | exp . LESS exp
+   26    | exp . POINT LENGTH
+   30    | exp . LSBRACKET exp RSBRACKET
+   33    | exp . POINT ID LPBRACKET expList RPBRACKET
+   37 nonEmptyExpList: nonEmptyExpList COMMA exp .
+
+    LSBRACKET  shift, and go to state 98
+    POINT      shift, and go to state 99
+    LESS       shift, and go to state 100
+    OR         shift, and go to state 101
+    AND        shift, and go to state 102
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
+
+    $default  reduce using rule 37 (nonEmptyExpList)
