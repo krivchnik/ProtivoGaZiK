@@ -31,6 +31,7 @@ class CArrayConstructionExpression;
 class CConstructClassExpression;
 class CMethodCallExpression;
 class CThisExpression;
+class CGetItemExpression;
 
 class IVisitor {
 public:
@@ -60,4 +61,5 @@ public:
 	virtual void Visit(CConstructClassExpression*) = 0;
     virtual void Visit(CMethodCallExpression*) = 0;
     virtual void Visit(CThisExpression*) = 0;
+    virtual void Visit(CGetItemExpression*) = 0;
 };

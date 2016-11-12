@@ -21,6 +21,7 @@ using namespace std;
 #include <Nodes/CConstructClassExpression.h>
 #include <Nodes/CMethodCallExpression.h>
 #include <Nodes/CThisExpression.h>
+#include <Nodes/CGetItemExpression.h>
 
 #include <Nodes/CAssignStatement.h>
 #include <Nodes/CAssignItemStatement.h>

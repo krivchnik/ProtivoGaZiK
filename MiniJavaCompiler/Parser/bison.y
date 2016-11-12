@@ -47,7 +47,7 @@ extern shared_ptr<CProgram> ans;
 %type  <stat_list>  		statList
 %type  <op_val>  			typeName visibility
 
-%type  <exp_list>          expList nonEmptyExpList
+%type  <exp_list>           expList nonEmptyExpList
 %type  <stat_list> 			varDeclList paramList nonEmptyParamList
 %type  <stat_list>			methodDeclList
 %type  <stat_list>			classDeclList
@@ -140,6 +140,8 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		| ID 							     { $$ = new CIdExpression(std::string($1)); }
 		| NOT exp   					     { $$ = new CNotExpression(shared_ptr<IExpression>($2)); }
 		| NEW INT LSBRACKET exp RSBRACKET    { $$ = new CArrayConstructionExpression(shared_ptr<IExpression>($4)); }
+		| exp LSBRACKET exp RPBRACKET		 { $$ = new CGetItemExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3)); }	
+
 		| NEW ID LPBRACKET RPBRACKET         { $$ = new CConstructClassExpression(shared_ptr<CIdExpression>
 		                                                                        (new CIdExpression(std::string($2)))); }
 		| exp POINT ID LPBRACKET expList RPBRACKET  { $$ = new CMethodCallExpression(shared_ptr<IExpression>($1),
@@ -162,7 +164,7 @@ statList : %empty 				 { $$ = new CListStatement(std::string("Statements")); }
 ;
 
 typeName
-    : INT LSBRACKET RSBRACKET                    { $$ = "int[]"; }
+    : INT LSBRACKET RSBRACKET                    { $$ = "intArray"; }
     | BOOLEAN                                    { $$ = "boolean"; }
     | INT                                        { $$ = "int"; }
     | ID                                         { $$ = $1; }

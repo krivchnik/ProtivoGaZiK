@@ -137,12 +137,12 @@ void CPrintVisitor::Visit(CIfElseStatement* statement) {
 
 void CPrintVisitor::Visit(CWhileStatement* statement) {
 	int currentExpressionId = ++expressionId;
-	file << getNodeNameWithLabel("While", currentExpressionId, "While") << currentExpressionId << getArrow() <<
+	file << getNodeNameWithLabel("While", currentExpressionId, "While") << getArrow() <<
          getNodeNameWithLabel("condition", currentExpressionId, "condition") << getArrow();
 	statement->getCondition()->Accept(this);
 	file << getEndLine();
 	file << getNodeNameWithLabel("While", currentExpressionId, "While") << getArrow() <<
-         getNodeNameWithLabel("While", currentExpressionId, "While") << getArrow();
+         getNodeNameWithLabel("body", currentExpressionId, "body") << getArrow();
 	statement->getBody()->Accept(this);
 }
 
@@ -196,16 +196,27 @@ void CPrintVisitor::Visit(CVarDecl* decl) {
     file << getNodeNameWithLabel(decl->GetVariableName(), ++expressionId, decl->GetVariableName());
 }
 
+void CPrintVisitor::Visit(CGetItemExpression* expression) {
+
+    int currentExpressionId = ++expressionId;
+
+    file << getNodeNameWithLabel("GetItem", currentExpressionId, "GetItem")  << getArrow();
+    expression->GetObject()->Accept(this);
+    file << getEndLine();
+    file << getNodeNameWithLabel("GetItem", currentExpressionId, "GetItem")  << getArrow();
+    expression->GetIndex()->Accept(this);
+}
+
 void CPrintVisitor::Visit( CMethod* statement ) {
     int currentExpressionId = ++expressionId;
     file << getNodeNameWithLabel("CMethod",currentExpressionId,"CMethod") << getArrow() <<
              getNodeNameWithLabel("Visibility",currentExpressionId,"Visibility") << getArrow();
-    file << statement->getVisibility();
+    file << getNodeNameWithLabel(statement->getVisibility(), currentExpressionId, statement->getVisibility());
     file << getEndLine();
 
     file << getNodeNameWithLabel("CMethod",currentExpressionId,"CMethod") << getArrow() <<
          getNodeNameWithLabel("TypeName",currentExpressionId,"TypeName") << getArrow();
-    file << statement->getTypeName();
+    file << getNodeNameWithLabel(statement->getTypeName(), currentExpressionId, statement->getTypeName());
     file << getEndLine();
 
     file << getNodeNameWithLabel("CMethod",currentExpressionId,"CMethod") << getArrow() <<
@@ -319,7 +330,7 @@ std::string CPrintVisitor::getEndLine() const {
 }
 
 std::string CPrintVisitor::getNodeNameWithLabel(std::string label, int id, std::string nodeName ) const {
-    return "{" + nodeName + label + delim +
+    return "{" + nodeName  + delim +
            std::to_string(id) +"[label=\"" + label + "\"]" +  "}";
 }
 

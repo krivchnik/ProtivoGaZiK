@@ -6,6 +6,7 @@
 #include <vector>
 
 #include <fstream>
+#include <Nodes/CGetItemExpression.h>
 
 class CPrintVisitor: public IVisitor {
 public:
@@ -37,6 +38,7 @@ public:
 	void Visit(CConstructClassExpression*);
     void Visit(CMethodCallExpression*);
     void Visit(CThisExpression*);
+    void Visit(CGetItemExpression*);
 
 private:
 
