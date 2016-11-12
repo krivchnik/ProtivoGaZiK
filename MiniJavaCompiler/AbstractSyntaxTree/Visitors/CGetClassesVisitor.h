@@ -17,7 +17,7 @@ public:
 
     CGetClassesVisitor();
 
-    std::map<CIdExpression, CClass> getClasses() { return classes; }
+    std::map<std::shared_ptr<CIdExpression> , std::shared_ptr<CClass> > getClasses() { return classes; }
 
     void Visit(CAssignStatement*);
     void Visit(CAssignItemStatement*);
@@ -48,7 +48,7 @@ public:
 
 private:
 
-    std::map<CIdExpression, CClass> classes;
+    std::map<std::shared_ptr<CIdExpression> , std::shared_ptr<CClass> > classes;
 
 };
 
