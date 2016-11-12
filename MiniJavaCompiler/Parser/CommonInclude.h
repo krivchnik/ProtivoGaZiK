@@ -40,3 +40,4 @@ using namespace std;
 
 #include <Visitors/CPrintVisitor.h>
 
+#include <Analyzer/CAnalyzer.h>

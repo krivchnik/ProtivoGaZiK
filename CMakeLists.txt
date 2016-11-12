@@ -1,7 +1,7 @@
 # cmake_minimum_required(VERSION <specify CMake version here>)
 project(MiniJavaCompiler)
 
-set(CMAKE_CXX_COMPILER "/usr/bin/g++-5")
+set(CMAKE_CXX_COMPILER "/usr/bin/g++")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -ansi -pedantic -std=c++11")
 SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS}" )
 
@@ -34,7 +34,8 @@ ADD_CUSTOM_COMMAND(
         COMMENT "Generating lexer.cpp"
 )
 
-file(GLOB NodeList ${PARSER_NODES_DIR} "${PARSER_NODES_DIR}/Nodes/*.cpp" "${PARSER_NODES_DIR}/Visitors/*.cpp")
+file(GLOB NodeList ${PARSER_NODES_DIR} "${PARSER_NODES_DIR}/Nodes/*.cpp" "${PARSER_NODES_DIR}/Visitors/*.cpp"
+        "${PARSER_NODES_DIR}/Analyzer/*.cpp")
 
 INCLUDE_DIRECTORIES(${PARSER_SOURCE_DIR} ${PARSER_NODES_DIR})
 

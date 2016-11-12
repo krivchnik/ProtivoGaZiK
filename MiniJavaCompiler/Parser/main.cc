@@ -5,7 +5,7 @@
 // prototype of bison-generated parser function
 int yyparse();
 
-shared_ptr<IStatement> ans;
+shared_ptr<CProgram> ans;
 
 int main(int argc, char **argv)
 {
@@ -23,7 +23,8 @@ int main(int argc, char **argv)
 	CPrintVisitor visitor;
 
 	visitor.StartVisit(ans.get(), std::string("graph.dot"));
-
+    CAnalyzer analyzer(ans);
+	analyzer.analyze();
 	return 0;
 }
 

@@ -126,7 +126,7 @@ void CGetClassesVisitor::Visit( CMethodCallExpression* exp) {
 }
 
 void CGetClassesVisitor::Visit( CClass* statement ) {
-    classes.insert(std::make_pair(statement->getId(), statement->getBaseId()));
+    classes.insert(std::make_pair(statement->getId(), std::shared_ptr<CClass>(statement)));
     statement->getId()->Accept(this);
     if (statement->getBaseId().get() != nullptr) {
         statement->getBaseId()->Accept(this);
