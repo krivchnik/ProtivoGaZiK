@@ -12,27 +12,27 @@ public:
 	//принимает корень дерева и имя файла с выводом для графвиза
 	void StartVisit(INode* startNode, std::string filename);
 	//Сюда нужно добавить методы visit для всех классов, которые мы хотим отображать в дереве.
-	void Visit(CAssignStatement*);
-	void Visit(CAssignItemStatement*);
-	void Visit(CPrintStatement*);
-	void Visit(CIfElseStatement*);
-	void Visit(CWhileStatement*);
-	void Visit(CListStatement*);
+	void Visit(CAssignStatement*) override;
+	void Visit(CAssignItemStatement*) override;
+	void Visit(CPrintStatement*) override;
+	void Visit(CIfElseStatement*) override;
+	void Visit(CWhileStatement*) override;
+	void Visit(CListStatement*) override;
 
-	void Visit(CVarDecl*);
-	void Visit(CMethod*);
-    void Visit(CClass*);
-	void Visit(CMainClass*);
-    void Visit(CProgram*);
+	void Visit(CVarDecl*) override;
+	void Visit(CMethod*) override;
+    void Visit(CClass*) override;
+	void Visit(CMainClass*) override;
+    void Visit(CProgram*) override;
 
-	void Visit(CIdExpression*);
-	void Visit(CNumExpression*);
-	void Visit(CBoolExpression*);
-    void Visit(CNotExpression*);
-	void Visit(COperationExpression*);
-	void Visit(CLengthExpression*);
-	void Visit(CArrayConstructionExpression*);
-	void Visit(CConstructClassExpression*);
+	void Visit(CIdExpression*) override;
+	void Visit(CNumExpression*) override;
+	void Visit(CBoolExpression*) override;
+    void Visit(CNotExpression*) override;
+	void Visit(COperationExpression*) override;
+	void Visit(CLengthExpression*) override;
+	void Visit(CArrayConstructionExpression*) override;
+	void Visit(CConstructClassExpression*) override;
 
 private:
 
