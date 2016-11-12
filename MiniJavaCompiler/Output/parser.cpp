@@ -62,7 +62,7 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 4 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:339  */
+#line 4 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:339  */
 
 #include <CommonInclude.h>
 int yyerror(char *s);
@@ -70,7 +70,7 @@ int yylex(void);
 
 extern shared_ptr<CProgram> ans;
 
-#line 74 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:339  */
+#line 74 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -90,8 +90,8 @@ extern shared_ptr<CProgram> ans;
 
 /* In a future release of Bison, this section will be replaced
    by #include "heading.h".  */
-#ifndef YY_YY_HOME_KAGUDKOV_CLIONPROJECTS_PROTIVOGAZIK_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED
-# define YY_YY_HOME_KAGUDKOV_CLIONPROJECTS_PROTIVOGAZIK_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED
+#ifndef YY_YY_HOME_NISMOHL_CLIONPROJECTS_PROTIVOGAZIK_2_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED
+# define YY_YY_HOME_NISMOHL_CLIONPROJECTS_PROTIVOGAZIK_2_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -154,7 +154,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 12 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:355  */
+#line 12 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:355  */
 
   int                     int_val;
   char*                   op_val;
@@ -168,7 +168,7 @@ union YYSTYPE
   CMainClass*		      main_class;
   CMethodCallExpression*  method_call;
 
-#line 172 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:355  */
+#line 172 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -181,11 +181,11 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_HOME_KAGUDKOV_CLIONPROJECTS_PROTIVOGAZIK_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED  */
+#endif /* !YY_YY_HOME_NISMOHL_CLIONPROJECTS_PROTIVOGAZIK_2_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED  */
 
 /* Copy the second part of user declarations.  */
 
-#line 189 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:358  */
+#line 189 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -1375,33 +1375,33 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 71 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 71 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { ans = shared_ptr<CProgram>(new CProgram(shared_ptr<CMainClass>((yyvsp[-1].main_class)), shared_ptr<CListStatement>((yyvsp[0].stat_list)))); return 0;}
-#line 1381 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1381 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 75 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 75 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.main_class) = new CMainClass(shared_ptr<CIdExpression>(new CIdExpression(std::string((yyvsp[-15].op_val)))),
 								  shared_ptr<CIdExpression>(new CIdExpression(std::string((yyvsp[-5].op_val)))),
 				 				  shared_ptr<CListStatement>((yyvsp[-2].stat_list))); }
-#line 1389 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1389 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 80 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 80 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = new CListStatement(std::string("Classes")); }
-#line 1395 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1395 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 81 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 81 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = std::move((yyvsp[0].stat_list)); (yyval.stat_list)->Add(shared_ptr<IStatement> ((yyvsp[-1].class_decl))); }
-#line 1401 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1401 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 87 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 87 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     {
       	(yyval.class_decl) = new CClass(
       		std::shared_ptr<CIdExpression>(new CIdExpression(std::string((yyvsp[-4].op_val)))),
@@ -1409,11 +1409,11 @@ yyreduce:
 			std::shared_ptr<CListStatement>((yyvsp[-1].stat_list))
 		);
     }
-#line 1413 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1413 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 96 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 96 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     {
       	(yyval.class_decl) = new CClass(
       		std::shared_ptr<CIdExpression>(new CIdExpression(std::string((yyvsp[-6].op_val)))), 
@@ -1422,249 +1422,249 @@ yyreduce:
       		std::shared_ptr<CListStatement>((yyvsp[-1].stat_list))
       	);
     }
-#line 1426 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1426 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 107 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 107 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = new CListStatement(std::string("Methods")); }
-#line 1432 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1432 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 108 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 108 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = std::move((yyvsp[0].stat_list)); (yyval.stat_list)->Add(shared_ptr<CMethod>((yyvsp[-1].method))); }
-#line 1438 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1438 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 111 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 111 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = new CListStatement(std::string("Variables")); }
-#line 1444 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1444 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 112 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 112 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = std::move((yyvsp[-3].stat_list)); (yyval.stat_list)->Add(shared_ptr<CVarDecl>(
     									  new CVarDecl(std::string((yyvsp[-2].op_val)), std::string((yyvsp[-1].op_val))))); }
-#line 1451 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1451 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 117 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 117 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = new CListStatement(std::string("Parameters")); }
-#line 1457 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1457 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 118 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 118 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = std::move((yyvsp[0].stat_list)); }
-#line 1463 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1463 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 122 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 122 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = new CListStatement(std::string("Parameters")); (yyval.stat_list)->Add(shared_ptr<CVarDecl>(new CVarDecl(std::string((yyvsp[-1].op_val)), std::string((yyvsp[0].op_val))))); }
-#line 1469 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1469 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 123 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 123 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = std::move((yyvsp[-3].stat_list)); (yyval.stat_list)->Add(shared_ptr<CVarDecl>(new CVarDecl(std::string((yyvsp[-1].op_val)), std::string((yyvsp[0].op_val))))); }
-#line 1475 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1475 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 126 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 126 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CNumExpression((yyvsp[0].int_val)); }
-#line 1481 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1481 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 127 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 127 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new COperationExpression(shared_ptr<IExpression>((yyvsp[-2].expr_val)), shared_ptr<IExpression>((yyvsp[0].expr_val)), COperationExpression::ADDITION); }
-#line 1487 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1487 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 128 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 128 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new COperationExpression(shared_ptr<IExpression>((yyvsp[-2].expr_val)), shared_ptr<IExpression>((yyvsp[0].expr_val)), COperationExpression::SUBTRACTION); }
-#line 1493 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1493 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 129 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 129 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new COperationExpression(shared_ptr<IExpression>((yyvsp[-2].expr_val)), shared_ptr<IExpression>((yyvsp[0].expr_val)), COperationExpression::MULTIPLICATION); }
-#line 1499 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1499 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 130 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 130 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new COperationExpression(shared_ptr<IExpression>((yyvsp[-2].expr_val)), shared_ptr<IExpression>((yyvsp[0].expr_val)), COperationExpression::MOD); }
-#line 1505 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1505 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 131 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 131 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new COperationExpression(shared_ptr<IExpression>((yyvsp[-2].expr_val)), shared_ptr<IExpression>((yyvsp[0].expr_val)), COperationExpression::AND); }
-#line 1511 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1511 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 132 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 132 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new COperationExpression(shared_ptr<IExpression>((yyvsp[-2].expr_val)), shared_ptr<IExpression>((yyvsp[0].expr_val)), COperationExpression::OR); }
-#line 1517 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1517 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 133 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 133 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new COperationExpression(shared_ptr<IExpression>((yyvsp[-2].expr_val)), shared_ptr<IExpression>((yyvsp[0].expr_val)), COperationExpression::LESS); }
-#line 1523 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1523 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 134 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 134 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CBoolExpression(true); }
-#line 1529 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1529 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 135 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 135 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CBoolExpression(false); }
-#line 1535 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1535 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 137 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 137 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CThisExpression(); }
-#line 1541 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1541 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 139 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 139 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CLengthExpression(shared_ptr<IExpression>((yyvsp[-2].expr_val))); }
-#line 1547 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1547 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 140 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 140 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CIdExpression(std::string((yyvsp[0].op_val))); }
-#line 1553 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1553 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 141 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 141 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CNotExpression(shared_ptr<IExpression>((yyvsp[0].expr_val))); }
-#line 1559 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1559 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 142 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 142 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CArrayConstructionExpression(shared_ptr<IExpression>((yyvsp[-1].expr_val))); }
-#line 1565 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1565 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 143 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 143 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CGetItemExpression(shared_ptr<IExpression>((yyvsp[-3].expr_val)), shared_ptr<IExpression>((yyvsp[-1].expr_val))); }
-#line 1571 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1571 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 144 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 144 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = (yyvsp[-1].expr_val); }
-#line 1577 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1577 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 146 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 146 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CConstructClassExpression(shared_ptr<CIdExpression>
 		                                                                        (new CIdExpression(std::string((yyvsp[-2].op_val))))); }
-#line 1584 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1584 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 148 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 148 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CMethodCallExpression(shared_ptr<IExpression>((yyvsp[-5].expr_val)),
 																					 shared_ptr<CIdExpression>(new CIdExpression((yyvsp[-3].op_val))), 
 																				     shared_ptr<CListExpression>((yyvsp[-1].exp_list))); }
-#line 1592 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1592 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 154 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 154 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.exp_list) = new CListExpression(std::string("Arguments")); }
-#line 1598 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1598 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 155 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 155 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.exp_list) = std::move((yyvsp[0].exp_list)); }
-#line 1604 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1604 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 159 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 159 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.exp_list) = new CListExpression(std::string("Arguments")); (yyval.exp_list)->Add(shared_ptr<IExpression>((yyvsp[0].expr_val))); }
-#line 1610 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1610 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 160 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 160 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.exp_list) = std::move((yyvsp[-2].exp_list)); (yyval.exp_list)->Add(shared_ptr<IExpression>((yyvsp[0].expr_val))); }
-#line 1616 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1616 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 163 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 163 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = new CListStatement(std::string("Statements")); }
-#line 1622 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1622 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 164 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 164 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = std::move((yyvsp[0].stat_list)); (yyval.stat_list)->Add(shared_ptr<IStatement> ((yyvsp[-1].stat_val))); }
-#line 1628 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1628 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 168 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 168 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.op_val) = "intArray"; }
-#line 1634 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1634 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 169 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 169 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.op_val) = "boolean"; }
-#line 1640 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1640 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 170 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 170 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.op_val) = "int"; }
-#line 1646 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1646 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 171 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 171 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.op_val) = (yyvsp[0].op_val); }
-#line 1652 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1652 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 176 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 176 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.op_val) = "public"; }
-#line 1658 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1658 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 177 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 177 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.op_val) = "private"; }
-#line 1664 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1664 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 186 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 186 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     {
         (yyval.method) = new CMethod(
             std::string((yyvsp[-12].op_val)),
@@ -1676,53 +1676,53 @@ yyreduce:
             shared_ptr<IExpression>((yyvsp[-2].expr_val))
         );
     }
-#line 1680 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1680 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 199 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 199 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_val) = (yyvsp[-1].stat_list); }
-#line 1686 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1686 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 201 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 201 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_val) = new CIfElseStatement(shared_ptr<IExpression>((yyvsp[-4].expr_val)),
     																					shared_ptr<IStatement>((yyvsp[-2].stat_val)),
     																					shared_ptr<IStatement>((yyvsp[0].stat_val))); }
-#line 1694 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1694 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 205 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 205 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_val) = new CWhileStatement(shared_ptr<IExpression>((yyvsp[-2].expr_val)),
     																				   shared_ptr<IStatement>((yyvsp[0].stat_val))); }
-#line 1701 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1701 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 208 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 208 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_val) = new CPrintStatement(shared_ptr<IExpression>((yyvsp[-2].expr_val))); }
-#line 1707 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1707 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 210 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 210 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_val) = new CAssignStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string((yyvsp[-3].op_val)))), 
     																					shared_ptr<IExpression>((yyvsp[-1].expr_val))); }
-#line 1714 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1714 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 213 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
+#line 213 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_val) = new CAssignItemStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string((yyvsp[-6].op_val)))),
      																						shared_ptr<IExpression>((yyvsp[-4].expr_val)),
     																						shared_ptr<IExpression>((yyvsp[-1].expr_val))); }
-#line 1722 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1722 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 1726 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1726 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1950,7 +1950,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 218 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1906  */
+#line 218 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1906  */
 
 
 int yyerror(string s)

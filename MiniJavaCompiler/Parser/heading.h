@@ -85,10 +85,7 @@ extern int yydebug;
     END = 295,
     INTEGER_LITERAL = 296,
     ID = 297,
-    MOD = 298,
-    VAR_DECL_LIST = 299,
-    METHOD_DECL = 300,
-    STAT_LIST = 301
+    MOD = 298
   };
 #endif
 
@@ -99,17 +96,19 @@ union YYSTYPE
 {
 #line 12 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1909  */
 
-  int                int_val;
-  char*              op_val;
-  INode*             node_val;
-  IExpression*       expr_val;
-  IStatement*        stat_val;
-  CListStatement*    stat_list;
-  CMethod*           method;
-  CClass*			 class_decl;
-  CMainClass*		 main_class;
+  int                     int_val;
+  char*                   op_val;
+  INode*                  node_val;
+  IExpression*            expr_val;
+  IStatement*             stat_val;
+  CListStatement*         stat_list;
+  CListExpression*		  exp_list;
+  CMethod*                method;
+  CClass*			      class_decl;
+  CMainClass*		      main_class;
+  CMethodCallExpression*  method_call;
 
-#line 113 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
+#line 112 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
