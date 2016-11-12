@@ -1,27 +1,6 @@
 #include <Visitors/CPrintVisitor.h>
 
-#include <Nodes/CAssignStatement.h>
-#include <Nodes/CAssignItemStatement.h>
-#include <Nodes/CPrintStatement.h>
-#include <Nodes/CIfElseStatement.h>
-#include <Nodes/CWhileStatement.h>
-#include <Nodes/CListStatement.h>
-
-#include <Nodes/CVarDecl.h>
-#include <Nodes/CMethod.h>
-#include <Nodes/CClass.h>
-#include <Nodes/CMainClass.h>
-#include <Nodes/CProgram.h>
-
-#include <Nodes/CIdExpression.h>
-#include <Nodes/CBoolExpression.h>
-#include <Nodes/CNumExpression.h>
-#include <Nodes/CNotExpression.h>
-#include <Nodes/COperationExpression.h>
-#include <Nodes/CLengthExpression.h>
-#include <Nodes/CArrayConstructionExpression.h>
-#include <Nodes/CConstructClassExpression.h>
-#include <Nodes/CMethodCallExpression.h>
+#include <CommonInclude.h>
 
 std::string GetOperationSign(int index) {
 	std::vector<std::string> signs = {"addition", "subtraction", "multiplication", "mod", "and", "or", "less"};
@@ -70,6 +49,13 @@ void CPrintVisitor::Visit(CBoolExpression* expression) {
 	std::string newId = getNodeNameWithLabel(std::to_string(expression->GetValue()), expressionId, "Bool");
 	file << newId;
 	idsOfTokenWithBoxShape.push_back(newId);
+}
+
+void CPrintVisitor::Visit(CThisExpression* expression) {
+    ++expressionId;
+    std::string newId = getNodeNameWithLabel("This", expressionId, "This");
+    file << newId;
+    idsOfTokenWithBoxShape.push_back(newId);
 }
 
 void CPrintVisitor::Visit(CIdExpression* expression) {
@@ -173,6 +159,27 @@ void CPrintVisitor::Visit(CListStatement* statement) {
             file << getEndLine();
         } else {
             file << getNodeNameWithLabel("List" + statement->GetStatementType(), currentExpressionId, "List") << getArrow();
+            statements[numberOfIterations - 1]->Accept(this);
+        }
+    }
+    if (numberOfIterations == 0) {
+        file << getNodeNameWithLabel("Empty", currentExpressionId, "Empty");
+    }
+}
+
+void CPrintVisitor::Visit(CListExpression* statement) {
+    int currentExpressionId = ++expressionId;
+
+    auto statements = statement->GetExpressions();
+    size_t numberOfIterations = statements.size();
+
+    for(size_t i = 0; i < numberOfIterations; ++i) {
+        if (i != numberOfIterations - 1) {
+            file << getNodeNameWithLabel("List" + statement->GetExpressionType(), currentExpressionId, "List") << getArrow();
+            statements[i]->Accept(this);
+            file << getEndLine();
+        } else {
+            file << getNodeNameWithLabel("List" + statement->GetExpressionType(), currentExpressionId, "List") << getArrow();
             statements[numberOfIterations - 1]->Accept(this);
         }
     }

@@ -2,7 +2,7 @@
 // Created by nismohl on 01.11.16.
 //
 
-#include "CVarDecl.h"
+#include <Nodes/CVarDecl.h>
 
 CVarDecl::CVarDecl(const std::string typeNameArg, const std::string variableNameArg)
         : typeName(typeNameArg), variableName(variableNameArg)

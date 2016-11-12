@@ -1,4 +1,4 @@
-
+#pragma once
 
 #include <Nodes/IStatement.h>
 #include <Nodes/IExpression.h>

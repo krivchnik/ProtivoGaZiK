@@ -1,7 +1,6 @@
 //
 // Created by nismohl on 03.11.16.
 //
-
 #pragma once
 
 #include <Nodes/IStatement.h>

@@ -8,7 +8,9 @@ class CCompoundStatement;
 class CPrintStatement;
 class CIfElseStatement;
 class CWhileStatement;
+
 class CListStatement;
+class CListExpression;
 
 class CVarDecl;
 class CListVarDecl;
@@ -28,6 +30,7 @@ class CLengthExpression;
 class CArrayConstructionExpression;
 class CConstructClassExpression;
 class CMethodCallExpression;
+class CThisExpression;
 
 class IVisitor {
 public:
@@ -37,7 +40,9 @@ public:
 	virtual void Visit(CPrintStatement*) = 0;
 	virtual void Visit(CIfElseStatement*) = 0;
     virtual void Visit(CWhileStatement*) = 0;
+
     virtual void Visit(CListStatement*) = 0;
+    virtual void Visit(CListExpression*) = 0;
 
 	virtual void Visit(CVarDecl*) = 0;
     virtual void Visit(CMethod*) = 0;
@@ -54,5 +59,5 @@ public:
     virtual void Visit(CArrayConstructionExpression*) = 0;
 	virtual void Visit(CConstructClassExpression*) = 0;
     virtual void Visit(CMethodCallExpression*) = 0;
-
+    virtual void Visit(CThisExpression*) = 0;
 };

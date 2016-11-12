@@ -16,10 +16,11 @@ extern shared_ptr<CProgram> ans;
   IExpression*            expr_val;
   IStatement*             stat_val;
   CListStatement*         stat_list;
+  CListExpression*		  exp_list;
   CMethod*                method;
   CClass*			      class_decl;
   CMainClass*		      main_class;
-  CMethodCallExpression   method_call;
+  CMethodCallExpression*  method_call;
 }
 
 %start	input
@@ -46,7 +47,7 @@ extern shared_ptr<CProgram> ans;
 %type  <stat_list>  		statList
 %type  <op_val>  			typeName visibility
 
-%type  <stat_list>          expList nonEmptyExpList
+%type  <exp_list>          expList nonEmptyExpList
 %type  <stat_list> 			varDeclList paramList nonEmptyParamList
 %type  <stat_list>			methodDeclList
 %type  <stat_list>			classDeclList
@@ -64,9 +65,6 @@ extern shared_ptr<CProgram> ans;
 
 %nonassoc ASSIGN
 %nonassoc LESS
-
-%precedence VAR_DECL_LIST
-%precedence METHOD_DECL
 
 %%
 
@@ -112,7 +110,7 @@ methodDeclList
 varDeclList
     : %empty                            { $$ = new CListStatement(std::string("Variables")); }
     | varDeclList typeName ID SEMICOLON { $$ = std::move($1); $$->Add(shared_ptr<CVarDecl>(
-    									  new CVarDecl(std::string($2), std::string($3)))); } %prec VAR_DECL_LIST
+    									  new CVarDecl(std::string($2), std::string($3)))); }
     ;
 
 paramList
@@ -136,6 +134,8 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
         | TRUE      	{ $$ = new CBoolExpression(true); }
         | FALSE 		{ $$ = new CBoolExpression(false); }
 
+        | THIS			{ $$ = new CThisExpression(); }
+
 		| exp POINT LENGTH 				     { $$ = new CLengthExpression(shared_ptr<IExpression>($1)); }
 		| ID 							     { $$ = new CIdExpression(std::string($1)); }
 		| NOT exp   					     { $$ = new CNotExpression(shared_ptr<IExpression>($2)); }
@@ -144,16 +144,16 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
 		                                                                        (new CIdExpression(std::string($2)))); }
 		| exp POINT ID LPBRACKET expList RPBRACKET  { $$ = new CMethodCallExpression(shared_ptr<IExpression>($1),
 																					 shared_ptr<CIdExpression>(new CIdExpression($3)), 
-																				     shared_ptr<CListStatement>($5)); }
+																				     shared_ptr<CListExpression>($5)); }
 		;
 
 expList
- 	: %empty   							{ $$ = new CListStatement(std::string("Arguments")); }
+ 	: %empty   							{ $$ = new CListExpression(std::string("Arguments")); }
  	| nonEmptyExpList                   { $$ = std::move($1); }
  	;
 
 nonEmptyExpList
-	: exp 								{ $$ = new CListStatement(std::string("Arguments")); $$->Add(shared_ptr<IExpression>($1)); }
+	: exp 								{ $$ = new CListExpression(std::string("Arguments")); $$->Add(shared_ptr<IExpression>($1)); }
     | nonEmptyExpList COMMA exp         { $$ = std::move($1); $$->Add(shared_ptr<IExpression>($3)); }
 
 
@@ -190,7 +190,7 @@ methodDeclaration
             shared_ptr<CListStatement>($9),
             shared_ptr<IExpression>($11)
         );
-    } %prec METHOD_DECL
+    }
     ;
 
 stat 	: LFBRACKET statList RFBRACKET                      { $$ = $2; }
@@ -205,11 +205,11 @@ stat 	: LFBRACKET statList RFBRACKET                      { $$ = $2; }
     	| PRINTLN LPBRACKET exp RPBRACKET SEMICOLON 		{ $$ = new CPrintStatement(shared_ptr<IExpression>($3)); }
 
     	| ID ASSIGN exp SEMICOLON                			{ $$ = new CAssignStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))), 
-    																					shared_ptr<IExpression>($3)); } %prec STAT_LIST
+    																					shared_ptr<IExpression>($3)); }
 
     	| ID LSBRACKET exp RSBRACKET ASSIGN exp SEMICOLON 	{ $$ = new CAssignItemStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))),
      																						shared_ptr<IExpression>($3),
-    																						shared_ptr<IExpression>($6)); } %prec STAT_LIST
+    																						shared_ptr<IExpression>($6)); }
         ;
 
 %%

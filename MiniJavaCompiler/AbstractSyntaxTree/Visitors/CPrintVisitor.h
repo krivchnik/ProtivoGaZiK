@@ -17,7 +17,9 @@ public:
 	void Visit(CPrintStatement*);
 	void Visit(CIfElseStatement*);
 	void Visit(CWhileStatement*);
+
 	void Visit(CListStatement*);
+    void Visit(CListExpression*);
 
 	void Visit(CVarDecl*);
 	void Visit(CMethod*);
@@ -34,6 +36,7 @@ public:
 	void Visit(CArrayConstructionExpression*);
 	void Visit(CConstructClassExpression*);
     void Visit(CMethodCallExpression*);
+    void Visit(CThisExpression*);
 
 private:
 

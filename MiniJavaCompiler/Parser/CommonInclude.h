@@ -20,13 +20,16 @@ using namespace std;
 #include <Nodes/CArrayConstructionExpression.h>
 #include <Nodes/CConstructClassExpression.h>
 #include <Nodes/CMethodCallExpression.h>
+#include <Nodes/CThisExpression.h>
 
 #include <Nodes/CAssignStatement.h>
 #include <Nodes/CAssignItemStatement.h>
 #include <Nodes/CPrintStatement.h>
 #include <Nodes/CIfElseStatement.h>
 #include <Nodes/CWhileStatement.h>
+
 #include <Nodes/CListStatement.h>
+#include <Nodes/CListExpression.h>
 
 #include <Nodes/CVarDecl.h>
 #include <Nodes/CMethod.h>
