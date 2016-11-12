@@ -73,10 +73,10 @@ extern shared_ptr<CProgram> ans;
 input:	mainClass classDeclList { ans = shared_ptr<CProgram>(new CProgram(shared_ptr<CMainClass>($1), shared_ptr<CListStatement>($2))); return 0;}
 		;
 
-mainClass:	CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET stat RFBRACKET RFBRACKET
+mainClass:	CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
 			{ $$ = new CMainClass(shared_ptr<CIdExpression>(new CIdExpression(std::string($2))),
 								  shared_ptr<CIdExpression>(new CIdExpression(std::string($12))),
-				 				  shared_ptr<IStatement>($15)); }
+				 				  shared_ptr<CListStatement>($15)); }
 ;
 
 classDeclList : %empty 				 				{ $$ = new CListStatement(std::string("Classes")); }
