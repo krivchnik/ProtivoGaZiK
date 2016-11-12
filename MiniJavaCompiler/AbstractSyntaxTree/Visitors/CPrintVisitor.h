@@ -6,7 +6,6 @@
 #include <vector>
 
 #include <fstream>
-#include <Nodes/CGetItemExpression.h>
 
 class CPrintVisitor: public IVisitor {
 public:
