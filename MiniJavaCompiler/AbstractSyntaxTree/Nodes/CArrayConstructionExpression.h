@@ -1,6 +1,5 @@
+#pragma once
 
-
-#include <Nodes/IStatement.h>
 #include <Nodes/IExpression.h>
 
 class CArrayConstructionExpression : public IExpression {
@@ -11,7 +10,6 @@ public:
 
 private:
     std::shared_ptr<IExpression> size;
-
 };
 
 
