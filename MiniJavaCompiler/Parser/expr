@@ -328,7 +328,7 @@ class Tree{
 
 
 
-class Visitor {
+class Visitor extends MyVisitor {
     Tree l ;
     Tree r ;
 
@@ -352,6 +352,29 @@ class Visitor {
 
 
 class MyVisitor extends Visitor {
+
+    public int visit(Tree n){
+	int nti ;
+
+	if (n.GetHas_Right()){
+	    r = n.GetRight() ;
+	    nti = r.accept(this) ; }
+	else nti = 0 ;
+
+	System.out.println(n.GetKey());
+
+	if (n.GetHas_Left()) {
+	    l = n.GetLeft();
+	    nti =l.accept(this) ; }
+	else nti = 0 ;
+
+	return 0;
+    }
+
+}
+
+
+class Visitor extends MyVisitor {
 
     public int visit(Tree n){
 	int nti ;

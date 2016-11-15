@@ -23,6 +23,10 @@ public:
 
     const std::shared_ptr<CListStatement> &getMethods() const;
 
+    void setId(const std::shared_ptr<CIdExpression> &id);
+
+    void setBaseId(const std::shared_ptr<CIdExpression> &baseId);
+
     void Accept(IVisitor*);
 private:
     std::shared_ptr<CIdExpression> id;

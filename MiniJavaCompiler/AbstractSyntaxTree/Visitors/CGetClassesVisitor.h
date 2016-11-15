@@ -18,7 +18,8 @@ public:
     CGetClassesVisitor();
 
     std::map<std::shared_ptr<CIdExpression> , std::shared_ptr<CClass> > getClasses() { return classes; }
-
+    //если увидим ещё раз класс с тем же именем, то препишем его уже существующему CIdExpression;
+    std::map<std::string, std::shared_ptr<CIdExpression> > classesNames;
     void Visit(CAssignStatement*);
     void Visit(CAssignItemStatement*);
     void Visit(CPrintStatement*);
