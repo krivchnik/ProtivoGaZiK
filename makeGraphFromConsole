@@ -1,0 +1,25 @@
+cmake CMakeLists.txt
+make
+./MiniJavaCompilerProject Examples/BinarySearch.java
+dot -Tps graph.dot -o Examples/BinarySearch.ps
+
+./MiniJavaCompilerProject Examples/BinaryTree.java
+dot -Tps graph.dot -o Examples/BinaryTree.ps
+
+./MiniJavaCompilerProject Examples/BubbleSort.java
+dot -Tps graph.dot -o Examples/BubbleSort.ps
+
+./MiniJavaCompilerProject Examples/Factorial.java
+dot -Tps graph.dot -o Examples/Factorial.ps
+
+./MiniJavaCompilerProject Examples/LinearSearch.java
+dot -Tps graph.dot -o Examples/LinearSearch.ps
+
+./MiniJavaCompilerProject Examples/LinkedList.java
+dot -Tps graph.dot -o Examples/LinkedList.ps
+
+./MiniJavaCompilerProject Examples/QuickSort.java
+dot -Tps graph.dot -o Examples/QuickSort.ps
+
+./MiniJavaCompilerProject Examples/TreeVisitor.java
+dot -Tps graph.dot -o Examples/TreeVisitor.ps
