@@ -1,4 +1,4 @@
-cmake CMakeLists.txt
+cmake CMakeListsForConsole.txt
 make
 ./MiniJavaCompilerProject Examples/BinarySearch.java
 dot -Tps graph.dot -o Examples/BinarySearch.ps

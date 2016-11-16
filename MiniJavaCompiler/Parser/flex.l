@@ -141,7 +141,6 @@ comment          \/\/.*\n
 "."              { updateLocation(); return POINT; }
 ","				 { updateLocation(); return COMMA; }
 
-<<EOF>> 		 { updateLocation(); return END; }
 
 {STRING}         {
 
