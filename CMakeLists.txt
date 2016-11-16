@@ -1,5 +1,6 @@
 # cmake_minimum_required(VERSION <specify CMake version here>)
-project(MiniJavaCompiler)
+cmake_minimum_required(VERSION 3.5)
+project(MiniJavaCompilerProject)
 
 set(CMAKE_CXX_COMPILER "/usr/bin/g++")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -ansi -pedantic -std=c++11")
@@ -39,4 +40,4 @@ file(GLOB NodeList ${PARSER_NODES_DIR} "${PARSER_NODES_DIR}/Nodes/*.cpp" "${PARS
 
 INCLUDE_DIRECTORIES(${PARSER_SOURCE_DIR} ${PARSER_NODES_DIR})
 
-add_executable(MiniJavaCompiler ${NodeList} ${BisonOutput} ${FlexOutput} ${PARSER_SOURCE_DIR}/main.cc)
+add_executable(MiniJavaCompilerProject ${NodeList} ${BisonOutput} ${FlexOutput} ${PARSER_SOURCE_DIR}/main.cc)
