@@ -10,7 +10,6 @@
 #include <ostream>
 
 
-
 class CCheckTypesVisitor : public IVisitor {
 
 public:
