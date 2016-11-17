@@ -4,9 +4,14 @@
 
 #include <Nodes/CVarDecl.h>
 
-CVarDecl::CVarDecl(const std::string typeNameArg, const std::string variableNameArg)
-        : typeName(typeNameArg), variableName(variableNameArg)
-{}
+CVarDecl::CVarDecl(const Location location,
+                   const std::string typeName,
+                   const std::string variableName)
+        : typeName(typeName),
+          variableName(variableName) {
+
+    this->location = location;
+}
 
 std::string CVarDecl::GetTypeName() const {
     return typeName;

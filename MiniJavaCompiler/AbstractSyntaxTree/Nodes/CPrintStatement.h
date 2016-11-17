@@ -5,7 +5,7 @@
 
 class CPrintStatement: public IStatement {
 public:
-	CPrintStatement(std::shared_ptr<IExpression> expressionArg);
+	CPrintStatement(const Location location, std::shared_ptr<IExpression> expressionArg);
 
 	std::shared_ptr<IExpression> GetExpression();
 

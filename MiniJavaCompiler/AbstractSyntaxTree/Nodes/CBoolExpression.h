@@ -4,7 +4,7 @@
 
 class CBoolExpression: public IExpression {
 public:
-    CBoolExpression(bool value);
+    CBoolExpression(const Location location, bool value);
     bool GetValue();
 
     void Accept(IVisitor*);

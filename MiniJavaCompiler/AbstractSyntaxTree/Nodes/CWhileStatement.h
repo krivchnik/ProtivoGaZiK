@@ -5,7 +5,9 @@
 
 class CWhileStatement : public IStatement {
 public:
-    CWhileStatement(std::shared_ptr<IExpression> condition, std::shared_ptr<IStatement> body);
+    CWhileStatement(const Location location,
+                    std::shared_ptr<IExpression> condition,
+                    std::shared_ptr<IStatement> body);
 
     std::shared_ptr<IExpression> getCondition();
 

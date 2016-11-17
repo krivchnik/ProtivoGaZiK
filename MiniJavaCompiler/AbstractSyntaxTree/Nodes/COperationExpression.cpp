@@ -1,7 +1,15 @@
 #include <Nodes/COperationExpression.h>
 
-COperationExpression::COperationExpression(std::shared_ptr<IExpression> leftOperand_, std::shared_ptr<IExpression> rightOperand_, OperationType type_) :
-	leftOperand(leftOperand_), rightOperand(rightOperand_), type(type_) {}
+COperationExpression::COperationExpression(const Location location,
+										   std::shared_ptr<IExpression> leftOperand,
+										   std::shared_ptr<IExpression> rightOperand,
+										   OperationType type)
+		: leftOperand(leftOperand),
+		  rightOperand(rightOperand),
+		  type(type) {
+
+	this->location = location;
+}
 
 std::shared_ptr<IExpression> COperationExpression::GetLeftOperand() {
 	return leftOperand;

@@ -4,11 +4,15 @@
 
 #include "CIfElseStatement.h"
 
-CIfElseStatement::CIfElseStatement(const std::shared_ptr<IExpression> &expression,
+CIfElseStatement::CIfElseStatement(const Location location,
+                                   const std::shared_ptr<IExpression> &expression,
                                    const std::shared_ptr<IStatement> &ifStatement,
-                                   const std::shared_ptr<IStatement> &elseStatement) : expression(expression),
-                                                                                       ifStatement(ifStatement),
-                                                                                       elseStatement(elseStatement) {}
+                                   const std::shared_ptr<IStatement> &elseStatement)
+        : expression(expression),
+          ifStatement(ifStatement),
+          elseStatement(elseStatement) {
+    this->location = location;
+}
 
 const std::shared_ptr<IExpression> &CIfElseStatement::getExpression() const {
     return expression;

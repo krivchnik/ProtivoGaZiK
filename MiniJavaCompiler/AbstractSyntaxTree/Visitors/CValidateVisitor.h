@@ -13,8 +13,6 @@
 
 #include <fstream>
 
-typedef std::pair<int, int> Location;
-
 class CValidateVisitor: public IVisitor {
 public:
 

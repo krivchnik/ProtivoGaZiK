@@ -4,7 +4,11 @@
 
 #include <Nodes/CLengthExpression.h>
 
-CLengthExpression::CLengthExpression(std::shared_ptr<IExpression> expression) : expression(expression) {}
+CLengthExpression::CLengthExpression(const Location location,
+                                     std::shared_ptr<IExpression> expression)
+        : expression(expression) {
+    this->location = location;
+}
 
 std::shared_ptr<IExpression> CLengthExpression::getExpression() {
     return expression;

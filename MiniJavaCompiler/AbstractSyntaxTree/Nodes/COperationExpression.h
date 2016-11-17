@@ -8,7 +8,11 @@ public:
 
 	enum OperationType { ADDITION, SUBTRACTION, MULTIPLICATION, MOD, AND, OR, LESS };
 
-	COperationExpression(std::shared_ptr<IExpression> leftOperand_, std::shared_ptr<IExpression> rightOperand_, OperationType type_);
+	COperationExpression(const Location location,
+						 std::shared_ptr<IExpression> leftOperand_,
+						 std::shared_ptr<IExpression> rightOperand_,
+						 OperationType type_);
+
 	std::shared_ptr<IExpression> GetLeftOperand();
 	std::shared_ptr<IExpression> GetRightOperand();
 	OperationType GetOperationType();

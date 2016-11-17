@@ -9,10 +9,12 @@
 
 class CClass : public IStatement {
 public:
-    CClass( const std::shared_ptr<CIdExpression> &id,
+    CClass( const Location location,
+            const std::shared_ptr<CIdExpression> &id,
             const std::shared_ptr<CListStatement> &fields, const std::shared_ptr<CListStatement> &methods);
 
-    CClass( const std::shared_ptr<CIdExpression> &id, const std::shared_ptr<CIdExpression> &baseId,
+    CClass( const Location location,
+            const std::shared_ptr<CIdExpression> &id, const std::shared_ptr<CIdExpression> &baseId,
             const std::shared_ptr<CListStatement> &fields, const std::shared_ptr<CListStatement> &methods);
 
     const std::shared_ptr<CIdExpression> &getId() const;

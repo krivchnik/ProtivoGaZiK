@@ -1,7 +1,9 @@
 #include <Nodes/CNotExpression.h>
 
-CNotExpression::CNotExpression(std::shared_ptr<IExpression> exp_) :
-        expression(exp_) {}
+CNotExpression::CNotExpression(const Location location, std::shared_ptr<IExpression> expression)
+        : expression(expression) {
+    this->location = location;
+}
 
 std::shared_ptr<IExpression> CNotExpression::GetExpression() {
     return expression;

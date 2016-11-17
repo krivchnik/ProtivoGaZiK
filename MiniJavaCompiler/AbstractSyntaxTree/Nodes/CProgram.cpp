@@ -2,10 +2,15 @@
 // Created by nismohl on 04.11.16.
 //
 
-#include "CProgram.h"
+#include <Nodes/CProgram.h>
 
-CProgram::CProgram(const std::shared_ptr<CMainClass> &mainClass, const std::shared_ptr<CListStatement> &minorClasses)
-        : mainClass(mainClass), minorClasses(minorClasses) {}
+CProgram::CProgram(const Location location,
+                   const std::shared_ptr<CMainClass> &mainClass,
+                   const std::shared_ptr<CListStatement> &minorClasses)
+        : mainClass(mainClass),
+          minorClasses(minorClasses) {
+    this->location = location;
+}
 
 const std::shared_ptr<CMainClass> &CProgram::GetMainClass() const {
     return mainClass;

@@ -7,7 +7,8 @@
 
 class CMethod : public IStatement {
 public:
-    CMethod(const std::string &visibility, const std::string &typeName,
+    CMethod(const Location location,
+            const std::string &visibility, const std::string &typeName,
             const std::shared_ptr<CIdExpression> &id, const std::shared_ptr<CListStatement> &parameters,
             const std::shared_ptr<CListStatement> &listDeclarations,
             const std::shared_ptr<CListStatement> &listStatements,

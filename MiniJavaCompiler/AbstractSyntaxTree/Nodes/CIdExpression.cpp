@@ -1,7 +1,9 @@
 #include <Nodes/CIdExpression.h>
 
-CIdExpression::CIdExpression(std::string name_) :
-	name(name_) {}
+CIdExpression::CIdExpression(const Location location, std::string name)
+		: name(name) {
+	this->location = location;
+}
 
 std::string CIdExpression::GetName() {
 	return name;

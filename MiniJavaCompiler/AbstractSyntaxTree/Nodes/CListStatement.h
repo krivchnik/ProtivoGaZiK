@@ -8,7 +8,7 @@ public:
     void Add(std::shared_ptr<IStatement> statement);
     void Accept(IVisitor*);
 
-    CListStatement(const std::string&);
+    CListStatement(const Location location, const std::string&);
 
     const std::vector<std::shared_ptr<IStatement>> GetStatements() const;
 

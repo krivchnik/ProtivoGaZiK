@@ -4,7 +4,8 @@
 
 class CConstructClassExpression : public IExpression {
 public:
-    CConstructClassExpression(const std::shared_ptr<CIdExpression> &classID);
+    CConstructClassExpression(const Location location,
+                              const std::shared_ptr<CIdExpression> &classID);
     const std::shared_ptr<CIdExpression> &getClassID() const;
     void Accept(IVisitor*);
 private:

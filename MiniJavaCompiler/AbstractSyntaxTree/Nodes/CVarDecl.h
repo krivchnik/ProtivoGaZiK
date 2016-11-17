@@ -8,7 +8,10 @@
 
 class CVarDecl : public IStatement {
 public:
-    CVarDecl(const std::string typeNameArg , const std::string variableNameArg);
+    CVarDecl(const Location location,
+             const std::string typeNameArg,
+             const std::string variableNameArg);
+
     std::string GetTypeName() const;
     std::string GetVariableName() const;
 

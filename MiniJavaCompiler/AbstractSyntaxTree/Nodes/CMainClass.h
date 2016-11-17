@@ -9,7 +9,8 @@
 
 class CMainClass : public IStatement {
 public:
-    CMainClass(const std::shared_ptr<CIdExpression> &classId,
+    CMainClass(const Location location,
+               const std::shared_ptr<CIdExpression> &classId,
                const std::shared_ptr<CIdExpression> &argId,
                const std::shared_ptr<IStatement> &statement);
 
