@@ -37,7 +37,6 @@ extern shared_ptr<CProgram> ans;
                     ASSIGN LESS
                     OR AND NOT
                     PLUS MINUS STAR
-                    END
 
 %token <int_val>	INTEGER_LITERAL
 %token <op_val>     ID
@@ -57,14 +56,14 @@ extern shared_ptr<CProgram> ans;
 %type  <class_decl>			classDeclaration
 %type  <main_class>	     	mainClass
 
-%left	POINT
-%left 	OR
-%left   AND
-%left	NOT PLUS MINUS
-%left	STAR MOD
-
-%nonassoc ASSIGN
-%nonassoc LESS
+%left LSBRACKET POINT LPBRACKET
+%right NOT
+%left STAR MOD
+%left PLUS MINUS
+%left LESS
+%left AND
+%left OR
+%left ASSIGN
 
 %%
 

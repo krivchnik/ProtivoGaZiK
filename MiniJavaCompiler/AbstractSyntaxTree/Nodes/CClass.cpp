@@ -32,4 +32,12 @@ void CClass::Accept(IVisitor *visitor) {
     visitor->Visit(this);
 }
 
+void CClass::setId(const std::shared_ptr<CIdExpression> &id) {
+    CClass::id = id;
+}
+
+void CClass::setBaseId(const std::shared_ptr<CIdExpression> &baseId) {
+    CClass::baseId = baseId;
+}
+
 

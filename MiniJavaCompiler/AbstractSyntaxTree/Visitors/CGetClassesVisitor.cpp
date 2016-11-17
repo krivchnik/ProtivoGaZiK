@@ -118,10 +118,23 @@ void CGetClassesVisitor::Visit( CMethodCallExpression* exp) {
 }
 
 void CGetClassesVisitor::Visit( CClass* statement ) {
-    classes.insert(std::make_pair(statement->getId(), statement->getBaseId()));
-    statement->getId()->Accept(this);
-    if (statement->getBaseId().get() != nullptr) {
-        statement->getBaseId()->Accept(this);
+    if( classesNames.find( statement->getId()->GetName() ) == classesNames.end() ){
+        classesNames.insert( std::make_pair( statement->getId()->GetName(), statement->getId() ) );
+        classes.insert(std::make_pair(statement->getId(), std::shared_ptr<CClass>(statement)));
+        statement->getId()->Accept(this);
+        if (statement->getBaseId().get() != nullptr) {
+            statement->getBaseId()->Accept(this);
+        }
+    } else {
+        std::cout << "Class redefinition " << statement->getId()->GetName() << std::endl;
+        statement->setId( classesNames[statement->getId()->GetName()] );
+        if( statement->getBaseId() != nullptr ) {
+            if( classesNames.find( statement->getBaseId()->GetName() ) != classesNames.end() ) {
+                statement->setBaseId( classesNames[statement->getBaseId()->GetName()] );
+            } else {
+                std::cout << statement->getId()->GetName() << " extends from undefined class" << std::endl;
+            }
+        }
     }
 
     statement->getFields()->Accept(this);
