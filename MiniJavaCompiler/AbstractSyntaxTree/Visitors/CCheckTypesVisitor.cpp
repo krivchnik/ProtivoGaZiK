@@ -95,12 +95,13 @@ void CCheckTypesVisitor::Visit(CGetItemExpression* expression) {
 }
 
 void CCheckTypesVisitor::Visit( CMethod* statement ) {
-
+    currentMethod = statement->getId()->GetName();
     statement->getId()->Accept(this);
     statement->getParameters()->Accept(this);
     statement->getListDeclarations()->Accept(this);
     statement->getListStatements()->Accept(this);
     statement->getReturnExpression()->Accept(this);
+    currentMethod = "";
 }
 
 
@@ -111,23 +112,28 @@ void CCheckTypesVisitor::Visit( CMethodCallExpression* exp) {
 }
 
 void CCheckTypesVisitor::Visit( CClass* statement ) {
+    currentClass = statement->getId()->GetName();
     if (statement->getBaseId().get() != nullptr) {
         statement->getBaseId()->Accept(this);
     }
     statement->getFields()->Accept(this);
     statement->getMethods()->Accept(this);
+    currentClass = "";
 }
 
 
 void CCheckTypesVisitor::Visit( CMainClass* statement ) {
+    currentClass = statement->GetClassId()->GetName();
     statement->GetClassId()->Accept(this);
     statement->GetArgId()->Accept(this);
     statement->GetStatement()->Accept(this);
+    currentClass = "";
 }
 
 
 void CCheckTypesVisitor::Visit(CProgram *statement) {
-
+    currentMethod = "";
+    currentClass = "";
     statement->GetMainClass()->Accept(this);
     statement->GetMinorClasses()->Accept(this);
 }
