@@ -76,7 +76,7 @@ mainClass:	CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET
 			{ $$ = new CMainClass(shared_ptr<CIdExpression>(new CIdExpression(std::string($2))),
 								  shared_ptr<CIdExpression>(new CIdExpression(std::string($12))),
 				 				  shared_ptr<CListStatement>($15));
-			   //std:cout << yylloc.first_line << " " << yylloc.first_column << " " <<  yylloc.last_line << " " << yylloc.last_column << "\n";
+			   std:cout << @$.first_line << " " << @$.first_column << " " <<  @$.last_line << " " << @$.last_column << "\n";
 
 			}
 ;

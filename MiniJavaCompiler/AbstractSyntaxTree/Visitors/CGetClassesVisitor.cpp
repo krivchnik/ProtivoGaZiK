@@ -1,7 +1,3 @@
-//
-// Created by kagudkov on 12.11.16.
-//
-
 #include <Visitors/CGetClassesVisitor.h>
 #include <CommonInclude.h>
 
@@ -190,44 +186,4 @@ void CGetClassesVisitor::Visit(CProgram *statement) {
 
     statement->GetMainClass()->Accept(this);
     statement->GetMinorClasses()->Accept(this);
-}
-
-
-void VariableInfo::Print(std::ostream& stream) {
-    stream << "\        varDecl:" << endl;
-    stream << "\        Type  " << type << " Name  " << name << endl;
-}
-
-void MethodInfo::Print(std::ostream& stream) {
-    stream << "\    Method:" << endl;
-    stream << "\    Name  " << name << endl;
-    stream << "\    RetType " << returnedType << endl;
-    stream << "\    Visibility " << visibility << endl;
-    stream << "\    ParamList" << endl;
-    for(int i = 0; i < paramList.size(); ++i) {
-        paramList[i].Print(stream);
-    }
-    stream << "\    VarList" << endl;
-    for(int i = 0; i < variablesList.size(); ++i) {
-        variablesList[i].Print(stream);
-    }
-}
-
-void ClassInfo::Print(std::ostream& stream) {
-    stream << "Class " << endl;
-    stream << "Name " << name << endl;
-    stream << "Base " << baseId << endl;
-    stream << "Methods " << endl;
-    for(int i = 0; i < methodsDeclarations.size(); ++i) {
-        methodsDeclarations[i].Print(stream);
-    }
-    stream << "VarDeclarations " << endl;
-    for(int i = 0; i < variableDeclaration.size(); ++i) {
-        variableDeclaration[i].Print(stream);
-    }
-
-}
-
-bool ClassInfo::HasBase() {
-    return baseId.length() > 0;
 }

@@ -1489,7 +1489,7 @@ yyreduce:
     { (yyval.main_class) = new CMainClass(shared_ptr<CIdExpression>(new CIdExpression(std::string((yyvsp[-15].op_val)))),
 								  shared_ptr<CIdExpression>(new CIdExpression(std::string((yyvsp[-5].op_val)))),
 				 				  shared_ptr<CListStatement>((yyvsp[-2].stat_list)));
-			   //std:cout << yylloc.first_line << " " << yylloc.first_column << " " <<  yylloc.last_line << " " << yylloc.last_column << "\n";
+			   std:cout << (yyloc).first_line << " " << (yyloc).first_column << " " <<  (yyloc).last_line << " " << (yyloc).last_column << "\n";
 
 			}
 #line 1496 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
