@@ -7,9 +7,13 @@
 
 #include <Visitors/IVisitor.h>
 #include <Nodes/INode.h>
+
+#include <map>
 #include <vector>
 
 #include <fstream>
+
+typedef std::pair<int, int> Location;
 
 class CValidateVisitor: public IVisitor {
 public:
@@ -46,4 +50,5 @@ public:
 
 private:
 
+    std::map<std::string, std::vector<Location>> typeErrors;
 };

@@ -5,6 +5,7 @@
 #include <Analyzer/CAnalyzer.h>
 
 #include <iostream>
+#include <Visitors/CValidateVisitor.h>
 
 void CAnalyzer::analyze() {
     checkCycleInheritance();
@@ -42,4 +43,11 @@ void CAnalyzer::checkCycleInheritance() {
             }
         }
     }
+}
+
+std::set<std::string> CAnalyzer::checkTypes() {
+
+    CValidateVisitor validateVisitor;
+    validateVisitor.Visit(program.get());
+    return std::set<std::string>();
 }

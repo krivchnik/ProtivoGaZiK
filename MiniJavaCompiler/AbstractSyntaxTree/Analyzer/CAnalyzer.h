@@ -12,9 +12,7 @@ private:
     std::shared_ptr<CProgram> program;
     std::map<std::shared_ptr<CIdExpression> , std::shared_ptr<CClass> > classes;
     void checkCycleInheritance();
-
-
-
+    std::set<std::string> checkTypes();
 };
 
 

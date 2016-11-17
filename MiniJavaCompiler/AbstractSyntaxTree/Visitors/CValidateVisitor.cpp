@@ -40,7 +40,6 @@ void CValidateVisitor::Visit(CArrayConstructionExpression* expression) {
     expression->getSize()->Accept(this);
 }
 
-
 void CValidateVisitor::Visit(CConstructClassExpression* expression) {
 }
 
@@ -100,6 +99,7 @@ void CValidateVisitor::Visit(CListExpression* statement) {
 }
 
 void CValidateVisitor::Visit(CVarDecl* decl) {
+
 }
 
 void CValidateVisitor::Visit(CGetItemExpression* expression) {
