@@ -4,7 +4,7 @@
 
 class CNotExpression: public IExpression {
 public:
-    CNotExpression(std::shared_ptr<IExpression> exp);
+    CNotExpression(const Location location, std::shared_ptr<IExpression> exp);
     std::shared_ptr<IExpression> GetExpression();
 
     void Accept(IVisitor*);

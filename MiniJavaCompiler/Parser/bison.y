@@ -3,10 +3,23 @@
 
 %{
 #include <CommonInclude.h>
+#include <heading.h>
+
 int yyerror(char *s);
 int yylex(void);
 
 extern shared_ptr<CProgram> ans;
+
+Location GetTokenLocation(YYLTYPE loc) {
+	Location location {loc.first_line, loc.first_column, loc.last_line, loc.last_column};
+	return location;
+}
+
+Location ComposeLocation(YYLTYPE loc1, YYLTYPE loc2) {
+	Location location {loc1.first_line, loc1.first_column, loc2.last_line, loc2.last_column};
+	return location;
+}
+
 %}
 
 %locations
@@ -69,28 +82,28 @@ extern shared_ptr<CProgram> ans;
 
 %%
 
-input:	mainClass classDeclList { ans = shared_ptr<CProgram>(new CProgram(shared_ptr<CMainClass>($1), shared_ptr<CListStatement>($2))); return 0;}
+input:	mainClass classDeclList { ans = shared_ptr<CProgram>(new CProgram(GetTokenLocation(@$), shared_ptr<CMainClass>($1), shared_ptr<CListStatement>($2))); return 0;}
 		;
 
 mainClass:	CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
-			{ $$ = new CMainClass(shared_ptr<CIdExpression>(new CIdExpression(std::string($2))),
-								  shared_ptr<CIdExpression>(new CIdExpression(std::string($12))),
-				 				  shared_ptr<CListStatement>($15));
-			   std:cout << @$.first_line << " " << @$.first_column << " " <<  @$.last_line << " " << @$.last_column << "\n";
-
+			{ $$ = new CMainClass(GetTokenLocation(@$),
+								  shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation(@2), std::string($2))),
+								  shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation(@12), std::string($12))),
+				 				  shared_ptr<CListStatement>($15)); 
 			}
 ;
 
-classDeclList : %empty 				 				{ $$ = new CListStatement(std::string("Classes")); }
-         	  | classDeclaration classDeclList 		{ $$ = std::move($2); $$->Add(shared_ptr<IStatement> ($1)); }
+classDeclList : %empty 				 				{ $$ = new CListStatement(GetTokenLocation(@$), std::string("Classes")); }
+         	  | classDeclaration classDeclList 		{ $$ = std::move($2); $$->Add(shared_ptr<IStatement> ($1)); 
+         	  	                           			  $$->SetLocation(GetTokenLocation(@$)); }
 ;
 
 classDeclaration
     : CLASS ID LFBRACKET
         varDeclList methodDeclList
       RFBRACKET {
-      	$$ = new CClass(
-      		std::shared_ptr<CIdExpression>(new CIdExpression(std::string($2))),
+      	$$ = new CClass(GetTokenLocation(@$),
+      		std::shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation(@2), std::string($2))),
 			std::shared_ptr<CListStatement>($4), 
 			std::shared_ptr<CListStatement>($5)
 		);
@@ -98,9 +111,9 @@ classDeclaration
     | CLASS ID EXTENDS ID LFBRACKET
         varDeclList methodDeclList
       RFBRACKET {
-      	$$ = new CClass(
-      		std::shared_ptr<CIdExpression>(new CIdExpression(std::string($2))), 
-      		std::shared_ptr<CIdExpression>(new CIdExpression(std::string($4))), 
+      	$$ = new CClass(GetTokenLocation(@$),
+      		std::shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation(@2), std::string($2))), 
+      		std::shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation(@4), std::string($4))), 
       		std::shared_ptr<CListStatement>($6), 
       		std::shared_ptr<CListStatement>($7)
       	);
@@ -108,66 +121,94 @@ classDeclaration
 ;
 
 methodDeclList
-	: %empty                            { $$ = new CListStatement(std::string("Methods")); }
-	| methodDeclaration methodDeclList  { $$ = std::move($2); $$->Add(shared_ptr<CMethod>($1)); }
+	: %empty                            { $$ = new CListStatement(GetTokenLocation(@$), std::string("Methods")); }
+	| methodDeclaration methodDeclList  { $$ = std::move($2); $$->Add(shared_ptr<CMethod>($1)); 
+										  $$->SetLocation(GetTokenLocation(@$)); }
 
 varDeclList
-    : %empty                            { $$ = new CListStatement(std::string("Variables")); }
-    | varDeclList typeName ID SEMICOLON { $$ = std::move($1); $$->Add(shared_ptr<CVarDecl>(
-    									  new CVarDecl(std::string($2), std::string($3)))); }
+    : %empty                            { $$ = new CListStatement(GetTokenLocation(@$), std::string("Variables")); }
+    | varDeclList typeName ID SEMICOLON { $$ = std::move($1); 
+    									  $$->Add(shared_ptr<CVarDecl>(new CVarDecl(ComposeLocation(@2, @3), std::string($2), std::string($3)))); 
+										  $$->SetLocation(GetTokenLocation(@$));}
     ;
 
 paramList
- 	: %empty   							{ $$ = new CListStatement(std::string("Parameters")); }
+ 	: %empty   							{ $$ = new CListStatement(GetTokenLocation(@$), std::string("Parameters")); }
  	| nonEmptyParamList                 { $$ = std::move($1); }
  	;
 
 nonEmptyParamList
-	: typeName ID 								{ $$ = new CListStatement(std::string("Parameters")); $$->Add(shared_ptr<CVarDecl>(new CVarDecl(std::string($1), std::string($2)))); }
-    | nonEmptyParamList COMMA typeName ID       { $$ = std::move($1); $$->Add(shared_ptr<CVarDecl>(new CVarDecl(std::string($3), std::string($4)))); }
+	: typeName ID 								{ $$ = new CListStatement(GetTokenLocation(@$), std::string("Parameters")); 
+												 $$->Add(shared_ptr<CVarDecl>(new CVarDecl(ComposeLocation(@1, @2), std::string($1), std::string($2)))); }
+
+    | nonEmptyParamList COMMA typeName ID       { $$ = std::move($1); 
+    											  $$->Add(shared_ptr<CVarDecl>(new CVarDecl(ComposeLocation(@3, @4), std::string($3), std::string($4)))); 
+    											  $$->SetLocation(GetTokenLocation(@$)); }
 	;
 
-exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
-		| exp PLUS exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::ADDITION); }
-		| exp MINUS exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::SUBTRACTION); }
-		| exp STAR exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::MULTIPLICATION); }
-		| exp MOD exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::MOD); }
-		| exp AND exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::AND); }
-		| exp OR exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::OR); }
-		| exp LESS exp	{ $$ = new COperationExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::LESS); }
-        | TRUE      	{ $$ = new CBoolExpression(true); }
-        | FALSE 		{ $$ = new CBoolExpression(false); }
+exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression(GetTokenLocation(@$), $1); }
+		| exp PLUS exp	{ $$ = new COperationExpression(GetTokenLocation(@$),
+														shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::ADDITION); }
 
-        | THIS			{ $$ = new CThisExpression(); 
-        				  //std:cout << yylloc.first_line << " " << yylloc.first_column << " " <<  yylloc.last_line << " " << yylloc.last_column << "\n";
-        				}
+		| exp MINUS exp	{ $$ = new COperationExpression(GetTokenLocation(@$),
+														shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::SUBTRACTION); }
 
-		| exp POINT LENGTH 				     { $$ = new CLengthExpression(shared_ptr<IExpression>($1)); }
-		| ID 							     { $$ = new CIdExpression(std::string($1)); }
-		| NOT exp   					     { $$ = new CNotExpression(shared_ptr<IExpression>($2)); }
-		| NEW INT LSBRACKET exp RSBRACKET    { $$ = new CArrayConstructionExpression(shared_ptr<IExpression>($4)); }
-		| exp LSBRACKET exp RSBRACKET		 { $$ = new CGetItemExpression(shared_ptr<IExpression>($1), shared_ptr<IExpression>($3)); }	
+		| exp STAR exp	{ $$ = new COperationExpression(GetTokenLocation(@$),
+														shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::MULTIPLICATION); }
+
+		| exp MOD exp	{ $$ = new COperationExpression(GetTokenLocation(@$),
+														shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::MOD); }
+
+		| exp AND exp	{ $$ = new COperationExpression(GetTokenLocation(@$),
+														shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::AND); }
+
+		| exp OR exp	{ $$ = new COperationExpression(GetTokenLocation(@$),
+														shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::OR); }
+
+		| exp LESS exp	{ $$ = new COperationExpression(GetTokenLocation(@$),
+													    shared_ptr<IExpression>($1), shared_ptr<IExpression>($3), COperationExpression::LESS); }
+        
+        | TRUE      	{ $$ = new CBoolExpression(GetTokenLocation(@$), true); }
+        | FALSE 		{ $$ = new CBoolExpression(GetTokenLocation(@$), false); }
+
+        | THIS			{ $$ = new CThisExpression(GetTokenLocation(@$)); }
+
+		| exp POINT LENGTH 				     { $$ = new CLengthExpression(GetTokenLocation(@$), 
+																		  shared_ptr<IExpression>($1)); }
+
+		| ID 							     { $$ = new CIdExpression(GetTokenLocation(@$), std::string($1)); }
+		
+		| NOT exp   					     { $$ = new CNotExpression(GetTokenLocation(@$), shared_ptr<IExpression>($2)); }
+
+		| NEW INT LSBRACKET exp RSBRACKET    { $$ = new CArrayConstructionExpression(GetTokenLocation(@$), 
+																					 shared_ptr<IExpression>($4)); }
+		
+		| exp LSBRACKET exp RSBRACKET		 { $$ = new CGetItemExpression(GetTokenLocation(@$), 
+																		   shared_ptr<IExpression>($1), shared_ptr<IExpression>($3)); }	
 		| LPBRACKET exp RPBRACKET			 { $$ = $2; }
 
-		| NEW ID LPBRACKET RPBRACKET         { $$ = new CConstructClassExpression(shared_ptr<CIdExpression>
-		                                                                        (new CIdExpression(std::string($2)))); }
-		| exp POINT ID LPBRACKET expList RPBRACKET  { $$ = new CMethodCallExpression(shared_ptr<IExpression>($1),
-																					 shared_ptr<CIdExpression>(new CIdExpression($3)), 
+		| NEW ID LPBRACKET RPBRACKET         { $$ = new CConstructClassExpression(GetTokenLocation(@$), 
+																				  shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation(@2), std::string($2)))); }
+		| exp POINT ID LPBRACKET expList RPBRACKET  { $$ = new CMethodCallExpression(GetTokenLocation(@$),
+																					 shared_ptr<IExpression>($1),
+																					 shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation(@3), $3)), 
 																				     shared_ptr<CListExpression>($5)); }
 		;
 
 expList
- 	: %empty   							{ $$ = new CListExpression(std::string("Arguments")); }
+ 	: %empty   							{ $$ = new CListExpression(GetTokenLocation(@$), std::string("Arguments")); }
  	| nonEmptyExpList                   { $$ = std::move($1); }
  	;
 
 nonEmptyExpList
-	: exp 								{ $$ = new CListExpression(std::string("Arguments")); $$->Add(shared_ptr<IExpression>($1)); }
-    | nonEmptyExpList COMMA exp         { $$ = std::move($1); $$->Add(shared_ptr<IExpression>($3)); }
+	: exp 								{ $$ = new CListExpression(GetTokenLocation(@$), std::string("Arguments")); $$->Add(shared_ptr<IExpression>($1)); }
+    | nonEmptyExpList COMMA exp         { $$ = std::move($1); $$->Add(shared_ptr<IExpression>($3)); 
+    									  $$->SetLocation(GetTokenLocation(@$)); }
 
 
-statList : %empty 				 { $$ = new CListStatement(std::string("Statements")); }
-         | stat statList		 { $$ = std::move($2); $$->Add(shared_ptr<IStatement> ($1)); }
+statList : %empty 				 { $$ = new CListStatement(GetTokenLocation(@$), std::string("Statements")); }
+         | stat statList		 { $$ = std::move($2); $$->Add(shared_ptr<IStatement> ($1)); 
+         						   $$->SetLocation(GetTokenLocation(@$)); }
 ;
 
 typeName
@@ -191,9 +232,10 @@ methodDeclaration
             RETURN exp SEMICOLON
       RFBRACKET {
         $$ = new CMethod(
+        	GetTokenLocation(@$),
             std::string($1),
             std::string($2),
-            shared_ptr<CIdExpression>(new CIdExpression(std::string($3))),
+            shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation(@3), std::string($3))),
             shared_ptr<CListStatement>(std::move($5)),
             shared_ptr<CListStatement>($8),
             shared_ptr<CListStatement>($9),
@@ -204,19 +246,24 @@ methodDeclaration
 
 stat 	: LFBRACKET statList RFBRACKET                      { $$ = $2; }
 
-    	| IF LPBRACKET exp RPBRACKET stat ELSE stat 		{ $$ = new CIfElseStatement(shared_ptr<IExpression>($3),
+    	| IF LPBRACKET exp RPBRACKET stat ELSE stat 		{ $$ = new CIfElseStatement(GetTokenLocation(@$),
+    																					shared_ptr<IExpression>($3),
     																					shared_ptr<IStatement>($5),
     																					shared_ptr<IStatement>($7)); }
 
-    	| WHILE LPBRACKET exp RPBRACKET stat         		{ $$ = new CWhileStatement(shared_ptr<IExpression>($3),
+    	| WHILE LPBRACKET exp RPBRACKET stat         		{ $$ = new CWhileStatement(GetTokenLocation(@$),
+    																				   shared_ptr<IExpression>($3),
     																				   shared_ptr<IStatement>($5)); }
 
-    	| PRINTLN LPBRACKET exp RPBRACKET SEMICOLON 		{ $$ = new CPrintStatement(shared_ptr<IExpression>($3)); }
+    	| PRINTLN LPBRACKET exp RPBRACKET SEMICOLON 		{ $$ = new CPrintStatement(GetTokenLocation(@$),
+    																				   shared_ptr<IExpression>($3)); }
 
-    	| ID ASSIGN exp SEMICOLON                			{ $$ = new CAssignStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))), 
+    	| ID ASSIGN exp SEMICOLON                			{ $$ = new CAssignStatement(GetTokenLocation(@$),
+    																					shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation(@1), std::string($1))), 
     																					shared_ptr<IExpression>($3)); }
 
-    	| ID LSBRACKET exp RSBRACKET ASSIGN exp SEMICOLON 	{ $$ = new CAssignItemStatement(shared_ptr<CIdExpression>(new CIdExpression(std::string($1))),
+    	| ID LSBRACKET exp RSBRACKET ASSIGN exp SEMICOLON 	{ $$ = new CAssignItemStatement(GetTokenLocation(@$),
+    																						shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation(@1), std::string($1))),
      																						shared_ptr<IExpression>($3),
     																						shared_ptr<IExpression>($6)); }
         ;

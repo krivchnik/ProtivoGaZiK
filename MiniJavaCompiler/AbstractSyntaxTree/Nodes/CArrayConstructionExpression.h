@@ -4,7 +4,7 @@
 
 class CArrayConstructionExpression : public IExpression {
 public:
-    CArrayConstructionExpression(const std::shared_ptr<IExpression> &size);
+    CArrayConstructionExpression(const Location location, const std::shared_ptr<IExpression> &size);
     const std::shared_ptr<IExpression> &getSize() const;
     void Accept(IVisitor*);
 

@@ -8,7 +8,8 @@
 
 class CMethodCallExpression : public IExpression{
 public:
-    CMethodCallExpression(const std::shared_ptr<IExpression> &object,
+    CMethodCallExpression(const Location location,
+                          const std::shared_ptr<IExpression> &object,
                           const std::shared_ptr<CIdExpression> &methodId,
                           const std::shared_ptr<CListExpression> &arguments);
 

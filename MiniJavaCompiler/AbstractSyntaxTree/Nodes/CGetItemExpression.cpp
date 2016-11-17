@@ -4,9 +4,12 @@
 
 #include <Nodes/CGetItemExpression.h>
 
-CGetItemExpression::CGetItemExpression(const std::shared_ptr<IExpression> &object,
+CGetItemExpression::CGetItemExpression(const Location location,
+                                       const std::shared_ptr<IExpression> &object,
                                        const std::shared_ptr<IExpression> &index)
-        : object(object), index(index) {}
+        : object(object), index(index) {
+    this->location = location;
+}
 
 const std::shared_ptr<IExpression> &CGetItemExpression::GetObject() const {
     return object;

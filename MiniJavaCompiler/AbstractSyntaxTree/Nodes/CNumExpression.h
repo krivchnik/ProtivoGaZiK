@@ -4,7 +4,7 @@
 
 class CNumExpression: public IExpression {
 public:
-	CNumExpression(int number);
+	CNumExpression(const Location location, int number);
 	int GetNumber();
 
 	void Accept(IVisitor*);

@@ -1,7 +1,9 @@
 #include <Nodes/CBoolExpression.h>
 
-CBoolExpression::CBoolExpression(bool value_) :
-        value(value_) {}
+CBoolExpression::CBoolExpression(const Location location, bool value)
+        : value(value) {
+    this->location = location;
+}
 
 bool CBoolExpression::GetValue() {
     return value;

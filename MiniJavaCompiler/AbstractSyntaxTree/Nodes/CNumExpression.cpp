@@ -1,7 +1,9 @@
 #include <Nodes/CNumExpression.h>
 
-CNumExpression::CNumExpression(int number_) :
-	number(number_) {}
+CNumExpression::CNumExpression(const Location location, int number)
+		: number(number) {
+	this->location = location;
+}
 
 int CNumExpression::GetNumber() {
 	return number;

@@ -10,7 +10,9 @@
 
 class CProgram: public INode {
 public:
-    CProgram(const std::shared_ptr<CMainClass> &mainClass, const std::shared_ptr<CListStatement> &minorClasses);
+    CProgram(const Location location,
+             const std::shared_ptr<CMainClass> &mainClass,
+             const std::shared_ptr<CListStatement> &minorClasses);
 
     const std::shared_ptr<CMainClass> &GetMainClass() const;
     const std::shared_ptr<CListStatement> &GetMinorClasses() const;

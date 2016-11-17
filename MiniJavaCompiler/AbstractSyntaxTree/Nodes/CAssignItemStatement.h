@@ -5,7 +5,8 @@
 //a[2] = 10
 class CAssignItemStatement : public IStatement {
 public:
-    CAssignItemStatement(std::shared_ptr<CIdExpression> id,
+    CAssignItemStatement(const Location location,
+                         std::shared_ptr<CIdExpression> id,
                          std::shared_ptr<IExpression> expressionInBrackets,
                          std::shared_ptr<IExpression> assignedExpression);
 

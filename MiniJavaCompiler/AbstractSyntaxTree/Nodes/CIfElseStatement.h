@@ -12,7 +12,9 @@ public:
 
     const std::shared_ptr<IStatement> &getElseStatement() const;
 
-    CIfElseStatement(const std::shared_ptr<IExpression> &expression, const std::shared_ptr<IStatement> &ifStatement,
+    CIfElseStatement(const Location location,
+                     const std::shared_ptr<IExpression> &expression,
+                     const std::shared_ptr<IStatement> &ifStatement,
                      const std::shared_ptr<IStatement> &elseStatement);
 
     void Accept(IVisitor* visitor);

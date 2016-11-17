@@ -4,10 +4,15 @@
 
 #include <Nodes/CMethodCallExpression.h>
 
-CMethodCallExpression::CMethodCallExpression(const std::shared_ptr<IExpression> &object,
+CMethodCallExpression::CMethodCallExpression(const Location location,
+                                             const std::shared_ptr<IExpression> &object,
                                              const std::shared_ptr<CIdExpression> &methodId,
-                                             const std::shared_ptr<CListExpression> &arguments):
-        object(object), methodId(methodId), arguments(arguments) {}
+                                             const std::shared_ptr<CListExpression> &arguments)
+        : object(object),
+          methodId(methodId),
+          arguments(arguments) {
+    this->location = location;
+}
 
 void CMethodCallExpression::Accept(IVisitor* visitor) {
     visitor->Visit(this);

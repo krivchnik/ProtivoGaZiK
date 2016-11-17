@@ -6,7 +6,7 @@
 
 class CIdExpression: public IExpression {
 public:
-	CIdExpression(std::string name);
+	CIdExpression(const Location location, std::string name);
 	std::string GetName();
 
 	void Accept(IVisitor*);

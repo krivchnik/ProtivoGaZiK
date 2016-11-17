@@ -7,5 +7,6 @@
 
 class CThisExpression: public IExpression {
 public:
+    CThisExpression(const Location location);
     void Accept(IVisitor*);
 };

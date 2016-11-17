@@ -4,13 +4,23 @@
 
 #include "CClass.h"
 
-CClass::CClass( const std::shared_ptr<CIdExpression> &id,
+CClass::CClass( const Location location,
+                const std::shared_ptr<CIdExpression> &id,
                 const std::shared_ptr<CListStatement> &fields, const std::shared_ptr<CListStatement> &methods)
-        :   id(id), baseId(nullptr), fields(fields), methods(methods) {}
+        : id(id), baseId(nullptr),
+          fields(fields), methods(methods) {
 
-CClass::CClass( const std::shared_ptr<CIdExpression> &id, const std::shared_ptr<CIdExpression> &baseId,
+    this->location = location;
+}
+
+CClass::CClass( const Location location,
+                const std::shared_ptr<CIdExpression> &id, const std::shared_ptr<CIdExpression> &baseId,
                 const std::shared_ptr<CListStatement> &fields, const std::shared_ptr<CListStatement> &methods)
-        :   id(id), baseId(baseId), fields(fields), methods(methods) {}
+        : id(id), baseId(baseId),
+          fields(fields), methods(methods) {
+
+    this->location = location;
+}
 
 const std::shared_ptr<CIdExpression> &CClass::getId() const {
     return id;

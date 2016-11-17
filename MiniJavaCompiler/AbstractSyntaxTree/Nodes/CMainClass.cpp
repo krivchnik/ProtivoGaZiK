@@ -4,9 +4,14 @@
 
 #include "CMainClass.h"
 
-CMainClass::CMainClass(const std::shared_ptr<CIdExpression> &classId, const std::shared_ptr<CIdExpression> &argId,
+CMainClass::CMainClass(const Location location,
+                       const std::shared_ptr<CIdExpression> &classId,
+                       const std::shared_ptr<CIdExpression> &argId,
                        const std::shared_ptr<IStatement> &statement)
-        : classId(classId), argId(argId), statement(statement) {}
+        : classId(classId),
+          argId(argId), statement(statement) {
+    this->location = location;
+}
 
 const std::shared_ptr<CIdExpression> &CMainClass::GetClassId() const {
     return classId;

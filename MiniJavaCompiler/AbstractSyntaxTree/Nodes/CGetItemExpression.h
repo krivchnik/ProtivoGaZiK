@@ -9,7 +9,9 @@
 
 class CGetItemExpression : public IExpression {
 public:
-    CGetItemExpression(const std::shared_ptr<IExpression> &object, const std::shared_ptr<IExpression> &index);
+    CGetItemExpression(const Location location,
+                       const std::shared_ptr<IExpression> &object,
+                       const std::shared_ptr<IExpression> &index);
     const std::shared_ptr<IExpression> &GetObject() const;
     const std::shared_ptr<IExpression> &GetIndex() const;
     void Accept(IVisitor*);

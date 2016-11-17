@@ -4,8 +4,9 @@
 
 #include <Nodes/CListStatement.h>
 
-void CListStatement::Accept(IVisitor* visitor) {
-    visitor->Visit(this);
+CListStatement::CListStatement(const Location location, const std::string &statementType)
+        : statementType(statementType) {
+    this->location = location;
 }
 
 void CListStatement::Add(std::shared_ptr<IStatement> statement) {
@@ -16,9 +17,10 @@ const std::vector<std::shared_ptr<IStatement>> CListStatement::GetStatements() c
     return statements;
 }
 
-CListStatement::CListStatement(const std::string &statementType)
-        : statementType(statementType) {}
-
 const std::string &CListStatement::GetStatementType() const {
     return statementType;
+}
+
+void CListStatement::Accept(IVisitor* visitor) {
+    visitor->Visit(this);
 }

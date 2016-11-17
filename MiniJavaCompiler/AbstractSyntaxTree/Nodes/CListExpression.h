@@ -8,7 +8,7 @@ public:
     void Add(std::shared_ptr<IExpression> exp);
     void Accept(IVisitor*);
 
-    CListExpression(const std::string&);
+    CListExpression(const Location location, const std::string&);
 
     const std::vector<std::shared_ptr<IExpression>> &GetExpressions() const;
 

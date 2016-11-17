@@ -4,8 +4,11 @@
 
 #include "CConstructClassExpression.h"
 
-CConstructClassExpression::CConstructClassExpression(const std::shared_ptr<CIdExpression> &classID) : classID(
-        classID) {}
+CConstructClassExpression::CConstructClassExpression(const Location location,
+                                                     const std::shared_ptr<CIdExpression> &classID)
+        : classID(classID) {
+    this->location = location;
+}
 
 const std::shared_ptr<CIdExpression> &CConstructClassExpression::getClassID() const {
     return classID;
