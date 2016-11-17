@@ -73,9 +73,9 @@ void CGetClassesVisitor::Visit(CWhileStatement* statement) {
 }
 
 void CGetClassesVisitor::Visit(CListStatement* statement) {
-
     auto statements = statement->GetStatements();
     size_t numberOfIterations = statements.size();
+    std::cout << "start analyze list of " << numberOfIterations << std::endl;
 
     for(size_t i = 0; i < numberOfIterations; ++i) {
         if (i != numberOfIterations - 1) {
@@ -126,26 +126,49 @@ void CGetClassesVisitor::Visit( CMethodCallExpression* exp) {
 }
 
 void CGetClassesVisitor::Visit( CClass* statement ) {
-    if( classesNames.find( statement->getId()->GetName() ) == classesNames.end() ){
-        classesNames.insert( std::make_pair( statement->getId()->GetName(), statement->getId() ) );
-        classes.insert(std::make_pair(statement->getId(), std::shared_ptr<CClass>(statement)));
-        statement->getId()->Accept(this);
-        if (statement->getBaseId().get() != nullptr) {
-            statement->getBaseId()->Accept(this);
-        }
+    std::cout << "start class visit ";
+    ClassInfo classInfo;
+    //classInfo.name = statement->getId()->GetName();
+    if (statement->getBaseId().get() != nullptr) {
+      //  classInfo.baseId = statement->getBaseId()->GetName();
+        statement->getBaseId()->Accept(this);
     } else {
-        std::cout << "Class redefinition " << statement->getId()->GetName() << std::endl;
-        statement->setId( classesNames[statement->getId()->GetName()] );
-        if( statement->getBaseId() != nullptr ) {
-            if( classesNames.find( statement->getBaseId()->GetName() ) != classesNames.end() ) {
-                statement->setBaseId( classesNames[statement->getBaseId()->GetName()] );
-            } else {
-                std::cout << statement->getId()->GetName() << " extends from undefined class" << std::endl;
-            }
-        }
+        classInfo.baseId = nullptr;
     }
+//
+//    for(auto field : statement->getFields()->GetStatements()) {
+//        VariableInfo variableInfo;
+//        variableInfo.name = dynamic_cast< CVarDecl* >(field.get())->GetVariableName();
+//        variableInfo.type = dynamic_cast< CVarDecl* >(field.get())->GetTypeName();
+//        classInfo.variableDeclaration.push_back(variableInfo);
+//    }
 
     statement->getFields()->Accept(this);
+/*
+    for(auto methodFromList : statement->getMethods()->GetStatements()) {
+        CMethod* method = dynamic_cast<CMethod* >(methodFromList.get());
+        MethodInfo methodInfo;
+        methodInfo.name = method->getId()->GetName();
+        methodInfo.returnedType = method->getTypeName();
+        for(auto param : method->getParameters()->GetStatements()) {
+            VariableInfo paramInfo;
+            paramInfo.name = dynamic_cast< CVarDecl* >(param.get())->GetVariableName();
+            paramInfo.type = dynamic_cast< CVarDecl* >(param.get())->GetTypeName();
+            methodInfo.paramList.push_back(paramInfo);
+        }
+
+        for(auto declFromList : method->getListDeclarations()->GetStatements()) {
+            VariableInfo declInfo;
+            CVarDecl* decl = dynamic_cast<CVarDecl* > (declFromList.get());
+            declInfo.name = decl->GetVariableName();
+            declInfo.type = decl->GetTypeName();
+            methodInfo.variablesList.push_back(declInfo);
+        }
+        methodInfo.visibility = method->getVisibility();
+
+        classInfo.methodsDeclarations.push_back(methodInfo);
+    }
+ */
     statement->getMethods()->Accept(this);
 }
 
@@ -154,13 +177,14 @@ void CGetClassesVisitor::Visit( CMainClass* statement ) {
     statement->GetClassId()->Accept(this);
     statement->GetArgId()->Accept(this);
     statement->GetStatement()->Accept(this);
+    std::cout << "MainClassAnalyzed" << std::endl;
 }
 
 
 void CGetClassesVisitor::Visit(CProgram *statement) {
 
     statement->GetMainClass()->Accept(this);
-    statement->GetMinorClasses()->Accept(this);
+   // statement->GetMinorClasses()->Accept(this);
 }
 
 

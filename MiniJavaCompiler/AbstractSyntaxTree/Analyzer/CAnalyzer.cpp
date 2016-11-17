@@ -13,15 +13,17 @@ void CAnalyzer::analyze() {
 
 CAnalyzer::CAnalyzer(std::shared_ptr<CProgram> program) : program(program) {
     CGetClassesVisitor getClassesVisitor;
+    std::cout << "start analyze" << std::endl;
     getClassesVisitor.Visit(program.get());
+    std::cout << "analyzed" << std::endl;
     classes = getClassesVisitor.getClasses();
     for (auto it = classes.begin(); it != classes.end(); ++it) {
-        std::cout << it->first->GetName() << "\n";
+        std::cout << it->first << "\n";
     }
 }
 
 void CAnalyzer::checkCycleInheritance() {
-    std::vector<std::shared_ptr<CClass> > classesValues;
+/*    std::vector<std::shared_ptr<CClass> > classesValues;
     std::map<std::shared_ptr<CClass>, bool> used;
     for( auto iter = classes.begin(); iter != classes.end(); ++iter ){
         classesValues.push_back( iter->second );
@@ -42,4 +44,5 @@ void CAnalyzer::checkCycleInheritance() {
             }
         }
     }
+*/
 }

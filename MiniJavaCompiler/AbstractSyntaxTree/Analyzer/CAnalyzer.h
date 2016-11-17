@@ -10,7 +10,7 @@ public:
 
 private:
     std::shared_ptr<CProgram> program;
-    std::map<std::shared_ptr<CIdExpression> , std::shared_ptr<CClass> > classes;
+    std::map< std::string, ClassInfo > classes;
     void checkCycleInheritance();
 
 

@@ -11,13 +11,34 @@
 #include <set>
 #include <map>
 
+struct VariableInfo{
+    std::string type;
+    std::string name;
+};
+
+struct MethodInfo{
+    std::string returnedType;
+    std::string name;
+    std::vector<VariableInfo> paramList;
+    std::vector<VariableInfo> variablesList;
+    std::string visibility;
+};
+
+struct ClassInfo{
+   std::vector<MethodInfo> methodsDeclarations;
+   std::vector<VariableInfo> variableDeclaration;
+   std::string baseId;
+   std::string name;
+};
+
+
 class CGetClassesVisitor : public IVisitor {
 
 public:
 
     CGetClassesVisitor();
 
-    std::map<std::shared_ptr<CIdExpression> , std::shared_ptr<CClass> > getClasses() { return classes; }
+    std::map< std::string, ClassInfo > getClasses() { return classes; }
     //если увидим ещё раз класс с тем же именем, то препишем его уже существующему CIdExpression;
     std::map<std::string, std::shared_ptr<CIdExpression> > classesNames;
     void Visit(CAssignStatement*);
@@ -49,7 +70,7 @@ public:
 
 private:
 
-    std::map<std::shared_ptr<CIdExpression> , std::shared_ptr<CClass> > classes;
+    std::map< std::string, ClassInfo > classes;
 
 };
 

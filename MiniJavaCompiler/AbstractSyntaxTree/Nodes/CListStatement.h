@@ -10,7 +10,7 @@ public:
 
     CListStatement(const std::string&);
 
-    const std::vector<std::shared_ptr<IStatement>> &GetStatements() const;
+    const std::vector<std::shared_ptr<IStatement>> GetStatements() const;
 
     const std::string &GetStatementType() const;
 
