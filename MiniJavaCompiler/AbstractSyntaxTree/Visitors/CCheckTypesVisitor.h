@@ -47,6 +47,9 @@ public:
 private:
 
     std::map< std::string, ClassInfo > classes;
+    //если текущее положение вне класса или метода, то будет = ""
+    std::string currentClass;
+    std::string currentMethod;
 
 };
 
