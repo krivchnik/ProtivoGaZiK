@@ -19,7 +19,7 @@ CAnalyzer::CAnalyzer(std::shared_ptr<CProgram> program) : program(program) {
     std::cout << "analyzed" << std::endl;
     classes = getClassesVisitor.getClasses();
     for (auto it = classes.begin(); it != classes.end(); ++it) {
-        std::cout << it->first << "\n";
+        it->second.Print(std::cout);
     }
 }
 

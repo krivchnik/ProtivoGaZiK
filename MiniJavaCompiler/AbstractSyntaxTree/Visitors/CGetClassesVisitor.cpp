@@ -120,23 +120,23 @@ void CGetClassesVisitor::Visit( CMethodCallExpression* exp) {
 void CGetClassesVisitor::Visit( CClass* statement ) {
     std::cout << "start class visit ";
     ClassInfo classInfo;
-    //classInfo.name = statement->getId()->GetName();
+    classInfo.name = statement->getId()->GetName();
     if (statement->getBaseId().get() != nullptr) {
-      //  classInfo.baseId = statement->getBaseId()->GetName();
+        classInfo.baseId = statement->getBaseId()->GetName();
         statement->getBaseId()->Accept(this);
     } else {
-        classInfo.baseId = nullptr;
+        classInfo.baseId = "";
     }
-//
-//    for(auto field : statement->getFields()->GetStatements()) {
-//        VariableInfo variableInfo;
-//        variableInfo.name = dynamic_cast< CVarDecl* >(field.get())->GetVariableName();
-//        variableInfo.type = dynamic_cast< CVarDecl* >(field.get())->GetTypeName();
-//        classInfo.variableDeclaration.push_back(variableInfo);
-//    }
+
+    for(auto field : statement->getFields()->GetStatements()) {
+        VariableInfo variableInfo;
+        variableInfo.name = dynamic_cast< CVarDecl* >(field.get())->GetVariableName();
+        variableInfo.type = dynamic_cast< CVarDecl* >(field.get())->GetTypeName();
+        classInfo.variableDeclaration.push_back(variableInfo);
+    }
 
     statement->getFields()->Accept(this);
-/*
+
     for(auto methodFromList : statement->getMethods()->GetStatements()) {
         CMethod* method = dynamic_cast<CMethod* >(methodFromList.get());
         MethodInfo methodInfo;
@@ -160,12 +160,17 @@ void CGetClassesVisitor::Visit( CClass* statement ) {
 
         classInfo.methodsDeclarations.push_back(methodInfo);
     }
- */
+    if( classes.find(classInfo.name) == classes.end() ) {
+        classes[classInfo.name] = classInfo;
+    } else {
+        std::cout << "REDEFINITION OF CLASS " << classInfo.name << std::endl;
+    }
     statement->getMethods()->Accept(this);
 }
 
 
 void CGetClassesVisitor::Visit( CMainClass* statement ) {
+
     statement->GetClassId()->Accept(this);
     statement->GetArgId()->Accept(this);
     statement->GetStatement()->Accept(this);
@@ -176,11 +181,41 @@ void CGetClassesVisitor::Visit( CMainClass* statement ) {
 void CGetClassesVisitor::Visit(CProgram *statement) {
 
     statement->GetMainClass()->Accept(this);
-   // statement->GetMinorClasses()->Accept(this);
+    statement->GetMinorClasses()->Accept(this);
 }
 
 
+void VariableInfo::Print(std::ostream& stream) {
+    stream << "\        varDecl:" << endl;
+    stream << "\        Type  " << type << " Name  " << name << endl;
+}
 
+void MethodInfo::Print(std::ostream& stream) {
+    stream << "\    Method:" << endl;
+    stream << "\    Name  " << name << endl;
+    stream << "\    RetType " << returnedType << endl;
+    stream << "\    Visibility " << visibility << endl;
+    stream << "\    ParamList" << endl;
+    for(int i = 0; i < paramList.size(); ++i) {
+        paramList[i].Print(stream);
+    }
+    stream << "\    VarList" << endl;
+    for(int i = 0; i < variablesList.size(); ++i) {
+        variablesList[i].Print(stream);
+    }
+}
 
+void ClassInfo::Print(std::ostream& stream) {
+    stream << "Class " << endl;
+    stream << "Name " << name << endl;
+    stream << "Base " << baseId << endl;
+    stream << "Methods " << endl;
+    for(int i = 0; i < methodsDeclarations.size(); ++i) {
+        methodsDeclarations[i].Print(stream);
+    }
+    stream << "VarDeclarations " << endl;
+    for(int i = 0; i < variableDeclaration.size(); ++i) {
+        variableDeclaration[i].Print(stream);
+    }
 
-
+}
