@@ -10,10 +10,12 @@
 #include <string>
 #include <set>
 #include <map>
+#include <ostream>
 
 struct VariableInfo{
     std::string type;
     std::string name;
+    void Print(std::ostream& stream);
 };
 
 struct MethodInfo{
@@ -22,13 +24,16 @@ struct MethodInfo{
     std::vector<VariableInfo> paramList;
     std::vector<VariableInfo> variablesList;
     std::string visibility;
+    void Print(std::ostream& stream);
 };
 
 struct ClassInfo{
-   std::vector<MethodInfo> methodsDeclarations;
-   std::vector<VariableInfo> variableDeclaration;
-   std::string baseId;
-   std::string name;
+    std::vector<MethodInfo> methodsDeclarations;
+    std::vector<VariableInfo> variableDeclaration;
+    std::string baseId;
+    std::string name;
+    void Print(std::ostream& stream);
+    bool HasBase();
 };
 
 
