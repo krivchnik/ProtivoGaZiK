@@ -8,6 +8,8 @@ int yylex(void);
 
 extern shared_ptr<CProgram> ans;
 %}
+
+%locations
 	
 %union{
   int                     int_val;
@@ -73,7 +75,8 @@ input:	mainClass classDeclList { ans = shared_ptr<CProgram>(new CProgram(shared_
 mainClass:	CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
 			{ $$ = new CMainClass(shared_ptr<CIdExpression>(new CIdExpression(std::string($2))),
 								  shared_ptr<CIdExpression>(new CIdExpression(std::string($12))),
-				 				  shared_ptr<CListStatement>($15)); }
+				 				  shared_ptr<CListStatement>($15)); 
+			}
 ;
 
 classDeclList : %empty 				 				{ $$ = new CListStatement(std::string("Classes")); }
@@ -133,7 +136,9 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
         | TRUE      	{ $$ = new CBoolExpression(true); }
         | FALSE 		{ $$ = new CBoolExpression(false); }
 
-        | THIS			{ $$ = new CThisExpression(); }
+        | THIS			{ $$ = new CThisExpression(); 
+        				  //std:cout << yylloc.first_line << " " << yylloc.first_column << " " <<  yylloc.last_line << " " << yylloc.last_column << "\n"; 
+        				}
 
 		| exp POINT LENGTH 				     { $$ = new CLengthExpression(shared_ptr<IExpression>($1)); }
 		| ID 							     { $$ = new CIdExpression(std::string($1)); }

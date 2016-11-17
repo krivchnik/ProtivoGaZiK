@@ -9,23 +9,13 @@
     #include <CommonInclude.h>
     #include <heading.h>
 
-    typedef struct YYLTYPE  
-	{  
-	  int first_line;  
-	  int first_column;  
-	  int last_line;  
-	  int last_column;  
-	} YYLTYPE;
-
-    YYLTYPE yylloc;
-
-    int line_number = 0;
-    int column_number = 0;
-	static void updateLocation()
+    int line_number = 1;
+    int column_number = 1;
+	static void updateLocation(YYLTYPE* yylloc)
 	{
 	    // Начало токена
-	    yylloc.first_line = line_number;
-	    yylloc.first_column = column_number;
+	    yylloc->first_line = line_number;
+	    yylloc->first_column = column_number;
 	    for( int i = 0; i < strlen(yytext); i++ ) {
 	   	 if( yytext[i] == '\n' ) {
 	   		 line_number++;
@@ -38,8 +28,8 @@
 	   	 }
 	    }
 
-	    yylloc.last_line = line_number;
-	    yylloc.last_column = column_number;
+	    yylloc->last_line = line_number;
+	    yylloc->last_column = column_number;
 	}
 
 	void printValueLocation(char *token_name, char *token_value) {
@@ -70,44 +60,45 @@ keyword          class|extends|public|private|static|int|double|boolean|void
 comment          \/\/.*\n
 
 %%
-              { updateLocation(); }
 
-"System.out.println"	{ updateLocation(); return PRINTLN;}
+"\n"|"\t"|" "           { updateLocation(&yylloc); }
 
-{comment}               {updateLocation();}
+"System.out.println"	{ updateLocation(&yylloc); return PRINTLN;}
 
-"public"              { updateLocation(); return(PUBLIC); }
-"private"             { updateLocation(); return(PRIVATE); }
-"static"              { updateLocation(); return(STATIC); }
+{comment}               {updateLocation(&yylloc);}
 
-"int"                 { updateLocation(); return(INT); }
-"boolean"             { updateLocation(); return(BOOLEAN); }
-"void"                { updateLocation(); return(VOID); }
-"String"              { updateLocation(); return(STRING); }
+"public"              { updateLocation(&yylloc); return(PUBLIC); }
+"private"             { updateLocation(&yylloc); return(PRIVATE); }
+"static"              { updateLocation(&yylloc); return(STATIC); }
 
-"class"               { updateLocation(); return(CLASS); }
-"extends"             { updateLocation(); return(EXTENDS); }
+"int"                 { updateLocation(&yylloc); return(INT); }
+"boolean"             { updateLocation(&yylloc); return(BOOLEAN); }
+"void"                { updateLocation(&yylloc); return(VOID); }
+"String"              { updateLocation(&yylloc); return(STRING); }
 
-"if"                  { updateLocation(); return(IF); }
-"else"                { updateLocation(); return(ELSE); }
-"while"               { updateLocation(); return(WHILE); }
-"return"              { updateLocation(); return(RETURN); }
+"class"               { updateLocation(&yylloc); return(CLASS); }
+"extends"             { updateLocation(&yylloc); return(EXTENDS); }
 
-"length"              { updateLocation(); return(LENGTH); }
+"if"                  { updateLocation(&yylloc); return(IF); }
+"else"                { updateLocation(&yylloc); return(ELSE); }
+"while"               { updateLocation(&yylloc); return(WHILE); }
+"return"              { updateLocation(&yylloc); return(RETURN); }
 
-"this"                { updateLocation(); return(THIS); }
-"new"                 { updateLocation(); return(NEW); }
+"length"              { updateLocation(&yylloc); return(LENGTH); }
 
-"main"                { updateLocation(); return(MAIN); }
+"this"                { updateLocation(&yylloc); return(THIS); }
+"new"                 { updateLocation(&yylloc); return(NEW); }
+
+"main"                { updateLocation(&yylloc); return(MAIN); }
 
 {keyword} {
-	updateLocation();
+	updateLocation(&yylloc);
 	toUpper(yytext);
 	printLocation(yytext);
 }
 
 {id}           	 {
-	              updateLocation(); 
+	              updateLocation(&yylloc); 
 	              size_t len = strlen(yytext);
                   char *token_name = (char*)malloc(len + 1 ); /* one for extra char, one for trailing zero */
                   strcpy(token_name, yytext);
@@ -115,36 +106,36 @@ comment          \/\/.*\n
                   yylval.op_val = token_name;
                   return ID;
                   }
-{IntegerLiteral} {updateLocation(); yylval.int_val = atoi(yytext); return INTEGER_LITERAL;}
+{IntegerLiteral} {updateLocation(&yylloc); yylval.int_val = atoi(yytext); return INTEGER_LITERAL;}
 
-"{"              {updateLocation(); return LFBRACKET;}
-"}"				 {updateLocation(); return RFBRACKET;}
-"("				 {updateLocation(); return LPBRACKET;}
-")"				 {updateLocation(); return RPBRACKET;}
-"["				 {updateLocation(); return LSBRACKET;}
-"]"				 {updateLocation(); return RSBRACKET;}
+"{"              {updateLocation(&yylloc); return LFBRACKET;}
+"}"				 {updateLocation(&yylloc); return RFBRACKET;}
+"("				 {updateLocation(&yylloc); return LPBRACKET;}
+")"				 {updateLocation(&yylloc); return RPBRACKET;}
+"["				 {updateLocation(&yylloc); return LSBRACKET;}
+"]"				 {updateLocation(&yylloc); return RSBRACKET;}
 
-"+"              {updateLocation(); return PLUS;}
-"-"              {updateLocation(); return MINUS;}
-"*"              {updateLocation(); return STAR;}
-"%"		         {updateLocation(); return MOD;}
+"+"              {updateLocation(&yylloc); return PLUS;}
+"-"              {updateLocation(&yylloc); return MINUS;}
+"*"              {updateLocation(&yylloc); return STAR;}
+"%"		         {updateLocation(&yylloc); return MOD;}
 
-"!"				 {updateLocation(); return NOT;}
+"!"				 {updateLocation(&yylloc); return NOT;}
 
-"="		         {updateLocation(); return ASSIGN;}
+"="		         {updateLocation(&yylloc); return ASSIGN;}
 
-"<"		     	 {updateLocation(); return LESS;}
-"&&"	    	 {updateLocation(); return AND;}
-"||"	         {updateLocation(); return OR;}
+"<"		     	 {updateLocation(&yylloc); return LESS;}
+"&&"	    	 {updateLocation(&yylloc); return AND;}
+"||"	         {updateLocation(&yylloc); return OR;}
 
-";"				 { updateLocation(); return SEMICOLON; }
-"."              { updateLocation(); return POINT; }
-","				 { updateLocation(); return COMMA; }
+";"				 { updateLocation(&yylloc); return SEMICOLON; }
+"."              { updateLocation(&yylloc); return POINT; }
+","				 { updateLocation(&yylloc); return COMMA; }
 
 
 {STRING}         {
 
-	updateLocation();
+	updateLocation(&yylloc);
 
 	const unsigned int MAX_SIZE = 1000;
 	char no_quotes[MAX_SIZE];

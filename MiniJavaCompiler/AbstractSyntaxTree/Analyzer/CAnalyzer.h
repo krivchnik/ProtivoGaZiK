@@ -12,9 +12,7 @@ private:
     std::shared_ptr<CProgram> program;
     std::map< std::string, ClassInfo > classes;
     void checkCycleInheritance();
-
-
-
+    std::set<std::string> checkTypes();
 };
 
 

@@ -7,12 +7,17 @@
 
 #include <Visitors/IVisitor.h>
 #include <Nodes/INode.h>
+
+#include <map>
 #include <vector>
 
 #include <fstream>
 
+typedef std::pair<int, int> Location;
+
 class CValidateVisitor: public IVisitor {
 public:
+
     //принимает корень дерева и имя файла с выводом для графвиза
     void StartVisit(INode* startNode, std::string filename);
     //Сюда нужно добавить методы visit для всех классов, которые мы хотим отображать в дереве.
@@ -45,4 +50,5 @@ public:
 
 private:
 
+    std::map<std::string, std::vector<Location>> typeErrors;
 };

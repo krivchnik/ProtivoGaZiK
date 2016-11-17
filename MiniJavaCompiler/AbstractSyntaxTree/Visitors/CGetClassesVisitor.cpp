@@ -78,11 +78,7 @@ void CGetClassesVisitor::Visit(CListStatement* statement) {
     std::cout << "start analyze list of " << numberOfIterations << std::endl;
 
     for(size_t i = 0; i < numberOfIterations; ++i) {
-        if (i != numberOfIterations - 1) {
-            statements[i]->Accept(this);
-        } else {
-            statements[numberOfIterations - 1]->Accept(this);
-        }
+        statements[i]->Accept(this);
     }
 }
 
@@ -92,11 +88,7 @@ void CGetClassesVisitor::Visit(CListExpression* statement) {
     size_t numberOfIterations = statements.size();
 
     for(size_t i = 0; i < numberOfIterations; ++i) {
-        if (i != numberOfIterations - 1) {
-            statements[i]->Accept(this);
-        } else {
-            statements[numberOfIterations - 1]->Accept(this);
-        }
+        statements[i]->Accept(this);
     }
 }
 
