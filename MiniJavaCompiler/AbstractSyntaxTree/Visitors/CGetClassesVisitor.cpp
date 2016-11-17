@@ -115,6 +115,7 @@ void CGetClassesVisitor::Visit( CMethodCallExpression* exp) {
 
 void CGetClassesVisitor::Visit( CClass* statement ) {
     ClassInfo classInfo;
+    classInfo.location = statement->GetLocation();
     classInfo.name = statement->getId()->GetName();
     if (statement->getBaseId().get() != nullptr) {
         classInfo.baseId = statement->getBaseId()->GetName();
@@ -125,6 +126,7 @@ void CGetClassesVisitor::Visit( CClass* statement ) {
 
     for(auto field : statement->getFields()->GetStatements()) {
         VariableInfo variableInfo;
+        variableInfo.location = field->GetLocation();
         variableInfo.name = dynamic_cast< CVarDecl* >(field.get())->GetVariableName();
         variableInfo.type = dynamic_cast< CVarDecl* >(field.get())->GetTypeName();
         classInfo.variableDeclaration.push_back(variableInfo);
@@ -135,10 +137,12 @@ void CGetClassesVisitor::Visit( CClass* statement ) {
     for(auto methodFromList : statement->getMethods()->GetStatements()) {
         CMethod* method = dynamic_cast<CMethod* >(methodFromList.get());
         MethodInfo methodInfo;
+        methodInfo.location = method->GetLocation();
         methodInfo.name = method->getId()->GetName();
         methodInfo.returnedType = method->getTypeName();
         for(auto param : method->getParameters()->GetStatements()) {
             VariableInfo paramInfo;
+            paramInfo.location = param->GetLocation();
             paramInfo.name = dynamic_cast< CVarDecl* >(param.get())->GetVariableName();
             paramInfo.type = dynamic_cast< CVarDecl* >(param.get())->GetTypeName();
             methodInfo.paramList.push_back(paramInfo);
@@ -147,6 +151,7 @@ void CGetClassesVisitor::Visit( CClass* statement ) {
         for(auto declFromList : method->getListDeclarations()->GetStatements()) {
             VariableInfo declInfo;
             CVarDecl* decl = dynamic_cast<CVarDecl* > (declFromList.get());
+            declInfo.location = decl->GetLocation();
             declInfo.name = decl->GetVariableName();
             declInfo.type = decl->GetTypeName();
             methodInfo.variablesList.push_back(declInfo);
@@ -166,6 +171,7 @@ void CGetClassesVisitor::Visit( CClass* statement ) {
 
 void CGetClassesVisitor::Visit( CMainClass* statement ) {
     ClassInfo classInfo;
+    classInfo.location = statement->GetLocation();
     classInfo.name = statement->GetClassId()->GetName();
     classInfo.baseId = "";
     MethodInfo methodInfo;

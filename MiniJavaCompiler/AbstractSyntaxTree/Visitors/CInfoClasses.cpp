@@ -2,12 +2,14 @@
 
 void VariableInfo::Print(std::ostream& stream) {
     stream << "\        varDecl:" << std::endl;
+    location.Print(stream);
     stream << "\        Type  " << type << " Name  " << name << std::endl;
 }
 
 void MethodInfo::Print(std::ostream& stream) {
     stream << "\    Method:" << std::endl;
     stream << "\    Name  " << name << std::endl;
+    location.Print(stream);
     stream << "\    RetType " << returnedType << std::endl;
     stream << "\    Visibility " << visibility << std::endl;
     stream << "\    ParamList" << std::endl;
@@ -23,6 +25,7 @@ void MethodInfo::Print(std::ostream& stream) {
 void ClassInfo::Print(std::ostream& stream) {
     stream << "Class " << std::endl;
     stream << "Name " << name << std::endl;
+    location.Print(stream);
     stream << "Base " << baseId << std::endl;
     stream << "Methods " << std::endl;
     for(int i = 0; i < methodsDeclarations.size(); ++i) {
