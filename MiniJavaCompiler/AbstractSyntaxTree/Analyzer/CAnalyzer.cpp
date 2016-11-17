@@ -38,7 +38,7 @@ void CAnalyzer::checkCycleInheritance() {
                 nameOfClassedInChain.push_back(nextBaseName);
                 if( used[nextBaseName] ){
                     std::cout << "Recursive inheritance " << nameOfClassedInChain[0];
-                    for( int i = 1; i < nameOfClassedInChain.size(); ++i ){
+                    for(size_t i = 1; i < nameOfClassedInChain.size(); ++i ){
                         std::cout << " -> " << nameOfClassedInChain[i];
                     }
                     break;

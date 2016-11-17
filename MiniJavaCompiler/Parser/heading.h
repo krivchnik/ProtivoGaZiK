@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_HOME_NISMOHL_CLIONPROJECTS_PROTIVOGAZIK_2_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED
-# define YY_YY_HOME_NISMOHL_CLIONPROJECTS_PROTIVOGAZIK_2_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED
+#ifndef YY_YY_HOME_DESERG_DOCUMENTS_PROTIVOGAZIK_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED
+# define YY_YY_HOME_DESERG_DOCUMENTS_PROTIVOGAZIK_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -82,10 +82,9 @@ extern int yydebug;
     PLUS = 292,
     MINUS = 293,
     STAR = 294,
-    END = 295,
-    INTEGER_LITERAL = 296,
-    ID = 297,
-    MOD = 298
+    INTEGER_LITERAL = 295,
+    ID = 296,
+    MOD = 297
   };
 #endif
 
@@ -94,7 +93,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 12 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1909  */
+#line 27 "/home/deserg/Documents/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1909  */
 
   int                     int_val;
   char*                   op_val;
@@ -108,7 +107,7 @@ union YYSTYPE
   CMainClass*		      main_class;
   CMethodCallExpression*  method_call;
 
-#line 112 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
+#line 111 "/home/deserg/Documents/ProtivoGaZiK/MiniJavaCompiler/Parser/heading.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -116,9 +115,23 @@ typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_DECLARED 1
 #endif
 
+/* Location type.  */
+#if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
+typedef struct YYLTYPE YYLTYPE;
+struct YYLTYPE
+{
+  int first_line;
+  int first_column;
+  int last_line;
+  int last_column;
+};
+# define YYLTYPE_IS_DECLARED 1
+# define YYLTYPE_IS_TRIVIAL 1
+#endif
+
 
 extern YYSTYPE yylval;
-
+extern YYLTYPE yylloc;
 int yyparse (void);
 
-#endif /* !YY_YY_HOME_NISMOHL_CLIONPROJECTS_PROTIVOGAZIK_2_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED  */
+#endif /* !YY_YY_HOME_DESERG_DOCUMENTS_PROTIVOGAZIK_MINIJAVACOMPILER_PARSER_HEADING_H_INCLUDED  */

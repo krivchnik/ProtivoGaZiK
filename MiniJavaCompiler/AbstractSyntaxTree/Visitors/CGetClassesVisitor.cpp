@@ -1,3 +1,7 @@
+//
+// Created by kagudkov on 12.11.16.
+//
+
 #include <Visitors/CGetClassesVisitor.h>
 #include <CommonInclude.h>
 
@@ -115,7 +119,6 @@ void CGetClassesVisitor::Visit( CMethodCallExpression* exp) {
 
 void CGetClassesVisitor::Visit( CClass* statement ) {
     ClassInfo classInfo;
-    classInfo.location = statement->GetLocation();
     classInfo.name = statement->getId()->GetName();
     if (statement->getBaseId().get() != nullptr) {
         classInfo.baseId = statement->getBaseId()->GetName();
@@ -126,7 +129,6 @@ void CGetClassesVisitor::Visit( CClass* statement ) {
 
     for(auto field : statement->getFields()->GetStatements()) {
         VariableInfo variableInfo;
-        variableInfo.location = field->GetLocation();
         variableInfo.name = dynamic_cast< CVarDecl* >(field.get())->GetVariableName();
         variableInfo.type = dynamic_cast< CVarDecl* >(field.get())->GetTypeName();
         classInfo.variableDeclaration.push_back(variableInfo);
@@ -137,12 +139,10 @@ void CGetClassesVisitor::Visit( CClass* statement ) {
     for(auto methodFromList : statement->getMethods()->GetStatements()) {
         CMethod* method = dynamic_cast<CMethod* >(methodFromList.get());
         MethodInfo methodInfo;
-        methodInfo.location = method->GetLocation();
         methodInfo.name = method->getId()->GetName();
         methodInfo.returnedType = method->getTypeName();
         for(auto param : method->getParameters()->GetStatements()) {
             VariableInfo paramInfo;
-            paramInfo.location = param->GetLocation();
             paramInfo.name = dynamic_cast< CVarDecl* >(param.get())->GetVariableName();
             paramInfo.type = dynamic_cast< CVarDecl* >(param.get())->GetTypeName();
             methodInfo.paramList.push_back(paramInfo);
@@ -151,7 +151,6 @@ void CGetClassesVisitor::Visit( CClass* statement ) {
         for(auto declFromList : method->getListDeclarations()->GetStatements()) {
             VariableInfo declInfo;
             CVarDecl* decl = dynamic_cast<CVarDecl* > (declFromList.get());
-            declInfo.location = decl->GetLocation();
             declInfo.name = decl->GetVariableName();
             declInfo.type = decl->GetTypeName();
             methodInfo.variablesList.push_back(declInfo);
@@ -171,7 +170,6 @@ void CGetClassesVisitor::Visit( CClass* statement ) {
 
 void CGetClassesVisitor::Visit( CMainClass* statement ) {
     ClassInfo classInfo;
-    classInfo.location = statement->GetLocation();
     classInfo.name = statement->GetClassId()->GetName();
     classInfo.baseId = "";
     MethodInfo methodInfo;
@@ -192,4 +190,44 @@ void CGetClassesVisitor::Visit(CProgram *statement) {
 
     statement->GetMainClass()->Accept(this);
     statement->GetMinorClasses()->Accept(this);
+}
+
+
+void VariableInfo::Print(std::ostream& stream) {
+    stream << "\tvarDecl:" << endl;
+    stream << "\tType  " << type << " Name  " << name << endl;
+}
+
+void MethodInfo::Print(std::ostream& stream) {
+    stream << "\tMethod:" << endl;
+    stream << "\tName  " << name << endl;
+    stream << "\tRetType " << returnedType << endl;
+    stream << "\tVisibility " << visibility << endl;
+    stream << "\tParamList" << endl;
+    for(size_t i = 0; i < paramList.size(); ++i) {
+        paramList[i].Print(stream);
+    }
+    stream << "\tVarList" << endl;
+    for(size_t i = 0; i < variablesList.size(); ++i) {
+        variablesList[i].Print(stream);
+    }
+}
+
+void ClassInfo::Print(std::ostream& stream) {
+    stream << "Class " << endl;
+    stream << "Name " << name << endl;
+    stream << "Base " << baseId << endl;
+    stream << "Methods " << endl;
+    for(size_t i = 0; i < methodsDeclarations.size(); ++i) {
+        methodsDeclarations[i].Print(stream);
+    }
+    stream << "VarDeclarations " << endl;
+    for(size_t i = 0; i < variableDeclaration.size(); ++i) {
+        variableDeclaration[i].Print(stream);
+    }
+
+}
+
+bool ClassInfo::HasBase() {
+    return baseId.length() > 0;
 }
