@@ -75,7 +75,7 @@ void CGetClassesVisitor::Visit(CWhileStatement* statement) {
 void CGetClassesVisitor::Visit(CListStatement* statement) {
     auto statements = statement->GetStatements();
     size_t numberOfIterations = statements.size();
-    std::cout << "start analyze list of " << numberOfIterations << std::endl;
+//    std::cout << "start analyze list of " << numberOfIterations << std::endl;
 
     for(size_t i = 0; i < numberOfIterations; ++i) {
         statements[i]->Accept(this);
@@ -118,7 +118,6 @@ void CGetClassesVisitor::Visit( CMethodCallExpression* exp) {
 }
 
 void CGetClassesVisitor::Visit( CClass* statement ) {
-    std::cout << "start class visit ";
     ClassInfo classInfo;
     classInfo.name = statement->getId()->GetName();
     if (statement->getBaseId().get() != nullptr) {
@@ -170,11 +169,20 @@ void CGetClassesVisitor::Visit( CClass* statement ) {
 
 
 void CGetClassesVisitor::Visit( CMainClass* statement ) {
-
+    ClassInfo classInfo;
+    classInfo.name = statement->GetClassId()->GetName();
+    classInfo.baseId = "";
+    MethodInfo methodInfo;
+    methodInfo.name = "main";
+    classInfo.methodsDeclarations.push_back(methodInfo);
+    if(classes.find(classInfo.name) == classes.end()){
+        classes[classInfo.name] = classInfo;
+    } else {
+        std::cout << "Redefinition " << classInfo.name;
+    }
     statement->GetClassId()->Accept(this);
     statement->GetArgId()->Accept(this);
     statement->GetStatement()->Accept(this);
-    std::cout << "MainClassAnalyzed" << std::endl;
 }
 
 
@@ -218,4 +226,8 @@ void ClassInfo::Print(std::ostream& stream) {
         variableDeclaration[i].Print(stream);
     }
 
+}
+
+bool ClassInfo::HasBase() {
+    return baseId.length() > 0;
 }

@@ -75,7 +75,9 @@ input:	mainClass classDeclList { ans = shared_ptr<CProgram>(new CProgram(shared_
 mainClass:	CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
 			{ $$ = new CMainClass(shared_ptr<CIdExpression>(new CIdExpression(std::string($2))),
 								  shared_ptr<CIdExpression>(new CIdExpression(std::string($12))),
-				 				  shared_ptr<CListStatement>($15)); 
+				 				  shared_ptr<CListStatement>($15));
+			   //std:cout << yylloc.first_line << " " << yylloc.first_column << " " <<  yylloc.last_line << " " << yylloc.last_column << "\n";
+
 			}
 ;
 
@@ -137,7 +139,7 @@ exp: 	INTEGER_LITERAL	{ $$ = new CNumExpression($1); }
         | FALSE 		{ $$ = new CBoolExpression(false); }
 
         | THIS			{ $$ = new CThisExpression(); 
-        				  //std:cout << yylloc.first_line << " " << yylloc.first_column << " " <<  yylloc.last_line << " " << yylloc.last_column << "\n"; 
+        				  //std:cout << yylloc.first_line << " " << yylloc.first_column << " " <<  yylloc.last_line << " " << yylloc.last_column << "\n";
         				}
 
 		| exp POINT LENGTH 				     { $$ = new CLengthExpression(shared_ptr<IExpression>($1)); }

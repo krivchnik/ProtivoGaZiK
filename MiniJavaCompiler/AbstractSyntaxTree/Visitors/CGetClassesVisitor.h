@@ -33,6 +33,7 @@ struct ClassInfo{
     std::string baseId;
     std::string name;
     void Print(std::ostream& stream);
+    bool HasBase();
 };
 
 

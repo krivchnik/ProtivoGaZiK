@@ -24,7 +24,6 @@ int main(int argc, char **argv)
 
 	visitor.StartVisit(ans.get(), std::string("graph.dot"));
     CAnalyzer analyzer(ans);
-	printf("createAnalyzer");
 	analyzer.analyze();
 	return 0;
 }

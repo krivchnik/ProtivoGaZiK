@@ -14,38 +14,40 @@ void CAnalyzer::analyze() {
 
 CAnalyzer::CAnalyzer(std::shared_ptr<CProgram> program) : program(program) {
     CGetClassesVisitor getClassesVisitor;
-    std::cout << "start analyze" << std::endl;
     getClassesVisitor.Visit(program.get());
-    std::cout << "analyzed" << std::endl;
     classes = getClassesVisitor.getClasses();
-    for (auto it = classes.begin(); it != classes.end(); ++it) {
+    for(auto it = classes.begin(); it != classes.end(); ++it) {
         it->second.Print(std::cout);
     }
 }
 
 void CAnalyzer::checkCycleInheritance() {
-/*    std::vector<std::shared_ptr<CClass> > classesValues;
-    std::map<std::shared_ptr<CClass>, bool> used;
-    for( auto iter = classes.begin(); iter != classes.end(); ++iter ){
-        classesValues.push_back( iter->second );
-        used[iter->second] = false;
+    //те вершины которые мы уже видели
+    std::map<std::string, bool> used;
+    for(auto it = classes.begin(); it != classes.end(); ++it) {
+        used[it->first] = false;
     }
-    for( auto iter = used.begin(); iter != used.end(); ++iter ) {
-        if( !iter->second ) {
-            iter->second = true;
-            std::shared_ptr<CClass> nextClass = iter->first;
-            //TODO
-            // while( nextClass->getBaseId() != nullptr && !used[classes[nextClass->getBaseId()]] ) {
-               // nextClass = classes[nextClass->getBaseId()];
-             //   used[nextClass] = true;
-            //}
-            if( nextClass->getBaseId() != nullptr && used[classes[nextClass->getBaseId()]] ) {
-                std::cout << "recursive inheritance " << nextClass->getBaseId()->GetName() << " ->"
-                          << nextClass->getBaseId() << std::endl;
+    for(auto it = classes.begin(); it != classes.end(); ++it) {
+        if( !used[it->first]) {
+            used[it->first] = true;
+            std::vector<std::string> nameOfClassedInChain;
+            std::string nextBaseName = it->first;
+            nameOfClassedInChain.push_back(nextBaseName);
+            while( classes[nextBaseName].HasBase() ) {
+                nextBaseName = classes[nextBaseName].baseId;
+                nameOfClassedInChain.push_back(nextBaseName);
+                if( used[nextBaseName] ){
+                    std::cout << "Recursive inheritance " << nameOfClassedInChain[0];
+                    for( int i = 1; i < nameOfClassedInChain.size(); ++i ){
+                        std::cout << " -> " << nameOfClassedInChain[i];
+                    }
+                    break;
+                }
+                used[nextBaseName] = true;
             }
         }
     }
-*/
+
 }
 
 std::set<std::string> CAnalyzer::checkTypes() {
