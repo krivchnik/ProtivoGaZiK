@@ -22,10 +22,16 @@ void CCheckTypesVisitor::Visit(CIdExpression *expression) {
 }
 
 void CCheckTypesVisitor::Visit(CNotExpression *expression) {
+    if(expression->getType() != BOOLEAN_TYPE) {
+        std::cout << "try use not to " << expression->getType() << endl;
+    }
     expression->GetExpression()->Accept(this);
 }
 
 void CCheckTypesVisitor::Visit(CLengthExpression *expression) {
+    if(expression->getType() != INT_ARRAY_TYPE) {
+        std::cout << "try use length to " << expression->getType() << endl;
+    }
     expression->getExpression()->Accept(this);
 }
 
@@ -36,6 +42,9 @@ void CCheckTypesVisitor::Visit(CArrayConstructionExpression *expression) {
 
 
 void CCheckTypesVisitor::Visit(CConstructClassExpression *expression) {
+    if(classes.find(expression->getType()) == classes.end()){
+        std::cout << "create not exist class " << expression->getType() << endl;
+    }
 }
 
 void CCheckTypesVisitor::Visit(CAssignStatement *statement) {
