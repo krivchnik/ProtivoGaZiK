@@ -40,7 +40,8 @@ using namespace std;
 #include <Nodes/CProgram.h>
 
 #include <Visitors/CPrintVisitor.h>
-
+#include <Visitors/CCheckTypesVisitor.h>
+#include <Visitors/CGetClassesVisitor.h>
 #include <Visitors/CInfoClasses.h>
 
 #include <Analyzer/CAnalyzer.h>

@@ -4,12 +4,11 @@
 
 #include <Analyzer/CAnalyzer.h>
 
-#include <iostream>
-#include <Visitors/CValidateVisitor.h>
 
 void CAnalyzer::analyze() {
     checkCycleInheritance();
-
+    checkMethodOverrides();
+    checkTypes();
 }
 
 CAnalyzer::CAnalyzer(std::shared_ptr<CProgram> program) : program(program) {
@@ -52,7 +51,11 @@ void CAnalyzer::checkCycleInheritance() {
 
 std::set<std::string> CAnalyzer::checkTypes() {
 
-    CValidateVisitor validateVisitor;
-    validateVisitor.Visit(program.get());
+    CCheckTypesVisitor checkTypesVisitor(classes);
+    checkTypesVisitor.Visit(program.get());
     return std::set<std::string>();
+}
+
+void CAnalyzer::checkMethodOverrides() {
+
 }
