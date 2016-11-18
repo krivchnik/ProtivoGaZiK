@@ -118,7 +118,7 @@ void CCheckTypesVisitor::Visit(CMethod *statement) {
     statement->getReturnExpression()->Accept(this);
     std::string typeName = statement->getTypeName();
     if (types.find(typeName) == types.end() && classes.find(typeName) == classes.end()) {
-        std::cout << "Non existing return type" << typeName << "in method  "
+        std::cout << "Non existing return type " << typeName << " in method  "
                   << currentClass << "::" << currentMethod << endl;
     }
     inMethodBody = false;

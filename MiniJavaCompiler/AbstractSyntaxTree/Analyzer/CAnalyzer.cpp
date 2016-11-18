@@ -8,6 +8,7 @@
 void CAnalyzer::analyze() {
     checkCycleInheritance();
     checkMethodOverrides();
+    checkParamOverrides();
     checkTypes();
 }
 
@@ -118,5 +119,21 @@ std::vector<std::string> CAnalyzer::getAvailVariables(ClassInfo classInfo) {
         nextClass = classInfo.baseId;
     }
     return vector<string>();
+}
+
+void CAnalyzer::checkParamOverrides() {
+    for(auto iter = classes.begin(); iter != classes.end(); ++iter) {
+        ClassInfo classInfo = iter ->second;
+        for(auto method : classInfo.methodsDeclarations){
+            std::set<std::string> paramNames;
+            for(auto varDecl : method.paramList) {
+                if(paramNames.find(varDecl.name) != paramNames.end()) {
+                    std::cout << "Param with similar name in " << classInfo.name << "::"
+                              << method.name << "::" << varDecl.name << endl;
+                }
+                paramNames.insert(varDecl.name);
+            }
+        }
+    }
 }
 

@@ -16,6 +16,8 @@ private:
     void checkCycleInheritance();
     //проверка переопределения методов
     void checkMethodOverrides();
+    //проверить, что параметры не переопределяются
+    void checkParamOverrides();
     //проверить, что переменые не переопределяются
     void checkVariableOverrides();
     //вернуть список доступных переменных из класса
