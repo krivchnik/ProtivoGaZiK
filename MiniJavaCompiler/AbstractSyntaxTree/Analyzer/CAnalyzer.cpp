@@ -12,12 +12,13 @@ void CAnalyzer::analyze() {
 }
 
 CAnalyzer::CAnalyzer(std::shared_ptr<CProgram> program) : program(program) {
+
     CGetClassesVisitor getClassesVisitor;
     getClassesVisitor.Visit(program.get());
     classes = getClassesVisitor.getClasses();
-    for (auto it = classes.begin(); it != classes.end(); ++it) {
-        it->second.Print(std::cout);
-    }
+//    for (auto it = classes.begin(); it != classes.end(); ++it) {
+//        it->second.Print(std::cout);
+//    }
 }
 
 void CAnalyzer::checkCycleInheritance() {
@@ -57,16 +58,6 @@ std::set<std::string> CAnalyzer::checkTypes() {
     return std::set<std::string>();
 }
 
-std::set<std::string> getPublicMethods(ClassInfo classInfo) {
-    std::set<std::string> publicMethods;
-    for (int i = 0; i < classInfo.methodsDeclarations.size(); ++i) {
-        if (classInfo.methodsDeclarations[i].visibility == "public") {
-            publicMethods.insert(classInfo.methodsDeclarations[i].name);
-        }
-    }
-    return publicMethods;
-}
-
 void CAnalyzer::checkMethodOverrides() {
     //те классы которые мы уже видели
     std::map<std::string, bool> used;
@@ -92,11 +83,11 @@ void CAnalyzer::checkMethodOverrides() {
         std::vector<std::set<std::string> > nameOfPublicMethods;
         std::string nextBaseName = it->first;
         nameOfClassedInChain.push_back(nextBaseName);
-        nameOfPublicMethods.push_back(getPublicMethods(it->second));
+        nameOfPublicMethods.push_back(classes[nextBaseName].getPublicMethods());
         while (classes[nextBaseName].HasBase() && !used[classes[nextBaseName].baseId]) {
             nextBaseName = classes[nextBaseName].baseId;
             nameOfClassedInChain.push_back(nextBaseName);
-            nameOfPublicMethods.push_back(getPublicMethods(classes[nextBaseName]));
+            nameOfPublicMethods.push_back(classes[nextBaseName].getPublicMethods());
             used[nextBaseName] = true;
         }
         for (int j = 0; j < classes[it->first].methodsDeclarations.size(); ++j) {

@@ -50,7 +50,10 @@ private:
     //если текущее положение вне класса или метода, то будет = ""
     std::string currentClass;
     std::string currentMethod;
-
+    //список методов доступных из текущего класса
+    std::set<std::string> getAvailableMethod();
+    //доступные типы
+    std::map<std::string, int> types;
 };
 
 

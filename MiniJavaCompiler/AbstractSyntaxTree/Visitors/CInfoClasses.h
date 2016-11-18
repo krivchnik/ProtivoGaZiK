@@ -3,6 +3,9 @@
 #include <vector>
 #include <iostream>
 #include <Nodes/INode.h>
+#include <set>
+#include <map>
+
 
 struct VariableInfo{
     Location location;
@@ -29,7 +32,9 @@ struct ClassInfo {
     std::string name;
 
     void Print(std::ostream &stream);
-
+    std::set<std::string> getPublicMethods();
     bool HasBase();
 };
+
+
 

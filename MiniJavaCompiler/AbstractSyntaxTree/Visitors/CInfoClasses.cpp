@@ -41,3 +41,15 @@ void ClassInfo::Print(std::ostream& stream) {
 bool ClassInfo::HasBase() {
     return baseId.length() > 0;
 }
+
+
+std::set<std::string> ClassInfo::getPublicMethods() {
+    std::set<std::string> publicMethods;
+    for (int i = 0; i < methodsDeclarations.size(); ++i) {
+        if (methodsDeclarations[i].visibility == "public") {
+            publicMethods.insert(methodsDeclarations[i].name);
+        }
+    }
+    return publicMethods;
+}
+

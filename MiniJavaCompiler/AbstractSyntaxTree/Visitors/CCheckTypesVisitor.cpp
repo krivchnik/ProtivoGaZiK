@@ -86,6 +86,11 @@ void CCheckTypesVisitor::Visit(CListExpression* statement) {
 }
 
 void CCheckTypesVisitor::Visit(CVarDecl* decl) {
+    //Проверка, что объявляемый тип существует.
+    std::string typeName = decl->GetTypeName();
+    if( types.find(typeName) == types.end() && classes.find(typeName) == classes.end() ) {
+        std::cout << "Non existing type in variable declaration " << typeName << endl;
+    }
 }
 
 void CCheckTypesVisitor::Visit(CGetItemExpression* expression) {
@@ -101,6 +106,11 @@ void CCheckTypesVisitor::Visit( CMethod* statement ) {
     statement->getListDeclarations()->Accept(this);
     statement->getListStatements()->Accept(this);
     statement->getReturnExpression()->Accept(this);
+    std::string typeName = statement->getTypeName();
+    if( types.find(typeName) == types.end() && classes.find(typeName) == classes.end() ) {
+        std::cout << "Non existing return type" << typeName <<  "in method  "
+                  << currentClass << "::" << currentMethod << endl;
+    }
     currentMethod = "";
 }
 
@@ -140,5 +150,30 @@ void CCheckTypesVisitor::Visit(CProgram *statement) {
 
 CCheckTypesVisitor::CCheckTypesVisitor(std::map<std::string, ClassInfo> &_classes) {
     classes = _classes;
+
+    types["int"] = 0;
+    types["intArray"] = 1;
+    types["boolean"] = 2;
+
+}
+
+std::set<std::string> CCheckTypesVisitor::getAvailableMethod() {
+
+    if(currentClass == "") {
+        return std::set<std::string>();
+    }
+    std::string nextClass = currentClass;
+    std::set<std::string> availMethod = classes[nextClass].getPublicMethods();
+    while( classes[nextClass].HasBase() ) {
+        nextClass = classes[nextClass].baseId;
+        if (nextClass == currentClass) {
+            break;
+        }
+        std::set<std::string> newMethod = classes[nextClass].getPublicMethods();
+        for (auto iter = newMethod.begin(); iter != newMethod.end(); ++iter) {
+            availMethod.insert(*iter);
+        }
+    }
+    return availMethod;
 }
 
