@@ -127,6 +127,23 @@ void CCheckTypesVisitor::Visit(CMethod *statement) {
 
 
 void CCheckTypesVisitor::Visit(CMethodCallExpression *exp) {
+    //по сути имя класса вызывающего метод
+    exp->setType(NONE_TYPE);
+    std::string className = exp->getObject()->getType();
+    if(classes.find(className) == classes.end()){
+        std::cout << "Wrong class for method call expression " << className << "::"
+                  << exp->getMethodId()->GetName() << endl;
+    } else {
+        for(auto method : classes[className].methodsDeclarations) {
+            if(method.name == exp->getMethodId()->GetName()) {
+                if(method.visibility == "private" && className != currentClass) {
+                    std::cout << "try to call private method" << className << "::" <<
+                              method.name << " from class" << currentClass << endl;
+                }
+            }
+        }
+    }
+
     exp->getObject()->Accept(this);
     exp->getMethodId()->Accept(this);
     exp->getArguments()->Accept(this);

@@ -3,11 +3,13 @@
 //
 
 #include <Nodes/CLengthExpression.h>
+#include "IStatement.h"
 
 CLengthExpression::CLengthExpression(const Location location,
                                      std::shared_ptr<IExpression> expression)
         : expression(expression) {
     this->location = location;
+    this->type = INT_TYPE;
 }
 
 std::shared_ptr<IExpression> CLengthExpression::getExpression() {

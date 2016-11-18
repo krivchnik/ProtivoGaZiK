@@ -3,6 +3,7 @@
 CIdExpression::CIdExpression(const Location location, std::string name)
 		: name(name) {
 	this->location = location;
+	this->type = name;
 }
 
 std::string CIdExpression::GetName() {

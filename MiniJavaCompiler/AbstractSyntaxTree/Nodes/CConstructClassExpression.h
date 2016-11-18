@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Nodes/IExpression.h>
+#include <Nodes/CIdExpression.h>
 
 class CConstructClassExpression : public IExpression {
 public:

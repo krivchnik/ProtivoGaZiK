@@ -10,6 +10,7 @@ class TV {
          int a;
          int[] b;
          boolean c;
+         a = b + 1 + 2;
          return 0;
     }
 }
