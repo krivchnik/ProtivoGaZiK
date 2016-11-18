@@ -33,6 +33,7 @@ struct ClassInfo {
 
     void Print(std::ostream &stream);
     std::set<std::string> getPublicMethods();
+    std::vector<MethodInfo> getPublicMethodsInfo();
     bool HasBase();
 };
 

@@ -51,7 +51,7 @@ private:
     std::string currentClass;
     std::string currentMethod;
     //список методов доступных из текущего класса
-    std::set<std::string> getAvailableMethod();
+    std::vector<MethodInfo> getAvailableMethod();
     //доступные типы
     std::map<std::string, int> types;
 
@@ -59,6 +59,8 @@ private:
     //Это нужно тк у нас нет класса Params. Чтобы определять ошибки в объявлениях параметров функции
     //или ошибки в объявлениях внутри метода
     bool inMethodBody;
+
+    const std::string &getTypeFromId(std::string basic_string);
 };
 
 

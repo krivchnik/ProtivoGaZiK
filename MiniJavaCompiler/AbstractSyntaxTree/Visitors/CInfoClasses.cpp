@@ -53,3 +53,12 @@ std::set<std::string> ClassInfo::getPublicMethods() {
     return publicMethods;
 }
 
+std::vector<MethodInfo> ClassInfo::getPublicMethodsInfo() {
+    std::vector<MethodInfo> publicMethods;
+    for (int i = 0; i < methodsDeclarations.size(); ++i) {
+        if (methodsDeclarations[i].visibility == "public") {
+            publicMethods.push_back(methodsDeclarations[i]);
+        }
+    }
+    return publicMethods;
+}
