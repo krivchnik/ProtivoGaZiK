@@ -54,6 +54,11 @@ private:
     std::set<std::string> getAvailableMethod();
     //доступные типы
     std::map<std::string, int> types;
+
+    //находимся ли мы уже в теле метода
+    //Это нужно тк у нас нет класса Params. Чтобы определять ошибки в объявлениях параметров функции
+    //или ошибки в объявлениях внутри метода
+    bool inMethodBody;
 };
 
 
