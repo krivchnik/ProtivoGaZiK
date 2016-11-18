@@ -107,4 +107,16 @@ void CAnalyzer::checkMethodOverrides() {
     }
 
 }
+//кажется, пока что не нужен поэтому недописан
+std::vector<std::string> CAnalyzer::getAvailVariables(ClassInfo classInfo) {
+    std::string nextClass = classInfo.name;
+    std::vector<std::string> availBaseMethod;
+    while(classes[nextClass].HasBase()){
+        for(int i = 0; i < classes[nextClass].variableDeclaration.size(); ++i){
+            availBaseMethod.push_back(classes[nextClass].variableDeclaration[i].name);
+        }
+        nextClass = classInfo.baseId;
+    }
+    return vector<string>();
+}
 

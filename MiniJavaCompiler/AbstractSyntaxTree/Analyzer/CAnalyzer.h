@@ -16,6 +16,10 @@ private:
     void checkCycleInheritance();
     //проверка переопределения методов
     void checkMethodOverrides();
+    //проверить, что переменые не переопределяются
+    void checkVariableOverrides();
+    //вернуть список доступных переменных из класса
+    std::vector<std::string> getAvailVariables(ClassInfo classInfo);
     //запуск CheckVisitor
     std::set<std::string> checkTypes();
 };
