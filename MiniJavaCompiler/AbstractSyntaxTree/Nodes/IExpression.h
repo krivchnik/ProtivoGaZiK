@@ -11,13 +11,11 @@ class IExpression: public INode {
 public:
 	virtual void Accept(IVisitor*) = 0;
 
-protected:
-public:
-	const std::string &getType() const {
+	const std::string &GetType() const {
 		return type;
 	}
 
-	void setType(const std::string &type) {
+	void SetType(const std::string &type) {
 		IExpression::type = type;
 	}
 

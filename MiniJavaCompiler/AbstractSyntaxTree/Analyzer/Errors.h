@@ -1,6 +1,8 @@
 #pragma once
 
+#include <map>
 #include <vector>
+#include <ostream>
 
 #include <Nodes/INode.h>
 
@@ -13,9 +15,13 @@ enum ErrorType {
     NON_ARRAY
 };
 
+std::ostream& operator<< (std::ostream& out, const ErrorType error);
+
 struct ErrorDescription {
     Location loc;
     ErrorType type;
+
+    //additional info: variable name, exp type, etc.
     std::string info;
 };
 
