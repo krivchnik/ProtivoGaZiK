@@ -22,8 +22,8 @@ void CCheckTypesVisitor::Visit(CIdExpression *expression) {
     std::string idType = getTypeFromId(expression->GetName());
 
     if(idType == NONE_TYPE) {
-        //INKNOWN VARIABLE
-        errors.AddError({expression->GetLocation(), ErrorType::UNDEFINED_VARIABLE, expression->GetName()});
+        //UNKNOWN IDENTIFIER
+        errors.AddError({expression->GetLocation(), ErrorType::UNDEFINED_IDENTIFIER, expression->GetName()});
     }
     expression->SetType(idType);
 }
@@ -50,9 +50,7 @@ void CCheckTypesVisitor::Visit(CArrayConstructionExpression *expression) {
         errors.AddError({expression->GetLocation(), ErrorType::NON_INTEGER, expression->GetType()});
     }
     expression->getSize()->Accept(this);
-
 }
-
 
 void CCheckTypesVisitor::Visit(CConstructClassExpression *expression) {
     if(classes.find(expression->GetType()) == classes.end()){
@@ -147,21 +145,27 @@ void CCheckTypesVisitor::Visit(CGetItemExpression *expression) {
     expression->GetIndex()->Accept(this);
 }
 
-void CCheckTypesVisitor::Visit(CMethod *statement) {
-    currentMethod = statement->getId()->GetName();
-    statement->getId()->Accept(this);
-    statement->getParameters()->Accept(this);
+void CCheckTypesVisitor::Visit(CMethod *method) {
+    currentMethod = method->getId()->GetName();
+
+    //THERE ARE NO ERRORS IN MAIN METHOD PARAMS; MAIN METHOD IS ALSO PUBLIC
+    if (!inMainMethodBody) {
+        method->getId()->Accept(this);
+        method->getParameters()->Accept(this);
+    }
 
     inMethodBody = true;
 
-    statement->getListDeclarations()->Accept(this);
-    statement->getListStatements()->Accept(this);
-    statement->getReturnExpression()->Accept(this);
-    std::string typeName = statement->getTypeName();
+    method->getListDeclarations()->Accept(this);
+    method->getListStatements()->Accept(this);
+    if (method->getReturnExpression() != nullptr) {
+        method->getReturnExpression()->Accept(this);
+    }
+    std::string typeName = method->getTypeName();
 
-    if (types.find(typeName) == types.end() && classes.find(typeName) == classes.end()) {
+    if (types.find(typeName) == types.end() && classes.find(typeName) == classes.end() && !inMainMethodBody) {
         //UNKNOWN RETURN TYPE
-        errors.AddError({statement->getId()->GetLocation(), ErrorType::UNKNOWN_TYPE, typeName});
+        errors.AddError({method->getId()->GetLocation(), ErrorType::UNKNOWN_TYPE, typeName});
     }
     inMethodBody = false;
     currentMethod = "";
@@ -202,12 +206,12 @@ void CCheckTypesVisitor::Visit(CClass *statement) {
     currentClass = "";
 }
 
-
 void CCheckTypesVisitor::Visit(CMainClass *statement) {
     currentClass = statement->GetClassId()->GetName();
     statement->GetClassId()->Accept(this);
-    statement->GetArgId()->Accept(this);
-    statement->GetStatement()->Accept(this);
+    inMainMethodBody = true;
+    statement->GetMainMethod()->Accept(this);
+    inMainMethodBody = false;
     currentClass = "";
 }
 
@@ -297,12 +301,12 @@ const std::string &CCheckTypesVisitor::getTypeFromId(std::string name) {
             }
         }
         for(auto param = methodInfo.paramList.begin(); param != methodInfo.paramList.end(); ++param){
-            if(param -> name == name){
+            if(param->name == name) {
                 return param->type;
             }
         }
         for(auto var = methodInfo.variablesList.begin(); var != methodInfo.variablesList.end(); ++var){
-            if(var->name == name){
+            if(var->name == name) {
                 return var->type;
             }
         }

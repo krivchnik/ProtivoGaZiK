@@ -68,6 +68,7 @@ private:
     //Это нужно тк у нас нет класса Params. Чтобы определять ошибки в объявлениях параметров функции
     //или ошибки в объявлениях внутри метода
     bool inMethodBody;
+    bool inMainMethodBody;
 
     const std::string &getTypeFromId(std::string basic_string);
 };

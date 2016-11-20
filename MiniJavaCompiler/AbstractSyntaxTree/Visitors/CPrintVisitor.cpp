@@ -231,19 +231,22 @@ void CPrintVisitor::Visit( CMethod* statement ) {
     statement->getParameters()->Accept(this);
     file << getEndLine();
 
-    file << getNodeNameWithLabel("CMethod",currentExpressionId,"CMethod") << getArrow()
-         << getNodeNameWithLabel("VariablesDeclarations",currentExpressionId,"VariablesDeclarations") << getArrow();
+    file << getNodeNameWithLabel("CMethod", currentExpressionId, "CMethod") << getArrow()
+         << getNodeNameWithLabel("VariablesDeclarations", currentExpressionId, "VariablesDeclarations")
+         << getArrow();
     statement->getListDeclarations()->Accept(this);
     file << getEndLine();
 
     file << getNodeNameWithLabel("CMethod",currentExpressionId,"CMethod") << getArrow() <<
          getNodeNameWithLabel("ListStatementsInMethod",currentExpressionId,"ListStatementsInMethod") << getArrow();
     statement->getListStatements()->Accept(this);
-    file << getEndLine();
 
-    file << getNodeNameWithLabel("CMethod",currentExpressionId,"CMethod") << getArrow() <<
-         getNodeNameWithLabel("ReturnExpression",currentExpressionId,"ReturnExpression") << getArrow();
-    statement->getReturnExpression()->Accept(this);
+    if (statement->getReturnExpression() != nullptr) {
+        file << getEndLine();
+        file << getNodeNameWithLabel("CMethod", currentExpressionId, "CMethod") << getArrow() <<
+             getNodeNameWithLabel("ReturnExpression", currentExpressionId, "ReturnExpression") << getArrow();
+        statement->getReturnExpression()->Accept(this);
+    }
 }
 
 
@@ -299,13 +302,8 @@ void CPrintVisitor::Visit( CMainClass* statement ) {
     file << getEndLine();
 
     file << getNodeNameWithLabel("CMainClass",currentExpressionId,"CMainClass") << getArrow() <<
-         getNodeNameWithLabel("ArgID",currentExpressionId,"ArgID") << getArrow();
-    statement->GetArgId()->Accept(this);
-    file << getEndLine();
-
-    file << getNodeNameWithLabel("CMainClass",currentExpressionId,"CMainClass") << getArrow() <<
-         getNodeNameWithLabel("Statement",currentExpressionId,"Statement") << getArrow();
-    statement->GetStatement()->Accept(this);
+         getNodeNameWithLabel("MainMethod",currentExpressionId,"MainMethod") << getArrow();
+    statement->GetMainMethod()->Accept(this);
 }
 
 

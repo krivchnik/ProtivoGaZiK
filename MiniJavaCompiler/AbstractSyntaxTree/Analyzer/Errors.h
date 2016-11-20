@@ -7,7 +7,7 @@
 #include <Nodes/INode.h>
 
 enum ErrorType {
-    UNDEFINED_VARIABLE,
+    UNDEFINED_IDENTIFIER,
     UNKNOWN_TYPE,
     PRIVATE_METHOD_CALL,
     NON_BOOLEAN_EXP,

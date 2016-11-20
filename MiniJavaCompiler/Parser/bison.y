@@ -86,10 +86,24 @@ input:	mainClass classDeclList { ans = shared_ptr<CProgram>(new CProgram(GetToke
 		;
 
 mainClass:	CLASS ID LFBRACKET PUBLIC STATIC VOID MAIN LPBRACKET STRING LSBRACKET RSBRACKET ID RPBRACKET LFBRACKET statList RFBRACKET RFBRACKET
-			{ $$ = new CMainClass(GetTokenLocation(@$),
+			{ 
+				CListStatement* params = new CListStatement(ComposeLocation(@9, @12), std::string("Arguments"));
+				params->Add(shared_ptr<CVarDecl>(new CVarDecl(ComposeLocation(@9, @12), "StringArray", std::string($12))));
+
+				CMethod* mainMethod = new CMethod(
+					ComposeLocation(@4, @13),
+					std::string("public"),
+					std::string("void"),
+					shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation(@7), "main")),
+					shared_ptr<CListStatement>(params),
+					shared_ptr<CListStatement>(new CListStatement(GetTokenLocation(@14), std::string("Variables"))),
+					shared_ptr<CListStatement>($15),
+					nullptr
+				);
+
+				$$ = new CMainClass(GetTokenLocation(@$),
 								  shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation(@2), std::string($2))),
-								  shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation(@12), std::string($12))),
-				 				  shared_ptr<CListStatement>($15)); 
+								  shared_ptr<CMethod>(mainMethod)); 
 			}
 ;
 

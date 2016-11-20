@@ -107,7 +107,9 @@ void CGetClassesVisitor::Visit( CMethod* statement ) {
     statement->getParameters()->Accept(this);
     statement->getListDeclarations()->Accept(this);
     statement->getListStatements()->Accept(this);
-    statement->getReturnExpression()->Accept(this);
+    if (statement->getReturnExpression() != nullptr) {
+        statement->getReturnExpression()->Accept(this);
+    }
 }
 
 
@@ -120,6 +122,8 @@ void CGetClassesVisitor::Visit( CMethodCallExpression* exp) {
 void CGetClassesVisitor::Visit( CClass* statement ) {
     ClassInfo classInfo;
     classInfo.name = statement->getId()->GetName();
+    classInfo.location = statement->GetLocation();
+
     if (statement->getBaseId().get() != nullptr) {
         classInfo.baseId = statement->getBaseId()->GetName();
         statement->getBaseId()->Accept(this);
@@ -129,8 +133,10 @@ void CGetClassesVisitor::Visit( CClass* statement ) {
 
     for(auto field : statement->getFields()->GetStatements()) {
         VariableInfo variableInfo;
-        variableInfo.name = dynamic_cast< CVarDecl* >(field.get())->GetVariableName();
-        variableInfo.type = dynamic_cast< CVarDecl* >(field.get())->GetTypeName();
+        CVarDecl* decl = dynamic_cast< CVarDecl* >(field.get());
+        variableInfo.location = decl->GetLocation();
+        variableInfo.name = decl->GetVariableName();
+        variableInfo.type = decl->GetTypeName();
         classInfo.variableDeclaration.push_back(variableInfo);
     }
 
@@ -141,10 +147,15 @@ void CGetClassesVisitor::Visit( CClass* statement ) {
         MethodInfo methodInfo;
         methodInfo.name = method->getId()->GetName();
         methodInfo.returnedType = method->getTypeName();
+        methodInfo.visibility = method->getVisibility();
+        methodInfo.location = method->GetLocation();
+
         for(auto param : method->getParameters()->GetStatements()) {
             VariableInfo paramInfo;
-            paramInfo.name = dynamic_cast< CVarDecl* >(param.get())->GetVariableName();
-            paramInfo.type = dynamic_cast< CVarDecl* >(param.get())->GetTypeName();
+            CVarDecl* decl = dynamic_cast< CVarDecl* >(param.get());
+            paramInfo.name = decl->GetVariableName();
+            paramInfo.type = decl->GetTypeName();
+            paramInfo.location = decl->GetLocation();
             methodInfo.paramList.push_back(paramInfo);
         }
 
@@ -153,9 +164,9 @@ void CGetClassesVisitor::Visit( CClass* statement ) {
             CVarDecl* decl = dynamic_cast<CVarDecl* > (declFromList.get());
             declInfo.name = decl->GetVariableName();
             declInfo.type = decl->GetTypeName();
+            declInfo.location = decl->GetLocation();
             methodInfo.variablesList.push_back(declInfo);
         }
-        methodInfo.visibility = method->getVisibility();
 
         classInfo.methodsDeclarations.push_back(methodInfo);
     }
@@ -172,17 +183,32 @@ void CGetClassesVisitor::Visit( CMainClass* statement ) {
     ClassInfo classInfo;
     classInfo.name = statement->GetClassId()->GetName();
     classInfo.baseId = "";
+    classInfo.location = statement->GetLocation();
+
+    auto params = statement->GetMainMethod()->getParameters()->GetStatements();
+    CVarDecl* decl = dynamic_cast<CVarDecl* >(params[0].get());
+
+    VariableInfo paramInfo;
+    paramInfo.name = decl->GetVariableName();
+    paramInfo.location = decl->GetLocation();
+    paramInfo.type = decl->GetTypeName();
+
+    auto method = statement->GetMainMethod();
     MethodInfo methodInfo;
-    methodInfo.name = "main";
+    methodInfo.location = method->GetLocation();
+    methodInfo.name = method->getId()->GetName();
+    methodInfo.returnedType = method->getVisibility();
+    methodInfo.paramList.push_back(paramInfo);
+
     classInfo.methodsDeclarations.push_back(methodInfo);
+
     if(classes.find(classInfo.name) == classes.end()){
         classes[classInfo.name] = classInfo;
     } else {
         std::cout << "Redefinition " << classInfo.name;
     }
     statement->GetClassId()->Accept(this);
-    statement->GetArgId()->Accept(this);
-    statement->GetStatement()->Accept(this);
+    statement->GetMainMethod()->Accept(this);
 }
 
 

@@ -21,8 +21,7 @@ public:
     CGetClassesVisitor();
 
     std::map< std::string, ClassInfo > getClasses() { return classes; }
-    //если увидим ещё раз класс с тем же именем, то препишем его уже существующему CIdExpression;
-    std::map<std::string, std::shared_ptr<CIdExpression> > classesNames;
+
     void Visit(CAssignStatement*);
     void Visit(CAssignItemStatement*);
     void Visit(CPrintStatement*);
