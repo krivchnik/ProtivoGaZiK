@@ -1,20 +1,27 @@
 #pragma once
 
-#include <Visitors/IVisitor.h>
+#include <Analyzer/Errors.h>
+
 #include <Nodes/CClass.h>
+
 #include <Visitors/CInfoClasses.h>
-#include <vector>
-#include <string>
-#include <set>
+#include <Visitors/IVisitor.h>
+
 #include <map>
 #include <ostream>
-
+#include <set>
+#include <string>
+#include <vector>
 
 class CCheckTypesVisitor : public IVisitor {
 
 public:
 
     CCheckTypesVisitor(std::map<std::string, ClassInfo >& _classes);
+
+    Errors GetErrors() const {
+        return errors;
+    }
 
     //если увидим ещё раз класс с тем же именем, то препишем его уже существующему CIdExpression;
     void Visit(CAssignStatement*);
@@ -54,6 +61,8 @@ private:
     std::vector<MethodInfo> getAvailableMethod();
     //доступные типы
     std::map<std::string, int> types;
+
+    Errors errors;
 
     //находимся ли мы уже в теле метода
     //Это нужно тк у нас нет класса Params. Чтобы определять ошибки в объявлениях параметров функции

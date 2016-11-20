@@ -21,15 +21,18 @@ void CCheckTypesVisitor::Visit(CThisExpression *expression) {
 void CCheckTypesVisitor::Visit(CIdExpression *expression) {
     std::string idType = getTypeFromId(expression->GetName());
     //если не было определения у переменной, но она используется
-    if(idType == NONE_TYPE){
-        std::cout << "use undefined variable " << expression->GetName() + "::" + currentClass
-                                                  + "::" + currentMethod<< endl;
+    if(idType == NONE_TYPE) {
+        errors.AddError({expression->GetLocation(), ErrorType::UNDEFINED_VARIABLE, expression->GetName()});
+        //IN ERRORS: undefinedVariables
+        //std::cout << "use undefined variable " << expression->GetName() + "::" + currentClass
+        //                                          + "::" + currentMethod << endl;
     }
     expression->setType(idType);
 }
 
 void CCheckTypesVisitor::Visit(CNotExpression *expression) {
     if(expression->getType() != BOOLEAN_TYPE) {
+        //IN ERRORS: nonBooleanExpression
         std::cout << "try use not to " << expression->getType() << endl;
     }
     expression->GetExpression()->Accept(this);
@@ -37,6 +40,7 @@ void CCheckTypesVisitor::Visit(CNotExpression *expression) {
 
 void CCheckTypesVisitor::Visit(CLengthExpression *expression) {
     if(expression->getType() != INT_ARRAY_TYPE) {
+        //IN ERRORS: nonArrays;
         std::cout << "try use length to " << expression->getType() << endl;
     }
     expression->getExpression()->Accept(this);
@@ -44,6 +48,7 @@ void CCheckTypesVisitor::Visit(CLengthExpression *expression) {
 
 void CCheckTypesVisitor::Visit(CArrayConstructionExpression *expression) {
     if(expression->getSize()->getType() != INT_TYPE) {
+        //IN ERRORS: nonIntegerType
         std::cout << "try to create array with not int size " << expression->getType() << endl;
     }
     expression->getSize()->Accept(this);
@@ -53,6 +58,7 @@ void CCheckTypesVisitor::Visit(CArrayConstructionExpression *expression) {
 
 void CCheckTypesVisitor::Visit(CConstructClassExpression *expression) {
     if(classes.find(expression->getType()) == classes.end()){
+        //IN ERRORS: unknownTypes
         std::cout << "create not exist class " << expression->getType() << endl;
     }
 }
@@ -72,6 +78,7 @@ void CCheckTypesVisitor::Visit(CAssignItemStatement *statement) {
 void CCheckTypesVisitor::Visit(CPrintStatement *statement) {
     statement->GetExpression()->Accept(this);
     if(statement->GetExpression()->getType() != INT_TYPE) {
+        //IN ERRORS: nonIntegerType
         std::cout << "print from not int " << statement->GetExpression()->getType() << endl;
     }
 }
@@ -81,6 +88,7 @@ void CCheckTypesVisitor::Visit(CIfElseStatement *statement) {
     statement->getIfStatement()->Accept(this);
     statement->getElseStatement()->Accept(this);
     if(statement->getExpression()->getType() != BOOLEAN_TYPE) {
+        //IN ERRORS: nonBooleanExpression
         std::cout << "not boolean condition in if " << statement->getExpression()->getType() << endl;
     }
 }
@@ -90,6 +98,7 @@ void CCheckTypesVisitor::Visit(CWhileStatement *statement) {
     statement->getCondition()->Accept(this);
     statement->getBody()->Accept(this);
     if(statement->getCondition()->getType() != BOOLEAN_TYPE) {
+        //IN ERRORS: nonBooleanExpression
         std::cout << "not boolean condition in while " << statement->getCondition()->getType() << endl;
     }
 }
@@ -120,9 +129,11 @@ void CCheckTypesVisitor::Visit(CVarDecl *decl) {
     if (types.find(typeName) == types.end() && classes.find(typeName) == classes.end()) {
         //Проблема параметров функции или объявления переменых внутри метода
         if (inMethodBody) {
+            //IN ERRORS: unknownTypes
             std::cout << "Non existing type in variable declaration " <<
                       typeName << "in class " << currentClass << endl;
         } else {
+            //IN ERRORS: unknownTypes
             std::cout << "Non existing type in function param list " <<
                       currentClass << "::" << currentMethod << "::" << typeName << endl;
         }
@@ -147,6 +158,7 @@ void CCheckTypesVisitor::Visit(CMethod *statement) {
     statement->getReturnExpression()->Accept(this);
     std::string typeName = statement->getTypeName();
     if (types.find(typeName) == types.end() && classes.find(typeName) == classes.end()) {
+        //IN ERRORS: unknownTypes
         std::cout << "Non existing return type " << typeName << " in method  "
                   << currentClass << "::" << currentMethod << endl;
     }
@@ -160,12 +172,14 @@ void CCheckTypesVisitor::Visit(CMethodCallExpression *exp) {
     exp->setType(NONE_TYPE);
     std::string className = exp->getObject()->getType();
     if(classes.find(className) == classes.end()){
+        //IN ERRORS: unknownTypes
         std::cout << "Wrong class for method call expression " << className << "::"
                   << exp->getMethodId()->GetName() << endl;
     } else {
         for(auto method : classes[className].methodsDeclarations) {
             if(method.name == exp->getMethodId()->GetName()) {
                 if(method.visibility == "private" && className != currentClass) {
+                    //IN ERRORS: privateMethodCall
                     std::cout << "try to call private method" << className << "::" <<
                               method.name << " from class" << currentClass << endl;
                 }
