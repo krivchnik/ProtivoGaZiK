@@ -16,7 +16,7 @@
 	    // Начало токена
 	    yylloc->first_line = line_number;
 	    yylloc->first_column = column_number;
-	    for( int i = 0; i < strlen(yytext); i++ ) {
+	    for( unsigned int i = 0; i < strlen(yytext); i++ ) {
 	   	 if( yytext[i] == '\n' ) {
 	   		 line_number++;
 	   		 column_number = 1;

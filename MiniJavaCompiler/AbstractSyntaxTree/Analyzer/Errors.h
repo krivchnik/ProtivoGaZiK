@@ -14,7 +14,9 @@ enum ErrorType {
     NON_INTEGER,
     NON_ARRAY,
     REDEFINITION_CLASS,
-    REDEFINITION_METHOD
+    REDEFINITION_METHOD,
+    REDEFINITION_PARAM,
+    RECURSIVE_INHERITANCE
 };
 
 std::ostream& operator<< (std::ostream& out, const ErrorType error);

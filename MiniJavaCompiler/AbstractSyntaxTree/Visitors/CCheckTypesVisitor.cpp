@@ -263,7 +263,7 @@ const std::string &CCheckTypesVisitor::getTypeFromId(std::string name) {
 
     //если это имя доступного метода
     std::vector<MethodInfo> availMethods = getAvailableMethod();
-    for(int i = 0; i < availMethods.size(); ++i){
+    for(unsigned int i = 0; i < availMethods.size(); ++i){
         if(availMethods[i].name == name){
             return availMethods[i].returnedType;
         }

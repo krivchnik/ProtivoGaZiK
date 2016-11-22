@@ -4,7 +4,6 @@
 
 #include <Analyzer/CAnalyzer.h>
 
-
 std::vector<ErrorDescription> CAnalyzer::analyze() {
     checkCycleInheritance();
     checkMethodOverrides();
@@ -34,13 +33,15 @@ void CAnalyzer::checkCycleInheritance() {
         std::string nextBaseName = it->first;
         nameOfClassedInChain.push_back(nextBaseName);
         while (classes[nextBaseName].HasBase()) {
-            nextBaseName = classes[nextBaseName].baseId;
+            ClassInfo nextBaseInfo = classes[nextBaseName];
+            nextBaseName = nextBaseInfo.baseId;
             nameOfClassedInChain.push_back(nextBaseName);
             if (used[nextBaseName]) {
-                std::cout << "Recursive inheritance " << nameOfClassedInChain[0];
+                std::string errorInfo = nameOfClassedInChain[0];
                 for (size_t i = 1; i < nameOfClassedInChain.size(); ++i) {
-                    std::cout << " -> " << nameOfClassedInChain[i];
+                    errorInfo.append(" -> ").append(nameOfClassedInChain[i]);
                 }
+                errors.push_back({nextBaseInfo.location, ErrorType::RECURSIVE_INHERITANCE, errorInfo});
                 break;
             }
             used[nextBaseName] = true;
@@ -72,11 +73,11 @@ void CAnalyzer::checkMethodOverrides() {
         //проверка внутри самого класса
         std::set<std::string> methods;
         for (unsigned int i = 0; i < it->second.methodsDeclarations.size(); ++i) {
-            if(methods.find(it->second.methodsDeclarations[i].name) != methods.end()) {
-                std::cout << "redefinition of method " << it->second.methodsDeclarations[i].name
-                          << " in class " << it->first << endl;
+            MethodInfo methodInfo = it->second.methodsDeclarations[i];
+            if(methods.find(methodInfo.name) != methods.end()) {
+                errors.push_back({methodInfo.location, ErrorType::REDEFINITION_METHOD, methodInfo.name});
             }
-            methods.insert(it->second.methodsDeclarations[i].name);
+            methods.insert(methodInfo.name);
         }
 
         //проверка того, что метода не было в предке
@@ -93,11 +94,10 @@ void CAnalyzer::checkMethodOverrides() {
             used[nextBaseName] = true;
         }
         for (unsigned int j = 0; j < classes[it->first].methodsDeclarations.size(); ++j) {
-            std::string methodName = classes[it->first].methodsDeclarations[j].name;
+            MethodInfo methodInfo = classes[it->first].methodsDeclarations[j];
             for (unsigned int k = 1; k < nameOfClassedInChain.size(); ++k) {
-                if(nameOfPublicMethods[k].find(methodName) != nameOfPublicMethods[k].end()) {
-                    std::cout << "Override method " << nameOfClassedInChain[k] << "::" << methodName <<
-                              " in class " << it->first << endl;
+                if(nameOfPublicMethods[k].find(methodInfo.name) != nameOfPublicMethods[k].end()) {
+                    errors.push_back({methodInfo.location, ErrorType::REDEFINITION_METHOD, methodInfo.name});
                 }
             }
         }
@@ -105,10 +105,9 @@ void CAnalyzer::checkMethodOverrides() {
         for (auto iter = classes.begin(); iter != classes.end(); ++iter) {
             used[iter->first] = false;
         }
-
     }
-
 }
+
 //кажется, пока что не нужен поэтому недописан
 std::vector<std::string> CAnalyzer::getAvailVariables(ClassInfo classInfo) {
     std::string nextClass = classInfo.name;
@@ -129,12 +128,10 @@ void CAnalyzer::checkParamOverrides() {
             std::set<std::string> paramNames;
             for(auto varDecl : method.paramList) {
                 if(paramNames.find(varDecl.name) != paramNames.end()) {
-                    std::cout << "Param with similar name in " << classInfo.name << "::"
-                              << method.name << "::" << varDecl.name << endl;
+                    errors.push_back({varDecl.location, ErrorType::REDEFINITION_PARAM, varDecl.name});
                 }
                 paramNames.insert(varDecl.name);
             }
         }
     }
 }
-
