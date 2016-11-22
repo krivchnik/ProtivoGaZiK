@@ -88,8 +88,19 @@ void CCheckTypesVisitor::Visit(CConstructClassExpression *expression) {
 
 void CCheckTypesVisitor::Visit(CAssignStatement *statement) {
 
-    statement->GetVariable()->Accept(this);
-    statement->GetExpression()->Accept(this);
+    auto var = statement->GetVariable();
+    auto exp = statement->GetExpression();
+
+    var->Accept(this);
+    exp->Accept(this);
+
+    string typeVar = var->GetType();
+    string typeExp = exp->GetType();
+
+    if (typeVar != typeExp) {
+        //TYPE MISMATCH
+        errors.push_back({exp->GetLocation(), ErrorType::WRONG_TYPE, typeMismatch(typeExp, typeVar)});
+    }
 }
 
 void CCheckTypesVisitor::Visit(CAssignItemStatement *statement) {
