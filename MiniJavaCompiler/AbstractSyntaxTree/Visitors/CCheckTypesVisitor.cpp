@@ -64,7 +64,7 @@ void CCheckTypesVisitor::Visit(CNotExpression *expression) {
 void CCheckTypesVisitor::Visit(CLengthExpression *expression) {
     expression->getExpression()->Accept(this);
 
-    if(expression->GetType() != INT_ARRAY_TYPE) {
+    if(expression->getExpression()->GetType() != INT_ARRAY_TYPE) {
         //ONLY ARRAYS HAVE .length
         errors.push_back({expression->GetLocation(), ErrorType::NON_ARRAY, expression->GetType()});
     }
