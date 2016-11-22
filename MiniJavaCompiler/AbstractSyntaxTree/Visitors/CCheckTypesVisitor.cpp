@@ -15,11 +15,20 @@ void CCheckTypesVisitor::Visit(COperationExpression *expression) {
     string typeRight = rightOperand->GetType();
     string typeOperation = expression->GetType();
 
+    if( expression->GetOperationType() == COperationExpression::LESS ) {
+        if( leftOperand->GetType() != INT_TYPE || rightOperand->GetType() != INT_TYPE ) {
+            errors.push_back( { expression->GetLocation(), ErrorType::WRONG_TYPE,
+                                typeMismatch(INT_TYPE, BOOLEAN_TYPE) } );
+        }
+        return;
+    }
+
     if (typeLeft != typeOperation) {
         errors.push_back({leftOperand->GetLocation(), ErrorType::WRONG_TYPE, typeMismatch(typeLeft, typeOperation)});
     } else if (typeRight != typeOperation) {
         errors.push_back({rightOperand->GetLocation(), ErrorType::WRONG_TYPE, typeMismatch(typeRight, typeOperation)});
     }
+
 }
 
 void CCheckTypesVisitor::Visit(CNumExpression *expression) {
@@ -29,6 +38,7 @@ void CCheckTypesVisitor::Visit(CBoolExpression *expression) {
 }
 
 void CCheckTypesVisitor::Visit(CThisExpression *expression) {
+    expression->SetType(currentClass);
 }
 
 void CCheckTypesVisitor::Visit(CIdExpression *expression) {
