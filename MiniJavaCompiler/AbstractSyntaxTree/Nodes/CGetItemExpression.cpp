@@ -10,7 +10,7 @@ CGetItemExpression::CGetItemExpression(const Location location,
         : object(object), index(index) {
     this->location = location;
     //на данный момент у нас бывают только массивы из int
-    this->type = INT_TYPE;
+    this->typeId = INT_TYPE;
 }
 
 const std::shared_ptr<IExpression> &CGetItemExpression::GetObject() const {

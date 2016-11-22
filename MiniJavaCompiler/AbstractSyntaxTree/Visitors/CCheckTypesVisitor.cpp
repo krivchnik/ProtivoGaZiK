@@ -16,7 +16,7 @@ void CCheckTypesVisitor::Visit(COperationExpression *expression) {
     string typeOperation = expression->GetType();
 
     if( expression->GetOperationType() == COperationExpression::LESS ) {
-        if( leftOperand->GetType() != INT_TYPE || rightOperand->GetType() != INT_TYPE ) {
+        if( leftOperand->GetTypeId() != INT_TYPE || rightOperand->GetTypeId() != INT_TYPE ) {
             errors.push_back( { expression->GetLocation(), ErrorType::WRONG_TYPE,
                                 typeMismatch(INT_TYPE, BOOLEAN_TYPE) } );
         }
@@ -42,7 +42,7 @@ void CCheckTypesVisitor::Visit(CThisExpression *expression) {
 }
 
 void CCheckTypesVisitor::Visit(CIdExpression *expression) {
-    std::string idType = getTypeFromId(expression->GetName());
+    std::string idType = getTypeFromId(expression->GetNameId());
 
     if(idType == NONE_TYPE) {
         //UNKNOWN IDENTIFIER
@@ -327,7 +327,7 @@ std::vector<MethodInfo> CCheckTypesVisitor::getAvailableMethod() {
     return availMethod;
 }
 
-const std::string &CCheckTypesVisitor::getTypeFromId(std::string name) {
+const int CCheckTypesVisitor::getTypeFromId(std::string name) {
     //если это происходит в вызове метода через classId.MethodName
     if( inMethodCallExpr ) {
         auto methodsInfo = classes[methodCallClassName].getPublicMethodsInfo();

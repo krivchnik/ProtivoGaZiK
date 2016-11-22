@@ -22,19 +22,19 @@ CClass::CClass( const Location location,
     this->location = location;
 }
 
-const std::shared_ptr<CIdExpression> &CClass::getId() const {
+const std::shared_ptr<CIdExpression> CClass::getId() const {
     return id;
 }
 
-const std::shared_ptr<CIdExpression> &CClass::getBaseId() const {
+const std::shared_ptr<CIdExpression> CClass::getBaseId() const {
     return baseId;
 }
 
-const std::shared_ptr<CListStatement> &CClass::getFields() const {
+const std::shared_ptr<CListStatement> CClass::getFields() const {
     return fields;
 }
 
-const std::shared_ptr<CListStatement> &CClass::getMethods() const {
+const std::shared_ptr<CListStatement> CClass::getMethods() const {
     return methods;
 }
 

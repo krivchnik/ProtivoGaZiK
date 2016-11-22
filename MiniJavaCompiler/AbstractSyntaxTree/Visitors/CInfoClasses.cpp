@@ -1,22 +1,22 @@
 #include <Visitors/CInfoClasses.h>
 
 void VariableInfo::Print(std::ostream& stream) {
-    stream << "\        varDecl:" << std::endl;
+    stream << "\t        varDecl:" << std::endl;
     location.Print(stream);
-    stream << "\        Type  " << type << " Name  " << name << std::endl;
+    stream << "\t        Type  " << strings.get(typeId) << " Name  " << strings.get(nameId) << std::endl;
 }
 
 void MethodInfo::Print(std::ostream& stream) {
-    stream << "\    Method:" << std::endl;
-    stream << "\    Name  " << name << std::endl;
+    stream << "\t    Method:" << std::endl;
+    stream << "\t    Name  " << strings.get(nameId) << std::endl;
     location.Print(stream);
-    stream << "\    RetType " << returnedType << std::endl;
-    stream << "\    Visibility " << visibility << std::endl;
-    stream << "\    ParamList" << std::endl;
+    stream << "\t    RetType " << strings.get(returnedTypeId) << std::endl;
+    stream << "\t    Visibility " << (isPublic ? "public" : "private") << std::endl;
+    stream << "\t    ParamList" << std::endl;
     for(unsigned int i = 0; i < paramList.size(); ++i) {
         paramList[i].Print(stream);
     }
-    stream << "\    VarList" << std::endl;
+    stream << "\t    VarList" << std::endl;
     for(unsigned int i = 0; i < variablesList.size(); ++i) {
         variablesList[i].Print(stream);
     }
@@ -24,9 +24,9 @@ void MethodInfo::Print(std::ostream& stream) {
 
 void ClassInfo::Print(std::ostream& stream) {
     stream << "Class " << std::endl;
-    stream << "Name " << name << std::endl;
+    stream << "Name " << strings.get(nameId) << std::endl;
     location.Print(stream);
-    stream << "Base " << baseId << std::endl;
+    stream << "Base " << strings.get(baseId) << std::endl;
     stream << "Methods " << std::endl;
     for(unsigned int i = 0; i < methodsDeclarations.size(); ++i) {
         methodsDeclarations[i].Print(stream);
@@ -39,15 +39,15 @@ void ClassInfo::Print(std::ostream& stream) {
 }
 
 bool ClassInfo::HasBase() {
-    return baseId.length() > 0;
+    return strings.get(baseId).length() > 0;
 }
 
 
-std::set<std::string> ClassInfo::getPublicMethods() {
-    std::set<std::string> publicMethods;
+std::set<int> ClassInfo::getPublicMethods() {
+    std::set<int> publicMethods;
     for (unsigned int i = 0; i < methodsDeclarations.size(); ++i) {
-        if (methodsDeclarations[i].visibility == "public") {
-            publicMethods.insert(methodsDeclarations[i].name);
+        if (methodsDeclarations[i].isPublic) {
+            publicMethods.insert(methodsDeclarations[i].nameId);
         }
     }
     return publicMethods;
@@ -56,7 +56,7 @@ std::set<std::string> ClassInfo::getPublicMethods() {
 std::vector<MethodInfo> ClassInfo::getPublicMethodsInfo() {
     std::vector<MethodInfo> publicMethods;
     for (unsigned int i = 0; i < methodsDeclarations.size(); ++i) {
-        if (methodsDeclarations[i].visibility == "public") {
+        if (methodsDeclarations[i].isPublic) {
             publicMethods.push_back(methodsDeclarations[i]);
         }
     }

@@ -16,5 +16,5 @@ public:
 
 private:
     std::vector<std::shared_ptr<IExpression> > expressions;
-    std::string expressionType;
+    int commentId;
 };

@@ -9,7 +9,7 @@ COperationExpression::COperationExpression(const Location location,
 		  operationType(operationType) {
 
 	this->location = location;
-    type = (operationType >= 4) ? BOOLEAN_TYPE : INT_TYPE;
+    typeId = (operationType >= 4) ? BOOLEAN_TYPE : INT_TYPE;
 }
 
 std::shared_ptr<IExpression> COperationExpression::GetLeftOperand() {

@@ -14,10 +14,12 @@ public:
 
     std::string GetTypeName() const;
     std::string GetVariableName() const;
+    int getTypeNameId() { return typeNameId; }
+    int getVariableNameId() { return variableNameId; }
 
     void Accept(IVisitor*);
 
 private:
-    std::string typeName;
-    std::string variableName;
+    int typeNameId;
+    int variableNameId;
 };

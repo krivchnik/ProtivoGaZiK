@@ -6,6 +6,7 @@
 int yyparse();
 
 shared_ptr<CProgram> ans;
+Strings strings;
 
 int main(int argc, char **argv)
 {

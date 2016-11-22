@@ -2,23 +2,25 @@
 
 #include <Nodes/INode.h>
 
-const std::string INT_TYPE = "int";
-const std::string INT_ARRAY_TYPE = "intArray";
-const std::string BOOLEAN_TYPE = "boolean";
-const std::string NONE_TYPE = "none";
+const int INT_TYPE = strings.add("int");
+const int INT_ARRAY_TYPE = strings.add("intArray");
+const int BOOLEAN_TYPE = strings.add("boolean");
+const int NONE_TYPE = strings.add("none");
 
 class IExpression: public INode {
 public:
 	virtual void Accept(IVisitor*) = 0;
 
 	const std::string &GetType() const {
-		return type;
+		return strings.get(typeId);
 	}
 
 	void SetType(const std::string &type) {
-		IExpression::type = type;
+		typeId = strings.add(type);
 	}
 
+	int getTypeId() { return typeId; }
+
 protected:
-	std::string type;
+	int typeId;
 };

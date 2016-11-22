@@ -5,16 +5,16 @@
 #include <Nodes/CMethod.h>
 
 CMethod::CMethod(const Location location,
-                 const std::string &visibility, const std::string &typeName,
+                 const bool isPublic, const std::string &typeName,
                  const std::shared_ptr<CIdExpression> &id, const std::shared_ptr<CListStatement> &parameters,
                  const std::shared_ptr<CListStatement> &listDeclarations,
                  const std::shared_ptr<CListStatement> &listStatements,
                  const std::shared_ptr<IExpression> &returnExpression)
-        : visibility(visibility), typeName(typeName),
-          id(id), parameters(parameters),
+        : isPublic(isPublic), id(id), parameters(parameters),
           listDeclarations(listDeclarations),
           listStatements(listStatements),
           returnExpression(returnExpression) {
+    typeNameId = strings.add(typeName);
     this->location = location;
 }
 
@@ -22,12 +22,12 @@ void CMethod::Accept(IVisitor* visitor) {
     visitor->Visit(this);
 }
 
-const std::string &CMethod::getVisibility() const {
-    return visibility;
+bool CMethod::getVisibility() const {
+    return isPublic;
 }
 
 const std::string &CMethod::getTypeName() const {
-    return typeName;
+    return strings.get(typeNameId);
 }
 
 const std::shared_ptr<CIdExpression> &CMethod::getId() const {

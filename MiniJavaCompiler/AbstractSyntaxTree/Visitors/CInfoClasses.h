@@ -9,18 +9,18 @@
 
 struct VariableInfo{
     Location location;
-    std::string type;
-    std::string name;
+    int typeId;
+    int nameId;
     void Print(std::ostream& stream);
 };
 
 struct MethodInfo{
     Location location;
-    std::string returnedType;
-    std::string name;
+    int returnedTypeId;
+    int nameId;
     std::vector<VariableInfo> paramList;
     std::vector<VariableInfo> variablesList;
-    std::string visibility;
+    bool isPublic;
     void Print(std::ostream& stream);
 };
 
@@ -28,11 +28,11 @@ struct ClassInfo {
     Location location;
     std::vector<MethodInfo> methodsDeclarations;
     std::vector<VariableInfo> variableDeclaration;
-    std::string baseId;
-    std::string name;
+    int baseId;
+    int nameId;
 
     void Print(std::ostream &stream);
-    std::set<std::string> getPublicMethods();
+    std::set<int> getPublicMethods();
     std::vector<MethodInfo> getPublicMethodsInfo();
     bool HasBase();
 };

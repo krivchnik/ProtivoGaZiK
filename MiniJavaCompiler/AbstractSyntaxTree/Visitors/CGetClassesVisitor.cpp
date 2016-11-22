@@ -121,14 +121,14 @@ void CGetClassesVisitor::Visit( CMethodCallExpression* exp) {
 
 void CGetClassesVisitor::Visit( CClass* statement ) {
     ClassInfo classInfo;
-    classInfo.name = statement->getId()->GetName();
+    classInfo.nameId = statement->getId()->GetNameId();
     classInfo.location = statement->GetLocation();
 
     if (statement->getBaseId().get() != nullptr) {
-        classInfo.baseId = statement->getBaseId()->GetName();
+        classInfo.baseId = statement->getBaseId()->GetNameId();
         statement->getBaseId()->Accept(this);
     } else {
-        classInfo.baseId = "";
+        classInfo.baseId = -1;
     }
 
     for(auto field : statement->getFields()->GetStatements()) {

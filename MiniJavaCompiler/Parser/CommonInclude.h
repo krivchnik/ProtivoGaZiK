@@ -9,6 +9,8 @@ using namespace std;
 #include <iostream>
 #include <string>
 #include <memory>
+#include <cassert>
+
 
 #include <Nodes/INode.h>
 #include <Nodes/IExpression.h>
@@ -45,3 +47,5 @@ using namespace std;
 #include <Visitors/CInfoClasses.h>
 
 #include <Analyzer/CAnalyzer.h>
+
+#include <StringInternment/Strings.h>

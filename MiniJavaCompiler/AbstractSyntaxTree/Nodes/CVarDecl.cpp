@@ -6,19 +6,18 @@
 
 CVarDecl::CVarDecl(const Location location,
                    const std::string typeName,
-                   const std::string variableName)
-        : typeName(typeName),
-          variableName(variableName) {
-
+                   const std::string variableName) {
+    typeNameId = strings.add(typeName);
+    variableNameId = strings.add(variableName);
     this->location = location;
 }
 
 std::string CVarDecl::GetTypeName() const {
-    return typeName;
+    return strings.get(typeNameId);
 }
 
 std::string CVarDecl::GetVariableName() const {
-    return variableName;
+    return strings.get(variableNameId);
 }
 
 void CVarDecl::Accept(IVisitor* visitor) {

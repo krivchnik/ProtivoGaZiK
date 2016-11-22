@@ -4,7 +4,7 @@
 CArrayConstructionExpression::CArrayConstructionExpression(const Location location, const std::shared_ptr<IExpression> &size)
         : size(size) {
     this->location = location;
-    this->type = INT_ARRAY_TYPE;
+    this->typeId = INT_ARRAY_TYPE;
 }
 
 const std::shared_ptr<IExpression> &CArrayConstructionExpression::getSize() const {

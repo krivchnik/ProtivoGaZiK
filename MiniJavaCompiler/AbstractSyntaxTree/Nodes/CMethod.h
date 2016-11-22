@@ -8,15 +8,16 @@
 class CMethod : public IStatement {
 public:
     CMethod(const Location location,
-            const std::string &visibility, const std::string &typeName,
+            const bool isPublic, const std::string &typeName,
             const std::shared_ptr<CIdExpression> &id, const std::shared_ptr<CListStatement> &parameters,
             const std::shared_ptr<CListStatement> &listDeclarations,
             const std::shared_ptr<CListStatement> &listStatements,
             const std::shared_ptr<IExpression> &returnExpression);
 
-    const std::string &getVisibility() const;
+    bool getVisibility() const;
 
     const std::string &getTypeName() const;
+    int getTypeNameId() { return typeNameId; }
 
     const std::shared_ptr<CIdExpression> &getId() const;
 
@@ -30,8 +31,8 @@ public:
 
     void Accept(IVisitor*);
 private:
-    std::string visibility;
-    std::string typeName;
+    bool isPublic;
+    int typeNameId;
     std::shared_ptr<CIdExpression> id;
     std::shared_ptr<CListStatement> parameters;
     std::shared_ptr<CListStatement> listDeclarations;

@@ -6,14 +6,15 @@
 
 class CIdExpression: public IExpression {
 public:
-	CIdExpression(const Location location, std::string name);
+	CIdExpression(const Location location, const std::string &name);
 	std::string GetName();
+	int getNameId() { return nameId; }
 
 	void Accept(IVisitor*);
 
 	bool operator < (CIdExpression other) const {
-		return name < other.name;
+		return strings.get(nameId) < strings.get(other.nameId);
 	}
 private:
-	std::string name;
+	int nameId;
 };

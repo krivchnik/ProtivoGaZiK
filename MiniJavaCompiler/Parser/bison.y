@@ -9,6 +9,7 @@ int yyerror(char *s);
 int yylex(void);
 
 extern shared_ptr<CProgram> ans;
+extern std::map stringMap;
 
 Location GetTokenLocation(YYLTYPE loc) {
 	Location location {loc.first_line, loc.first_column, loc.last_line, loc.last_column};

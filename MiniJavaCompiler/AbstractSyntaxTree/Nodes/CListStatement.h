@@ -16,5 +16,5 @@ public:
 
 private:
     std::vector<std::shared_ptr<IStatement> > statements;
-    std::string statementType;
+    int statementTypeId;
 };

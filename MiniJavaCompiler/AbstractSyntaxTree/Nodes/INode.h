@@ -1,9 +1,12 @@
 #pragma once
 //интерфейс от которого должны быть унаследованы все классы, которые могут быть узлом дерева объхода
+#include <StringInternment/Strings.h>
 #include <Visitors/IVisitor.h>
 
 #include <iostream>
 #include <memory>
+
+extern Strings strings;
 
 struct Location {
 	int first_line;

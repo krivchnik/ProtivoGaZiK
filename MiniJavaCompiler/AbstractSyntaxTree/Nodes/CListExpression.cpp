@@ -4,8 +4,9 @@
 
 #include <Nodes/CListExpression.h>
 
-CListExpression::CListExpression(const Location location, const std::string &expressionType)
-        : expressionType(expressionType) {
+CListExpression::CListExpression(const Location location, const std::string &expressionType) {
+
+    strings.add(expressionType);
     this->location = location;
 }
 
@@ -18,7 +19,7 @@ const std::vector<std::shared_ptr<IExpression>> &CListExpression::GetExpressions
 }
 
 const std::string &CListExpression::GetExpressionType() const {
-    return expressionType;
+    return strings.get(commentId);
 }
 
 void CListExpression::Accept(IVisitor* visitor) {

@@ -9,7 +9,7 @@ CLengthExpression::CLengthExpression(const Location location,
                                      std::shared_ptr<IExpression> expression)
         : expression(expression) {
     this->location = location;
-    this->type = INT_TYPE;
+    this->typeId = INT_TYPE;
 }
 
 std::shared_ptr<IExpression> CLengthExpression::getExpression() {

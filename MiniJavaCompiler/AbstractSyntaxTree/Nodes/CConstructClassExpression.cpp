@@ -8,7 +8,7 @@ CConstructClassExpression::CConstructClassExpression(const Location location,
                                                      const std::shared_ptr<CIdExpression> &classID)
         : classID(classID) {
     this->location = location;
-    this->type = this->classID->GetName();
+    this->typeId = strings.add(this->classID->GetName());
 }
 
 const std::shared_ptr<CIdExpression> &CConstructClassExpression::getClassID() const {

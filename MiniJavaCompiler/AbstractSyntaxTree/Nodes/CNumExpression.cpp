@@ -3,7 +3,7 @@
 CNumExpression::CNumExpression(const Location location, int number)
 		: number(number) {
 	this->location = location;
-	this->type = INT_TYPE;
+	this->typeId = INT_TYPE;
 }
 
 int CNumExpression::GetNumber() {

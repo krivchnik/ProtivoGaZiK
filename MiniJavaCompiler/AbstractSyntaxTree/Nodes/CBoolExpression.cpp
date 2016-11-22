@@ -4,7 +4,7 @@
 CBoolExpression::CBoolExpression(const Location location, bool value)
         : value(value) {
     this->location = location;
-    this->type = BOOLEAN_TYPE;
+    this->typeId = BOOLEAN_TYPE;
 }
 
 bool CBoolExpression::GetValue() {

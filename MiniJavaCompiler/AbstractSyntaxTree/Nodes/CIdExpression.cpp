@@ -1,13 +1,13 @@
 #include <Nodes/CIdExpression.h>
 
-CIdExpression::CIdExpression(const Location location, std::string name)
-		: name(name) {
-	this->location = location;
-	this->type = name;
+CIdExpression::CIdExpression(const Location location, const std::string &name) {
+    nameId = strings.add(name);
+	this->typeId = nameId;
+    this->location = location;
 }
 
 std::string CIdExpression::GetName() {
-	return name;
+	return strings.get(nameId);
 }
 
 void CIdExpression::Accept(IVisitor* visitor) {

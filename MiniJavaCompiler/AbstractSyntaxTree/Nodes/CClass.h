@@ -17,13 +17,13 @@ public:
             const std::shared_ptr<CIdExpression> &id, const std::shared_ptr<CIdExpression> &baseId,
             const std::shared_ptr<CListStatement> &fields, const std::shared_ptr<CListStatement> &methods);
 
-    const std::shared_ptr<CIdExpression> &getId() const;
+    const std::shared_ptr<CIdExpression> getId() const;
 
-    const std::shared_ptr<CIdExpression> &getBaseId() const;
+    const std::shared_ptr<CIdExpression> getBaseId() const;
 
-    const std::shared_ptr<CListStatement> &getFields() const;
+    const std::shared_ptr<CListStatement> getFields() const;
 
-    const std::shared_ptr<CListStatement> &getMethods() const;
+    const std::shared_ptr<CListStatement> getMethods() const;
 
     void setId(const std::shared_ptr<CIdExpression> &id);
 
