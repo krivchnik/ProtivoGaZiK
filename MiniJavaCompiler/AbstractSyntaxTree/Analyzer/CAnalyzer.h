@@ -24,6 +24,8 @@ private:
     std::vector<std::string> getAvailVariables(ClassInfo classInfo);
     //запуск CheckVisitor
     std::set<std::string> checkTypes();
+
+    std::vector<ErrorDescription> errors;
 };
 
 

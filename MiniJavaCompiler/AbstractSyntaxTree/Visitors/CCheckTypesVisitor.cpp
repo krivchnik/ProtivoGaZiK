@@ -23,7 +23,7 @@ void CCheckTypesVisitor::Visit(CIdExpression *expression) {
 
     if(idType == NONE_TYPE) {
         //UNKNOWN IDENTIFIER
-        errors.AddError({expression->GetLocation(), ErrorType::UNDEFINED_IDENTIFIER, expression->GetName()});
+        errors.push_back({expression->GetLocation(), ErrorType::UNDEFINED_IDENTIFIER, expression->GetName()});
     }
     expression->SetType(idType);
 }
@@ -31,7 +31,7 @@ void CCheckTypesVisitor::Visit(CIdExpression *expression) {
 void CCheckTypesVisitor::Visit(CNotExpression *expression) {
     if(expression->GetType() != BOOLEAN_TYPE) {
         //!<exp>: <exp> MUST BE BOOLEAN
-        errors.AddError({expression->GetLocation(), ErrorType::NON_BOOLEAN_EXP, expression->GetType()});
+        errors.push_back({expression->GetLocation(), ErrorType::NON_BOOLEAN_EXP, expression->GetType()});
     }
     expression->GetExpression()->Accept(this);
 }
@@ -39,7 +39,7 @@ void CCheckTypesVisitor::Visit(CNotExpression *expression) {
 void CCheckTypesVisitor::Visit(CLengthExpression *expression) {
     if(expression->GetType() != INT_ARRAY_TYPE) {
         //ONLY ARRAYS HAVE .length
-        errors.AddError({expression->GetLocation(), ErrorType::NON_ARRAY, expression->GetType()});
+        errors.push_back({expression->GetLocation(), ErrorType::NON_ARRAY, expression->GetType()});
     }
     expression->getExpression()->Accept(this);
 }
@@ -47,7 +47,7 @@ void CCheckTypesVisitor::Visit(CLengthExpression *expression) {
 void CCheckTypesVisitor::Visit(CArrayConstructionExpression *expression) {
     if(expression->getSize()->GetType() != INT_TYPE) {
         //SIZE OF ARRAY MUST BE INTEGER
-        errors.AddError({expression->GetLocation(), ErrorType::NON_INTEGER, expression->GetType()});
+        errors.push_back({expression->GetLocation(), ErrorType::NON_INTEGER, expression->GetType()});
     }
     expression->getSize()->Accept(this);
 }
@@ -55,7 +55,7 @@ void CCheckTypesVisitor::Visit(CArrayConstructionExpression *expression) {
 void CCheckTypesVisitor::Visit(CConstructClassExpression *expression) {
     if(classes.find(expression->GetType()) == classes.end()){
         //CAN'T CREATE OBJECT OF UNKNOWN CLASS
-        errors.AddError({expression->GetLocation(), ErrorType::UNKNOWN_TYPE, expression->GetType()});
+        errors.push_back({expression->GetLocation(), ErrorType::UNKNOWN_TYPE, expression->GetType()});
     }
 }
 
@@ -76,7 +76,7 @@ void CCheckTypesVisitor::Visit(CPrintStatement *statement) {
     auto expression = statement->GetExpression();
     if(expression->GetType() != INT_TYPE) {
         //ONLY ABLE TO PRINT INTEGERS
-        errors.AddError({expression->GetLocation(), ErrorType::NON_INTEGER, expression->GetType()});
+        errors.push_back({expression->GetLocation(), ErrorType::NON_INTEGER, expression->GetType()});
     }
 }
 
@@ -88,7 +88,7 @@ void CCheckTypesVisitor::Visit(CIfElseStatement *statement) {
     auto expression = statement->getExpression();
     if(expression->GetType() != BOOLEAN_TYPE) {
         //CONDITION MUST BE BOOLEAN
-        errors.AddError({expression->GetLocation(), ErrorType::NON_BOOLEAN_EXP, expression->GetType()});
+        errors.push_back({expression->GetLocation(), ErrorType::NON_BOOLEAN_EXP, expression->GetType()});
     }
 }
 
@@ -100,7 +100,7 @@ void CCheckTypesVisitor::Visit(CWhileStatement *statement) {
     auto expression = statement->getCondition();
     if(expression->GetType() != BOOLEAN_TYPE) {
         //CONDITION MUST BE BOOLEAN
-        errors.AddError({expression->GetLocation(), ErrorType::NON_BOOLEAN_EXP, expression->GetType()});
+        errors.push_back({expression->GetLocation(), ErrorType::NON_BOOLEAN_EXP, expression->GetType()});
     }
 }
 
@@ -131,10 +131,10 @@ void CCheckTypesVisitor::Visit(CVarDecl *decl) {
 
         if (inMethodBody) {
             //UNKNOWN VAR TYPE IN METHOD BODY
-            errors.AddError({decl->GetLocation(), ErrorType::UNKNOWN_TYPE, typeName});
+            errors.push_back({decl->GetLocation(), ErrorType::UNKNOWN_TYPE, typeName});
         } else {
             //UNKNOWN VAR TYPE IN PARAM LIST
-            errors.AddError({decl->GetLocation(), ErrorType::UNKNOWN_TYPE, typeName});
+            errors.push_back({decl->GetLocation(), ErrorType::UNKNOWN_TYPE, typeName});
         }
     }
 }
@@ -165,7 +165,7 @@ void CCheckTypesVisitor::Visit(CMethod *method) {
 
     if (types.find(typeName) == types.end() && classes.find(typeName) == classes.end() && !inMainMethodBody) {
         //UNKNOWN RETURN TYPE
-        errors.AddError({method->getId()->GetLocation(), ErrorType::UNKNOWN_TYPE, typeName});
+        errors.push_back({method->getId()->GetLocation(), ErrorType::UNKNOWN_TYPE, typeName});
     }
     inMethodBody = false;
     currentMethod = "";
@@ -179,13 +179,13 @@ void CCheckTypesVisitor::Visit(CMethodCallExpression *exp) {
 
     if(classes.find(className) == classes.end()){
         //<CLASS>.method(): UNKNOWN <CLASS>
-        errors.AddError({exp->getObject()->GetLocation(), ErrorType::UNKNOWN_TYPE, exp->getMethodId()->GetName()});
+        errors.push_back({exp->getObject()->GetLocation(), ErrorType::UNKNOWN_TYPE, exp->getMethodId()->GetName()});
     } else {
         for(auto method : classes[className].methodsDeclarations) {
             if(method.name == exp->getMethodId()->GetName()) {
                 if(method.visibility == "private" && className != currentClass) {
                     //PRIVATE METHOD CALL
-                    errors.AddError({exp->getMethodId()->GetLocation(), ErrorType::PRIVATE_METHOD_CALL, method.name});
+                    errors.push_back({exp->getMethodId()->GetLocation(), ErrorType::PRIVATE_METHOD_CALL, method.name});
                 }
             }
         }

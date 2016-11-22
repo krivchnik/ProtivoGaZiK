@@ -9,6 +9,8 @@ std::ostream& operator<< (std::ostream& out, const ErrorType error) {
         messages[NON_BOOLEAN_EXP] = "[expression must be boolean]";
         messages[NON_INTEGER] = "[expression must be integer]";
         messages[NON_ARRAY] = "[must have array type]";
+        messages[REDEFINITION_CLASS] = "[class redefinition]";
+        messages[REDEFINITION_METHOD] = "[method redefinition]";
     }
     return out << messages[error];
 }

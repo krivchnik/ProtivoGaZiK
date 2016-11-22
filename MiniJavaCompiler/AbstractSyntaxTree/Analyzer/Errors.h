@@ -12,7 +12,9 @@ enum ErrorType {
     PRIVATE_METHOD_CALL,
     NON_BOOLEAN_EXP,
     NON_INTEGER,
-    NON_ARRAY
+    NON_ARRAY,
+    REDEFINITION_CLASS,
+    REDEFINITION_METHOD
 };
 
 std::ostream& operator<< (std::ostream& out, const ErrorType error);
@@ -23,21 +25,6 @@ struct ErrorDescription {
 
     //additional info: variable name, exp type, etc.
     std::string info;
-};
-
-class Errors {
-public:
-
-    void AddError(const ErrorDescription& desc) {
-        errors.push_back(desc);
-    }
-
-    const std::vector<ErrorDescription>& GetErrors() const {
-        return errors;
-    }
-
-private:
-    std::vector<ErrorDescription> errors;
 };
 
 

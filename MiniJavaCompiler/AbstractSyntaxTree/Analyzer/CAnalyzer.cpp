@@ -75,7 +75,7 @@ void CAnalyzer::checkMethodOverrides() {
 
         //проверка внутри самого класса
         std::set<std::string> methods;
-        for (int i = 0; i < it->second.methodsDeclarations.size(); ++i) {
+        for (unsigned int i = 0; i < it->second.methodsDeclarations.size(); ++i) {
             if(methods.find(it->second.methodsDeclarations[i].name) != methods.end()) {
                 std::cout << "redefinition of method " << it->second.methodsDeclarations[i].name
                           << " in class " << it->first << endl;
@@ -96,9 +96,9 @@ void CAnalyzer::checkMethodOverrides() {
             nameOfPublicMethods.push_back(classes[nextBaseName].getPublicMethods());
             used[nextBaseName] = true;
         }
-        for (int j = 0; j < classes[it->first].methodsDeclarations.size(); ++j) {
+        for (unsigned int j = 0; j < classes[it->first].methodsDeclarations.size(); ++j) {
             std::string methodName = classes[it->first].methodsDeclarations[j].name;
-            for (int k = 1; k < nameOfClassedInChain.size(); ++k) {
+            for (unsigned int k = 1; k < nameOfClassedInChain.size(); ++k) {
                 if(nameOfPublicMethods[k].find(methodName) != nameOfPublicMethods[k].end()) {
                     std::cout << "Override method " << nameOfClassedInChain[k] << "::" << methodName <<
                               " in class " << it->first << endl;
@@ -118,7 +118,7 @@ std::vector<std::string> CAnalyzer::getAvailVariables(ClassInfo classInfo) {
     std::string nextClass = classInfo.name;
     std::vector<std::string> availBaseMethod;
     while(classes[nextClass].HasBase()){
-        for(int i = 0; i < classes[nextClass].variableDeclaration.size(); ++i){
+        for(unsigned int i = 0; i < classes[nextClass].variableDeclaration.size(); ++i){
             availBaseMethod.push_back(classes[nextClass].variableDeclaration[i].name);
         }
         nextClass = classInfo.baseId;

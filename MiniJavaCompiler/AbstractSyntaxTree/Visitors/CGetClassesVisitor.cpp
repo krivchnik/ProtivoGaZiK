@@ -173,7 +173,7 @@ void CGetClassesVisitor::Visit( CClass* statement ) {
     if( classes.find(classInfo.name) == classes.end() ) {
         classes[classInfo.name] = classInfo;
     } else {
-        std::cout << "REDEFINITION OF CLASS " << classInfo.name << std::endl;
+        errors.push_back({statement->GetLocation(), ErrorType::REDEFINITION_CLASS, statement->getId()->GetName()});
     }
     statement->getMethods()->Accept(this);
 }
@@ -205,7 +205,7 @@ void CGetClassesVisitor::Visit( CMainClass* statement ) {
     if(classes.find(classInfo.name) == classes.end()){
         classes[classInfo.name] = classInfo;
     } else {
-        std::cout << "Redefinition " << classInfo.name;
+        errors.push_back({statement->GetLocation(), ErrorType::REDEFINITION_CLASS, statement->GetClassId()->GetName()});
     }
     statement->GetClassId()->Accept(this);
     statement->GetMainMethod()->Accept(this);

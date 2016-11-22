@@ -1,6 +1,29 @@
 class QuickSort{
-    public static void main(String[] a){
-	System.out.println(10);
+    public static void main(String[] arwere){
+	    System.out.println(10);
+    }
+}
+
+class QuickSort{
+     public int Start(int a, int c, int[] d, TV3 e){
+             int a;
+             int[] b;
+             boolean c;
+             a = b + 1 + 2;
+                      f = 10;
+             return 0;
+     }
+}
+
+class TV {
+
+    public int Start(int a, int c, int[] d, TV3 e){
+         int a;
+         int[] b;
+         boolean c;
+         a = b + 1 + 2;
+                  f = 10;
+         return 0;
     }
 }
 

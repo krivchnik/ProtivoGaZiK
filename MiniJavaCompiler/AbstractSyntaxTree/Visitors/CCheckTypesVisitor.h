@@ -62,7 +62,7 @@ private:
     //доступные типы
     std::map<std::string, int> types;
 
-    Errors errors;
+    std::vector<ErrorDescription> errors;
 
     //находимся ли мы уже в теле метода
     //Это нужно тк у нас нет класса Params. Чтобы определять ошибки в объявлениях параметров функции

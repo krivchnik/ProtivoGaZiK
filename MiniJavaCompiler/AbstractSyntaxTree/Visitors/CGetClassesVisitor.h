@@ -3,16 +3,16 @@
 //
 #pragma once
 
+#include <Analyzer/Errors.h>
+#include <Visitors/CInfoClasses.h>
 #include <Visitors/IVisitor.h>
 #include <Nodes/CClass.h>
-#include <Visitors/CInfoClasses.h>
-#include <vector>
-#include <string>
-#include <set>
+
 #include <map>
 #include <ostream>
-
-
+#include <set>
+#include <string>
+#include <vector>
 
 class CGetClassesVisitor : public IVisitor {
 
@@ -21,6 +21,10 @@ public:
     CGetClassesVisitor();
 
     std::map< std::string, ClassInfo > getClasses() { return classes; }
+
+    const Errors& GetErrors() const {
+        return errors;
+    }
 
     void Visit(CAssignStatement*);
     void Visit(CAssignItemStatement*);
@@ -52,6 +56,6 @@ public:
 private:
 
     std::map< std::string, ClassInfo > classes;
-
+    std::vector<ErrorDescription> errors;
 };
 
