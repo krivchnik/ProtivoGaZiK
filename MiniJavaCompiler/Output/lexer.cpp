@@ -1,6 +1,6 @@
-#line 2 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/lexer.cpp"
+#line 2 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/lexer.cpp"
 
-#line 4 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/lexer.cpp"
+#line 4 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/lexer.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -379,8 +379,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 43
-#define YY_END_OF_BUFFER 44
+#define YY_NUM_RULES 45
+#define YY_END_OF_BUFFER 46
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -388,24 +388,25 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static yyconst flex_int16_t yy_accept[148] =
+static yyconst flex_int16_t yy_accept[156] =
     {   0,
-        0,    0,   44,   43,    1,   34,   43,   33,   43,   26,
-       27,   32,   30,   41,   31,   40,   43,   23,   23,   39,
-       36,   35,   22,   22,   28,   29,   22,   22,   22,   22,
-       22,   22,   22,   22,   22,   22,   22,   22,   22,   22,
-       24,   43,   25,    0,   42,    0,   37,    0,   23,   22,
-       22,   22,   22,   22,   22,   22,   22,   13,   22,   22,
-       22,   22,   22,   22,   22,   22,   22,   22,   22,   38,
-        0,   42,    0,    0,    3,   22,   22,   22,   22,   22,
-       22,   22,    7,   22,   22,   19,   22,   22,   22,   22,
-       22,   22,   22,   22,   22,   22,   22,   22,   14,   22,
+        0,    0,   46,   45,    1,   36,   45,   35,   45,   28,
+       29,   34,   32,   43,   33,   42,   45,   25,   25,   41,
+       38,   37,   24,   24,   30,   31,   24,   24,   24,   24,
+       24,   24,   24,   24,   24,   24,   24,   24,   24,   24,
+       24,   26,   45,   27,    0,   44,    0,   39,    0,   25,
+       24,   24,   24,   24,   24,   24,   24,   24,   24,   13,
+       24,   24,   24,   24,   24,   24,   24,   24,   24,   24,
+       24,   24,   40,    0,   44,    0,    0,    3,   24,   24,
+       24,   24,   24,   24,   24,   24,    7,   24,   24,   21,
+       24,   24,   24,   24,   24,   24,   24,   24,   24,   24,
 
-       22,   20,   22,   22,   22,   22,   18,    9,   22,   22,
-       22,   22,   11,   22,   22,   22,   22,   22,   22,   22,
-       15,   10,   22,   22,   21,   22,   17,   22,    4,   16,
-        6,    0,    8,   12,    5,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    2,    0
+       24,   24,   24,   14,   24,   24,   24,   22,   24,   24,
+       24,   24,   20,   17,    9,   24,   24,   24,   24,   11,
+       24,   24,   18,   24,   24,   24,   24,   24,   15,   10,
+       24,   24,   23,   24,   19,   24,    4,   16,    6,    0,
+        8,   12,    5,    0,    0,    0,    0,    0,    0,    0,
+        0,    0,    0,    2,    0
     } ;
 
 static yyconst YY_CHAR yy_ec[256] =
@@ -450,104 +451,106 @@ static yyconst YY_CHAR yy_meta[52] =
         1
     } ;
 
-static yyconst flex_uint16_t yy_base[152] =
+static yyconst flex_uint16_t yy_base[160] =
     {   0,
-        0,    0,  172,  173,  173,  173,   46,  173,  163,  173,
-      173,  173,  173,  173,  173,  173,  154,  173,   36,  173,
-      173,  173,    0,   12,  173,  173,  130,  132,  128,   20,
-       25,  135,  138,  133,   17,  132,  119,  127,  121,  125,
-      173,  108,  173,   53,  173,   59,  173,  154,   51,    0,
-      115,  113,  115,  126,  108,  109,  107,    0,  106,  110,
-      112,  100,  110,  116,  100,  115,  106,  105,  104,  173,
-       58,   60,   67,  135,  173,  102,   93,   99,   92,  105,
-      101,  100,    0,   97,   91,    0,   83,   91,   82,   82,
-       82,   93,   86,   83,   89,   88,   76,   81,    0,   78,
+        0,    0,  179,  180,  180,  180,   46,  180,  170,  180,
+      180,  180,  180,  180,  180,  180,  161,  180,   36,  180,
+      180,  180,    0,   12,  180,  180,  137,  139,  135,   20,
+      146,   25,  141,  144,  139,   17,  138,  125,   25,  128,
+      132,  180,  115,  180,   56,  180,   62,  180,  161,   52,
+        0,  122,  120,  122,  133,  115,  116,  114,  120,    0,
+      112,  116,  118,  106,  116,  122,  106,  121,  112,  102,
+      110,  109,  180,   58,   66,   70,  140,  180,  107,   98,
+      104,   97,  110,  106,  105,   93,    0,  101,   95,    0,
+       87,   95,   86,   86,   86,   96,   96,   89,   86,   92,
 
-       72,    0,   87,   78,   71,   76,    0,    0,   79,   76,
-       71,   80,    0,   75,   75,   70,   60,   73,   63,   71,
-        0,    0,   84,   53,    0,   48,    0,   58,    0,    0,
-        0,   49,    0,    0,    0,   43,   43,   67,   41,   39,
-       44,   39,   33,   39,   36,  173,  173,   92,   70,   94,
-       96
+       91,   79,   84,    0,   81,   87,   74,    0,   89,   80,
+       73,   78,    0,    0,    0,   81,   78,   73,   82,    0,
+       77,   77,    0,   72,   62,   75,   65,   73,    0,    0,
+       79,   55,    0,   50,    0,   59,    0,    0,    0,   50,
+        0,    0,    0,   44,   43,   70,   44,   41,   45,   41,
+       35,   41,   37,  180,  180,   95,   72,   97,   99
     } ;
 
-static yyconst flex_int16_t yy_def[152] =
+static yyconst flex_int16_t yy_def[160] =
     {   0,
-      147,    1,  147,  147,  147,  147,  148,  147,  147,  147,
-      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
-      147,  147,  149,  149,  147,  147,  149,  149,  149,  149,
-      149,  149,  149,  149,  149,  149,  149,  149,  149,  149,
-      147,  147,  147,  148,  147,  150,  147,  151,  147,  149,
-      149,  149,  149,  149,  149,  149,  149,  149,  149,  149,
-      149,  149,  149,  149,  149,  149,  149,  149,  149,  147,
-      148,  148,  150,  151,  147,  149,  149,  149,  149,  149,
-      149,  149,  149,  149,  149,  149,  149,  149,  149,  149,
-      149,  149,  149,  149,  149,  149,  149,  149,  149,  149,
+      155,    1,  155,  155,  155,  155,  156,  155,  155,  155,
+      155,  155,  155,  155,  155,  155,  155,  155,  155,  155,
+      155,  155,  157,  157,  155,  155,  157,  157,  157,  157,
+      157,  157,  157,  157,  157,  157,  157,  157,  157,  157,
+      157,  155,  155,  155,  156,  155,  158,  155,  159,  155,
+      157,  157,  157,  157,  157,  157,  157,  157,  157,  157,
+      157,  157,  157,  157,  157,  157,  157,  157,  157,  157,
+      157,  157,  155,  156,  156,  158,  159,  155,  157,  157,
+      157,  157,  157,  157,  157,  157,  157,  157,  157,  157,
+      157,  157,  157,  157,  157,  157,  157,  157,  157,  157,
 
-      149,  149,  149,  149,  149,  149,  149,  149,  149,  149,
-      149,  149,  149,  149,  149,  149,  149,  149,  149,  149,
-      149,  149,  149,  149,  149,  149,  149,  149,  149,  149,
-      149,  147,  149,  149,  149,  147,  147,  147,  147,  147,
-      147,  147,  147,  147,  147,  147,    0,  147,  147,  147,
-      147
+      157,  157,  157,  157,  157,  157,  157,  157,  157,  157,
+      157,  157,  157,  157,  157,  157,  157,  157,  157,  157,
+      157,  157,  157,  157,  157,  157,  157,  157,  157,  157,
+      157,  157,  157,  157,  157,  157,  157,  157,  157,  155,
+      157,  157,  157,  155,  155,  155,  155,  155,  155,  155,
+      155,  155,  155,  155,    0,  155,  155,  155,  155
     } ;
 
-static yyconst flex_uint16_t yy_nxt[225] =
+static yyconst flex_uint16_t yy_nxt[232] =
     {   0,
         4,    5,    5,    5,    6,    7,    8,    9,   10,   11,
        12,   13,   14,   15,   16,   17,   18,   19,   20,   21,
        22,   23,   24,   25,    4,   26,   23,   27,   28,   29,
-       30,   23,   23,   23,   31,   32,   33,   34,   23,   35,
-       36,   37,   38,   23,   39,   40,   23,   23,   41,   42,
-       43,   45,   49,   49,   51,   56,   58,   63,   45,   52,
-       64,   44,   59,   45,   72,   45,   57,   49,   49,   44,
-       46,   50,   72,  146,  145,  144,  143,   46,  142,  141,
-      140,  139,   46,   73,   46,  138,  137,  136,  135,  134,
-      133,   73,   44,   44,   71,   71,   74,   74,  132,  131,
+       30,   31,   23,   23,   32,   33,   34,   35,   23,   36,
+       37,   38,   39,   23,   40,   41,   23,   23,   42,   43,
+       44,   46,   50,   50,   52,   57,   60,   65,   69,   53,
+       66,   46,   61,   46,   45,   70,   58,   75,   50,   50,
+       47,   46,   45,   51,  154,   75,  153,  152,  151,  150,
+       47,  149,   47,  148,  147,  146,   76,  145,  144,  143,
+       47,  142,  141,  140,   76,   45,   45,   74,   74,   77,
 
+       77,  139,  138,  137,  136,  135,  134,  133,  132,  131,
       130,  129,  128,  127,  126,  125,  124,  123,  122,  121,
       120,  119,  118,  117,  116,  115,  114,  113,  112,  111,
       110,  109,  108,  107,  106,  105,  104,  103,  102,  101,
-      100,   99,   98,   97,   96,   95,   94,   75,   93,   92,
+      100,   99,   78,   98,   97,   96,   95,   94,   93,   92,
        91,   90,   89,   88,   87,   86,   85,   84,   83,   82,
-       81,   80,   79,   78,   77,   76,   75,   70,   69,   68,
-       67,   66,   65,   62,   61,   60,   55,   54,   53,   48,
-       47,  147,    3,  147,  147,  147,  147,  147,  147,  147,
-      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
-      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
+       81,   80,   79,   78,   73,   72,   71,   68,   67,   64,
+       63,   62,   59,   56,   55,   54,   49,   48,  155,    3,
+      155,  155,  155,  155,  155,  155,  155,  155,  155,  155,
+      155,  155,  155,  155,  155,  155,  155,  155,  155,  155,
 
-      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
-      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
-      147,  147,  147,  147
+      155,  155,  155,  155,  155,  155,  155,  155,  155,  155,
+      155,  155,  155,  155,  155,  155,  155,  155,  155,  155,
+      155,  155,  155,  155,  155,  155,  155,  155,  155,  155,
+      155
     } ;
 
-static yyconst flex_int16_t yy_chk[225] =
+static yyconst flex_int16_t yy_chk[232] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    7,   19,   19,   24,   30,   31,   35,   44,   24,
-       35,   46,   31,   71,   46,   72,   30,   49,   49,   73,
-        7,  149,   73,  145,  144,  143,  142,   44,  141,  140,
-      139,  138,   71,   46,   72,  137,  136,  132,  128,  126,
-      124,   73,  148,  148,  150,  150,  151,  151,  123,  120,
+        1,    7,   19,   19,   24,   30,   32,   36,   39,   24,
+       36,   45,   32,   74,   47,   39,   30,   47,   50,   50,
+        7,   75,   76,  157,  153,   76,  152,  151,  150,  149,
+       45,  148,   74,  147,  146,  145,   47,  144,  140,  136,
+       75,  134,  132,  131,   76,  156,  156,  158,  158,  159,
 
-      119,  118,  117,  116,  115,  114,  112,  111,  110,  109,
-      106,  105,  104,  103,  101,  100,   98,   97,   96,   95,
-       94,   93,   92,   91,   90,   89,   88,   87,   85,   84,
-       82,   81,   80,   79,   78,   77,   76,   74,   69,   68,
-       67,   66,   65,   64,   63,   62,   61,   60,   59,   57,
-       56,   55,   54,   53,   52,   51,   48,   42,   40,   39,
-       38,   37,   36,   34,   33,   32,   29,   28,   27,   17,
-        9,    3,  147,  147,  147,  147,  147,  147,  147,  147,
-      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
-      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
+      159,  128,  127,  126,  125,  124,  122,  121,  119,  118,
+      117,  116,  112,  111,  110,  109,  107,  106,  105,  103,
+      102,  101,  100,   99,   98,   97,   96,   95,   94,   93,
+       92,   91,   89,   88,   86,   85,   84,   83,   82,   81,
+       80,   79,   77,   72,   71,   70,   69,   68,   67,   66,
+       65,   64,   63,   62,   61,   59,   58,   57,   56,   55,
+       54,   53,   52,   49,   43,   41,   40,   38,   37,   35,
+       34,   33,   31,   29,   28,   27,   17,    9,    3,  155,
+      155,  155,  155,  155,  155,  155,  155,  155,  155,  155,
+      155,  155,  155,  155,  155,  155,  155,  155,  155,  155,
 
-      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
-      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
-      147,  147,  147,  147
+      155,  155,  155,  155,  155,  155,  155,  155,  155,  155,
+      155,  155,  155,  155,  155,  155,  155,  155,  155,  155,
+      155,  155,  155,  155,  155,  155,  155,  155,  155,  155,
+      155
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -564,8 +567,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-#line 4 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 1 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+#line 4 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 	/* This code goes at the "top" of the generated file. */
 	#include <string.h>
 	#include <stdio.h>
@@ -581,7 +584,7 @@ char *yytext;
 	    // Начало токена
 	    yylloc->first_line = line_number;
 	    yylloc->first_column = column_number;
-	    for( int i = 0; i < strlen(yytext); i++ ) {
+	    for( unsigned int i = 0; i < strlen(yytext); i++ ) {
 	   	 if( yytext[i] == '\n' ) {
 	   		 line_number++;
 	   		 column_number = 1;
@@ -613,7 +616,7 @@ char *yytext;
 		}
 	}
 
-#line 617 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/lexer.cpp"
+#line 620 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/lexer.cpp"
 
 #define INITIAL 0
 
@@ -831,10 +834,10 @@ YY_DECL
 		}
 
 	{
-#line 62 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 62 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 
 
-#line 838 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/lexer.cpp"
+#line 841 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/lexer.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -861,13 +864,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 148 )
+				if ( yy_current_state >= 156 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 173 );
+		while ( yy_base[yy_current_state] != 180 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -894,117 +897,127 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 64 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 64 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 { updateLocation(&yylloc); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 66 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{ updateLocation(&yylloc); return PRINTLN;}
+#line 66 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return PRINTLN; }
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 68 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc);}
+#line 68 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 70 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 70 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 { updateLocation(&yylloc); return(PUBLIC); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 71 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 71 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 { updateLocation(&yylloc); return(PRIVATE); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 72 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 72 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 { updateLocation(&yylloc); return(STATIC); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 74 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 74 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 { updateLocation(&yylloc); return(INT); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 75 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 75 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 { updateLocation(&yylloc); return(BOOLEAN); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 76 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 76 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 { updateLocation(&yylloc); return(VOID); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 77 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 77 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 { updateLocation(&yylloc); return(STRING); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 79 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 79 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 { updateLocation(&yylloc); return(CLASS); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 80 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 80 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 { updateLocation(&yylloc); return(EXTENDS); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 82 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 82 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 { updateLocation(&yylloc); return(IF); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 83 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 83 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 { updateLocation(&yylloc); return(ELSE); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 84 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 84 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 { updateLocation(&yylloc); return(WHILE); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 85 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 85 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 { updateLocation(&yylloc); return(RETURN); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 87 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{ updateLocation(&yylloc); return(LENGTH); }
+#line 87 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return(TRUE); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 89 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{ updateLocation(&yylloc); return(THIS); }
+#line 88 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return(FALSE); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 90 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{ updateLocation(&yylloc); return(NEW); }
+#line 90 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return(LENGTH); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 92 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{ updateLocation(&yylloc); return(MAIN); }
+#line 92 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return(THIS); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 94 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 93 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return(NEW); }
+	YY_BREAK
+case 22:
+YY_RULE_SETUP
+#line 95 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return(MAIN); }
+	YY_BREAK
+case 23:
+YY_RULE_SETUP
+#line 97 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {
 	updateLocation(&yylloc);
 	toUpper(yytext);
 	printLocation(yytext);
 }
 	YY_BREAK
-case 22:
+case 24:
 YY_RULE_SETUP
-#line 100 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 103 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {
 	              updateLocation(&yylloc); 
 	              size_t len = strlen(yytext);
@@ -1015,105 +1028,105 @@ YY_RULE_SETUP
                   return ID;
                   }
 	YY_BREAK
-case 23:
-YY_RULE_SETUP
-#line 109 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc); yylval.int_val = atoi(yytext); return INTEGER_LITERAL;}
-	YY_BREAK
-case 24:
-YY_RULE_SETUP
-#line 111 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc); return LFBRACKET;}
-	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 112 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc); return RFBRACKET;}
+#line 112 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{updateLocation(&yylloc); yylval.int_val = atoi(yytext); return INTEGER_LITERAL;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 113 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc); return LPBRACKET;}
+#line 114 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return LFBRACKET; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 114 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc); return RPBRACKET;}
+#line 115 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return RFBRACKET; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 115 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc); return LSBRACKET;}
+#line 116 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return LPBRACKET; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 116 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc); return RSBRACKET;}
+#line 117 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return RPBRACKET; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 118 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc); return PLUS;}
+#line 118 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return LSBRACKET; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 119 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc); return MINUS;}
+#line 119 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return RSBRACKET; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 120 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc); return STAR;}
+#line 121 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return PLUS; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 121 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc); return MOD;}
+#line 122 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return MINUS; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 123 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc); return NOT;}
+#line 123 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return STAR; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 125 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc); return ASSIGN;}
+#line 124 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return MOD; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 127 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc); return LESS;}
+#line 126 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return NOT; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 128 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc); return AND;}
+#line 128 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return ASSIGN; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 129 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{updateLocation(&yylloc); return OR;}
+#line 130 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return LESS; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 131 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{ updateLocation(&yylloc); return SEMICOLON; }
+#line 131 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return AND; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 132 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{ updateLocation(&yylloc); return POINT; }
+#line 132 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return OR; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 133 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
-{ updateLocation(&yylloc); return COMMA; }
+#line 134 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return SEMICOLON; }
 	YY_BREAK
 case 42:
-/* rule 42 can match eol */
 YY_RULE_SETUP
-#line 136 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 135 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return POINT; }
+	YY_BREAK
+case 43:
+YY_RULE_SETUP
+#line 136 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
+{ updateLocation(&yylloc); return COMMA; }
+	YY_BREAK
+case 44:
+/* rule 44 can match eol */
+YY_RULE_SETUP
+#line 139 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 {
 
 	updateLocation(&yylloc);
@@ -1128,12 +1141,12 @@ YY_RULE_SETUP
 
 }
 	YY_BREAK
-case 43:
+case 45:
 YY_RULE_SETUP
-#line 150 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 153 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 ECHO;
 	YY_BREAK
-#line 1137 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Output/lexer.cpp"
+#line 1150 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/lexer.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1426,7 +1439,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 148 )
+			if ( yy_current_state >= 156 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -1454,11 +1467,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 148 )
+		if ( yy_current_state >= 156 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 147);
+	yy_is_jam = (yy_current_state == 155);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2134,7 +2147,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 150 "/home/nismohl/ClionProjects/ProtivoGaZiK_2/MiniJavaCompiler/Parser/flex.l"
+#line 153 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/flex.l"
 
 
 
