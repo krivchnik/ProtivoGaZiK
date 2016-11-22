@@ -71,6 +71,8 @@ private:
     bool inMainMethodBody;
 
     const std::string &getTypeFromId(std::string basic_string);
+
+    std::string typeMismatch(std::string got, std::string expected);
 };
 
 

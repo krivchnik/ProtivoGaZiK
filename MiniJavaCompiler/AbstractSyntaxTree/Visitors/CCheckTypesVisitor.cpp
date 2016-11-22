@@ -16,11 +16,9 @@ void CCheckTypesVisitor::Visit(COperationExpression *expression) {
     string typeOperation = expression->GetType();
 
     if (typeLeft != typeOperation) {
-        string errorInfo = "got " + typeLeft + ", expected " + typeOperation;
-        errors.push_back({leftOperand->GetLocation(), ErrorType::WRONG_TYPE, errorInfo});
+        errors.push_back({leftOperand->GetLocation(), ErrorType::WRONG_TYPE, typeMismatch(typeLeft, typeOperation)});
     } else if (typeRight != typeOperation) {
-        string errorInfo = "got " + typeRight + ", expected " + typeOperation;
-        errors.push_back({rightOperand->GetLocation(), ErrorType::WRONG_TYPE, errorInfo});
+        errors.push_back({rightOperand->GetLocation(), ErrorType::WRONG_TYPE, typeMismatch(typeRight, typeOperation)});
     }
 }
 
@@ -81,9 +79,24 @@ void CCheckTypesVisitor::Visit(CAssignStatement *statement) {
 }
 
 void CCheckTypesVisitor::Visit(CAssignItemStatement *statement) {
+
+    auto index = statement->getExpressionInBrackets();
+    auto assignedExp = statement->getAssignedExpression();
+
     statement->getId()->Accept(this);
-    statement->getExpressionInBrackets()->Accept(this);
-    statement->getAssignedExpression()->Accept(this);
+    index->Accept(this);
+    assignedExp->Accept(this);
+
+    string typeIndex = index->GetType();
+    if (typeIndex != INT_TYPE) {
+        //INDEX MUST BE INTEGER
+        errors.push_back({index->GetLocation(), ErrorType::NON_INTEGER, index->GetType()});
+    }
+
+    if (assignedExp->GetType() != INT_TYPE) {
+        //THERE ARE ONLY INT ARRAYS IN MINIJAVA, SO ASSIGNED EXP MUDT BE INT
+        errors.push_back({index->GetLocation(), ErrorType::WRONG_TYPE, typeMismatch(assignedExp->GetType(), INT_TYPE)});
+    }
 }
 
 void CCheckTypesVisitor::Visit(CPrintStatement *statement) {
@@ -328,5 +341,10 @@ const std::string &CCheckTypesVisitor::getTypeFromId(std::string name) {
     }
 
     return NONE_TYPE;
+}
+
+std::string CCheckTypesVisitor::typeMismatch(std::string got, std::string expected) {
+    std::string errorInfo = "got " + got + ", expected " + expected;
+    return errorInfo;
 }
 
