@@ -17,9 +17,9 @@ CAnalyzer::CAnalyzer(std::shared_ptr<CProgram> program) : program(program) {
     CGetClassesVisitor getClassesVisitor;
     getClassesVisitor.Visit(program.get());
     classes = getClassesVisitor.getClasses();
-    for(auto iter = classes.begin(); iter != classes.end(); ++iter) {
+    /*for(auto iter = classes.begin(); iter != classes.end(); ++iter) {
         iter->second.Print(std::cout);
-    }
+    }*/
     auto classErrors = getClassesVisitor.GetErrors();
     errors.insert(errors.end(), classErrors.begin(), classErrors.end());
 }

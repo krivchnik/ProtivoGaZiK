@@ -59,12 +59,13 @@ void CCheckTypesVisitor::Visit(CLengthExpression *expression) {
     }
 }
 
-void CCheckTypesVisitor::Visit(CArrayConstructionExpression *expression) {
-    expression->getSize()->Accept(this);
+void CCheckTypesVisitor::Visit(CArrayConstructionExpression *expression) { ;
+    auto size = expression->getSize();
+    size->Accept(this);
 
-    if(expression->getSize()->GetType() != INT_TYPE) {
+    if(size->GetType() != INT_TYPE) {
         //SIZE OF ARRAY MUST BE INTEGER
-        errors.push_back({expression->GetLocation(), ErrorType::NON_INTEGER, expression->GetType()});
+        errors.push_back({expression->GetLocation(), ErrorType::NON_INTEGER, size->GetType()});
     }
 }
 
@@ -172,8 +173,14 @@ void CCheckTypesVisitor::Visit(CVarDecl *decl) {
 
 void CCheckTypesVisitor::Visit(CGetItemExpression *expression) {
 
+    auto index = expression->GetIndex();
     expression->GetObject()->Accept(this);
-    expression->GetIndex()->Accept(this);
+    index->Accept(this);
+
+    if (index->GetType() != INT_TYPE) {
+        errors.push_back({index->GetLocation(), ErrorType::NON_INTEGER, index->GetType()});
+    }
+
 }
 
 void CCheckTypesVisitor::Visit(CMethod *method) {
