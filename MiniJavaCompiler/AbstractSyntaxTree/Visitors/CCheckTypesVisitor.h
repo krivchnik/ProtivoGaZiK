@@ -19,7 +19,7 @@ public:
 
     CCheckTypesVisitor(std::map<std::string, ClassInfo >& _classes);
 
-    Errors GetErrors() const {
+    std::vector<ErrorDescription> GetErrors() const {
         return errors;
     }
 

@@ -7,7 +7,8 @@ class CAnalyzer {
 
 public:
     CAnalyzer(std::shared_ptr<CProgram> program);
-    void analyze();
+
+    std::vector<ErrorDescription> analyze();
 
 private:
     std::shared_ptr<CProgram> program;
@@ -23,7 +24,7 @@ private:
     //вернуть список доступных переменных из класса
     std::vector<std::string> getAvailVariables(ClassInfo classInfo);
     //запуск CheckVisitor
-    std::set<std::string> checkTypes();
+    void checkTypes();
 
     std::vector<ErrorDescription> errors;
 };

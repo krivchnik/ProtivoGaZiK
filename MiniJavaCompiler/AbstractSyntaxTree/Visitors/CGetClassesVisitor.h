@@ -22,7 +22,7 @@ public:
 
     std::map< std::string, ClassInfo > getClasses() { return classes; }
 
-    const Errors& GetErrors() const {
+    const std::vector<ErrorDescription>& GetErrors() const {
         return errors;
     }
 

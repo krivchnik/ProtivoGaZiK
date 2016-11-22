@@ -5,11 +5,12 @@
 #include <Analyzer/CAnalyzer.h>
 
 
-void CAnalyzer::analyze() {
+std::vector<ErrorDescription> CAnalyzer::analyze() {
     checkCycleInheritance();
     checkMethodOverrides();
     checkParamOverrides();
     checkTypes();
+    return errors;
 }
 
 CAnalyzer::CAnalyzer(std::shared_ptr<CProgram> program) : program(program) {
@@ -17,9 +18,8 @@ CAnalyzer::CAnalyzer(std::shared_ptr<CProgram> program) : program(program) {
     CGetClassesVisitor getClassesVisitor;
     getClassesVisitor.Visit(program.get());
     classes = getClassesVisitor.getClasses();
-//    for (auto it = classes.begin(); it != classes.end(); ++it) {
-//        it->second.Print(std::cout);
-//    }
+    auto classErrors = getClassesVisitor.GetErrors();
+    errors.insert(errors.end(), classErrors.begin(), classErrors.end());
 }
 
 void CAnalyzer::checkCycleInheritance() {
@@ -52,16 +52,12 @@ void CAnalyzer::checkCycleInheritance() {
 
 }
 
-std::set<std::string> CAnalyzer::checkTypes() {
+void CAnalyzer::checkTypes() {
 
     CCheckTypesVisitor checkTypesVisitor(classes);
     checkTypesVisitor.Visit(program.get());
-    auto errors = checkTypesVisitor.GetErrors().GetErrors();
-    for (auto error : errors) {
-        std::cout << "\n " << error.type << " : " << error.info << "\n";
-        error.loc.Print(std::cout);
-    }
-    return std::set<std::string>();
+    auto typeErrors = checkTypesVisitor.GetErrors();
+    errors.insert(errors.end(), typeErrors.begin(), typeErrors.end());
 }
 
 void CAnalyzer::checkMethodOverrides() {

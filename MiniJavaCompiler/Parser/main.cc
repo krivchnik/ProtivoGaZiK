@@ -24,7 +24,11 @@ int main(int argc, char **argv)
 
 	visitor.StartVisit(ans.get(), std::string("graph.dot"));
     CAnalyzer analyzer(ans);
-	analyzer.analyze();
+	auto errors = analyzer.analyze();
+	for (auto error : errors) {
+		std::cout << error.type << " : " << error.info << "\n";
+		error.loc.Print(std::cout);
+	}
 	return 0;
 }
 
