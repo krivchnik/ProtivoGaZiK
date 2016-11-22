@@ -58,6 +58,7 @@ void CCheckTypesVisitor::Visit(CNotExpression *expression) {
         //!<exp>: <exp> MUST BE BOOLEAN
         errors.push_back({expression->GetLocation(), ErrorType::NON_BOOLEAN_EXP, expression->GetType()});
     }
+    expression->SetType(expression->GetExpression()->GetType());
 }
 
 void CCheckTypesVisitor::Visit(CLengthExpression *expression) {
