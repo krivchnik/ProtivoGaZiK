@@ -5,8 +5,23 @@
 
 void CCheckTypesVisitor::Visit(COperationExpression *expression) {
 
-    expression->GetLeftOperand()->Accept(this);
-    expression->GetRightOperand()->Accept(this);
+    auto leftOperand = expression->GetLeftOperand();
+    auto rightOperand = expression->GetRightOperand();
+
+    leftOperand->Accept(this);
+    rightOperand->Accept(this);
+
+    string typeLeft = leftOperand->GetType();
+    string typeRight = rightOperand->GetType();
+    string typeOperation = expression->GetType();
+
+    if (typeLeft != typeOperation) {
+        string errorInfo = "got " + typeLeft + ", expected " + typeOperation;
+        errors.push_back({leftOperand->GetLocation(), ErrorType::WRONG_TYPE, errorInfo});
+    } else if (typeRight != typeOperation) {
+        string errorInfo = "got " + typeRight + ", expected " + typeOperation;
+        errors.push_back({rightOperand->GetLocation(), ErrorType::WRONG_TYPE, errorInfo});
+    }
 }
 
 void CCheckTypesVisitor::Visit(CNumExpression *expression) {
@@ -72,8 +87,8 @@ void CCheckTypesVisitor::Visit(CAssignItemStatement *statement) {
 }
 
 void CCheckTypesVisitor::Visit(CPrintStatement *statement) {
-    statement->GetExpression()->Accept(this);
     auto expression = statement->GetExpression();
+    expression->Accept(this);
     if(expression->GetType() != INT_TYPE) {
         //ONLY ABLE TO PRINT INTEGERS
         errors.push_back({expression->GetLocation(), ErrorType::NON_INTEGER, expression->GetType()});
@@ -313,6 +328,5 @@ const std::string &CCheckTypesVisitor::getTypeFromId(std::string name) {
     }
 
     return NONE_TYPE;
-
 }
 

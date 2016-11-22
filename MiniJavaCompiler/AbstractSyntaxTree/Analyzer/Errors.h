@@ -16,7 +16,8 @@ enum ErrorType {
     REDEFINITION_CLASS,
     REDEFINITION_METHOD,
     REDEFINITION_PARAM,
-    RECURSIVE_INHERITANCE
+    RECURSIVE_INHERITANCE,
+    WRONG_TYPE
 };
 
 std::ostream& operator<< (std::ostream& out, const ErrorType error);

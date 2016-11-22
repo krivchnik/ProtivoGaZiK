@@ -3,12 +3,13 @@
 COperationExpression::COperationExpression(const Location location,
 										   std::shared_ptr<IExpression> leftOperand,
 										   std::shared_ptr<IExpression> rightOperand,
-										   OperationType type)
+										   OperationType operationType)
 		: leftOperand(leftOperand),
 		  rightOperand(rightOperand),
-		  type(type) {
+		  operationType(operationType) {
 
 	this->location = location;
+    type = (operationType >= 4) ? BOOLEAN_TYPE : INT_TYPE;
 }
 
 std::shared_ptr<IExpression> COperationExpression::GetLeftOperand() {
@@ -20,11 +21,9 @@ std::shared_ptr<IExpression> COperationExpression::GetRightOperand() {
 }
 
 COperationExpression::OperationType COperationExpression::GetOperationType() {
-	return type;
+	return operationType;
 }
 
 void COperationExpression::Accept(IVisitor* visitor) {
 	visitor->Visit(this);
 }
-
-
