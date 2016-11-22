@@ -71,14 +71,14 @@ Location ComposeLocation(YYLTYPE loc1, YYLTYPE loc2) {
 %type  <class_decl>			classDeclaration
 %type  <main_class>	     	mainClass
 
-%left LSBRACKET POINT LPBRACKET
-%right NOT
-%left STAR MOD
-%left PLUS MINUS
-%left LESS
-%left AND
-%left OR
 %left ASSIGN
+%left OR
+%left AND
+%left LESS
+%left PLUS MINUS
+%left STAR MOD
+%right NOT
+%left LSBRACKET POINT LPBRACKET
 
 %%
 

@@ -316,19 +316,19 @@ std::vector<MethodInfo> CCheckTypesVisitor::getAvailableMethod() {
     if (currentClass == "") {
         return std::vector<MethodInfo>();
     }
+
+    std::vector<MethodInfo> availMethods(classes[currentClass].methodsDeclarations);
+
     std::string nextClass = currentClass;
-    std::vector<MethodInfo> availMethod = classes[nextClass].getPublicMethodsInfo();
     while (classes[nextClass].HasBase()) {
         nextClass = classes[nextClass].baseId;
         if (nextClass == currentClass) {
             break;
         }
-        std::vector<MethodInfo> newMethod = classes[nextClass].getPublicMethodsInfo();
-        for (auto iter = newMethod.begin(); iter != newMethod.end(); ++iter) {
-            availMethod.push_back(*iter);
-        }
+        std::vector<MethodInfo> newMethods = classes[nextClass].getPublicMethodsInfo();
+        availMethods.insert(availMethods.end(), newMethods.begin(), newMethods.end());
     }
-    return availMethod;
+    return availMethods;
 }
 
 const std::string &CCheckTypesVisitor::getTypeFromId(std::string name) {
