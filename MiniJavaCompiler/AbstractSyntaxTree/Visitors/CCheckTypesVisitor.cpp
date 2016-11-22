@@ -42,12 +42,14 @@ void CCheckTypesVisitor::Visit(CThisExpression *expression) {
 }
 
 void CCheckTypesVisitor::Visit(CIdExpression *expression) {
+
     std::string idType = getTypeFromId(expression->GetName());
 
     if(idType == NONE_TYPE) {
         //UNKNOWN IDENTIFIER
         errors.push_back({expression->GetLocation(), ErrorType::UNDEFINED_IDENTIFIER, expression->GetName()});
     }
+
     expression->SetType(idType);
 }
 
@@ -145,7 +147,6 @@ void CCheckTypesVisitor::Visit(CIfElseStatement *statement) {
     }
 }
 
-
 void CCheckTypesVisitor::Visit(CWhileStatement *statement) {
     statement->getCondition()->Accept(this);
     statement->getBody()->Accept(this);
@@ -242,7 +243,9 @@ void CCheckTypesVisitor::Visit(CMethodCallExpression *exp) {
     methodCallClassName = className;
 
     auto methodId = exp->getMethodId();
+
     methodId->Accept(this);
+
     inMethodCallExpr = false;
     methodCallClassName = "";
     exp->getArguments()->Accept(this);
@@ -329,10 +332,13 @@ std::vector<MethodInfo> CCheckTypesVisitor::getAvailableMethod() {
 const std::string &CCheckTypesVisitor::getTypeFromId(std::string name) {
     //если это происходит в вызове метода через classId.MethodName
     if( inMethodCallExpr ) {
-        auto methodsInfo = classes[methodCallClassName].getPublicMethodsInfo();
-        for(auto iter = methodsInfo.begin(); iter != methodsInfo.end(); ++iter) {
-            if( iter->name == name ) {
-                return iter->returnedType;
+
+        if (classes.find(methodCallClassName) != classes.end()) {
+            auto methodsInfo = classes[methodCallClassName].getPublicMethodsInfo();
+            for(auto iter = methodsInfo.begin(); iter != methodsInfo.end(); ++iter) {
+                if( iter->name == name ) {
+                    return iter->returnedType;
+                }
             }
         }
         return NONE_TYPE;
