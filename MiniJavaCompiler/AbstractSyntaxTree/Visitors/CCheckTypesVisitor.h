@@ -57,6 +57,7 @@ private:
     //если текущее положение вне класса или метода, то будет = ""
     std::string currentClass;
     std::string currentMethod;
+    std::string methodCallClassName;
     //список методов доступных из текущего класса
     std::vector<MethodInfo> getAvailableMethod();
     //доступные типы
@@ -69,6 +70,7 @@ private:
     //или ошибки в объявлениях внутри метода
     bool inMethodBody;
     bool inMainMethodBody;
+    bool inMethodCallExpr;
 
     const std::string &getTypeFromId(std::string basic_string);
 
