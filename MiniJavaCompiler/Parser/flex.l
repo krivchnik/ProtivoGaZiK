@@ -61,12 +61,12 @@ comment          \/\/.*\n
 
 %%
 
-"\n"|"\t"|" "           { updateLocation(&yylloc); }
+"\n"|"\t"|" "         { updateLocation(&yylloc); }
 
-"System.out.println"	{ updateLocation(&yylloc); return PRINTLN;}
+"System.out.println"  { updateLocation(&yylloc); return PRINTLN; }
 
-{comment}               {updateLocation(&yylloc);}
-
+{comment}             { updateLocation(&yylloc); }
+ 
 "public"              { updateLocation(&yylloc); return(PUBLIC); }
 "private"             { updateLocation(&yylloc); return(PRIVATE); }
 "static"              { updateLocation(&yylloc); return(STATIC); }
@@ -83,6 +83,9 @@ comment          \/\/.*\n
 "else"                { updateLocation(&yylloc); return(ELSE); }
 "while"               { updateLocation(&yylloc); return(WHILE); }
 "return"              { updateLocation(&yylloc); return(RETURN); }
+
+"true"                { updateLocation(&yylloc); return(TRUE); }
+"false"               { updateLocation(&yylloc); return(FALSE); }
 
 "length"              { updateLocation(&yylloc); return(LENGTH); }
 
@@ -108,25 +111,25 @@ comment          \/\/.*\n
                   }
 {IntegerLiteral} {updateLocation(&yylloc); yylval.int_val = atoi(yytext); return INTEGER_LITERAL;}
 
-"{"              {updateLocation(&yylloc); return LFBRACKET;}
-"}"				 {updateLocation(&yylloc); return RFBRACKET;}
-"("				 {updateLocation(&yylloc); return LPBRACKET;}
-")"				 {updateLocation(&yylloc); return RPBRACKET;}
-"["				 {updateLocation(&yylloc); return LSBRACKET;}
-"]"				 {updateLocation(&yylloc); return RSBRACKET;}
+"{"              { updateLocation(&yylloc); return LFBRACKET; }
+"}"				 { updateLocation(&yylloc); return RFBRACKET; }
+"("				 { updateLocation(&yylloc); return LPBRACKET; }
+")"				 { updateLocation(&yylloc); return RPBRACKET; }
+"["				 { updateLocation(&yylloc); return LSBRACKET; }
+"]"				 { updateLocation(&yylloc); return RSBRACKET; }
 
-"+"              {updateLocation(&yylloc); return PLUS;}
-"-"              {updateLocation(&yylloc); return MINUS;}
-"*"              {updateLocation(&yylloc); return STAR;}
-"%"		         {updateLocation(&yylloc); return MOD;}
+"+"              { updateLocation(&yylloc); return PLUS; }
+"-"              { updateLocation(&yylloc); return MINUS; }
+"*"              { updateLocation(&yylloc); return STAR; }
+"%"		         { updateLocation(&yylloc); return MOD; }
 
-"!"				 {updateLocation(&yylloc); return NOT;}
+"!"				 { updateLocation(&yylloc); return NOT; }
 
-"="		         {updateLocation(&yylloc); return ASSIGN;}
+"="		         { updateLocation(&yylloc); return ASSIGN; }
 
-"<"		     	 {updateLocation(&yylloc); return LESS;}
-"&&"	    	 {updateLocation(&yylloc); return AND;}
-"||"	         {updateLocation(&yylloc); return OR;}
+"<"		     	 { updateLocation(&yylloc); return LESS; }
+"&&"	    	 { updateLocation(&yylloc); return AND; }
+"||"	         { updateLocation(&yylloc); return OR; }
 
 ";"				 { updateLocation(&yylloc); return SEMICOLON; }
 "."              { updateLocation(&yylloc); return POINT; }
