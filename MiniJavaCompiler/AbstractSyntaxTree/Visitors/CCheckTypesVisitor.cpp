@@ -44,27 +44,30 @@ void CCheckTypesVisitor::Visit(CIdExpression *expression) {
 }
 
 void CCheckTypesVisitor::Visit(CNotExpression *expression) {
+    expression->GetExpression()->Accept(this);
+
     if(expression->GetType() != BOOLEAN_TYPE) {
         //!<exp>: <exp> MUST BE BOOLEAN
         errors.push_back({expression->GetLocation(), ErrorType::NON_BOOLEAN_EXP, expression->GetType()});
     }
-    expression->GetExpression()->Accept(this);
 }
 
 void CCheckTypesVisitor::Visit(CLengthExpression *expression) {
+    expression->getExpression()->Accept(this);
+
     if(expression->GetType() != INT_ARRAY_TYPE) {
         //ONLY ARRAYS HAVE .length
         errors.push_back({expression->GetLocation(), ErrorType::NON_ARRAY, expression->GetType()});
     }
-    expression->getExpression()->Accept(this);
 }
 
 void CCheckTypesVisitor::Visit(CArrayConstructionExpression *expression) {
+    expression->getSize()->Accept(this);
+
     if(expression->getSize()->GetType() != INT_TYPE) {
         //SIZE OF ARRAY MUST BE INTEGER
         errors.push_back({expression->GetLocation(), ErrorType::NON_INTEGER, expression->GetType()});
     }
-    expression->getSize()->Accept(this);
 }
 
 void CCheckTypesVisitor::Visit(CConstructClassExpression *expression) {
@@ -176,6 +179,7 @@ void CCheckTypesVisitor::Visit(CMethod *method) {
     if (method->getReturnExpression() != nullptr) {
         method->getReturnExpression()->Accept(this);
     }
+
     std::string typeName = method->getTypeName();
 
     if (types.find(typeName) == types.end() && classes.find(typeName) == classes.end() && !inMainMethodBody) {
@@ -188,6 +192,10 @@ void CCheckTypesVisitor::Visit(CMethod *method) {
 
 
 void CCheckTypesVisitor::Visit(CMethodCallExpression *exp) {
+    exp->getObject()->Accept(this);
+    exp->getMethodId()->Accept(this);
+    exp->getArguments()->Accept(this);
+
     //по сути имя класса вызывающего метод
     exp->SetType(NONE_TYPE);
     std::string className = exp->getObject()->GetType();
@@ -205,10 +213,6 @@ void CCheckTypesVisitor::Visit(CMethodCallExpression *exp) {
             }
         }
     }
-
-    exp->getObject()->Accept(this);
-    exp->getMethodId()->Accept(this);
-    exp->getArguments()->Accept(this);
 }
 
 void CCheckTypesVisitor::Visit(CClass *statement) {
@@ -245,6 +249,8 @@ CCheckTypesVisitor::CCheckTypesVisitor(std::map<std::string, ClassInfo> &_classe
     types["intArray"] = 1;
     types["boolean"] = 2;
     inMethodBody = false;
+    inMainMethodBody = false;
+    inMethodCallExpr = false;
 
 }
 
