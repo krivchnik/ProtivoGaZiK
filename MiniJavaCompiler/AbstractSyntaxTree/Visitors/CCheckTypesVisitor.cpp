@@ -213,12 +213,16 @@ void CCheckTypesVisitor::Visit(CMethod *method) {
 
 void CCheckTypesVisitor::Visit(CMethodCallExpression *exp) {
     exp->getObject()->Accept(this);
+    std::string className = exp->getObject()->GetType();
+    inMethodCallExpr = true;
+    methodCallClassName = className;
     exp->getMethodId()->Accept(this);
+    inMethodCallExpr = false;
+    methodCallClassName = "";
     exp->getArguments()->Accept(this);
 
     //по сути имя класса вызывающего метод
     exp->SetType(NONE_TYPE);
-    std::string className = exp->getObject()->GetType();
 
     if(classes.find(className) == classes.end()){
         //<CLASS>.method(): UNKNOWN <CLASS>
@@ -295,6 +299,16 @@ std::vector<MethodInfo> CCheckTypesVisitor::getAvailableMethod() {
 }
 
 const std::string &CCheckTypesVisitor::getTypeFromId(std::string name) {
+    //если это происходит в вызове метода через classId.MethodName
+    if( inMethodCallExpr ) {
+        auto methodsInfo = classes[methodCallClassName].getPublicMethodsInfo();
+        for(auto iter = methodsInfo.begin(); iter != methodsInfo.end(); ++iter) {
+            if( iter->name == name ) {
+                return iter->returnedType;
+            }
+        }
+        return NONE_TYPE;
+    }
     //если в объявление класса
     for(auto iter = classes.begin(); iter != classes.end(); ++iter){
         if(iter->first == name) {
