@@ -1,55 +1,20 @@
 class QuickSort{
     public static void main(String[] arwere){
-	    System.out.println(10);
+	    System.out.println(20);
     }
 }
 
-class QuickSort{
-     public int Start(int a, int c, int[] d, TV3 e){
-             int a;
-             int[] b;
-             boolean c;
-             a = b + 1 + 2;
-                      f = 10;
-             return 0;
-     }
-}
-
-class TV {
-
-    public int Start(int a, int c, int[] d, TV3 e){
-         int a;
-         int[] b;
-         boolean c;
-         a = b + 1 + 2;
-                  f = 10;
-         return 0;
+class Simple {
+    public int ReturnInt() {
+        return 20;
     }
 }
 
-class TV {
-
-    public int Start(int a, int c, int[] d, TV3 e){
-         int a;
-         int[] b;
-         boolean c;
-         a = b + 1 + 2;
-                  f = 10;
-         return 0;
+class Tree {
+    public int Foo(int a) {
+        Simple s;
+        s = new Simple();
+        a = s.ReturnInt();
+        return 30;
     }
 }
-
-class TV2 extends TV{
-    TV b;
-    public TV Start(){
-
-         return 0;
-    }
-
-    public NotAClass Start2(){
-
-         return 0;
-    }
-}
-
-
