@@ -59,7 +59,7 @@ private:
     std::string currentMethod;
     std::string methodCallClassName;
     //список методов доступных из текущего класса
-    std::vector<MethodInfo> getAvailableMethod();
+    std::vector<MethodInfo> getAvailableMethodsInfo(std::string currentClass);
     //доступные типы
     std::map<std::string, int> types;
 

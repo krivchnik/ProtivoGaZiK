@@ -259,14 +259,13 @@ void CCheckTypesVisitor::Visit(CMethodCallExpression *exp) {
         //<CLASS>.method(): UNKNOWN <CLASS>
         errors.push_back({object->GetLocation(), ErrorType::UNKNOWN_TYPE, methodId->GetName()});
     } else {
-        for(auto method : classes[className].methodsDeclarations) {
+        for(auto method : getAvailableMethodsInfo(className)) {
             if(method.name == methodId->GetName()) {
                 if(method.visibility == "private" && className != currentClass) {
                     //PRIVATE METHOD CALL
                     errors.push_back({methodId->GetLocation(), ErrorType::PRIVATE_METHOD_CALL, method.name});
-                } else {
-                    exp->SetType(method.returnedType);
                 }
+                exp->SetType(method.returnedType);
             }
         }
     }
@@ -311,18 +310,20 @@ CCheckTypesVisitor::CCheckTypesVisitor(std::map<std::string, ClassInfo> &_classe
 
 }
 
-std::vector<MethodInfo> CCheckTypesVisitor::getAvailableMethod() {
+std::vector<MethodInfo> CCheckTypesVisitor::getAvailableMethodsInfo(std::string className) {
 
-    if (currentClass == "") {
+    if (className == "") {
         return std::vector<MethodInfo>();
     }
 
-    std::vector<MethodInfo> availMethods(classes[currentClass].methodsDeclarations);
+    std::vector<MethodInfo> availMethods(classes[className].methodsDeclarations);
 
-    std::string nextClass = currentClass;
+    std::string nextClass = className;
     while (classes[nextClass].HasBase()) {
         nextClass = classes[nextClass].baseId;
-        if (nextClass == currentClass) {
+
+        //TODO: CYCLIC INHERITANCE ???
+        if (nextClass == className) {
             break;
         }
         std::vector<MethodInfo> newMethods = classes[nextClass].getPublicMethodsInfo();
@@ -336,7 +337,7 @@ const std::string &CCheckTypesVisitor::getTypeFromId(std::string name) {
     if( inMethodCallExpr ) {
 
         if (classes.find(methodCallClassName) != classes.end()) {
-            auto methodsInfo = classes[methodCallClassName].getPublicMethodsInfo();
+            auto methodsInfo = getAvailableMethodsInfo(methodCallClassName);
             for(auto iter = methodsInfo.begin(); iter != methodsInfo.end(); ++iter) {
                 if( iter->name == name ) {
                     return iter->returnedType;
@@ -353,7 +354,7 @@ const std::string &CCheckTypesVisitor::getTypeFromId(std::string name) {
     }
 
     //если это имя доступного метода
-    std::vector<MethodInfo> availMethods = getAvailableMethod();
+    std::vector<MethodInfo> availMethods = getAvailableMethodsInfo(currentClass);
     for(unsigned int i = 0; i < availMethods.size(); ++i){
         if(availMethods[i].name == name){
             return availMethods[i].returnedType;
