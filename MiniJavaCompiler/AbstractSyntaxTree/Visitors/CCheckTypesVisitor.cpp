@@ -223,11 +223,16 @@ void CCheckTypesVisitor::Visit(CMethod *method) {
 
 
 void CCheckTypesVisitor::Visit(CMethodCallExpression *exp) {
-    exp->getObject()->Accept(this);
-    std::string className = exp->getObject()->GetType();
+
+    auto object = exp->getObject();
+    object->Accept(this);
+
+    std::string className = object->GetType();
     inMethodCallExpr = true;
     methodCallClassName = className;
-    exp->getMethodId()->Accept(this);
+
+    auto methodId = exp->getMethodId();
+    methodId->Accept(this);
     inMethodCallExpr = false;
     methodCallClassName = "";
     exp->getArguments()->Accept(this);
@@ -237,13 +242,15 @@ void CCheckTypesVisitor::Visit(CMethodCallExpression *exp) {
 
     if(classes.find(className) == classes.end()){
         //<CLASS>.method(): UNKNOWN <CLASS>
-        errors.push_back({exp->getObject()->GetLocation(), ErrorType::UNKNOWN_TYPE, exp->getMethodId()->GetName()});
+        errors.push_back({object->GetLocation(), ErrorType::UNKNOWN_TYPE, methodId->GetName()});
     } else {
         for(auto method : classes[className].methodsDeclarations) {
-            if(method.name == exp->getMethodId()->GetName()) {
+            if(method.name == methodId->GetName()) {
                 if(method.visibility == "private" && className != currentClass) {
                     //PRIVATE METHOD CALL
-                    errors.push_back({exp->getMethodId()->GetLocation(), ErrorType::PRIVATE_METHOD_CALL, method.name});
+                    errors.push_back({methodId->GetLocation(), ErrorType::PRIVATE_METHOD_CALL, method.name});
+                } else {
+                    exp->SetType(method.returnedType);
                 }
             }
         }
