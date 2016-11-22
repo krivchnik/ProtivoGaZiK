@@ -54,13 +54,14 @@ void CCheckTypesVisitor::Visit(CIdExpression *expression) {
 }
 
 void CCheckTypesVisitor::Visit(CNotExpression *expression) {
-    expression->GetExpression()->Accept(this);
+    auto innerExpression = expression->GetExpression();
+    innerExpression->Accept(this);
 
-    if(expression->GetType() != BOOLEAN_TYPE) {
+    if(innerExpression->GetType() != BOOLEAN_TYPE) {
         //!<exp>: <exp> MUST BE BOOLEAN
-        errors.push_back({expression->GetLocation(), ErrorType::NON_BOOLEAN_EXP, expression->GetType()});
+        errors.push_back({innerExpression->GetLocation(), ErrorType::NON_BOOLEAN_EXP, innerExpression->GetType()});
     }
-    expression->SetType(expression->GetExpression()->GetType());
+    expression->SetType(BOOLEAN_TYPE);
 }
 
 void CCheckTypesVisitor::Visit(CLengthExpression *expression) {
