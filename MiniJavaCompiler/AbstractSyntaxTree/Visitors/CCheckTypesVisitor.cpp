@@ -18,15 +18,16 @@ void CCheckTypesVisitor::Visit(COperationExpression *expression) {
     if( expression->GetOperationType() == COperationExpression::LESS ) {
         if( leftOperand->GetType() != INT_TYPE || rightOperand->GetType() != INT_TYPE ) {
             errors.push_back( { expression->GetLocation(), ErrorType::WRONG_TYPE,
-                                typeMismatch(INT_TYPE, BOOLEAN_TYPE) } );
+                                getMismatchString(INT_TYPE, BOOLEAN_TYPE) } );
         }
         return;
     }
 
     if (typeLeft != typeOperation) {
-        errors.push_back({leftOperand->GetLocation(), ErrorType::WRONG_TYPE, typeMismatch(typeLeft, typeOperation)});
+        errors.push_back({leftOperand->GetLocation(), ErrorType::WRONG_TYPE, getMismatchString(typeLeft, typeOperation)});
     } else if (typeRight != typeOperation) {
-        errors.push_back({rightOperand->GetLocation(), ErrorType::WRONG_TYPE, typeMismatch(typeRight, typeOperation)});
+        errors.push_back({rightOperand->GetLocation(), ErrorType::WRONG_TYPE,
+                          getMismatchString(typeRight, typeOperation)});
     }
 
 }
@@ -103,7 +104,7 @@ void CCheckTypesVisitor::Visit(CAssignStatement *statement) {
 
     if (typeVar != typeExp) {
         //TYPE MISMATCH
-        errors.push_back({exp->GetLocation(), ErrorType::WRONG_TYPE, typeMismatch(typeExp, typeVar)});
+        errors.push_back({exp->GetLocation(), ErrorType::WRONG_TYPE, getMismatchString(typeExp, typeVar)});
     }
 }
 
@@ -124,7 +125,8 @@ void CCheckTypesVisitor::Visit(CAssignItemStatement *statement) {
 
     if (assignedExp->GetType() != INT_TYPE) {
         //THERE ARE ONLY INT ARRAYS IN MINIJAVA, SO ASSIGNED EXP MUDT BE INT
-        errors.push_back({index->GetLocation(), ErrorType::WRONG_TYPE, typeMismatch(assignedExp->GetType(), INT_TYPE)});
+        errors.push_back({index->GetLocation(), ErrorType::WRONG_TYPE,
+                          getMismatchString(assignedExp->GetType(), INT_TYPE)});
     }
 }
 
@@ -266,6 +268,22 @@ void CCheckTypesVisitor::Visit(CMethodCallExpression *exp) {
                     errors.push_back({methodId->GetLocation(), ErrorType::PRIVATE_METHOD_CALL, method.name});
                 }
                 exp->SetType(method.returnedType);
+
+                vector<VariableInfo> params = method.paramList;
+                auto arguments = exp->getArguments()->GetExpressions();
+
+                if (arguments.size() != params.size()) {
+                    errors.push_back({exp->getArguments()->GetLocation(), ErrorType::WRONG_ARGUMENT_NUMBER,
+                                      getMismatchString(std::to_string(arguments.size()), std::to_string(params.size()))});
+                }
+
+                for (unsigned int index = 0; index < params.size(); ++index) {
+                    string paramType = params[index].type;
+                    string argumentType = arguments[index]->GetType();
+                    if (paramType != argumentType) {
+                        errors.push_back({ arguments[index]->GetLocation(), ErrorType::WRONG_TYPE, getMismatchString(argumentType, paramType)});
+                    }
+                }
             }
         }
     }
@@ -407,7 +425,7 @@ const std::string &CCheckTypesVisitor::getTypeFromId(std::string name) {
     return NONE_TYPE;
 }
 
-std::string CCheckTypesVisitor::typeMismatch(std::string got, std::string expected) {
+std::string CCheckTypesVisitor::getMismatchString(std::string got, std::string expected) {
     std::string errorInfo = "got " + got + ", expected " + expected;
     return errorInfo;
 }

@@ -74,7 +74,7 @@ private:
 
     const std::string &getTypeFromId(std::string basic_string);
 
-    std::string typeMismatch(std::string got, std::string expected);
+    std::string getMismatchString(std::string got, std::string expected);
 };
 
 

@@ -14,6 +14,7 @@ std::ostream& operator<< (std::ostream& out, const ErrorType error) {
         messages[REDEFINITION_PARAM] = "[param redefinition]";
         messages[RECURSIVE_INHERITANCE] = "[recursive class inheritance]";
         messages[WRONG_TYPE] = "[wrong type]";
+        messages[WRONG_ARGUMENT_NUMBER] = "[wrong number of arguments]";
     }
     return out << messages[error];
 }
