@@ -60,7 +60,8 @@ void CCheckTypesVisitor::Visit(CNotExpression *expression) {
 
     if(innerExpression->GetType() != BOOLEAN_TYPE) {
         //!<exp>: <exp> MUST BE BOOLEAN
-        errors.push_back({innerExpression->GetLocation(), ErrorType::NON_BOOLEAN_EXP, innerExpression->GetType()});
+        errors.push_back({innerExpression->GetLocation(), ErrorType::WRONG_TYPE,
+                          getMismatchString(innerExpression->GetType(), BOOLEAN_TYPE)});
     }
     expression->SetType(BOOLEAN_TYPE);
 }
@@ -80,7 +81,8 @@ void CCheckTypesVisitor::Visit(CArrayConstructionExpression *expression) { ;
 
     if(size->GetType() != INT_TYPE) {
         //SIZE OF ARRAY MUST BE INTEGER
-        errors.push_back({expression->GetLocation(), ErrorType::NON_INTEGER, size->GetType()});
+        errors.push_back({expression->GetLocation(), ErrorType::WRONG_TYPE,
+                          getMismatchString(size->GetType(), INT_TYPE)});
     }
 }
 
@@ -120,7 +122,8 @@ void CCheckTypesVisitor::Visit(CAssignItemStatement *statement) {
     string typeIndex = index->GetType();
     if (typeIndex != INT_TYPE) {
         //INDEX MUST BE INTEGER
-        errors.push_back({index->GetLocation(), ErrorType::NON_INTEGER, index->GetType()});
+        errors.push_back({index->GetLocation(), ErrorType::WRONG_TYPE,
+                          getMismatchString(index->GetType(), INT_TYPE)});
     }
 
     if (assignedExp->GetType() != INT_TYPE) {
@@ -135,7 +138,8 @@ void CCheckTypesVisitor::Visit(CPrintStatement *statement) {
     expression->Accept(this);
     if(expression->GetType() != INT_TYPE) {
         //ONLY ABLE TO PRINT INTEGERS
-        errors.push_back({expression->GetLocation(), ErrorType::NON_INTEGER, expression->GetType()});
+        errors.push_back({expression->GetLocation(), ErrorType::WRONG_TYPE,
+                          getMismatchString(expression->GetType(), INT_TYPE)});
     }
 }
 
@@ -147,7 +151,8 @@ void CCheckTypesVisitor::Visit(CIfElseStatement *statement) {
     auto expression = statement->getExpression();
     if(expression->GetType() != BOOLEAN_TYPE) {
         //CONDITION MUST BE BOOLEAN
-        errors.push_back({expression->GetLocation(), ErrorType::NON_BOOLEAN_EXP, expression->GetType()});
+        errors.push_back({expression->GetLocation(), ErrorType::WRONG_TYPE,
+                          getMismatchString(expression->GetType(), BOOLEAN_TYPE)});
     }
 }
 
@@ -158,7 +163,8 @@ void CCheckTypesVisitor::Visit(CWhileStatement *statement) {
     auto expression = statement->getCondition();
     if(expression->GetType() != BOOLEAN_TYPE) {
         //CONDITION MUST BE BOOLEAN
-        errors.push_back({expression->GetLocation(), ErrorType::NON_BOOLEAN_EXP, expression->GetType()});
+        errors.push_back({expression->GetLocation(), ErrorType::WRONG_TYPE,
+                          getMismatchString(expression->GetType(), BOOLEAN_TYPE)});
     }
 }
 
@@ -204,7 +210,8 @@ void CCheckTypesVisitor::Visit(CGetItemExpression *expression) {
     index->Accept(this);
 
     if (index->GetType() != INT_TYPE) {
-        errors.push_back({index->GetLocation(), ErrorType::NON_INTEGER, index->GetType()});
+        errors.push_back({index->GetLocation(), ErrorType::WRONG_TYPE,
+                          getMismatchString(index->GetType(), INT_TYPE)});
     }
 
 }
