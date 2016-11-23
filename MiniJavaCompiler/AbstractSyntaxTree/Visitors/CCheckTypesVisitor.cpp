@@ -2,6 +2,8 @@
 #include <Visitors/CCheckTypesVisitor.h>
 #include <CommonInclude.h>
 
+#include <algorithm>
+
 
 void CCheckTypesVisitor::Visit(COperationExpression *expression) {
 
@@ -275,7 +277,7 @@ void CCheckTypesVisitor::Visit(CMethodCallExpression *exp) {
 
     if(classes.find(className) == classes.end()){
         //<CLASS>.method(): UNKNOWN <CLASS>
-        errors.push_back({object->GetLocation(), ErrorType::UNKNOWN_TYPE, methodId->GetName()});
+        errors.push_back({object->GetLocation(), ErrorType::UNKNOWN_TYPE, object->GetType()});
     } else {
         for(auto method : getAvailableMethodsInfo(className)) {
             if(method.name == methodId->GetName()) {
@@ -297,7 +299,11 @@ void CCheckTypesVisitor::Visit(CMethodCallExpression *exp) {
                     string paramType = params[index].type;
                     string argumentType = arguments[index]->GetType();
                     if (paramType != argumentType) {
-                        errors.push_back({ arguments[index]->GetLocation(), ErrorType::WRONG_TYPE, getMismatchString(argumentType, paramType)});
+                        std::vector<std::string> baseClasses = getAllBaseClasses(argumentType);
+                        if (std::find(baseClasses.begin(), baseClasses.end(), paramType) == baseClasses.end()) {
+                            errors.push_back({arguments[index]->GetLocation(), ErrorType::WRONG_TYPE,
+                                              getMismatchString(argumentType, paramType)});
+                        }
                     }
                 }
 
@@ -354,17 +360,12 @@ std::vector<MethodInfo> CCheckTypesVisitor::getAvailableMethodsInfo(std::string 
 
     std::vector<MethodInfo> availMethods(classes[className].methodsDeclarations);
 
-    std::string nextClass = className;
-    while (classes[nextClass].HasBase()) {
-        nextClass = classes[nextClass].baseId;
-
-        //TODO: CYCLIC INHERITANCE ???
-        if (nextClass == className) {
-            break;
-        }
-        std::vector<MethodInfo> newMethods = classes[nextClass].getPublicMethodsInfo();
-        availMethods.insert(availMethods.end(), newMethods.begin(), newMethods.end());
+    std::vector<std::string> baseClasses = getAllBaseClasses(className);
+    for (auto it = baseClasses.begin(); it != baseClasses.end(); ++it) {
+        std::vector<MethodInfo> publicMethods = classes[*it].getPublicMethodsInfo();
+        availMethods.insert(availMethods.end(), publicMethods.begin(), publicMethods.end());
     }
+
     return availMethods;
 }
 
@@ -449,3 +450,29 @@ std::string CCheckTypesVisitor::getMismatchString(std::string got, std::string e
     return errorInfo;
 }
 
+std::vector<std::string> CCheckTypesVisitor::getAllBaseClasses(std::string className) {
+
+    std::vector<std::string> visitedClasses;
+    if (classes.find(className) == classes.end()) {
+        return visitedClasses;
+    }
+
+    ClassInfo classInfo = classes[className];
+
+    ClassInfo currentClass = classInfo;
+    while(currentClass.HasBase()) {
+        auto currentClassIt = classes.find(currentClass.baseId);
+        if (currentClassIt == classes.end()) {
+            break;
+        }
+
+        currentClass = currentClassIt->second;
+
+        if (std::find(visitedClasses.begin(), visitedClasses.end(), currentClass.name) != visitedClasses.end()) {
+            break;
+        }
+
+        visitedClasses.push_back(currentClass.name);
+    }
+    return visitedClasses;
+}

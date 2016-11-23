@@ -21,6 +21,7 @@ private:
     void checkVariableOverrides();
     //вернуть список доступных переменных из класса
     std::vector<std::string> getAvailVariables(ClassInfo classInfo);
+
     //запуск CheckVisitor
     void checkTypes();
 

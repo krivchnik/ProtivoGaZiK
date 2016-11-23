@@ -60,6 +60,10 @@ private:
     std::string methodCallClassName;
     //список методов доступных из текущего класса
     std::vector<MethodInfo> getAvailableMethodsInfo(std::string currentClass);
+
+    //все классы-родители переданного класса
+    std::vector<std::string> getAllBaseClasses(std::string className);
+
     //доступные типы
     std::map<std::string, int> types;
 

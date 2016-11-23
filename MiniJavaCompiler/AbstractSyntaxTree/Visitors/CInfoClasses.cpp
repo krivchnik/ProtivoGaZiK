@@ -20,6 +20,7 @@ std::ostream &operator<<(std::ostream &stream, const MethodInfo &methodInfo) {
     for(unsigned int i = 0; i < methodInfo.variablesList.size(); ++i) {
         stream << methodInfo.variablesList[i];
     }
+    return stream;
 }
 
 std::ostream &operator<<(std::ostream &stream, const ClassInfo &classInfo) {
@@ -35,7 +36,7 @@ std::ostream &operator<<(std::ostream &stream, const ClassInfo &classInfo) {
         stream << classInfo.variableDeclaration[i];
     }
     stream << "\n";
-
+    return stream;
 }
 
 bool ClassInfo::HasBase() {
