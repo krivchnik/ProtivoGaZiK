@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 	auto errors = analyzer.analyze();
 	for (auto error : errors) {
 		std::cout << error.type << " : " << error.info << "\n";
-		error.loc.Print(std::cout);
+		std::cout << error.loc;
 	}
 	return 0;
 }

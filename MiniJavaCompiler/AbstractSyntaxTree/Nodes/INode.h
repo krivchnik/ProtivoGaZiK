@@ -11,10 +11,10 @@ struct Location {
 	int last_line;
 	int last_column;
 
-    void Print(std::ostream& ss) {
-        ss << "    Location:\n";
-        ss << "\t\t(" << std::to_string(first_line) << "," << std::to_string(first_column) << "),("
-           << std::to_string(last_line) << "," << std::to_string(last_column) << ")\n";
+	friend std::ostream& operator <<(std::ostream &stream, const Location& loc) {
+		stream << "(" << std::to_string(loc.first_line) << "," << std::to_string(loc.first_column) << "),("
+           			  << std::to_string(loc.last_line) << "," << std::to_string(loc.last_column) << ")\n";
+		return stream;
     }
 };
 

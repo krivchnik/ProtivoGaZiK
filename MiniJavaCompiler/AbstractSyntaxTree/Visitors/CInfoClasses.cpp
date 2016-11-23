@@ -1,40 +1,40 @@
 #include <Visitors/CInfoClasses.h>
 
-void VariableInfo::Print(std::ostream& stream) {
-    stream << "\        varDecl:" << std::endl;
-    location.Print(stream);
-    stream << "\        Type  " << type << " Name  " << name << std::endl;
+std::ostream &operator<<(std::ostream &stream, const VariableInfo &varInfo) {
+    stream << "\t\t\t\tvarDecl at " << varInfo.location;
+    stream << "\t\t\t\t\tType: " << varInfo.type << "\n";
+    stream << "\t\t\t\t\tName: " << varInfo.name << "\n";
+    return stream;
 }
 
-void MethodInfo::Print(std::ostream& stream) {
-    stream << "\    Method:" << std::endl;
-    stream << "\    Name  " << name << std::endl;
-    location.Print(stream);
-    stream << "\    RetType " << returnedType << std::endl;
-    stream << "\    Visibility " << visibility << std::endl;
-    stream << "\    ParamList" << std::endl;
-    for(unsigned int i = 0; i < paramList.size(); ++i) {
-        paramList[i].Print(stream);
+std::ostream &operator<<(std::ostream &stream, const MethodInfo &methodInfo) {
+    stream << "\t\tMethod at " << methodInfo.location;
+    stream << "\t\t\tName: " << methodInfo.name << "\n";
+    stream << "\t\t\tRetType: " << methodInfo.returnedType << "\n";
+    stream << "\t\t\tVisibility: " << methodInfo.visibility << "\n";
+    stream << "\t\t\tParamList:\n";
+    for(unsigned int i = 0; i < methodInfo.paramList.size(); ++i) {
+        stream << methodInfo.paramList[i];
     }
-    stream << "\    VarList" << std::endl;
-    for(unsigned int i = 0; i < variablesList.size(); ++i) {
-        variablesList[i].Print(stream);
+    stream << "\t\t\tVarList:\n";
+    for(unsigned int i = 0; i < methodInfo.variablesList.size(); ++i) {
+        stream << methodInfo.variablesList[i];
     }
 }
 
-void ClassInfo::Print(std::ostream& stream) {
-    stream << "Class " << std::endl;
-    stream << "Name " << name << std::endl;
-    location.Print(stream);
-    stream << "Base " << baseId << std::endl;
-    stream << "Methods " << std::endl;
-    for(unsigned int i = 0; i < methodsDeclarations.size(); ++i) {
-        methodsDeclarations[i].Print(stream);
+std::ostream &operator<<(std::ostream &stream, const ClassInfo &classInfo) {
+    stream << "Class at " << classInfo.location;
+    stream << "\tName: " << classInfo.name << "\n";
+    stream << "\tBase: " << classInfo.baseId << "\n";
+    stream << "\tMethods:\n";
+    for(unsigned int i = 0; i < classInfo.methodsDeclarations.size(); ++i) {
+        stream << classInfo.methodsDeclarations[i];
     }
-    stream << "VarDeclarations " << std::endl;
-    for(unsigned int i = 0; i < variableDeclaration.size(); ++i) {
-        variableDeclaration[i].Print(stream);
+    stream << "\tVarDeclarations:\n";
+    for(unsigned int i = 0; i < classInfo.variableDeclaration.size(); ++i) {
+        stream << classInfo.variableDeclaration[i];
     }
+    stream << "\n";
 
 }
 

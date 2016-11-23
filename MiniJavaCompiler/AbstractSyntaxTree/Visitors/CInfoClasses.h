@@ -11,7 +11,8 @@ struct VariableInfo{
     Location location;
     std::string type;
     std::string name;
-    void Print(std::ostream& stream);
+
+    friend std::ostream& operator <<(std::ostream &stream, const VariableInfo &varInfo);
 };
 
 struct MethodInfo{
@@ -21,7 +22,8 @@ struct MethodInfo{
     std::vector<VariableInfo> paramList;
     std::vector<VariableInfo> variablesList;
     std::string visibility;
-    void Print(std::ostream& stream);
+
+    friend std::ostream& operator <<(std::ostream &stream, const MethodInfo &methodInfo);
 };
 
 struct ClassInfo {
@@ -31,7 +33,8 @@ struct ClassInfo {
     std::string baseId;
     std::string name;
 
-    void Print(std::ostream &stream);
+    friend std::ostream& operator <<(std::ostream &stream, const ClassInfo &classInfo);
+
     std::set<std::string> getPublicMethods();
     std::vector<MethodInfo> getPublicMethodsInfo();
     bool HasBase();

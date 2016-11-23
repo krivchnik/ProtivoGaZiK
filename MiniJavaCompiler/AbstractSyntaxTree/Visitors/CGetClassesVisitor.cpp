@@ -197,7 +197,8 @@ void CGetClassesVisitor::Visit( CMainClass* statement ) {
     MethodInfo methodInfo;
     methodInfo.location = method->GetLocation();
     methodInfo.name = method->getId()->GetName();
-    methodInfo.returnedType = method->getVisibility();
+    methodInfo.returnedType = method->getTypeName();
+    methodInfo.visibility = method->getVisibility();
     methodInfo.paramList.push_back(paramInfo);
 
     classInfo.methodsDeclarations.push_back(methodInfo);
