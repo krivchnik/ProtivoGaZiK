@@ -79,8 +79,9 @@ void CAnalyzer::checkMethodOverrides() {
             MethodInfo methodInfo = it->second.methodsDeclarations[i];
             if(methods.find(methodInfo.name) != methods.end()) {
                 errors.push_back({methodInfo.location, ErrorType::REDEFINITION_METHOD, methodInfo.name});
+            } else {
+                methods.insert(methodInfo.name);
             }
-            methods.insert(methodInfo.name);
         }
 
         //проверка того, что метода не было в предке

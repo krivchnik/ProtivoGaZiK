@@ -178,13 +178,13 @@ void CCheckTypesVisitor::Visit(CListStatement *statement) {
     }
 }
 
-void CCheckTypesVisitor::Visit(CListExpression *statement) {
+void CCheckTypesVisitor::Visit(CListExpression *expressionList) {
 
-    auto statements = statement->GetExpressions();
-    size_t numberOfIterations = statements.size();
+    auto expressions = expressionList->GetExpressions();
+    size_t numberOfIterations = expressions.size();
 
     for (size_t i = 0; i < numberOfIterations; ++i) {
-        statements[i]->Accept(this);
+        expressions[i]->Accept(this);
     }
 }
 
@@ -229,16 +229,25 @@ void CCheckTypesVisitor::Visit(CMethod *method) {
 
     method->getListDeclarations()->Accept(this);
     method->getListStatements()->Accept(this);
-    if (method->getReturnExpression() != nullptr) {
-        method->getReturnExpression()->Accept(this);
-    }
+
+    auto returnExpression = method->getReturnExpression();
 
     std::string typeName = method->getTypeName();
+
+    if (returnExpression != nullptr) {
+        returnExpression->Accept(this);
+        if (typeName != returnExpression->GetType()) {
+            //WRONG RETURN TYPE
+            errors.push_back({returnExpression->GetLocation(), ErrorType::UNKNOWN_TYPE,
+                              getMismatchString(returnExpression->GetType(), typeName)});
+        }
+    }
 
     if (types.find(typeName) == types.end() && classes.find(typeName) == classes.end() && !inMainMethodBody) {
         //UNKNOWN RETURN TYPE
         errors.push_back({method->getId()->GetLocation(), ErrorType::UNKNOWN_TYPE, typeName});
     }
+
     inMethodBody = false;
     currentMethod = "";
 }
@@ -291,6 +300,8 @@ void CCheckTypesVisitor::Visit(CMethodCallExpression *exp) {
                         errors.push_back({ arguments[index]->GetLocation(), ErrorType::WRONG_TYPE, getMismatchString(argumentType, paramType)});
                     }
                 }
+
+                break;
             }
         }
     }
@@ -415,6 +426,7 @@ const std::string &CCheckTypesVisitor::getTypeFromId(std::string name) {
                 method != classes[currentClass].methodsDeclarations.end(); ++method) {
             if(method->name == currentMethod) {
                 methodInfo = *method;
+                break;
             }
         }
         for(auto param = methodInfo.paramList.begin(); param != methodInfo.paramList.end(); ++param){
