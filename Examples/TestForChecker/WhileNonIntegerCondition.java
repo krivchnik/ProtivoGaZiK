@@ -5,7 +5,10 @@ class Main {
 }
 
 class A {
-    public int cool(int n) {
-    	return 43;
+    public int cool() {
+    	A a;
+    	while (a) 
+    		System.out.println(42);
+        return 43;
     }
 }
