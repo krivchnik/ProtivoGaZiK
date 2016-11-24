@@ -1172,13 +1172,8 @@ State 96
    30    | exp . LSBRACKET exp RSBRACKET
    33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
-    LESS   shift, and go to state 100
-    OR     shift, and go to state 101
-    AND    shift, and go to state 102
-    PLUS   shift, and go to state 103
-    MINUS  shift, and go to state 104
-    STAR   shift, and go to state 105
-    MOD    shift, and go to state 106
+    LSBRACKET  shift, and go to state 98
+    POINT      shift, and go to state 99
 
     $default  reduce using rule 28 (exp)
 
@@ -1465,8 +1460,12 @@ State 119
    30    | exp . LSBRACKET exp RSBRACKET
    33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
-    OR   shift, and go to state 101
-    AND  shift, and go to state 102
+    LSBRACKET  shift, and go to state 98
+    POINT      shift, and go to state 99
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
     $default  reduce using rule 22 (exp)
 
@@ -1485,6 +1484,15 @@ State 120
    30    | exp . LSBRACKET exp RSBRACKET
    33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
+    LSBRACKET  shift, and go to state 98
+    POINT      shift, and go to state 99
+    LESS       shift, and go to state 100
+    AND        shift, and go to state 102
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
+
     $default  reduce using rule 21 (exp)
 
 
@@ -1502,7 +1510,13 @@ State 121
    30    | exp . LSBRACKET exp RSBRACKET
    33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
-    OR  shift, and go to state 101
+    LSBRACKET  shift, and go to state 98
+    POINT      shift, and go to state 99
+    LESS       shift, and go to state 100
+    PLUS       shift, and go to state 103
+    MINUS      shift, and go to state 104
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
     $default  reduce using rule 20 (exp)
 
@@ -1521,9 +1535,10 @@ State 122
    30    | exp . LSBRACKET exp RSBRACKET
    33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
-    LESS  shift, and go to state 100
-    OR    shift, and go to state 101
-    AND   shift, and go to state 102
+    LSBRACKET  shift, and go to state 98
+    POINT      shift, and go to state 99
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
     $default  reduce using rule 16 (exp)
 
@@ -1542,9 +1557,10 @@ State 123
    30    | exp . LSBRACKET exp RSBRACKET
    33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
-    LESS  shift, and go to state 100
-    OR    shift, and go to state 101
-    AND   shift, and go to state 102
+    LSBRACKET  shift, and go to state 98
+    POINT      shift, and go to state 99
+    STAR       shift, and go to state 105
+    MOD        shift, and go to state 106
 
     $default  reduce using rule 17 (exp)
 
@@ -1563,11 +1579,8 @@ State 124
    30    | exp . LSBRACKET exp RSBRACKET
    33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
-    LESS   shift, and go to state 100
-    OR     shift, and go to state 101
-    AND    shift, and go to state 102
-    PLUS   shift, and go to state 103
-    MINUS  shift, and go to state 104
+    LSBRACKET  shift, and go to state 98
+    POINT      shift, and go to state 99
 
     $default  reduce using rule 18 (exp)
 
@@ -1586,11 +1599,8 @@ State 125
    30    | exp . LSBRACKET exp RSBRACKET
    33    | exp . POINT ID LPBRACKET expList RPBRACKET
 
-    LESS   shift, and go to state 100
-    OR     shift, and go to state 101
-    AND    shift, and go to state 102
-    PLUS   shift, and go to state 103
-    MINUS  shift, and go to state 104
+    LSBRACKET  shift, and go to state 98
+    POINT      shift, and go to state 99
 
     $default  reduce using rule 19 (exp)
 

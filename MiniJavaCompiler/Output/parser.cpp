@@ -455,7 +455,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  5
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   248
+#define YYLAST   260
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  43
@@ -568,21 +568,21 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-     -13,   -12,    65,    44,    67,   -71,    27,   -71,    44,    68,
-       0,   -71,    70,   -71,    36,    64,    12,    75,    87,   -71,
-     -71,    78,   -71,   -71,   112,    79,    25,    51,   -71,   118,
-     121,   -71,   115,    90,   -71,    12,   123,   -71,   -71,   131,
-     141,   145,    25,   -71,   148,   159,   151,   135,   140,   167,
-      25,   -71,   182,   -71,   155,   196,    94,   -71,   107,   107,
-     203,   207,   210,    62,   191,   107,    62,   214,   218,    86,
-      86,    86,    86,    86,    86,   -71,   219,   -71,    86,   -71,
-     -71,   -71,    35,    86,   -71,   -71,     7,    17,    53,   103,
-     116,   150,   -71,    63,   209,   228,   195,   107,    86,   -14,
-      86,    86,    86,    86,    86,    86,    86,   107,   227,   206,
-     -71,   233,   -71,    86,   236,   220,   136,   -71,   238,    40,
-     -71,   211,   -16,   -16,   127,   127,   -71,   -71,    86,   -71,
-     160,   -71,   107,   -71,    86,   170,   -71,   -71,   184,   239,
-     213,   -71,   -71,    86,   184
+     -10,   -23,    19,    29,    58,   -71,    25,   -71,    29,    55,
+       0,   -71,    60,   -71,    27,    61,    12,    70,    51,   -71,
+     -71,    74,   -71,   -71,    76,    75,    65,     6,   -71,   115,
+     112,   -71,   120,    83,   -71,    12,   118,   -71,   -71,   144,
+     133,   145,    65,   -71,   152,   157,   131,   122,   123,   167,
+      65,   -71,   161,   -71,   135,   176,    94,   -71,   107,   107,
+     179,   183,   193,    62,   182,   107,    62,   207,   209,    86,
+      86,    86,    86,    86,    86,   -71,   210,   -71,    86,   -71,
+     -71,   -71,    -3,    86,   -71,   -71,     7,    17,    53,   103,
+     116,   150,   -71,    63,   203,   217,    -1,   107,    86,   -14,
+      86,    86,    86,    86,    86,    86,    86,   107,   219,   198,
+     -71,   229,   -71,    86,   236,   222,   136,   -71,   244,   218,
+     194,   204,    32,    32,    -1,    -1,   -71,   -71,    86,   -71,
+     160,   -71,   107,   -71,    86,   170,   -71,   -71,   184,   245,
+     220,   -71,   -71,    86,   184
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -610,8 +610,8 @@ static const yytype_uint8 yydefact[] =
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-     -71,   -71,   -71,   240,   -71,   -20,    56,   -71,   -71,   -70,
-     -71,   -71,   -49,   185,   -71,   -71,   -26
+     -71,   -71,   -71,   242,   -71,   -20,    56,   -71,   -71,   -70,
+     -71,   -71,   180,    35,   -71,   -71,    24
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
@@ -626,60 +626,64 @@ static const yytype_int16 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-      87,    88,    89,    90,    91,    13,     1,    34,    93,    67,
-      68,    97,   117,    96,    98,    40,    75,   100,   101,   102,
-      14,   107,    19,    20,    98,    21,    22,   118,   116,     4,
-     119,   120,   121,   122,   123,   124,   125,    99,    21,    22,
-     100,   101,   102,   130,   103,   104,   105,    99,    94,   106,
+      87,    88,    89,    90,    91,    13,    98,    34,    93,     1,
+      94,    97,   117,    96,    98,    40,    19,    20,     4,     5,
+      14,   107,    19,    20,    98,    21,    22,   118,   116,    99,
+     119,   120,   121,   122,   123,   124,   125,    99,    95,    98,
+     100,   101,   102,   130,   103,   104,   105,    99,     6,   106,
      100,   101,   102,    23,   103,   104,   105,   108,   135,   106,
-      98,    19,    20,     6,   138,     5,    23,   112,    10,    72,
-      98,   115,     9,   144,   101,   102,    95,    17,    12,    18,
-      28,   126,    15,    99,    35,    30,   100,   101,   102,    78,
+      98,    33,    99,     9,   138,    12,    10,   112,    17,    72,
+      98,   105,    15,   144,   106,    28,    18,    47,    21,    22,
+      29,    30,    31,    99,    35,    54,   100,   101,   102,    78,
      103,   104,   105,    99,    73,   106,   100,   101,   102,    59,
-     103,   104,   105,    79,    80,   106,   137,    21,    22,    56,
-      98,   109,    59,    81,    82,    60,    29,    61,    31,    62,
-      32,    36,    83,    98,    38,   110,    84,    85,    60,    37,
-      61,    39,    62,    99,    42,    63,   100,   101,   102,    41,
-     103,   104,   105,    98,   133,   106,    99,    43,    66,   100,
-     101,   102,    44,   103,   104,   105,    48,    98,   106,   111,
-     100,   101,   102,    49,   103,   104,    99,    98,   136,   100,
-     101,   102,    53,   103,   104,   105,    51,    98,   106,   141,
-      99,    52,    50,   100,   101,   102,    55,   103,   104,   105,
-      99,    98,   106,   100,   101,   102,    57,   103,   104,   105,
-      99,    58,   106,   100,   101,   102,    69,   103,   104,   105,
-      70,    33,   106,    71,    99,    74,   113,   100,   101,   102,
-      76,   103,   104,   105,    77,    92,   106,    47,   100,   101,
-     102,   114,   103,   104,   105,    54,   127,   106,   128,   129,
-     131,   134,   132,   142,   143,   101,     0,     0,    11
+     103,   104,   105,    79,    80,   106,    23,    21,    22,    56,
+      98,   109,    59,    81,    82,    60,    32,    61,    36,    62,
+      37,   115,    83,    98,    39,   110,    84,    85,    60,    38,
+      61,   126,    62,    99,    41,    63,   100,   101,   102,    43,
+     103,   104,   105,    98,   133,   106,    99,    42,    66,   100,
+     101,   102,    44,   103,   104,   105,   137,    98,   106,   111,
+      48,    49,    50,    51,    52,    55,    99,    98,   136,   100,
+     101,   102,    53,   103,   104,   105,    57,    98,   106,   141,
+      99,    58,    69,   100,   101,   102,    70,   103,   104,   105,
+      99,    98,   106,   100,   101,   102,    71,   103,   104,   105,
+      99,    98,   106,   100,   101,   102,    74,   103,   104,   105,
+     113,    98,   106,    76,    99,    77,    92,   100,   101,   102,
+     114,   103,   104,   105,    99,    98,   106,   100,   127,   102,
+     128,   103,   104,   105,    99,   129,   106,   100,    67,    68,
+     131,   103,   104,   105,   132,    75,   106,   134,    99,   142,
+      11,   143,     0,     0,     0,   103,   104,   105,     0,     0,
+     106
 };
 
 static const yytype_int16 yycheck[] =
 {
-      70,    71,    72,    73,    74,     5,    19,    27,    78,    58,
-      59,     4,    26,    83,     7,    35,    65,    33,    34,    35,
-      20,     4,    10,    11,     7,    13,    14,    41,    98,    41,
-     100,   101,   102,   103,   104,   105,   106,    30,    13,    14,
-      33,    34,    35,   113,    37,    38,    39,    30,    13,    42,
+      70,    71,    72,    73,    74,     5,     7,    27,    78,    19,
+      13,     4,    26,    83,     7,    35,    10,    11,    41,     0,
+      20,     4,    10,    11,     7,    13,    14,    41,    98,    30,
+     100,   101,   102,   103,   104,   105,   106,    30,    41,     7,
+      33,    34,    35,   113,    37,    38,    39,    30,    19,    42,
       33,    34,    35,    41,    37,    38,    39,     4,   128,    42,
-       7,    10,    11,    19,   134,     0,    41,     4,    41,     7,
-       7,    97,     5,   143,    34,    35,    41,    41,    10,    15,
-       5,   107,    12,    30,    28,     7,    33,    34,    35,     3,
+       7,    26,    30,     5,   134,    10,    41,     4,    41,     7,
+       7,    39,    12,   143,    42,     5,    15,    42,    13,    14,
+      29,     7,     6,    30,    28,    50,    33,    34,    35,     3,
       37,    38,    39,    30,    32,    42,    33,    34,    35,     5,
-      37,    38,    39,    17,    18,    42,   132,    13,    14,    53,
-       7,     8,     5,    27,    28,    21,    29,    23,     6,    25,
-      41,     3,    36,     7,     9,     9,    40,    41,    21,     8,
-      23,    41,    25,    30,     3,    41,    33,    34,    35,    16,
-      37,    38,    39,     7,     8,    42,    30,     6,    41,    33,
-      34,    35,     7,    37,    38,    39,     8,     7,    42,     9,
-      33,    34,    35,     4,    37,    38,    30,     7,     8,    33,
+      37,    38,    39,    17,    18,    42,    41,    13,    14,    53,
+       7,     8,     5,    27,    28,    21,    41,    23,     3,    25,
+       8,    97,    36,     7,    41,     9,    40,    41,    21,     9,
+      23,   107,    25,    30,    16,    41,    33,    34,    35,     6,
+      37,    38,    39,     7,     8,    42,    30,     3,    41,    33,
+      34,    35,     7,    37,    38,    39,   132,     7,    42,     9,
+       8,     4,    31,    41,    41,     4,    30,     7,     8,    33,
       34,    35,     5,    37,    38,    39,    41,     7,    42,     9,
-      30,    41,    31,    33,    34,    35,     4,    37,    38,    39,
-      30,     7,    42,    33,    34,    35,    41,    37,    38,    39,
-      30,     5,    42,    33,    34,    35,     3,    37,    38,    39,
-       3,    26,    42,     3,    30,    24,     7,    33,    34,    35,
-       6,    37,    38,    39,     6,     6,    42,    42,    33,    34,
-      35,     3,    37,    38,    39,    50,     9,    42,    32,     6,
-       4,     3,    22,     4,    31,    34,    -1,    -1,     8
+      30,     5,     3,    33,    34,    35,     3,    37,    38,    39,
+      30,     7,    42,    33,    34,    35,     3,    37,    38,    39,
+      30,     7,    42,    33,    34,    35,    24,    37,    38,    39,
+       7,     7,    42,     6,    30,     6,     6,    33,    34,    35,
+       3,    37,    38,    39,    30,     7,    42,    33,     9,    35,
+      32,    37,    38,    39,    30,     6,    42,    33,    58,    59,
+       4,    37,    38,    39,    22,    65,    42,     3,    30,     4,
+       8,    31,    -1,    -1,    -1,    37,    38,    39,    -1,    -1,
+      42
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -1494,7 +1498,7 @@ yyreduce:
         case 2:
 #line 85 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { ans = shared_ptr<CProgram>(new CProgram(GetTokenLocation((yyloc)), shared_ptr<CMainClass>((yyvsp[-1].main_class)), shared_ptr<CListStatement>((yyvsp[0].stat_list)))); return 0;}
-#line 1498 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1502 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 3:
@@ -1518,20 +1522,20 @@ yyreduce:
 								  shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation((yylsp[-15])), std::string((yyvsp[-15].op_val)))),
 								  shared_ptr<CMethod>(mainMethod)); 
 			}
-#line 1522 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1526 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 4:
 #line 110 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = new CListStatement(GetTokenLocation((yyloc)), std::string("Classes")); }
-#line 1528 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1532 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 5:
 #line 111 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = std::move((yyvsp[0].stat_list)); (yyval.stat_list)->Add(shared_ptr<IStatement> ((yyvsp[-1].class_decl))); 
          	  	                           			  (yyval.stat_list)->SetLocation(GetTokenLocation((yyloc))); }
-#line 1535 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1539 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 6:
@@ -1543,7 +1547,7 @@ yyreduce:
 			std::shared_ptr<CListStatement>((yyvsp[-1].stat_list))
 		);
     }
-#line 1547 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1551 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 7:
@@ -1556,26 +1560,26 @@ yyreduce:
       		std::shared_ptr<CListStatement>((yyvsp[-1].stat_list))
       	);
     }
-#line 1560 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1564 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 8:
 #line 138 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = new CListStatement(GetTokenLocation((yyloc)), std::string("Methods")); }
-#line 1566 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1570 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
 #line 139 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = std::move((yyvsp[0].stat_list)); (yyval.stat_list)->Add(shared_ptr<CMethod>((yyvsp[-1].method))); 
 										  (yyval.stat_list)->SetLocation(GetTokenLocation((yyloc))); }
-#line 1573 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1577 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 10:
 #line 143 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = new CListStatement(GetTokenLocation((yyloc)), std::string("Variables")); }
-#line 1579 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1583 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 11:
@@ -1583,26 +1587,26 @@ yyreduce:
     { (yyval.stat_list) = std::move((yyvsp[-3].stat_list)); 
     									  (yyval.stat_list)->Add(shared_ptr<CVarDecl>(new CVarDecl(ComposeLocation((yylsp[-2]), (yylsp[-1])), std::string((yyvsp[-2].op_val)), std::string((yyvsp[-1].op_val))))); 
 										  (yyval.stat_list)->SetLocation(GetTokenLocation((yyloc)));}
-#line 1587 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1591 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 12:
 #line 150 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = new CListStatement(GetTokenLocation((yyloc)), std::string("Parameters")); }
-#line 1593 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1597 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
 #line 151 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = std::move((yyvsp[0].stat_list)); }
-#line 1599 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1603 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 14:
 #line 155 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = new CListStatement(GetTokenLocation((yyloc)), std::string("Parameters")); 
 												 (yyval.stat_list)->Add(shared_ptr<CVarDecl>(new CVarDecl(ComposeLocation((yylsp[-1]), (yylsp[0])), std::string((yyvsp[-1].op_val)), std::string((yyvsp[0].op_val))))); }
-#line 1606 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1610 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 15:
@@ -1610,126 +1614,126 @@ yyreduce:
     { (yyval.stat_list) = std::move((yyvsp[-3].stat_list)); 
     											  (yyval.stat_list)->Add(shared_ptr<CVarDecl>(new CVarDecl(ComposeLocation((yylsp[-1]), (yylsp[0])), std::string((yyvsp[-1].op_val)), std::string((yyvsp[0].op_val))))); 
     											  (yyval.stat_list)->SetLocation(GetTokenLocation((yyloc))); }
-#line 1614 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1618 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 16:
 #line 163 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CNumExpression(GetTokenLocation((yyloc)), (yyvsp[0].int_val)); }
-#line 1620 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1624 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
 #line 164 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new COperationExpression(GetTokenLocation((yyloc)),
 														shared_ptr<IExpression>((yyvsp[-2].expr_val)), shared_ptr<IExpression>((yyvsp[0].expr_val)), COperationExpression::ADDITION); }
-#line 1627 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1631 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 18:
 #line 167 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new COperationExpression(GetTokenLocation((yyloc)),
 														shared_ptr<IExpression>((yyvsp[-2].expr_val)), shared_ptr<IExpression>((yyvsp[0].expr_val)), COperationExpression::SUBTRACTION); }
-#line 1634 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1638 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 19:
 #line 170 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new COperationExpression(GetTokenLocation((yyloc)),
 														shared_ptr<IExpression>((yyvsp[-2].expr_val)), shared_ptr<IExpression>((yyvsp[0].expr_val)), COperationExpression::MULTIPLICATION); }
-#line 1641 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1645 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 20:
 #line 173 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new COperationExpression(GetTokenLocation((yyloc)),
 														shared_ptr<IExpression>((yyvsp[-2].expr_val)), shared_ptr<IExpression>((yyvsp[0].expr_val)), COperationExpression::MOD); }
-#line 1648 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1652 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 21:
 #line 176 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new COperationExpression(GetTokenLocation((yyloc)),
 														shared_ptr<IExpression>((yyvsp[-2].expr_val)), shared_ptr<IExpression>((yyvsp[0].expr_val)), COperationExpression::AND); }
-#line 1655 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1659 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 22:
 #line 179 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new COperationExpression(GetTokenLocation((yyloc)),
 														shared_ptr<IExpression>((yyvsp[-2].expr_val)), shared_ptr<IExpression>((yyvsp[0].expr_val)), COperationExpression::OR); }
-#line 1662 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1666 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 23:
 #line 182 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new COperationExpression(GetTokenLocation((yyloc)),
 													    shared_ptr<IExpression>((yyvsp[-2].expr_val)), shared_ptr<IExpression>((yyvsp[0].expr_val)), COperationExpression::LESS); }
-#line 1669 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1673 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 24:
 #line 185 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CBoolExpression(GetTokenLocation((yyloc)), true); }
-#line 1675 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1679 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 25:
 #line 186 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CBoolExpression(GetTokenLocation((yyloc)), false); }
-#line 1681 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1685 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 26:
 #line 188 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CThisExpression(GetTokenLocation((yyloc))); }
-#line 1687 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1691 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 27:
 #line 190 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CLengthExpression(GetTokenLocation((yyloc)), 
 																		  shared_ptr<IExpression>((yyvsp[-2].expr_val))); }
-#line 1694 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1698 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 28:
 #line 193 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CIdExpression(GetTokenLocation((yyloc)), std::string((yyvsp[0].op_val))); }
-#line 1700 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1704 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 29:
 #line 195 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CNotExpression(GetTokenLocation((yyloc)), shared_ptr<IExpression>((yyvsp[0].expr_val))); }
-#line 1706 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1710 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 30:
 #line 197 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CArrayConstructionExpression(GetTokenLocation((yyloc)), 
 																					 shared_ptr<IExpression>((yyvsp[-1].expr_val))); }
-#line 1713 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1717 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 31:
 #line 200 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CGetItemExpression(GetTokenLocation((yyloc)), 
 																		   shared_ptr<IExpression>((yyvsp[-3].expr_val)), shared_ptr<IExpression>((yyvsp[-1].expr_val))); }
-#line 1720 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1724 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 32:
 #line 202 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = (yyvsp[-1].expr_val); }
-#line 1726 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1730 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 33:
 #line 204 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.expr_val) = new CConstructClassExpression(GetTokenLocation((yyloc)), 
 																				  shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation((yylsp[-2])), std::string((yyvsp[-2].op_val))))); }
-#line 1733 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1737 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 34:
@@ -1738,81 +1742,81 @@ yyreduce:
 																					 shared_ptr<IExpression>((yyvsp[-5].expr_val)),
 																					 shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation((yylsp[-3])), (yyvsp[-3].op_val))), 
 																				     shared_ptr<CListExpression>((yyvsp[-1].exp_list))); }
-#line 1742 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1746 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 35:
 #line 213 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.exp_list) = new CListExpression(GetTokenLocation((yyloc)), std::string("Arguments")); }
-#line 1748 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1752 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 36:
 #line 214 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.exp_list) = std::move((yyvsp[0].exp_list)); }
-#line 1754 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1758 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 37:
 #line 218 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.exp_list) = new CListExpression(GetTokenLocation((yyloc)), std::string("Arguments")); (yyval.exp_list)->Add(shared_ptr<IExpression>((yyvsp[0].expr_val))); }
-#line 1760 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1764 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 38:
 #line 219 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.exp_list) = std::move((yyvsp[-2].exp_list)); (yyval.exp_list)->Add(shared_ptr<IExpression>((yyvsp[0].expr_val))); 
     									  (yyval.exp_list)->SetLocation(GetTokenLocation((yyloc))); }
-#line 1767 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1771 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 39:
 #line 223 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = new CListStatement(GetTokenLocation((yyloc)), std::string("Statements")); }
-#line 1773 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1777 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 40:
 #line 224 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_list) = std::move((yyvsp[0].stat_list)); (yyval.stat_list)->Add(shared_ptr<IStatement> ((yyvsp[-1].stat_val))); 
          						   (yyval.stat_list)->SetLocation(GetTokenLocation((yyloc))); }
-#line 1780 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1784 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 41:
 #line 229 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.op_val) = "intArray"; }
-#line 1786 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1790 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 42:
 #line 230 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.op_val) = "boolean"; }
-#line 1792 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1796 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 43:
 #line 231 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.op_val) = "int"; }
-#line 1798 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1802 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 44:
 #line 232 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.op_val) = (yyvsp[0].op_val); }
-#line 1804 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1808 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 45:
 #line 237 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.op_val) = "public"; }
-#line 1810 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1814 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 46:
 #line 238 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.op_val) = "private"; }
-#line 1816 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1820 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 47:
@@ -1829,13 +1833,13 @@ yyreduce:
             shared_ptr<IExpression>((yyvsp[-2].expr_val))
         );
     }
-#line 1833 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1837 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 48:
 #line 261 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_val) = (yyvsp[-1].stat_list); }
-#line 1839 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1843 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 49:
@@ -1844,7 +1848,7 @@ yyreduce:
     																					shared_ptr<IExpression>((yyvsp[-4].expr_val)),
     																					shared_ptr<IStatement>((yyvsp[-2].stat_val)),
     																					shared_ptr<IStatement>((yyvsp[0].stat_val))); }
-#line 1848 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1852 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 50:
@@ -1852,14 +1856,14 @@ yyreduce:
     { (yyval.stat_val) = new CWhileStatement(GetTokenLocation((yyloc)),
     																				   shared_ptr<IExpression>((yyvsp[-2].expr_val)),
     																				   shared_ptr<IStatement>((yyvsp[0].stat_val))); }
-#line 1856 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1860 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 51:
 #line 272 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Parser/bison.y" /* yacc.c:1646  */
     { (yyval.stat_val) = new CPrintStatement(GetTokenLocation((yyloc)),
     																				   shared_ptr<IExpression>((yyvsp[-2].expr_val))); }
-#line 1863 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1867 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 52:
@@ -1867,7 +1871,7 @@ yyreduce:
     { (yyval.stat_val) = new CAssignStatement(GetTokenLocation((yyloc)),
     																					shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation((yylsp[-3])), std::string((yyvsp[-3].op_val)))), 
     																					shared_ptr<IExpression>((yyvsp[-1].expr_val))); }
-#line 1871 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1875 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 53:
@@ -1876,11 +1880,11 @@ yyreduce:
     																						shared_ptr<CIdExpression>(new CIdExpression(GetTokenLocation((yylsp[-6])), std::string((yyvsp[-6].op_val)))),
      																						shared_ptr<IExpression>((yyvsp[-4].expr_val)),
     																						shared_ptr<IExpression>((yyvsp[-1].expr_val))); }
-#line 1880 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1884 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 1884 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
+#line 1888 "/home/kagudkov/ClionProjects/ProtivoGaZiK/MiniJavaCompiler/Output/parser.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
