@@ -240,7 +240,7 @@ void CCheckTypesVisitor::Visit(CMethod *method) {
         returnExpression->Accept(this);
         if (typeName != returnExpression->GetType()) {
             //WRONG RETURN TYPE
-            errors.push_back({returnExpression->GetLocation(), ErrorType::UNKNOWN_TYPE,
+            errors.push_back({returnExpression->GetLocation(), ErrorType::WRONG_TYPE,
                               getMismatchString(returnExpression->GetType(), typeName)});
         }
     }
