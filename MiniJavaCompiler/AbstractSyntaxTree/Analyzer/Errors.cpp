@@ -4,6 +4,7 @@ std::ostream& operator<< (std::ostream& out, const ErrorType error) {
     static std::map<ErrorType, std::string> messages;
     if (messages.size() == 0) {
         messages[UNDEFINED_IDENTIFIER] = "[unknown identifier]";
+        messages[NON_UNIQUE_IDENTIFIER] = "[non unique identifier]";
         messages[UNKNOWN_TYPE] = "[unknown type]";
         messages[PRIVATE_METHOD_CALL] = "[private method call]";
         messages[NON_ARRAY] = "[must have array type]";

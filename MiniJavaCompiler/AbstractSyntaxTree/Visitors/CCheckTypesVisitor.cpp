@@ -230,6 +230,17 @@ void CCheckTypesVisitor::Visit(CMethod *method) {
     inMethodBody = true;
 
     method->getListDeclarations()->Accept(this);
+
+    std::vector<CVarDecl*> declarations;
+    auto rawFields = method->getListDeclarations()->GetStatements();
+    for (auto it = rawFields.begin(); it != rawFields.end(); ++it) {
+        declarations.push_back(dynamic_cast< CVarDecl* >(it->get()));
+    }
+    std::vector<CVarDecl*> nonUniqueDeclarations = getNonUniqueFields(declarations);
+    for (auto varDecl : nonUniqueDeclarations) {
+        errors.push_back({(*varDecl).GetLocation(), ErrorType::NON_UNIQUE_IDENTIFIER, (*varDecl).GetVariableName()});
+    }
+
     method->getListStatements()->Accept(this);
 
     auto returnExpression = method->getReturnExpression();
@@ -313,14 +324,24 @@ void CCheckTypesVisitor::Visit(CMethodCallExpression *exp) {
     }
 }
 
-void CCheckTypesVisitor::Visit(CClass *statement) {
-    currentClass = statement->getId()->GetName();
-    if (statement->getBaseId().get() != nullptr) {
-        statement->getBaseId()->Accept(this);
+void CCheckTypesVisitor::Visit(CClass *classDecl) {
+    currentClass = classDecl->getId()->GetName();
+    if (classDecl->getBaseId().get() != nullptr) {
+        classDecl->getBaseId()->Accept(this);
     }
-    statement->getFields()->Accept(this);
-    statement->getMethods()->Accept(this);
+    classDecl->getFields()->Accept(this);
+    classDecl->getMethods()->Accept(this);
     currentClass = "";
+
+    std::vector<CVarDecl*> fields;
+    auto rawFields = classDecl->getFields()->GetStatements();
+    for (auto it = rawFields.begin(); it != rawFields.end(); ++it) {
+        fields.push_back(dynamic_cast< CVarDecl* >(it->get()));
+    }
+    std::vector<CVarDecl*> nonUniqueFields = getNonUniqueFields(fields);
+    for (auto varDecl : nonUniqueFields) {
+        errors.push_back({(*varDecl).GetLocation(), ErrorType::NON_UNIQUE_IDENTIFIER, (*varDecl).GetVariableName()});
+    }
 }
 
 void CCheckTypesVisitor::Visit(CMainClass *statement) {
@@ -475,4 +496,18 @@ std::vector<std::string> CCheckTypesVisitor::getAllBaseClasses(std::string class
         visitedClasses.push_back(currentClass.name);
     }
     return visitedClasses;
+}
+
+std::vector<CVarDecl*> CCheckTypesVisitor::getNonUniqueFields(const std::vector<CVarDecl*> &fields) {
+    std::set<std::string> uniqueFields;
+    std::vector<CVarDecl*> nonUniqueFields;
+    for (auto it = fields.begin(); it != fields.end(); ++it) {
+        std::string fieldName = (*it)->GetVariableName();
+        if (uniqueFields.find(fieldName) != uniqueFields.end()) {
+            nonUniqueFields.push_back(*it);
+        } else {
+            uniqueFields.insert(fieldName);
+        }
+    }
+    return nonUniqueFields;
 }
