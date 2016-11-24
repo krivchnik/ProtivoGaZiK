@@ -76,6 +76,8 @@ private:
     bool inMainMethodBody;
     bool inMethodCallExpr;
 
+    std::vector<CVarDecl*> getNonUniqueFields(const std::vector<CVarDecl*>&);
+
     const std::string &getTypeFromId(std::string basic_string);
 
     std::string getMismatchString(std::string got, std::string expected);
