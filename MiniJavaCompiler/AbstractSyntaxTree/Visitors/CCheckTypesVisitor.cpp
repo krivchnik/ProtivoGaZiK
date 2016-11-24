@@ -293,6 +293,7 @@ void CCheckTypesVisitor::Visit(CMethodCallExpression *exp) {
                 if (arguments.size() != params.size()) {
                     errors.push_back({exp->getArguments()->GetLocation(), ErrorType::WRONG_ARGUMENT_NUMBER,
                                       getMismatchString(std::to_string(arguments.size()), std::to_string(params.size()))});
+                    return;
                 }
 
                 for (unsigned int index = 0; index < params.size(); ++index) {
