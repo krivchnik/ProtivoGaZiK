@@ -5,7 +5,13 @@ class Main {
 }
 
 class A {
-    public int cool(int n) {
-    	return 43;
+    public int cool() {
+    	A a;
+        int[] b;
+    	
+        b = new int[1];
+        b[a] = 1;
+
+        return 43;
     }
 }

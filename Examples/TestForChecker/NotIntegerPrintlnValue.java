@@ -5,7 +5,11 @@ class Main {
 }
 
 class A {
-    public int cool(int n) {
-    	return 43;
+    public int cool() {
+    	A a;
+    	
+        System.out.println(a);
+
+        return 43;
     }
 }

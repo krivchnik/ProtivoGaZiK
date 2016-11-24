@@ -5,7 +5,7 @@ class Main {
 }
 
 class A {
-    public int cool(int n) {
+    private int cool() {
     	return 43;
     }
 }

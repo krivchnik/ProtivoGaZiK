@@ -5,7 +5,8 @@ class Main {
 }
 
 class A {
-    public int cool(int n) {
-    	return 43;
+    public int cool() {
+    	int a;
+    	return a.f();
     }
 }

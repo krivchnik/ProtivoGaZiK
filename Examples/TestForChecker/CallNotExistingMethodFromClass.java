@@ -4,8 +4,13 @@ class Main {
     }
 }
 
+class B {
+}
+
 class A {
-    public int cool(int n) {
-    	return 43;
+    public int cool() {
+    	B b;
+
+    	return b.f();
     }
 }
