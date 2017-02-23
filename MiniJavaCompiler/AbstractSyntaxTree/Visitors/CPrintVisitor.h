@@ -38,7 +38,6 @@ public:
     void Visit(CMethodCallExpression*);
     void Visit(CThisExpression*);
     void Visit(CGetItemExpression*);
-
 private:
 
 	int expressionId;
