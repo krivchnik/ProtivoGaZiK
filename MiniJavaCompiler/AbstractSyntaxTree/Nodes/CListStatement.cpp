@@ -13,7 +13,7 @@ void CListStatement::Add(std::shared_ptr<IStatement> statement) {
     statements.push_back(statement);
 }
 
-const std::vector<std::shared_ptr<IStatement>> CListStatement::GetStatements() const {
+const std::vector<std::shared_ptr<IStatement>>& CListStatement::GetStatements() const {
     return statements;
 }
 

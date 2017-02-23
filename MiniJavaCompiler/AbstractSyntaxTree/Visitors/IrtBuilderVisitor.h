@@ -48,6 +48,10 @@ public:
 private:
     void updateSubtreeWrapper( IRTree::ISubtreeWrapper* wrapperNew );
     void updateSubtreeWrapper( std::shared_ptr<IRTree::ISubtreeWrapper> wrapperNew );
+    std::string makeMethodFullName( const std::string& className, const std::string& methodName );
+
+    void buildNewFrame( const CMethod* declaration );
+    void buildNewFrame( const CMainClass* mainClass );
 
     std::shared_ptr<IRTree::ISubtreeWrapper> subtreeWrapper;
 

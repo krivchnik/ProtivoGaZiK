@@ -34,10 +34,10 @@ private:
 
 class CStatementWrapper : public ISubtreeWrapper {
 public:
-    explicit CStatementWrapper( const CStatement* _statement )
+    CStatementWrapper( const CStatement* _statement )
         : statement( _statement ) {}
-    explicit CStatementWrapper( std::shared_ptr<const CStatement> _statement ) : statement( _statement ) {}
-    virtual ~CStatementWrapper() = default;
+    CStatementWrapper( std::shared_ptr<const CStatement> _statement )
+        : statement( _statement ) {}
 
     virtual std::shared_ptr<const CExpression> ToExpression() override;
     virtual std::shared_ptr<const CStatement> ToStatement() override;
@@ -49,7 +49,6 @@ private:
 class CConditionalWrapper : public ISubtreeWrapper {
 public:
     CConditionalWrapper() = default;
-    virtual ~CConditionalWrapper() = default;
 
     virtual std::shared_ptr<const CExpression> ToExpression() override;
     virtual std::shared_ptr<const CStatement> ToStatement() override;
