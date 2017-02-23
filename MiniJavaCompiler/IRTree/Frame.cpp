@@ -6,43 +6,43 @@ using namespace IRTree;
 std::shared_ptr<const CExpression> CAddressInFrame::ToExpression( std::shared_ptr<const CExpression> framePointer ) const {
     std::shared_ptr<const CExpression> offsetExpression;
     if ( offset != 0 ) {
-        offsetExpression = std::move( std::shared_ptr<const CBinaryExpression>(
+        offsetExpression = std::shared_ptr<const CBinaryExpression>(
             new CBinaryExpression(
                 TOperatorType::OT_Plus,
-                std::move( framePointer ),
-                std::move( std::shared_ptr<const CExpression>(
+                framePointer,
+                std::shared_ptr<const CExpression>(
                     new CConstExpression( offset )
-                ) )
+                )
             )
-        ) );
+        );
     } else {
-        offsetExpression = std::move( framePointer );
+        offsetExpression = framePointer;
     }
-    return std::move( offsetExpression );
+    return offsetExpression;
 }
 
 std::shared_ptr<const CExpression> CAddressOfField::ToExpression( std::shared_ptr<const CExpression> thisPointer ) const {
     std::shared_ptr<const CExpression> offsetExpression;
     if ( offset != 0 ) {
-        offsetExpression = std::move( std::shared_ptr<const CBinaryExpression>(
+        offsetExpression = std::shared_ptr<const CBinaryExpression>(
             new CBinaryExpression(
                 TOperatorType::OT_Plus,
-                std::move( thisPointer ),
-                std::move( std::shared_ptr<const CExpression>(
+                thisPointer,
+                std::shared_ptr<const CExpression>(
                     new CConstExpression( offset )
-                ) )
+                )
             )
-        ) );
+        );
     } else {
-        offsetExpression = std::move( thisPointer );
+        offsetExpression = thisPointer;
     }
-    return std::move( offsetExpression );
+    return offsetExpression;
 }
 
 std::shared_ptr<const CExpression> CAddressInRegister::ToExpression( std::shared_ptr<const CExpression> framePointer ) const {
-    return std::move( std::shared_ptr<const CTempExpression>(
+    return std::shared_ptr<const CTempExpression>(
         new CTempExpression( temp )
-    ) );
+    );
 }
 
 
@@ -118,14 +118,14 @@ const IAddress* CFrame::GetReturn() const {
 }
 
 std::shared_ptr<const CExpression> CFrame::ExternalCall( const std::string& functionName, std::shared_ptr<const CExpressionList> args ) const {
-    return std::move( std::shared_ptr<const IRTree::CCallExpression>(
+    return std::shared_ptr<const IRTree::CCallExpression>(
         new IRTree::CCallExpression(
-            std::move( std::shared_ptr<const CNameExpression>(
+            std::shared_ptr<const CNameExpression>(
                 new CNameExpression( CLabel( functionName ) )
-            ) ),
-            std::move( args )
+            ),
+            args
         )
-    ) );
+    );
 }
 
 int CFrame::nextOffsetFromFramePointer() {
