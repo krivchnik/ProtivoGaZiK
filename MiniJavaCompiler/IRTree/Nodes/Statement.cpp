@@ -36,11 +36,10 @@ CJumpConditionalStatement::CJumpConditionalStatement( TLogicOperatorType _operat
         labelTrue( _labelTrue ), labelFalse( _labelFalse ), operation( _operation ) {}
 CJumpConditionalStatement::~CJumpConditionalStatement() {}
 
-CSeqStatement::CSeqStatement(std::shared_ptr<const CLabelStatement> &&_left, std::shared_ptr<const CStatement> &&_right )
+CSeqStatement::CSeqStatement(const CStatement* _left, const CStatement* _right )
     : leftStatement( _left ), rightStatement( _right ) {}
-CSeqStatement::CSeqStatement( std::shared_ptr<const CStatement>&& _left, std::shared_ptr<const CStatement>&& _right )
+CSeqStatement::CSeqStatement( std::shared_ptr<const CStatement> _left, std::shared_ptr<const CStatement> _right )
     : leftStatement( _left ), rightStatement( _right ) {}
-CSeqStatement::~CSeqStatement() {}
 
 CLabelStatement::CLabelStatement( CLabel _label ) : label( _label ) {}
 CLabelStatement::~CLabelStatement() {}
