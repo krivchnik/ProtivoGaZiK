@@ -48,15 +48,15 @@ public:
 private:
     void updateSubtreeWrapper( IRTree::ISubtreeWrapper* wrapperNew );
     void updateSubtreeWrapper( std::shared_ptr<IRTree::ISubtreeWrapper> wrapperNew );
+
     template <class InputIteratorArguments, class InputIteratorLocals, class InputIteratorFields>
     void buildNewFrame( const std::string& className, const std::string& methodName,
                         InputIteratorArguments argumentsLeftIt, InputIteratorArguments argumentsRightIt,
                         InputIteratorLocals localsLeftIt, InputIteratorLocals localsRightIt,
                         InputIteratorFields fieldsLeftIt, InputIteratorFields fieldsRightIt );
-    void buildNewFrame( CMainClass* mainClass );
     std::string makeMethodFullName( const std::string& className, const std::string& methodName );
 
-    void buildNewFrame( const CMethod* declaration );
+    void buildNewFrame( CMethod* declaration );
 
     std::shared_ptr<IRTree::ISubtreeWrapper> subtreeWrapper;
 
@@ -68,22 +68,4 @@ private:
 
     // used when translating expr.methodName() to determine the name of the class of expr
     std::string methodCallerClassName;
-
-
-
-    int expressionId;
-    //в этот вектор нужно добавить все имена токенов, которые мы хотим отрисовывать в форме прямоугольника, а не эллипса
-    std::vector<std::string> idsOfTokenWithBoxShape;
-    //При использовании графвиза у нас возникла проблема - разные с нашей точки зрения токены, имеющие одно и то же имя
-    // сливались в одну ноду на дереве, моэтому после каждого токена мы пишем его id в формате tokenName + A + id
-    // в качестве разделителя не получилось использовать " " |_ и тому подобные символы
-    std::string delim = "A";
-
-    std::ofstream file;
-    //метод рисует стрелочку межда именами нод в файле вывода
-    std::string getArrow() const;
-    //метод заканчиват эту строку в файле вывода и переходит на следующую
-    std::string getEndLine() const;
-
-    std::string getNodeNameWithLabel(std::string label, int id, std::string nodeName ) const;
 };

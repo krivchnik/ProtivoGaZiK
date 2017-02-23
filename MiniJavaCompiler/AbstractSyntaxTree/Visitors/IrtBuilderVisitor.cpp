@@ -4,9 +4,8 @@
 
 
 void CIrtBuilderVisitor::Visit( CMainClass* mainClass ) {
-
-    buildNewFrame( mainClass );
-    std::string methodFullName = makeMethodFullName( frameCurrent->GetClassName(), frameCurrent->GetMethodName() );
+    //ПОТЕНЦИАЛЬНО БАГ (ЕСТЬ ЛИ ИНФО О MAIN CLASS В ТАБЛИЦЕ СИМВОЛОВ)
+    classCurrentName = mainClass->GetClassId()->GetName();
 
     mainClass->GetMainMethod()->Accept( this );
 }
@@ -209,6 +208,62 @@ void CIrtBuilderVisitor::updateSubtreeWrapper( std::shared_ptr<IRTree::ISubtreeW
 
 std::string CIrtBuilderVisitor::makeMethodFullName( const std::string& className, const std::string& methodName ) {
     return className + "::" + methodName;
+}
+
+void CIrtBuilderVisitor::Visit(CAssignStatement *) {
+    //MOCK
+}
+
+void CIrtBuilderVisitor::Visit(CAssignItemStatement *) {
+    //MOCK
+}
+
+void CIrtBuilderVisitor::Visit(CPrintStatement *) {
+    //MOCK
+}
+
+void CIrtBuilderVisitor::Visit(CIfElseStatement *) {
+    //MOCK
+}
+
+void CIrtBuilderVisitor::Visit(CWhileStatement *) {
+    //MOCK
+}
+
+void CIrtBuilderVisitor::Visit(CListExpression *) {
+    //MOCK
+}
+
+void CIrtBuilderVisitor::Visit(CNotExpression *) {
+    //MOCK
+}
+
+void CIrtBuilderVisitor::Visit(COperationExpression *) {
+    //MOCK
+}
+
+void CIrtBuilderVisitor::Visit(CLengthExpression *) {
+    //MOCK
+}
+
+void CIrtBuilderVisitor::Visit(CArrayConstructionExpression *) {
+    //MOCKs
+}
+
+void CIrtBuilderVisitor::Visit(CConstructClassExpression *) {
+    //MOCK
+}
+
+void CIrtBuilderVisitor::Visit(CMethodCallExpression *) {
+    //MOCK
+}
+
+void CIrtBuilderVisitor::Visit(CThisExpression *) {
+    //MOCK
+}
+
+void CIrtBuilderVisitor::Visit(CGetItemExpression *) {
+    //MOCK
 }
 
 
