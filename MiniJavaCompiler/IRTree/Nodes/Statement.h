@@ -129,8 +129,8 @@ private:
 
 class CSeqStatement : public CStatement {
 public:
-    CSeqStatement( std::shared_ptr<const CLabelStatement> _left, std::shared_ptr<const CStatement> &&_right );
-    CSeqStatement( std::shared_ptr<const CStatement> _left, std::shared_ptr<const CStatement>&& _right );
+    CSeqStatement( std::shared_ptr<const CLabelStatement> _left, std::shared_ptr<const CStatement> _right );
+    CSeqStatement( std::shared_ptr<const CStatement> _left, std::shared_ptr<const CStatement> _right );
 
     const CStatement* LeftStatement() const { return leftStatement.get(); }
     const CStatement* RightStatement() const { return rightStatement.get(); }

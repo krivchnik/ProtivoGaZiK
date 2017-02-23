@@ -23,7 +23,7 @@ public:
     explicit CExpressionWrapper( const CExpression* _expression )
         : expression( _expression ) {}
     explicit CExpressionWrapper( std::shared_ptr<const CExpression> _expression )
-        : expression( std::move( _expression ) ) {}
+        : expression( _expression ) {}
     virtual ~CExpressionWrapper() = default;
 
     virtual std::shared_ptr<const CExpression> ToExpression() override;
@@ -37,7 +37,7 @@ class CStatementWrapper : public ISubtreeWrapper {
 public:
     explicit CStatementWrapper( const CStatement* _statement )
         : statement( _statement ) {}
-    explicit CStatementWrapper( std::shared_ptr<const CStatement> _statement ) : statement( std::move( _statement ) ) {}
+    explicit CStatementWrapper( std::shared_ptr<const CStatement> _statement ) : statement( _statement ) {}
     virtual ~CStatementWrapper() = default;
 
     virtual std::shared_ptr<const CExpression> ToExpression() override;
@@ -74,8 +74,8 @@ public:
         std::shared_ptr<const CExpression> _operandLeft,
         std::shared_ptr<const CExpression> _operandRight
     ) : operatorType( _operatorType ),
-        operandLeft( std::move( _operandLeft ) ),
-        operandRight( std::move( _operandRight ) ) {}
+        operandLeft( _operandLeft ),
+        operandRight( _operandRight ) {}
 
     virtual std::shared_ptr<const CStatement> ToConditional( CLabel labelTrue, CLabel labelFalse ) override;
 private:

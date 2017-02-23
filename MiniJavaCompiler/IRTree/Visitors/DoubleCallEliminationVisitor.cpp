@@ -3,7 +3,7 @@
 using namespace IRTree;
 
 std::shared_ptr<const CStatement> CDoubleCallEliminationVisitor::ResultTree() {
-    return std::move( lastStatement );
+    return lastStatement;
 }
 
 void CDoubleCallEliminationVisitor::updateLastExpression( const CExpression* newLastExpression ) {
@@ -11,7 +11,7 @@ void CDoubleCallEliminationVisitor::updateLastExpression( const CExpression* new
 }
 
 void CDoubleCallEliminationVisitor::updateLastExpression( std::shared_ptr<const CExpression> newLastExpression ) {
-    lastExpression = std::move( newLastExpression );
+    lastExpression = newLastExpression;
 }
 
 void CDoubleCallEliminationVisitor::updateLastExpressionList( const CExpressionList* newLastExpressionList ) {
@@ -19,7 +19,7 @@ void CDoubleCallEliminationVisitor::updateLastExpressionList( const CExpressionL
 }
 
 void CDoubleCallEliminationVisitor::updateLastExpressionList( std::shared_ptr<const CExpressionList> newLastExpressionList ) {
-    lastExpressionList = std::move( newLastExpressionList );
+    lastExpressionList = newLastExpressionList;
 }
 
 void CDoubleCallEliminationVisitor::updateLastStatement( const CStatement* newLastStatement ) {
@@ -27,7 +27,7 @@ void CDoubleCallEliminationVisitor::updateLastStatement( const CStatement* newLa
 }
 
 void CDoubleCallEliminationVisitor::updateLastStatement( std::shared_ptr<const CStatement> newLastStatement ) {
-    lastStatement = std::move( newLastStatement );
+    lastStatement = newLastStatement;
 }
 
 void CDoubleCallEliminationVisitor::updateLastStatementList( const CStatementList* newLastStatementList ) {
@@ -35,7 +35,7 @@ void CDoubleCallEliminationVisitor::updateLastStatementList( const CStatementLis
 }
 
 void CDoubleCallEliminationVisitor::updateLastStatementList( std::shared_ptr<const CStatementList> newLastStatementList ) {
-    lastStatementList = std::move( newLastStatementList );
+    lastStatementList = newLastStatementList;
 }
 
 
@@ -79,16 +79,16 @@ void CDoubleCallEliminationVisitor::Visit( const CBinaryExpression* expression )
     onNodeEnter( nodeName );
 
     expression->LeftOperand()->Accept( this );
-    std::shared_ptr<const CExpression> expressionLeft = std::move( lastExpression );
+    std::shared_ptr<const CExpression> expressionLeft(lastExpression);
 
     expression->RightOperand()->Accept( this );
-    std::shared_ptr<const CExpression> expressionRight = std::move( lastExpression );
+    std::shared_ptr<const CExpression> expressionRight(lastExpression);
 
     updateLastExpression(
         new CBinaryExpression(
             expression->Operation(),
-            std::move( expressionLeft ),
-            std::move( expressionRight )
+            expressionLeft,
+            expressionRight
         )
     );
 
@@ -100,10 +100,10 @@ void CDoubleCallEliminationVisitor::Visit( const CMemExpression* expression ) {
     onNodeEnter( nodeName );
 
     expression->Address()->Accept( this );
-    std::shared_ptr<const CExpression> addressExpression = std::move( lastExpression );
+    std::shared_ptr<const CExpression> addressExpression( lastExpression );
 
     updateLastExpression(
-        new CMemExpression( std::move( addressExpression ) )
+        new CMemExpression( addressExpression )
     );
 
     onNodeExit( nodeName );
@@ -114,14 +114,14 @@ void CDoubleCallEliminationVisitor::Visit( const CCallExpression* expression ) {
     onNodeEnter( nodeName );
 
     expression->Function()->Accept( this );
-    std::shared_ptr<const CExpression> functionExpression = std::move( lastExpression );
+    std::shared_ptr<const CExpression> functionExpression( lastExpression );
     expression->Arguments()->Accept( this );
-    std::shared_ptr<const CExpressionList> argumentsList = std::move( lastExpressionList );
+    std::shared_ptr<const CExpressionList> argumentsList( lastExpressionList );
 
     updateLastExpression(
         new CCallExpression(
-            std::move( functionExpression ),
-            std::move( argumentsList )
+            functionExpression,
+            argumentsList
         )
     );
 
@@ -137,8 +137,8 @@ void CDoubleCallEliminationVisitor::Visit( const CEseqExpression* expression ) {
 
     updateLastExpression(
         new CEseqExpression(
-            std::move( lastStatement ),
-            std::move( lastExpression )
+            lastStatement,
+            lastExpression
         )
     );
 
@@ -152,10 +152,10 @@ void CDoubleCallEliminationVisitor::Visit( const CExpStatement* statement ) {
     onNodeEnter( nodeName );
 
     statement->Expression()->Accept( this );
-    std::shared_ptr<const CExpression> expression = std::move( lastExpression );
+    std::shared_ptr<const CExpression> expression( lastExpression );
 
     updateLastStatement(
-        new CExpStatement( std::move( expression ) )
+        new CExpStatement( expression )
     );
 
     onNodeExit( nodeName );
@@ -166,16 +166,16 @@ void CDoubleCallEliminationVisitor::Visit( const CJumpConditionalStatement* stat
     onNodeEnter( nodeName );
 
     statement->LeftOperand()->Accept( this );
-    std::shared_ptr<const CExpression> expressionLeft = std::move( lastExpression );
+    std::shared_ptr<const CExpression> expressionLeft( lastExpression );
 
     statement->RightOperand()->Accept( this );
-    std::shared_ptr<const CExpression> expressionRight = std::move( lastExpression );
+    std::shared_ptr<const CExpression> expressionRight( lastExpression );
 
     updateLastStatement(
         new CJumpConditionalStatement(
             statement->Operation(),
-            std::move( expressionLeft ),
-            std::move( expressionRight ),
+            expressionLeft,
+            expressionRight,
             statement->TrueLabel(),
             statement->FalseLabel()
         )
@@ -211,13 +211,13 @@ void CDoubleCallEliminationVisitor::Visit( const CMoveStatement* statement ) {
     onNodeEnter( nodeName );
 
     statement->Destination()->Accept( this );
-    std::shared_ptr<const CExpression> destination = std::move( lastExpression );
+    std::shared_ptr<const CExpression> destination( lastExpression );
 
     statement->Source()->Accept( this );
-    std::shared_ptr<const CExpression> source = std::move( lastExpression );
+    std::shared_ptr<const CExpression> source( lastExpression );
 
     updateLastStatement(
-        new CMoveStatement( std::move( destination ), std::move( source ) )
+        new CMoveStatement( destination, source )
     );
 
     onNodeExit( nodeName );
@@ -228,13 +228,13 @@ void CDoubleCallEliminationVisitor::Visit( const CSeqStatement* statement ) {
     onNodeEnter( nodeName );
 
     statement->LeftStatement()->Accept( this );
-    std::shared_ptr<const CStatement> statementLeft = std::move( lastStatement );
+    std::shared_ptr<const CStatement> statementLeft( lastStatement );
 
     statement->RightStatement()->Accept( this );
-    std::shared_ptr<const CStatement> statementRight = std::move( lastStatement );
+    std::shared_ptr<const CStatement> statementRight( lastStatement );
 
     updateLastStatement(
-        new CSeqStatement( std::move( statementLeft ), std::move( statementRight ) )
+        new CSeqStatement( statementLeft, statementRight )
     );
 
     onNodeExit( nodeName );
@@ -251,7 +251,7 @@ void CDoubleCallEliminationVisitor::Visit( const CExpressionList* list ) {
     const std::vector<std::shared_ptr<const CExpression>>& expressions = list->Expressions();
     for ( auto it = expressions.begin(); it != expressions.end(); ++it ) {
         ( *it )->Accept( this );
-        newList->Add( std::move( lastExpression ) );
+        newList->Add( lastExpression );
     }
 
     updateLastExpressionList( newList );
@@ -268,7 +268,7 @@ void CDoubleCallEliminationVisitor::Visit( const CStatementList* list ) {
     const std::vector<std::shared_ptr<const CStatement>>& statements = list->Statements();
     for ( auto it = statements.begin(); it != statements.end(); ++it ) {
         ( *it )->Accept( this );
-        newList->Add( std::move( lastStatement ) );
+        newList->Add( lastStatement );
     }
 
     updateLastStatementList( newList );

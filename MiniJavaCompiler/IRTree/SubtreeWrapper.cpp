@@ -27,9 +27,9 @@ std::shared_ptr<const CStatement> CExpressionWrapper::ToConditional( CLabel labe
 std::shared_ptr<const CExpression> CStatementWrapper::ToExpression() {
     // such calls should never happen
     assert( false );
-    // return std::move( std::shared_ptr<const CExpression>(
+    // return std::shared_ptr<const CExpression>(
     //     new CEseqExpression( statement, new CConstExpression( 0 ) )
-    // ) );
+    // );
 }
 
 std::shared_ptr<const CStatement> CStatementWrapper::ToStatement() {
@@ -89,29 +89,29 @@ std::shared_ptr<const CStatement> CAndConditionalWrapper::ToConditional( CLabel 
     return std::shared_ptr<const CStatement>(
         new CSeqStatement(
             operandLeft->ToConditional( labelMiddle, labelFalse ),
-            std::move( std::shared_ptr<const CSeqStatement>(
+            std::shared_ptr<const CSeqStatement>(
                 new CSeqStatement(
-                        std::move( std::shared_ptr<const CLabelStatement>( new CLabelStatement( labelMiddle ) ) ),
-                        std::move( operandRight->ToConditional( labelTrue, labelFalse ) )
+                        std::shared_ptr<const CLabelStatement>( new CLabelStatement( labelMiddle ) ),
+                        operandRight->ToConditional( labelTrue, labelFalse )
                 )
-            ) )
+            )
         )
     );
 }
 
 std::shared_ptr<const CStatement> COrConditionalWrapper::ToConditional( CLabel labelTrue, CLabel labelFalse ) {
     CLabel labelMiddle;
-    return std::move( std::shared_ptr<const CStatement>(
+    return std::shared_ptr<const CStatement>(
         new CSeqStatement(
-                std::move(operandLeft->ToConditional(labelTrue, labelMiddle ) ),
-                std::move(std::shared_ptr<const CSeqStatement>(
+                operandLeft->ToConditional(labelTrue, labelMiddle ),
+                std::shared_ptr<const CSeqStatement>(
                         new CSeqStatement(
-                                std::move(std::shared_ptr<const CLabelStatement>(new CLabelStatement(labelMiddle ) ) ),
-                                std::move(operandRight->ToConditional(labelTrue, labelFalse ) )
+                                std::shared_ptr<const CLabelStatement>(new CLabelStatement(labelMiddle ) ),
+                                operandRight->ToConditional(labelTrue, labelFalse )
                         )
-                ) )
+                )
         )
-    ) );
+    );
 }
 
 std::shared_ptr<const CStatement> CNegateConditionalWrapper::ToConditional( CLabel labelTrue, CLabel labelFalse ) {
