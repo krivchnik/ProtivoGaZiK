@@ -177,3 +177,9 @@ void CIrtBuilderVisitor::updateSubtreeWrapper( std::shared_ptr<IRTree::ISubtreeW
 std::string CIrtBuilderVisitor::makeMethodFullName( const std::string& className, const std::string& methodName ) {
     return className + "::" + methodName;
 }
+
+
+
+
+
+
