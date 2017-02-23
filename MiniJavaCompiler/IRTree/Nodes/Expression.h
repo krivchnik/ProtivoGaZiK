@@ -27,7 +27,7 @@ enum class TOperatorType : char {
     OT_Plus,
     OT_Minus,
     OT_Times,
-    OT_Div,
+    OT_Div,F
     OT_Mod,
     OT_And,
     OT_Or
