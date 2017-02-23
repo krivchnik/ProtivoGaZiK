@@ -56,7 +56,7 @@ public:
     CVisitor( bool _verbose ) : verbose( _verbose ) {}
     virtual ~CVisitor() {}
 protected:
-    // Generates unique id for nodes of one type.
+    // Generates unique id for Nodes of one type.
     int generateNodeNextIndex( const std::string& nodeType );
 
     // Generates full node name based on the node type and a unique id assigned to the node.

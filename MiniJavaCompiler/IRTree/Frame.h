@@ -1,7 +1,3 @@
-//
-// Created by nismohl on 23.02.17.
-//
-
 #pragma once
 
 #include <unordered_map>
@@ -9,7 +5,9 @@
 
 #include <IRT/nodes/Expression.h>
 #include <IRT/Temporary.h>
-#include <IRTree/CLabel.h>
+#include <IRT/Label.h>
+
+namespace IRTree {
 
 class IAddress {
 public:
@@ -51,8 +49,8 @@ class CFrame {
 public:
     // CFrame( CLabel _name ) : name( _name ), maxOffsetFramePointer( 0 ) {}
     CFrame( const std::string& _className, const std::string& _methodName )
-            : className( _className ), methodName( _methodName ),
-              name( className + "$" + methodName ), maxOffsetFramePointer( 0 ), maxOffsetThis( 0 ) {}
+        : className( _className ), methodName( _methodName ),
+          name( className + "$" + methodName ), maxOffsetFramePointer( 0 ), maxOffsetThis( 0 ) {}
 
     CTemp FramePointer() const;
     CTemp ReturnValueTemp() const;
@@ -94,3 +92,6 @@ private:
     int maxOffsetFramePointer;
     int maxOffsetThis;
 };
+
+
+}

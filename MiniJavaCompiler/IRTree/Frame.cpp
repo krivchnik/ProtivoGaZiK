@@ -1,8 +1,4 @@
-//
-// Created by nismohl on 23.02.17.
-//
-
-#include <IRTree/Frame.h>
+#include <IRT/Frame.h>
 #include <cassert>
 
 using namespace IRTree;
@@ -11,13 +7,13 @@ std::unique_ptr<const CExpression> CAddressInFrame::ToExpression( std::unique_pt
     std::unique_ptr<const CExpression> offsetExpression;
     if ( offset != 0 ) {
         offsetExpression = std::move( std::unique_ptr<const CBinaryExpression>(
-                new CBinaryExpression(
-                        TOperatorType::OT_Plus,
-                        std::move( framePointer ),
-                        std::move( std::unique_ptr<const CExpression>(
-                                new CConstExpression( offset )
-                        ) )
-                )
+            new CBinaryExpression(
+                TOperatorType::OT_Plus,
+                std::move( framePointer ),
+                std::move( std::unique_ptr<const CExpression>(
+                    new CConstExpression( offset )
+                ) )
+            )
         ) );
     } else {
         offsetExpression = std::move( framePointer );
@@ -29,13 +25,13 @@ std::unique_ptr<const CExpression> CAddressOfField::ToExpression( std::unique_pt
     std::unique_ptr<const CExpression> offsetExpression;
     if ( offset != 0 ) {
         offsetExpression = std::move( std::unique_ptr<const CBinaryExpression>(
-                new CBinaryExpression(
-                        TOperatorType::OT_Plus,
-                        std::move( thisPointer ),
-                        std::move( std::unique_ptr<const CExpression>(
-                                new CConstExpression( offset )
-                        ) )
-                )
+            new CBinaryExpression(
+                TOperatorType::OT_Plus,
+                std::move( thisPointer ),
+                std::move( std::unique_ptr<const CExpression>(
+                    new CConstExpression( offset )
+                ) )
+            )
         ) );
     } else {
         offsetExpression = std::move( thisPointer );
@@ -45,7 +41,7 @@ std::unique_ptr<const CExpression> CAddressOfField::ToExpression( std::unique_pt
 
 std::unique_ptr<const CExpression> CAddressInRegister::ToExpression( std::unique_ptr<const CExpression> framePointer ) const {
     return std::move( std::unique_ptr<const CTempExpression>(
-            new CTempExpression( temp )
+        new CTempExpression( temp )
     ) );
 }
 
@@ -123,12 +119,12 @@ const IAddress* CFrame::GetReturn() const {
 
 std::unique_ptr<const CExpression> CFrame::ExternalCall( const std::string& functionName, std::unique_ptr<const CExpressionList> args ) const {
     return std::move( std::unique_ptr<const IRTree::CCallExpression>(
-            new IRTree::CCallExpression(
-                    std::move( std::unique_ptr<const CNameExpression>(
-                            new CNameExpression( CLabel( functionName ) )
-                    ) ),
-                    std::move( args )
-            )
+        new IRTree::CCallExpression(
+            std::move( std::unique_ptr<const CNameExpression>(
+                new CNameExpression( CLabel( functionName ) )
+            ) ),
+            std::move( args )
+        )
     ) );
 }
 
