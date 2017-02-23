@@ -15,15 +15,7 @@ public:
     //все классы-родители переданного класса
     std::vector<std::string> GetAllBaseClasses(std::string className);
 
-    ClassInfo GetClassInfo(std::string className) {
-        if (classes.find(className) != classes.end()) {
-            return classes[className];
-        } else {
-            ClassInfo notFoundClass;
-            notFoundClass.name = "";
-            return notFoundClass;
-        }
-    }
+    ClassInfo GetClassInfo(std::string className);
 
 private:
     std::map<std::string, ClassInfo > classes;

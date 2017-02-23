@@ -49,3 +49,13 @@ std::vector<std::string> CSymbolTable::GetAllBaseClasses(std::string className) 
     }
     return visitedClasses;
 }
+
+ClassInfo CSymbolTable::GetClassInfo(std::string className) {
+    if (classes.find(className) != classes.end()) {
+        return classes[className];
+    } else {
+        ClassInfo notFoundClass;
+        notFoundClass.name = "";
+        return notFoundClass;
+    }
+}

@@ -1,6 +1,7 @@
 #include <Visitors/IrtBuilderVisitor.h>
 #include <CommonInclude.h>
 #include <IRTree/Frame.h>
+#include <unordered_set>
 
 
 void CIrtBuilderVisitor::Visit( CMainClass* mainClass ) {
@@ -32,6 +33,40 @@ void CIrtBuilderVisitor::buildNewFrame( const std::string& className, const std:
     for ( auto it = localsLeftIt; it != localsRightIt; ++it ) {
         frameCurrent->AddLocal( *it );
     }
+}
+
+
+void CIrtBuilderVisitor::buildNewFrame( CMethod* declaration ) {
+
+    ClassInfo classInfo = symbolTable.GetClassInfo(classCurrentName);
+    MethodInfo methodInfo = classInfo.GetMethodInfo(declaration->getId()->GetName());
+
+    std::vector<VariableInfo> params(methodInfo.paramList);
+    std::vector<std::string> paramsNames;
+    paramsNames.reserve( params.size() );
+    for ( auto it = params.begin(); it != params.end(); ++it ) {
+        paramsNames.push_back( it->name );
+    }
+
+    std::vector<VariableInfo> locals(methodInfo.variablesList);
+    std::vector<std::string> localsNames;
+    localsNames.reserve( locals.size() );
+    for ( auto it = locals.begin(); it != locals.end(); ++it ) {
+        localsNames.push_back( it->name );
+    }
+
+    std::unordered_set<std::string> fieldsNames;
+    ClassInfo currentClass = classInfo;
+    do {
+        std::vector<VariableInfo> fields = currentClass.variableDeclaration;
+        for ( auto it = fields.begin(); it != fields.end(); ++it ) {
+            fieldsNames.insert( it->name );
+        }
+        currentClass = symbolTable.GetClassInfo(currentClass.baseId);
+    } while(currentClass.HasBase());
+
+    buildNewFrame( classCurrentName, declaration->getId()->GetName(), paramsNames.begin(), paramsNames.end(),
+                   localsNames.begin(), localsNames.end(), fieldsNames.begin(), fieldsNames.end() );
 }
 
 void CIrtBuilderVisitor::Visit( CNumExpression* expression ) {
