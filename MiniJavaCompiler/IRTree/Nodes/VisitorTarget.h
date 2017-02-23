@@ -1,6 +1,6 @@
 #pragma once
 
-#include <IRT/visitors/Visitor.h>
+#include <IRTree/Visitors/Visitor.h>
 
 namespace IRTree {
 

@@ -3,8 +3,8 @@
 #include <memory>
 #include <vector>
 
-#include <IRT/visitors/Visitor.h>
-#include <IRT/nodes/VisitorTarget.h>
+#include <IRTree/Visitors/Visitor.h>
+#include <IRTree/Nodes/VisitorTarget.h>
 
 namespace IRTree {
 

@@ -2,14 +2,14 @@
 
 #include <memory>
 
-#include <IRT/Temporary.h>
-#include <IRT/Label.h>
+#include <IRTree/Temporary.h>
+#include <IRTree/Label.h>
 
-#include <IRT/visitors/Visitor.h>
+#include <IRTree/Visitors/Visitor.h>
 
-#include <IRT/nodes/ExpressionList.h>
-#include <IRT/nodes/Statement.h>
-#include <IRT/nodes/VisitorTarget.h>
+#include <IRTree/Nodes/ExpressionList.h>
+#include <IRTree/Nodes/Statement.h>
+#include <IRTree/Nodes/VisitorTarget.h>
 
 namespace IRTree {
 

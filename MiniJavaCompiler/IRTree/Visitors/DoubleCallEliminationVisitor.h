@@ -1,12 +1,12 @@
 #pragma once
 
-#include <IRT/nodes/NodeNames.h>
-#include <IRT/visitors/Visitor.h>
+#include <IRTree/Nodes/NodeNames.h>
+#include <IRTree/Visitors/Visitor.h>
 
-#include <IRT/nodes/Expression.h>
-#include <IRT/nodes/ExpressionList.h>
-#include <IRT/nodes/Statement.h>
-#include <IRT/nodes/StatementList.h>
+#include <IRTree/Nodes/Expression.h>
+#include <IRTree/Nodes/ExpressionList.h>
+#include <IRTree/Nodes/Statement.h>
+#include <IRTree/Nodes/StatementList.h>
 
 namespace IRTree {
 

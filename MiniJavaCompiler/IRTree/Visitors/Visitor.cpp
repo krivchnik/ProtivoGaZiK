@@ -1,5 +1,5 @@
-#include <IRT/visitors/Visitor.h>
-#include <IRT/nodes/Expression.h>
+#include <IRTree/Visitors/Visitor.h>
+#include <IRTree/Nodes/Expression.h>
 
 using namespace IRTree;
 

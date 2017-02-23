@@ -1,5 +1,5 @@
-#include <IRT/SubtreeWrapper.h>
-#include <IRT/Temporary.h>
+#include <IRTree/SubtreeWrapper.h>
+#include <IRTree/Temporary.h>
 
 using namespace IRTree;
 

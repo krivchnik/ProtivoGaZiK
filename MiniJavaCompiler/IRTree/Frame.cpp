@@ -1,4 +1,4 @@
-#include <IRT/Frame.h>
+#include <IRTree/Frame.h>
 #include <cassert>
 
 using namespace IRTree;

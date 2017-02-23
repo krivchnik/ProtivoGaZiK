@@ -1,4 +1,4 @@
-#include <IRT/Label.h>
+#include <IRTree/Label.h>
 
 using namespace IRTree;
 

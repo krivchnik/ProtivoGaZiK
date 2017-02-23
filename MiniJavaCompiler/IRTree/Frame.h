@@ -3,9 +3,9 @@
 #include <unordered_map>
 #include <vector>
 
-#include <IRT/nodes/Expression.h>
-#include <IRT/Temporary.h>
-#include <IRT/Label.h>
+#include <IRTree/Nodes/Expression.h>
+#include <IRTree/Temporary.h>
+#include <IRTree/Label.h>
 
 namespace IRTree {
 

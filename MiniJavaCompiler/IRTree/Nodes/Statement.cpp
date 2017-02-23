@@ -1,6 +1,6 @@
-#include <IRT/nodes/Statement.h>
+#include <IRTree/Nodes/Statement.h>
 
-#include <IRT/nodes/Expression.h>
+#include <IRTree/Nodes/Expression.h>
 
 using namespace IRTree;
 

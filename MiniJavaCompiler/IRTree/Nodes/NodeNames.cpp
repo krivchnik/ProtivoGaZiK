@@ -1,4 +1,4 @@
-#include <IRT/nodes/NodeNames.h>
+#include <IRTree/Nodes/NodeNames.h>
 
 using namespace IRTree;
 

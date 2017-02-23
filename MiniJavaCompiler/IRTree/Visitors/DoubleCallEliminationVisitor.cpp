@@ -1,4 +1,4 @@
-#include <IRT/visitors/DoubleCallEliminationVisitor.h>
+#include <IRTree/Visitors/DoubleCallEliminationVisitor.h>
 
 using namespace IRTree;
 

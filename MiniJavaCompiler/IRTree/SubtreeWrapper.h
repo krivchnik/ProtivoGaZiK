@@ -2,9 +2,9 @@
 
 #include <cassert>
 #include <memory>
-#include <IRT/Label.h>
-#include <IRT/nodes/Expression.h>
-#include <IRT/nodes/Statement.h>
+#include <IRTree/Label.h>
+#include <IRTree/Nodes/Expression.h>
+#include <IRTree/Nodes/Statement.h>
 
 namespace IRTree {
 

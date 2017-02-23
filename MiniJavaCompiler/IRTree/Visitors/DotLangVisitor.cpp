@@ -1,4 +1,4 @@
-#include <IRT/visitors/DotLangVisitor.h>
+#include <IRTree/Visitors/DotLangVisitor.h>
 
 using namespace IRTree;
 

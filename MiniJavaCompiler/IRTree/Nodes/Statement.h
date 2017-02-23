@@ -1,8 +1,8 @@
 #pragma once
 
 #include <memory>
-#include <IRT/Label.h>
-#include <IRT/nodes/VisitorTarget.h>
+#include <IRTree/Label.h>
+#include <IRTree/Nodes/VisitorTarget.h>
 
 namespace IRTree {
 
