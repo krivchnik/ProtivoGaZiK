@@ -5,11 +5,23 @@
 #include <Visitors/CSymbolTable.h>
 
 
-std::vector<MethodInfo> CSymbolTable::getAvailableMethodsInfo(std::string currentClass) {
-    return std::vector<MethodInfo>();
+std::vector<MethodInfo> CSymbolTable::GetAvailableMethodsInfo(std::string className) {
+    if (className == "") {
+        return std::vector<MethodInfo>();
+    }
+
+    std::vector<MethodInfo> availMethods(classes[className].methodsDeclarations);
+
+    std::vector<std::string> baseClasses = GetAllBaseClasses(className);
+    for (auto it = baseClasses.begin(); it != baseClasses.end(); ++it) {
+        std::vector<MethodInfo> publicMethods = classes[*it].getPublicMethodsInfo();
+        availMethods.insert(availMethods.end(), publicMethods.begin(), publicMethods.end());
+    }
+
+    return availMethods;
 }
 
-std::vector<std::string> CSymbolTable::getAllBaseClasses(std::string className) {
+std::vector<std::string> CSymbolTable::GetAllBaseClasses(std::string className) {
 
     std::vector<std::string> visitedClasses;
     if (classes.find(className) == classes.end()) {
@@ -27,8 +39,10 @@ std::vector<std::string> CSymbolTable::getAllBaseClasses(std::string className) 
 
         currentClass = currentClassIt->second;
 
-        if (std::find(visitedClasses.begin(), visitedClasses.end(), currentClass.name) != visitedClasses.end()) {
-            break;
+        for (auto it = visitedClasses.begin(); it != visitedClasses.end(); ++it) {
+            if (*it == currentClass.name) {
+                break;
+            }
         }
 
         visitedClasses.push_back(currentClass.name);

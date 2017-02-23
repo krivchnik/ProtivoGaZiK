@@ -61,6 +61,14 @@ struct ClassInfo {
         }
     }
 
+    VariableInfo GetFieldInfo(const std::string& name) const {
+        for (auto it = variableDeclaration.begin(); it != variableDeclaration.end(); ++it) {
+            if (it->name == name) {
+                return *it;
+            }
+        }
+    }
+
     std::set<std::string> getPublicMethods();
     std::vector<MethodInfo> getPublicMethodsInfo();
     bool HasBase();

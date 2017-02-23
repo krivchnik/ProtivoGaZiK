@@ -26,13 +26,18 @@ void CIrtBuilderVisitor::Visit( CIdExpression* expression ) {
     if ( address ) {
         // expression is a name of local var / argument / field
 
-        ClassInfo classInfo = classes[frameCurrent->GetClassName()];
+        std::vector<MethodInfo> methods = symbolTable.GetAvailableMethodsInfo(frameCurrent->GetClassName());
+        MethodInfo methodInfo;
+        for (auto it = methods.begin(); it != methods.end(); ++it) {
+            if (it->name == frameCurrent->GetMethodName()) {
+                methodInfo = *it;
+                break;
+            }
+        };
 
-        //wrong decision
-        MethodInfo methodInfo = classInfo.GetMethodInfo(frameCurrent->GetMethodName());
         VariableInfo varInfo = methodInfo.GetVariableOrParamInfo(expression->GetName());
-
-        if ( varInfo.type == NONE_TYPE ) {
+        std::string type = varInfo.type;
+        if ( type == NONE_TYPE ) {
             // expression is a name of field
             updateSubtreeWrapper( new IRTree::CExpressionWrapper(
                     new IRTree::CMemExpression(
@@ -49,7 +54,7 @@ void CIrtBuilderVisitor::Visit( CIdExpression* expression ) {
                             )
                     )
             ) );
-            type = classDefinition->GetFieldType( expression->GetName() );
+            type = symbolTable.GetClassInfo(frameCurrent->GetClassName()).GetFieldInfo(expression->GetName()).type;
         } else {
             // expression is a name of local var / argument
             updateSubtreeWrapper( new IRTree::CExpressionWrapper(
@@ -63,8 +68,8 @@ void CIrtBuilderVisitor::Visit( CIdExpression* expression ) {
             ) );
         }
 
-        if ( type.Type() == TTypeIdentifier::ClassId ) {
-            methodCallerClassName = type.ClassName();
+        if ( symbolTable.GetClassInfo(type).name == "" ) {
+            methodCallerClassName = type;
         }
     }
 }

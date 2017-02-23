@@ -9,6 +9,7 @@
 #include <IRTree/SubtreeWrapper.h>
 #include <IRTree/Frame.h>
 #include "CInfoClasses.h"
+#include "CSymbolTable.h"
 
 class CIrtBuilderVisitor: public IVisitor {
 public:
@@ -50,11 +51,14 @@ private:
 
     std::shared_ptr<IRTree::ISubtreeWrapper> subtreeWrapper;
 
-    std::map< std::string, ClassInfo > classes;
+    CSymbolTable symbolTable;
 
     std::string classCurrentName;
     std::unordered_map<std::string, std::shared_ptr<const IRTree::CFrame>> frames;
     IRTree::CFrame* frameCurrent;
+
+    // used when translating expr.methodName() to determine the name of the class of expr
+    std::string methodCallerClassName;
 
 
 
