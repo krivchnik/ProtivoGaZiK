@@ -48,6 +48,12 @@ public:
 private:
     void updateSubtreeWrapper( IRTree::ISubtreeWrapper* wrapperNew );
     void updateSubtreeWrapper( std::shared_ptr<IRTree::ISubtreeWrapper> wrapperNew );
+    template <class InputIteratorArguments, class InputIteratorLocals, class InputIteratorFields>
+    void buildNewFrame( const std::string& className, const std::string& methodName,
+                        InputIteratorArguments argumentsLeftIt, InputIteratorArguments argumentsRightIt,
+                        InputIteratorLocals localsLeftIt, InputIteratorLocals localsRightIt,
+                        InputIteratorFields fieldsLeftIt, InputIteratorFields fieldsRightIt );
+    void buildNewFrame( CMainClass* mainClass );
     std::string makeMethodFullName( const std::string& className, const std::string& methodName );
 
     void buildNewFrame( const CMethod* declaration );
@@ -62,7 +68,6 @@ private:
 
     // used when translating expr.methodName() to determine the name of the class of expr
     std::string methodCallerClassName;
-
 
 
 
