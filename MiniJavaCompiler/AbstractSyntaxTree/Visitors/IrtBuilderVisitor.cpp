@@ -2,6 +2,39 @@
 #include <CommonInclude.h>
 #include <IRTree/Frame.h>
 
+
+void CIrtBuilderVisitor::Visit( CMainClass* mainClass ) {
+
+    buildNewFrame( mainClass );
+    std::string methodFullName = makeMethodFullName( frameCurrent->GetClassName(), frameCurrent->GetMethodName() );
+
+    mainClass->GetMainMethod()->Accept( this );
+}
+
+template <class InputIteratorArguments, class InputIteratorLocals, class InputIteratorFields>
+void CIrtBuilderVisitor::buildNewFrame( const std::string& className, const std::string& methodName,
+                                        InputIteratorArguments argumentsLeftIt, InputIteratorArguments argumentsRightIt,
+                                        InputIteratorLocals localsLeftIt, InputIteratorLocals localsRightIt,
+                                        InputIteratorFields fieldsLeftIt, InputIteratorFields fieldsRightIt ) {
+    std::unique_ptr<IRTree::CFrame> frameNew = std::unique_ptr<IRTree::CFrame>( new IRTree::CFrame( className, methodName ) );
+
+    frameCurrent = frameNew.get();
+
+    frameCurrent->AddThis();
+    for ( auto it = fieldsLeftIt; it != fieldsRightIt; ++it ) {
+        frameCurrent->AddField( *it );
+    }
+    // arguments and locals should be added after fields
+    // in order to overwrite them in the map of addresses in case of name collision
+    for ( auto it = argumentsLeftIt; it != argumentsRightIt; ++it ) {
+        frameCurrent->AddArgument( *it );
+    }
+    frameCurrent->AddReturn();
+    for ( auto it = localsLeftIt; it != localsRightIt; ++it ) {
+        frameCurrent->AddLocal( *it );
+    }
+}
+
 void CIrtBuilderVisitor::Visit( CNumExpression* expression ) {
 //    ++expressionId;
 //    std::string nodeName = getNodeNameWithLabel(std::to_string(expression->GetNumber()), expressionId, "Number");
