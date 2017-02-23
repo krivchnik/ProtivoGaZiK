@@ -35,18 +35,29 @@ class CExpression;
 
 class CMoveStatement : public CStatement {
 public:
-    CMoveStatement( const CExpression* _destination, const CExpression* _source );
-    CMoveStatement( std::unique_ptr<const CExpression> _destination, std::unique_ptr<const CExpression> _source );
+    CMoveStatement( const CExpression* _destination,
+                    const CExpression* _source );
+
+    CMoveStatement( std::shared_ptr<const CExpression> _destination,
+                    std::shared_ptr<const CExpression> _source );
+
     ~CMoveStatement();
 
-    const CExpression* Destination() const { return destination.get(); }
-    const CExpression* Source() const { return source.get(); }
+    const CExpression* Destination() const {
+        return destination.get();
+    }
 
-    void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
+    const CExpression* Source() const {
+        return source.get();
+    }
+
+    void Accept( IVisitor* visitor ) const override {
+        visitor->Visit( this );
+    }
 
 private:
-    std::unique_ptr<const CExpression> destination;
-    std::unique_ptr<const CExpression> source;
+    std::shared_ptr<const CExpression> destination;
+    std::shared_ptr<const CExpression> source;
 };
 
 //-----------------------------------------------------------------------------------------------//
@@ -54,7 +65,7 @@ private:
 class CExpStatement : public CStatement {
 public:
     CExpStatement( const CExpression* _expression );
-    CExpStatement( std::unique_ptr<const CExpression> _expression );
+    CExpStatement( std::shared_ptr<const CExpression> _expression );
     ~CExpStatement();
 
     const CExpression* Expression() const { return expression.get(); }
@@ -62,7 +73,7 @@ public:
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
 
 private:
-    std::unique_ptr<const CExpression> expression;
+    std::shared_ptr<const CExpression> expression;
 };
 
 //-----------------------------------------------------------------------------------------------//
@@ -85,11 +96,17 @@ private:
 class CJumpConditionalStatement : public CStatement {
 public:
     CJumpConditionalStatement( TLogicOperatorType _operation,
-        const CExpression* left, const CExpression* right,
-        CLabel _labelTrue, CLabel _labelFalse );
+                               const CExpression* left,
+                               const CExpression* right,
+                               CLabel _labelTrue,
+                               CLabel _labelFalse );
+
     CJumpConditionalStatement( TLogicOperatorType _operation,
-    std::unique_ptr<const CExpression> left, std::unique_ptr<const CExpression> right,
-    CLabel _labelTrue, CLabel _labelFalse );
+                               std::shared_ptr<const CExpression> left,
+                               std::shared_ptr<const CExpression> right,
+                               CLabel _labelTrue,
+                               CLabel _labelFalse );
+
     ~CJumpConditionalStatement();
 
     const CExpression* LeftOperand() const { return leftOperand.get(); }
@@ -101,8 +118,8 @@ public:
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
 
 private:
-    std::unique_ptr<const CExpression> leftOperand;
-    std::unique_ptr<const CExpression> rightOperand;
+    std::shared_ptr<const CExpression> leftOperand;
+    std::shared_ptr<const CExpression> rightOperand;
     CLabel labelTrue;
     CLabel labelFalse;
     TLogicOperatorType operation;
@@ -112,9 +129,8 @@ private:
 
 class CSeqStatement : public CStatement {
 public:
-    CSeqStatement( const CStatement* _left, const CStatement* _right );
-    CSeqStatement( std::unique_ptr<const CStatement> _left, std::unique_ptr<const CStatement> _right );
-    ~CSeqStatement();
+    CSeqStatement( std::shared_ptr<const CLabelStatement> _left, std::shared_ptr<const CStatement> &&_right );
+    CSeqStatement( std::shared_ptr<const CStatement> _left, std::shared_ptr<const CStatement>&& _right );
 
     const CStatement* LeftStatement() const { return leftStatement.get(); }
     const CStatement* RightStatement() const { return rightStatement.get(); }
@@ -122,8 +138,8 @@ public:
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
 
 private:
-    std::unique_ptr<const CStatement> leftStatement;
-    std::unique_ptr<const CStatement> rightStatement;
+    std::shared_ptr<const CStatement> leftStatement;
+    std::shared_ptr<const CStatement> rightStatement;
 };
 
 //-----------------------------------------------------------------------------------------------//

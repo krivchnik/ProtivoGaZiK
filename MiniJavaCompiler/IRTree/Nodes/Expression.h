@@ -81,7 +81,7 @@ private:
 class CBinaryExpression : public CExpression {
 public:
     CBinaryExpression( TOperatorType _operation, const CExpression* left, const CExpression* right );
-    CBinaryExpression( TOperatorType _operation, std::unique_ptr<const CExpression> left, std::unique_ptr<const CExpression> right );
+    CBinaryExpression( TOperatorType _operation, std::shared_ptr<const CExpression> left, std::shared_ptr<const CExpression> right );
     ~CBinaryExpression();
 
     TOperatorType Operation() const { return operation; }
@@ -91,8 +91,8 @@ public:
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
 
 private:
-    std::unique_ptr<const CExpression> leftOperand;
-    std::unique_ptr<const CExpression> rightOperand;
+    std::shared_ptr<const CExpression> leftOperand;
+    std::shared_ptr<const CExpression> rightOperand;
     TOperatorType operation;
 };
 
@@ -101,7 +101,7 @@ private:
 class CMemExpression : public CExpression {
 public:
     CMemExpression( const CExpression* _address );
-    CMemExpression( std::unique_ptr<const CExpression> _address );
+    CMemExpression( std::shared_ptr<const CExpression> _address );
     ~CMemExpression();
 
     const CExpression* Address() const { return address.get(); }
@@ -109,7 +109,7 @@ public:
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
 
 private:
-    std::unique_ptr<const CExpression> address;
+    std::shared_ptr<const CExpression> address;
 };
 
 //-----------------------------------------------------------------------------------------------//
@@ -117,7 +117,7 @@ private:
 class CCallExpression : public CExpression {
 public:
     CCallExpression( const CExpression* func, const CExpressionList* args );
-    CCallExpression( std::unique_ptr<const CExpression> func, std::unique_ptr<const CExpressionList> args );
+    CCallExpression( std::shared_ptr<const CExpression> func, std::shared_ptr<const CExpressionList> args );
     ~CCallExpression();
 
     const CExpression* Function() const { return function.get(); }
@@ -126,15 +126,15 @@ public:
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
 
 private:
-    std::unique_ptr<const CExpression> function;
-    std::unique_ptr<const CExpressionList> arguments;
+    std::shared_ptr<const CExpression> function;
+    std::shared_ptr<const CExpressionList> arguments;
 };
 
 //-----------------------------------------------------------------------------------------------//
 class CEseqExpression : public CExpression {
 public:
     CEseqExpression( const CStatement* _statement, const CExpression* _expression );
-    CEseqExpression( std::unique_ptr<const CStatement> _statement, std::unique_ptr<const CExpression> _expression );
+    CEseqExpression( std::shared_ptr<const CStatement> _statement, std::shared_ptr<const CExpression> _expression );
     ~CEseqExpression();
 
     const CStatement* Statement() const { return statement.get(); }
@@ -143,8 +143,8 @@ public:
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
 
 private:
-    std::unique_ptr<const CStatement> statement;
-    std::unique_ptr<const CExpression> expression;
+    std::shared_ptr<const CStatement> statement;
+    std::shared_ptr<const CExpression> expression;
 };
 
 } // namespace IRTree

@@ -42,9 +42,9 @@ public:
 
 private:
     void updateSubtreeWrapper( IRTree::ISubtreeWrapper* wrapperNew );
-    void updateSubtreeWrapper( std::unique_ptr<IRTree::ISubtreeWrapper> wrapperNew );
+    void updateSubtreeWrapper( std::shared_ptr<IRTree::ISubtreeWrapper> wrapperNew );
 
-    std::unique_ptr<IRTree::ISubtreeWrapper> subtreeWrapper;
+    std::shared_ptr<IRTree::ISubtreeWrapper> subtreeWrapper;
 
 
 

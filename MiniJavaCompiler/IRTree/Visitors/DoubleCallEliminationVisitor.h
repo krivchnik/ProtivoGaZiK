@@ -15,7 +15,7 @@ public:
     CDoubleCallEliminationVisitor( bool _verbose = false ) : CVisitor( _verbose ) {}
     ~CDoubleCallEliminationVisitor() {}
 
-    std::unique_ptr<const CStatement> ResultTree();
+    std::shared_ptr<const CStatement> ResultTree();
 
     // Visitors for different node types.
     void Visit( const CConstExpression* expression ) override;
@@ -38,21 +38,21 @@ public:
 
 private:
     void updateLastExpression( const CExpression* newLastExpression );
-    void updateLastExpression( std::unique_ptr<const CExpression> newLastExpression );
+    void updateLastExpression( std::shared_ptr<const CExpression> newLastExpression );
 
     void updateLastExpressionList( const CExpressionList* newLastExpressionList );
-    void updateLastExpressionList( std::unique_ptr<const CExpressionList> newLastExpressionList );
+    void updateLastExpressionList( std::shared_ptr<const CExpressionList> newLastExpressionList );
 
     void updateLastStatement( const CStatement* newLastStatement );
-    void updateLastStatement( std::unique_ptr<const CStatement> newLastStatement );
+    void updateLastStatement( std::shared_ptr<const CStatement> newLastStatement );
 
     void updateLastStatementList( const CStatementList* newLastStatementList );
-    void updateLastStatementList( std::unique_ptr<const CStatementList> newLastStatementList );
+    void updateLastStatementList( std::shared_ptr<const CStatementList> newLastStatementList );
 
-    std::unique_ptr<const CExpression> lastExpression;
-    std::unique_ptr<const CStatement> lastStatement;
-    std::unique_ptr<const CExpressionList> lastExpressionList;
-    std::unique_ptr<const CStatementList> lastStatementList;
+    std::shared_ptr<const CExpression> lastExpression;
+    std::shared_ptr<const CStatement> lastStatement;
+    std::shared_ptr<const CExpressionList> lastExpressionList;
+    std::shared_ptr<const CStatementList> lastStatementList;
 };
 
 }

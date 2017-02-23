@@ -12,9 +12,9 @@ void CIrtBuilderVisitor::Visit( CNumExpression* expression ) {
 }
 
 void CIrtBuilderVisitor::updateSubtreeWrapper( IRTree::ISubtreeWrapper* wrapperNew ) {
-    subtreeWrapper = std::unique_ptr<IRTree::ISubtreeWrapper>( wrapperNew );
+    subtreeWrapper = std::shared_ptr<IRTree::ISubtreeWrapper>( wrapperNew );
 }
 
-void CIrtBuilderVisitor::updateSubtreeWrapper( std::unique_ptr<IRTree::ISubtreeWrapper> wrapperNew ) {
+void CIrtBuilderVisitor::updateSubtreeWrapper( std::shared_ptr<IRTree::ISubtreeWrapper> wrapperNew ) {
     subtreeWrapper = std::move( wrapperNew );
 }

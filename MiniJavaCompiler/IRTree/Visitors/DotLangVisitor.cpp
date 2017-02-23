@@ -232,7 +232,7 @@ void CDotLangVisitor::Visit( const CExpressionList* list ) {
     onNodeEnter( nodeName );
     visitedNodeStack.push_back( nodeName );
 
-    const std::vector<std::unique_ptr<const CExpression>>& expressions = list->Expressions();
+    const std::vector<std::shared_ptr<const CExpression>>& expressions = list->Expressions();
     for ( auto it = expressions.begin(); it != expressions.end(); ++it ) {
         ( *it )->Accept( this );
 
@@ -249,7 +249,7 @@ void CDotLangVisitor::Visit( const CStatementList* list ) {
 
     visitedNodeStack.push_back( nodeName );
 
-    const std::vector<std::unique_ptr<const CStatement>>& statements = list->Statements();
+    const std::vector<std::shared_ptr<const CStatement>>& statements = list->Statements();
     for ( auto it = statements.begin(); it != statements.end(); ++it ) {
         ( *it )->Accept( this );
 
