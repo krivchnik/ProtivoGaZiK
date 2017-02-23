@@ -7,6 +7,8 @@
 
 #include <fstream>
 #include <IRTree/SubtreeWrapper.h>
+#include <IRTree/Frame.h>
+#include "CInfoClasses.h"
 
 class CIrtBuilderVisitor: public IVisitor {
 public:
@@ -31,9 +33,11 @@ public:
     void Visit(CIdExpression*);
     void Visit(CNumExpression*);
     void Visit(CBoolExpression*);
+
     void Visit(CNotExpression*);
     void Visit(COperationExpression*);
     void Visit(CLengthExpression*);
+
     void Visit(CArrayConstructionExpression*);
     void Visit(CConstructClassExpression*);
     void Visit(CMethodCallExpression*);
@@ -45,6 +49,13 @@ private:
     void updateSubtreeWrapper( std::shared_ptr<IRTree::ISubtreeWrapper> wrapperNew );
 
     std::shared_ptr<IRTree::ISubtreeWrapper> subtreeWrapper;
+
+    std::map< std::string, ClassInfo > classes;
+
+    std::string classCurrentName;
+    std::unordered_map<std::string, std::shared_ptr<const IRTree::CFrame>> frames;
+    IRTree::CFrame* frameCurrent;
+
 
 
 

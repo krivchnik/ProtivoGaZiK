@@ -20,11 +20,10 @@ public:
 
 class CExpressionWrapper : public ISubtreeWrapper {
 public:
-    explicit CExpressionWrapper( const CExpression* _expression )
+    CExpressionWrapper( const CExpression* _expression )
         : expression( _expression ) {}
-    explicit CExpressionWrapper( std::shared_ptr<const CExpression> _expression )
+    CExpressionWrapper( std::shared_ptr<const CExpression> _expression )
         : expression( _expression ) {}
-    virtual ~CExpressionWrapper() = default;
 
     virtual std::shared_ptr<const CExpression> ToExpression() override;
     virtual std::shared_ptr<const CStatement> ToStatement() override;
