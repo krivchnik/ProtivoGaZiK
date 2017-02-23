@@ -15,13 +15,13 @@ public:
     CExpressionList() = default;
 
     CExpressionList( const CExpression* expression ) { Add( expression ); }
-    CExpressionList( std::shared_ptr<const CExpression> expression ) { Add( std::move( expression ) ); }
+    CExpressionList( std::shared_ptr<const CExpression> expression ) { Add( expression ); }
 
     void Add( const CExpression* expression )
         { expressions.emplace_back( expression ); }
 
     void Add( std::shared_ptr<const CExpression> expression )
-        { expressions.push_back( std::move( expression ) ); }
+        { expressions.push_back( expression ); }
 
     const std::vector< std::shared_ptr<const CExpression> >& Expressions() const { return expressions; }
 

@@ -15,12 +15,12 @@ public:
     CStatementList() = default;
 
     CStatementList( const CStatement* statement ) { Add( statement ); }
-    CStatementList( std::shared_ptr<const CStatement> statement ) { Add( std::move( statement ) ); }
+    CStatementList( std::shared_ptr<const CStatement> statement ) { Add( statement ); }
 
     void Add( const CStatement* statement )
         { statements.emplace_back( statement ); }
     void Add( std::shared_ptr<const CStatement> statement )
-        { statements.push_back( std::move( statement ) ); }
+        { statements.push_back( statement ); }
 
     const std::vector< std::shared_ptr<const CStatement> >& Statements() const { return statements; }
 
