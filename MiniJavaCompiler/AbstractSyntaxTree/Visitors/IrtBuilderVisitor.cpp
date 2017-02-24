@@ -277,8 +277,18 @@ void CIrtBuilderVisitor::Visit(CAssignItemStatement *) {
     //MOCK
 }
 
-void CIrtBuilderVisitor::Visit(CPrintStatement *) {
-    //MOCK
+void CIrtBuilderVisitor::Visit(CPrintStatement *statement) {
+
+    statement->GetExpression()->Accept( this );
+
+    updateSubtreeWrapper( new IRTree::CExpressionWrapper(
+            std::move( frameCurrent->ExternalCall(
+                    "print",
+                    std::shared_ptr<const IRTree::CExpressionList>(
+                            new IRTree::CExpressionList( subtreeWrapper->ToExpression() )
+                    )
+            ) )
+    ) );
 }
 
 void CIrtBuilderVisitor::Visit(CIfElseStatement *) {
