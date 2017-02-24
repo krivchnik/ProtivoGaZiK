@@ -11,6 +11,25 @@ TMethodToIRTMap CIrtBuilderVisitor::GetMethodTrees() {
     return methodTrees;
 }
 
+IRTree::TOperatorType CIrtBuilderVisitor::operatorFromAstToIr( COperationExpression::OperationType type ) const {
+    IRTree::TOperatorType typeResult;
+    switch ( type ) {
+        case COperationExpression::OperationType::ADDITION: typeResult = IRTree::TOperatorType::OT_Plus; break;
+        case COperationExpression::OperationType::SUBTRACTION: typeResult = IRTree::TOperatorType::OT_Minus; break;
+        case COperationExpression::OperationType::MULTIPLICATION: typeResult = IRTree::TOperatorType::OT_Times; break;
+        //case COperationExpression::OperationType::DIVISION = IRTree::TOperatorType::OT_Div; break;
+        case COperationExpression::OperationType::MOD: typeResult = IRTree::TOperatorType::OT_Mod; break;
+        case COperationExpression::OperationType::AND: typeResult = IRTree::TOperatorType::OT_And; break;
+        case COperationExpression::OperationType::OR: typeResult = IRTree::TOperatorType::OT_Or; break;
+        default: {
+            // such cases should never happen
+            assert( false ) ;
+        }
+    }
+    return typeResult;
+}
+
+
 void CIrtBuilderVisitor::Visit( CMainClass* mainClass ) {
     //ПОТЕНЦИАЛЬНО БАГ (ЕСТЬ ЛИ ИНФО О MAIN CLASS В ТАБЛИЦЕ СИМВОЛОВ)
     classCurrentName = mainClass->GetClassId()->GetName();
@@ -307,8 +326,43 @@ void CIrtBuilderVisitor::Visit(CNotExpression *) {
     //MOCK
 }
 
-void CIrtBuilderVisitor::Visit(COperationExpression *) {
-    //MOCK
+void CIrtBuilderVisitor::Visit(COperationExpression *expression) {
+
+    expression->GetLeftOperand()->Accept( this );
+    std::shared_ptr<IRTree::ISubtreeWrapper> wrapperLeft( subtreeWrapper );
+    // std::unique_ptr<const IRTree::CExpression> expressionLeft = std::move( subtreeWrapper->ToExpression() );
+
+    expression->GetRightOperand()->Accept( this );
+    std::shared_ptr<IRTree::ISubtreeWrapper> wrapperRight( subtreeWrapper );
+    // std::unique_ptr<const IRTree::CExpression> expressionRight = std::move( subtreeWrapper->ToExpression() );
+
+    if ( expression->GetOperationType() == COperationExpression::OperationType::LESS ) {
+        updateSubtreeWrapper( new IRTree::CRelativeConditionalWrapper(
+                IRTree::TLogicOperatorType::LOT_LT,
+                wrapperLeft->ToExpression(),
+                wrapperRight->ToExpression()
+        ) );
+    } else if ( expression->GetOperationType() == COperationExpression::OperationType::AND ) {
+        updateSubtreeWrapper( new IRTree::CAndConditionalWrapper(
+                wrapperLeft,
+                wrapperRight
+        ) );
+    } else if ( expression->GetOperationType() == COperationExpression::OperationType::OR ) {
+        updateSubtreeWrapper( new IRTree::COrConditionalWrapper(
+                wrapperLeft,
+                wrapperRight
+        ) );
+    } else {
+        IRTree::TOperatorType operatorType = operatorFromAstToIr( expression->GetOperationType() );
+
+        updateSubtreeWrapper( new IRTree::CExpressionWrapper(
+                new IRTree::CBinaryExpression(
+                        operatorType,
+                        wrapperLeft->ToExpression(),
+                        wrapperRight->ToExpression()
+                )
+        ) );
+    }
 }
 
 void CIrtBuilderVisitor::Visit(CLengthExpression *) {

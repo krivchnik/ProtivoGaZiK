@@ -8,6 +8,7 @@
 #include <fstream>
 #include <IRTree/SubtreeWrapper.h>
 #include <IRTree/Frame.h>
+#include <Nodes/COperationExpression.h>
 #include "CInfoClasses.h"
 #include "CSymbolTable.h"
 
@@ -55,6 +56,8 @@ public:
 private:
     void updateSubtreeWrapper( IRTree::ISubtreeWrapper* wrapperNew );
     void updateSubtreeWrapper( std::shared_ptr<IRTree::ISubtreeWrapper> wrapperNew );
+
+    IRTree::TOperatorType operatorFromAstToIr( COperationExpression::OperationType type ) const;
 
     template <class InputIteratorArguments, class InputIteratorLocals, class InputIteratorFields>
     void buildNewFrame( const std::string& className, const std::string& methodName,
