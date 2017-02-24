@@ -373,8 +373,27 @@ void CIrtBuilderVisitor::Visit(CArrayConstructionExpression *) {
     //MOCKs
 }
 
-void CIrtBuilderVisitor::Visit(CConstructClassExpression *) {
-    //MOCK
+void CIrtBuilderVisitor::Visit(CConstructClassExpression *expression) {
+
+    ClassInfo classInfo = symbolTable.GetClassInfo(expression->getClassID()->GetName());
+    int fieldCount = classInfo.variableDeclaration.size();
+
+    updateSubtreeWrapper( new IRTree::CExpressionWrapper(
+            std::move( frameCurrent->ExternalCall(
+                    "malloc",
+                    std::shared_ptr<const IRTree::CExpressionList>(
+                            new IRTree::CExpressionList(
+                                    new IRTree::CBinaryExpression(
+                                            IRTree::TOperatorType::OT_Times,
+                                            new IRTree::CConstExpression( fieldCount ),
+                                            new IRTree::CConstExpression( frameCurrent->WordSize() )
+                                    )
+                            )
+                    )
+            ) )
+    ) );
+
+    methodCallerClassName = expression->getClassID()->GetName();
 }
 
 void CIrtBuilderVisitor::Visit(CMethodCallExpression *expression) {
@@ -420,10 +439,10 @@ void CIrtBuilderVisitor::Visit(CThisExpression *) {
 void CIrtBuilderVisitor::Visit(CGetItemExpression *expression) {
 
     expression->GetObject()->Accept( this );
-    std::shared_ptr<const IRTree::CExpression> containerExpression( subtreeWrapper->ToExpression();
+    std::shared_ptr<const IRTree::CExpression> containerExpression( subtreeWrapper->ToExpression() );
 
     expression->GetIndex()->Accept( this );
-    std::shared_ptr<const IRTree::CExpression> indexExpression( subtreeWrapper->ToExpression();
+    std::shared_ptr<const IRTree::CExpression> indexExpression( subtreeWrapper->ToExpression() );
 
     updateSubtreeWrapper( new IRTree::CExpressionWrapper(
             new IRTree::CMemExpression(
