@@ -587,6 +587,7 @@ void CIrtBuilderVisitor::Visit(CThisExpression *) {
                      )
             )
     ) );
+    methodCallerClassName = classCurrentName;
 }
 
 void CIrtBuilderVisitor::Visit(CGetItemExpression *expression) {
