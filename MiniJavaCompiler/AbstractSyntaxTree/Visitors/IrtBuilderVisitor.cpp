@@ -576,7 +576,13 @@ void CIrtBuilderVisitor::Visit(CMethodCallExpression *expression) {
 }
 
 void CIrtBuilderVisitor::Visit(CThisExpression *) {
-    //MOCK
+    updateSubtreeWrapper( new IRTree::CExpressionWrapper(
+            frameCurrent->GetThis()->ToExpression(
+                    std::shared_ptr<const IRTree::CExpression>(
+                            new IRTree::CTempExpression( frameCurrent->FramePointer() )
+                     )
+            )
+    ) );
 }
 
 void CIrtBuilderVisitor::Visit(CGetItemExpression *expression) {

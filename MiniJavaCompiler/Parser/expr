@@ -6,13 +6,8 @@ class QuickSort{
 class BBS{
     int[] b;
     public int a(int k){
-        int j;
         int k;
-        if( true ) {
-            j = 1;
-        } else {
-            k = 2;
-        }
+        k = this.a(10);
         return 0 ;
     }
 
