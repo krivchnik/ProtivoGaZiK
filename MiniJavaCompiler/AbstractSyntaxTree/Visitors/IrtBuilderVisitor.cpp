@@ -303,8 +303,43 @@ void CIrtBuilderVisitor::Visit(CAssignStatement *statement) {
     ) );
 }
 
-void CIrtBuilderVisitor::Visit(CAssignItemStatement *) {
-    //MOCK
+void CIrtBuilderVisitor::Visit(CAssignItemStatement *statement) {
+
+    statement->getId()->Accept( this );
+    std::shared_ptr<const IRTree::CExpression> leftPartExpression( subtreeWrapper->ToExpression() );
+
+    statement->getAssignedExpression()->Accept( this );
+    std::shared_ptr<const IRTree::CExpression> rightPartExpression( subtreeWrapper->ToExpression() );
+
+    statement->getExpressionInBrackets()->Accept( this );
+    std::shared_ptr<const IRTree::CExpression> indexExpression( subtreeWrapper->ToExpression() );
+
+    updateSubtreeWrapper( new IRTree::CStatementWrapper(
+            new IRTree::CMoveStatement(
+                    std::shared_ptr<const IRTree::CMemExpression>(
+                            new IRTree::CMemExpression(
+                                    new IRTree::CBinaryExpression(
+                                            IRTree::TOperatorType::OT_Plus,
+                                            leftPartExpression,
+                                            std::shared_ptr<const IRTree::CBinaryExpression>(
+                                                    new IRTree::CBinaryExpression(
+                                                            IRTree::TOperatorType::OT_Times,
+                                                            new IRTree::CBinaryExpression(
+                                                                    IRTree::TOperatorType::OT_Plus,
+                                                                    indexExpression,
+                                                                    std::shared_ptr<const IRTree::CConstExpression>(
+                                                                            new IRTree::CConstExpression( 1 )
+                                                                    )
+                                                            ),
+                                                            new IRTree::CConstExpression( frameCurrent->WordSize() )
+                                                    )
+                                            )
+                                    )
+                            )
+                    ),
+                    rightPartExpression
+            )
+    ) );
 }
 
 void CIrtBuilderVisitor::Visit(CPrintStatement *statement) {
