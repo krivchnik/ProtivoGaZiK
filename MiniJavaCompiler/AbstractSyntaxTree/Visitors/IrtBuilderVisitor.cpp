@@ -281,7 +281,7 @@ void CIrtBuilderVisitor::updateSubtreeWrapper( IRTree::ISubtreeWrapper* wrapperN
 }
 
 void CIrtBuilderVisitor::updateSubtreeWrapper( std::shared_ptr<IRTree::ISubtreeWrapper> wrapperNew ) {
-    subtreeWrapper = std::move( wrapperNew );
+    subtreeWrapper = wrapperNew;
 }
 
 std::string CIrtBuilderVisitor::makeMethodFullName( const std::string& className, const std::string& methodName ) {
@@ -360,8 +360,39 @@ void CIrtBuilderVisitor::Visit(CIfElseStatement *) {
     //MOCK
 }
 
-void CIrtBuilderVisitor::Visit(CWhileStatement *) {
-    //MOCK
+void CIrtBuilderVisitor::Visit(CWhileStatement *statement) {
+
+    statement->getCondition()->Accept( this );
+    std::shared_ptr<IRTree::ISubtreeWrapper> wrapperCondition( subtreeWrapper );
+    statement->getBody()->Accept( this );
+    std::shared_ptr<IRTree::ISubtreeWrapper> wrapperBody( subtreeWrapper );
+
+    IRTree::CLabel labelLoop;
+    IRTree::CLabel labelBody;
+    IRTree::CLabel labelDone;
+
+    updateSubtreeWrapper( new IRTree::CStatementWrapper(
+            new IRTree::CSeqStatement(
+                    new IRTree::CLabelStatement( labelLoop ),
+                    new IRTree::CSeqStatement(
+                            wrapperCondition->ToConditional( labelBody, labelDone ),
+                            std::shared_ptr<const IRTree::CSeqStatement>(
+                                    new IRTree::CSeqStatement(
+                                            new IRTree::CLabelStatement( labelBody ),
+                                            new IRTree::CSeqStatement(
+                                                    wrapperBody->ToStatement(),
+                                                    std::shared_ptr<const IRTree::CSeqStatement>(
+                                                            new IRTree::CSeqStatement(
+                                                                    new IRTree::CJumpStatement( labelLoop ),
+                                                                    new IRTree::CLabelStatement( labelDone )
+                                                            )
+                                                    )
+                                            )
+                                    )
+                            )
+                    )
+            )
+    ) );
 }
 
 void CIrtBuilderVisitor::Visit(CListExpression *) {
