@@ -376,12 +376,40 @@ void CIrtBuilderVisitor::Visit(COperationExpression *expression) {
     }
 }
 
-void CIrtBuilderVisitor::Visit(CLengthExpression *) {
-    //MOCK
+void CIrtBuilderVisitor::Visit(CLengthExpression *expression) {
+
+    expression->getExpression()->Accept( this );
+    std::shared_ptr<const IRTree::CExpression> targetExpression = subtreeWrapper->ToExpression();
+
+    updateSubtreeWrapper( new IRTree::CExpressionWrapper( targetExpression ) );
 }
 
-void CIrtBuilderVisitor::Visit(CArrayConstructionExpression *) {
-    //MOCKs
+void CIrtBuilderVisitor::Visit(CArrayConstructionExpression *expression ) {
+
+    expression->getSize()->Accept( this );
+
+    std::shared_ptr<const IRTree::CExpression> expressionLength = subtreeWrapper->ToExpression();
+
+    updateSubtreeWrapper( new IRTree::CExpressionWrapper(
+            frameCurrent->ExternalCall(
+                    "malloc",
+                    std::shared_ptr<const IRTree::CExpressionList>(
+                            new IRTree::CExpressionList(
+                                    new IRTree::CBinaryExpression(
+                                            IRTree::TOperatorType::OT_Times,
+                                            new IRTree::CBinaryExpression(
+                                                    IRTree::TOperatorType::OT_Plus,
+                                                    expressionLength,
+                                                    std::shared_ptr<IRTree::CConstExpression>( new IRTree::CConstExpression( 1 ) )
+                                            ),
+                                            new IRTree::CConstExpression( frameCurrent->WordSize() )
+                                    )
+                            )
+                    )
+            )
+    )
+    );
+
 }
 
 void CIrtBuilderVisitor::Visit(CConstructClassExpression *expression) {
