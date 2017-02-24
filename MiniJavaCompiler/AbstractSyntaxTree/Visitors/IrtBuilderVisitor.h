@@ -71,7 +71,7 @@ private:
 
     std::string classCurrentName;
     std::unordered_map<std::string, std::shared_ptr<const IRTree::CFrame>> frames;
-    IRTree::CFrame* frameCurrent;
+    std::shared_ptr<IRTree::CFrame> frameCurrent;
 
     // used when translating expr.methodName() to determine the name of the class of expr
     std::string methodCallerClassName;

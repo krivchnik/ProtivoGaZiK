@@ -23,9 +23,7 @@ void CIrtBuilderVisitor::buildNewFrame( const std::string& className, const std:
                                         InputIteratorArguments argumentsLeftIt, InputIteratorArguments argumentsRightIt,
                                         InputIteratorLocals localsLeftIt, InputIteratorLocals localsRightIt,
                                         InputIteratorFields fieldsLeftIt, InputIteratorFields fieldsRightIt ) {
-    std::unique_ptr<IRTree::CFrame> frameNew = std::unique_ptr<IRTree::CFrame>( new IRTree::CFrame( className, methodName ) );
-
-    frameCurrent = frameNew.get();
+    frameCurrent = std::shared_ptr<IRTree::CFrame>( new IRTree::CFrame( className, methodName ) );
 
     frameCurrent->AddThis();
     for ( auto it = fieldsLeftIt; it != fieldsRightIt; ++it ) {
@@ -161,8 +159,11 @@ void CIrtBuilderVisitor::Visit( CMethod* declaration ) {
     declaration->getListDeclarations()->Accept( this );
     std::shared_ptr<IRTree::ISubtreeWrapper> statementListWrapper( subtreeWrapper );
 
-    declaration->getReturnExpression()->Accept( this );
-    std::shared_ptr<const IRTree::CExpression> expressionReturn( subtreeWrapper->ToExpression() );
+    std::shared_ptr<const IRTree::CExpression> expressionReturn(nullptr);
+    if (declaration->getReturnExpression()) {
+        declaration->getReturnExpression()->Accept( this );
+        expressionReturn = subtreeWrapper->ToExpression();
+    }
 
     if ( statementListWrapper ) {
         updateSubtreeWrapper(

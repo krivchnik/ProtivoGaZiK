@@ -38,7 +38,9 @@ int main(int argc, char **argv)
 		for ( auto it = methodTrees.begin(); it != methodTrees.end(); ++it ) {
 			std::string methodName = it->first;
 			methodName[0] = std::toupper( methodName[0] );
-			std::fstream outputStream( (pathOutputFile + methodName + extension).c_str());
+			std::fstream outputStream( (pathOutputFile + methodName + extension).c_str(), std::fstream::out);
+            outputStream << methodName << "\n";
+            outputStream.close();
 			/*outputStream << ToDotLanguage( it->first ) << std::endl;
 			outputStream.close();*/
 		}
