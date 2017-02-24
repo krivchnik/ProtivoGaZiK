@@ -288,8 +288,19 @@ std::string CIrtBuilderVisitor::makeMethodFullName( const std::string& className
     return className + "::" + methodName;
 }
 
-void CIrtBuilderVisitor::Visit(CAssignStatement *) {
-    //MOCK
+void CIrtBuilderVisitor::Visit(CAssignStatement *statement) {
+
+    statement->GetVariable()->Accept( this );
+    std::shared_ptr<IRTree::ISubtreeWrapper> wrapperLeftPart( subtreeWrapper );
+    statement->GetExpression()->Accept( this );
+    std::shared_ptr<IRTree::ISubtreeWrapper> wrapperRightPart( subtreeWrapper );
+
+    updateSubtreeWrapper( new IRTree::CStatementWrapper(
+            new IRTree::CMoveStatement(
+                    wrapperLeftPart->ToExpression(),
+                    wrapperRightPart->ToExpression()
+            )
+    ) );
 }
 
 void CIrtBuilderVisitor::Visit(CAssignItemStatement *) {
