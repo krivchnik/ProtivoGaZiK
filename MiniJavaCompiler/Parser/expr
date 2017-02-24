@@ -6,9 +6,15 @@ class QuickSort{
 class BBS{
     int[] b;
     public int a(int k){
-       b = new int[5];
-       System.out.println( b.length );
-       return 0 ;
+        int j;
+        int k;
+        if( true ) {
+            j = 1;
+        } else {
+            k = 2;
+        }
+        return 0 ;
     }
+
 
 }

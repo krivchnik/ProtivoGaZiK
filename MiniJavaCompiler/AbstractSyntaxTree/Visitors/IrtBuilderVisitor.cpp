@@ -356,8 +356,46 @@ void CIrtBuilderVisitor::Visit(CPrintStatement *statement) {
     ) );
 }
 
-void CIrtBuilderVisitor::Visit(CIfElseStatement *) {
-    //MOCK
+void CIrtBuilderVisitor::Visit( CIfElseStatement *statement ) {
+    assert( statement != 0 );
+
+    statement->getExpression()->Accept( this );
+    std::shared_ptr<IRTree::ISubtreeWrapper> wrapperCondition = subtreeWrapper;
+    statement->getIfStatement()->Accept( this );
+    std::shared_ptr<IRTree::ISubtreeWrapper> wrapperTargetPositive = subtreeWrapper;
+    statement->getElseStatement()->Accept( this );
+    std::shared_ptr<IRTree::ISubtreeWrapper> wrapperTargetNegative = subtreeWrapper;
+
+    IRTree::CLabel labelTrue;
+    IRTree::CLabel labelFalse;
+    IRTree::CLabel labelJoin;
+
+    updateSubtreeWrapper( new IRTree::CStatementWrapper(
+            new IRTree::CSeqStatement(
+                    wrapperCondition->ToConditional( labelTrue, labelFalse ),
+                    std::shared_ptr<const IRTree::CSeqStatement>(
+                            new IRTree::CSeqStatement(
+                                    new IRTree::CLabelStatement( labelTrue ),
+                                    new IRTree::CSeqStatement(
+                                            wrapperTargetPositive->ToStatement(),
+                                            std::shared_ptr<const IRTree::CSeqStatement>(
+                                                    new IRTree::CSeqStatement(
+                                                            new IRTree::CJumpStatement( labelJoin ),
+                                                            new IRTree::CSeqStatement(
+                                                                    new IRTree::CLabelStatement( labelFalse ),
+                                                                    new IRTree::CSeqStatement(
+                                                                            wrapperTargetNegative->ToStatement(),
+                                                                            std::shared_ptr<const IRTree::CLabelStatement>(
+                                                                                    new IRTree::CLabelStatement( labelJoin ) )
+                                                                    )
+                                                            )
+                                                    )
+                                            )
+                                    )
+                            )
+                    )
+            )
+    ) );
 }
 
 void CIrtBuilderVisitor::Visit(CWhileStatement *statement) {
