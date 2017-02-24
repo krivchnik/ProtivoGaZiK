@@ -3,6 +3,13 @@
 #include <IRTree/Frame.h>
 #include <unordered_set>
 
+void CIrtBuilderVisitor::StartVisit(INode *startNode) {
+    startNode->Accept(this);
+}
+
+TMethodToIRTMap CIrtBuilderVisitor::GetMethodTrees() {
+    return methodTrees;
+}
 
 void CIrtBuilderVisitor::Visit( CMainClass* mainClass ) {
     //ПОТЕНЦИАЛЬНО БАГ (ЕСТЬ ЛИ ИНФО О MAIN CLASS В ТАБЛИЦЕ СИМВОЛОВ)
@@ -191,6 +198,8 @@ void CIrtBuilderVisitor::Visit( CMethod* declaration ) {
                 )
         );
     }
+
+    methodTrees.emplace( methodFullName, std::move( subtreeWrapper->ToStatement() ) );
 }
 
 void CIrtBuilderVisitor::Visit( CClass* declaration ) {
@@ -300,9 +309,3 @@ void CIrtBuilderVisitor::Visit(CThisExpression *) {
 void CIrtBuilderVisitor::Visit(CGetItemExpression *) {
     //MOCK
 }
-
-
-
-
-
-

@@ -1,5 +1,6 @@
 #pragma  once
 #include <CommonInclude.h>
+#include <Visitors/CSymbolTable.h>
 
 class CAnalyzer {
 
@@ -8,6 +9,9 @@ public:
 
     std::vector<ErrorDescription> analyze();
 
+    CSymbolTable GetSymbolTable() const {
+        return CSymbolTable(classes);
+    }
 private:
     std::shared_ptr<CProgram> program;
     std::map< std::string, ClassInfo > classes;

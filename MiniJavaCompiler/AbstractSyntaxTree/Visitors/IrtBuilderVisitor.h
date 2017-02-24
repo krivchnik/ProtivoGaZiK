@@ -11,10 +11,17 @@
 #include "CInfoClasses.h"
 #include "CSymbolTable.h"
 
+typedef typename std::unordered_map<std::string, std::shared_ptr<const IRTree::CStatement>> TMethodToIRTMap;
+
 class CIrtBuilderVisitor: public IVisitor {
 public:
+    CIrtBuilderVisitor(const CSymbolTable& symbolTable)
+            : symbolTable(symbolTable) {}
+
+    TMethodToIRTMap GetMethodTrees();
+
     //принимает корень дерева и имя файла с выводом для графвиза
-    void StartVisit(INode* startNode, std::string filename);
+    void StartVisit(INode* startNode);
     //Сюда нужно добавить методы visit для всех классов, которые мы хотим отображать в дереве.
     void Visit(CAssignStatement*);
     void Visit(CAssignItemStatement*);
@@ -68,4 +75,7 @@ private:
 
     // used when translating expr.methodName() to determine the name of the class of expr
     std::string methodCallerClassName;
+
+    // result
+    TMethodToIRTMap methodTrees;
 };

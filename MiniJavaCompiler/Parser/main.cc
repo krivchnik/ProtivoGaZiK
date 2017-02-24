@@ -1,6 +1,7 @@
 /* main.cc */
 
 #include <CommonInclude.h>
+#include <Visitors/IrtBuilderVisitor.h>
 
 // prototype of bison-generated parser function
 int yyparse();
@@ -24,6 +25,23 @@ int main(int argc, char **argv)
 	for (auto error : errors) {
 		std::cout << error.type << " : " << error.info << "\n";
 		std::cout << error.loc;
+	}
+	if (errors.size() == 0) {
+		std::string pathOutputFile("irt_");
+		std::string extension(".dot");
+		std::string openMode("w");
+
+		CSymbolTable symbolTable(analyzer.GetSymbolTable());
+		CIrtBuilderVisitor irtBuilder(symbolTable);
+		irtBuilder.StartVisit(ans.get());
+		TMethodToIRTMap methodTrees(irtBuilder.GetMethodTrees());
+		for ( auto it = methodTrees.begin(); it != methodTrees.end(); ++it ) {
+			std::string methodName = it->first;
+			methodName[0] = std::toupper( methodName[0] );
+			std::fstream outputStream( (pathOutputFile + methodName + extension).c_str());
+			/*outputStream << ToDotLanguage( it->first ) << std::endl;
+			outputStream.close();*/
+		}
 	}
 	return 0;
 }
