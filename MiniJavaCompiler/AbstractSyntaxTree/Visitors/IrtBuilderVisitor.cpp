@@ -377,14 +377,73 @@ void CIrtBuilderVisitor::Visit(CConstructClassExpression *) {
     //MOCK
 }
 
-void CIrtBuilderVisitor::Visit(CMethodCallExpression *) {
-    //MOCK
+void CIrtBuilderVisitor::Visit(CMethodCallExpression *expression) {
+    expression->getObject()->Accept( this );
+    std::string methodCaller = methodCallerClassName;
+
+    const std::vector<std::shared_ptr<IExpression>>& arguments = expression->getArguments()->GetExpressions();
+
+    IRTree::CExpressionList* expressionListIrt = new IRTree::CExpressionList();
+
+    for ( auto it = arguments.begin(); it != arguments.end(); ++it ) {
+        ( *it )->Accept( this );
+        expressionListIrt->Add( subtreeWrapper->ToExpression() );
+    }
+
+    updateSubtreeWrapper( new IRTree::CExpressionWrapper(
+            new IRTree::CCallExpression(
+                    new IRTree::CNameExpression(
+                            IRTree::CLabel( makeMethodFullName( methodCaller, expression->getMethodId()->GetName() ) )
+                    ),
+                    expressionListIrt
+            )
+    ) );
+
+    std::vector<MethodInfo> methodsInfo = symbolTable.GetAvailableMethodsInfo(methodCaller);
+    std::string returnType = "";
+    for (auto it = methodsInfo.begin(); it != methodsInfo.end(); ++it) {
+        if (it->name == expression->getMethodId()->GetName()) {
+            returnType = it->returnedType;
+            break;
+        }
+    }
+
+    if (symbolTable.GetClassInfo(returnType).name != "") {
+        methodCallerClassName = returnType;
+    }
 }
 
 void CIrtBuilderVisitor::Visit(CThisExpression *) {
     //MOCK
 }
 
-void CIrtBuilderVisitor::Visit(CGetItemExpression *) {
-    //MOCK
+void CIrtBuilderVisitor::Visit(CGetItemExpression *expression) {
+
+    expression->GetObject()->Accept( this );
+    std::shared_ptr<const IRTree::CExpression> containerExpression( subtreeWrapper->ToExpression();
+
+    expression->GetIndex()->Accept( this );
+    std::shared_ptr<const IRTree::CExpression> indexExpression( subtreeWrapper->ToExpression();
+
+    updateSubtreeWrapper( new IRTree::CExpressionWrapper(
+            new IRTree::CMemExpression(
+                    new IRTree::CBinaryExpression(
+                            IRTree::TOperatorType::OT_Plus,
+                            containerExpression,
+                            std::shared_ptr<const IRTree::CBinaryExpression>(
+                                    new IRTree::CBinaryExpression(
+                                            IRTree::TOperatorType::OT_Times,
+                                            new IRTree::CBinaryExpression(
+                                                    IRTree::TOperatorType::OT_Plus,
+                                                    indexExpression,
+                                                    std::shared_ptr<const IRTree::CConstExpression>(
+                                                            new IRTree::CConstExpression( 1 )
+                                                    )
+                                            ),
+                                            new IRTree::CConstExpression( frameCurrent->WordSize() )
+                                    )
+                            )
+                    )
+            )
+    ) );
 }
