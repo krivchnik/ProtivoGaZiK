@@ -356,7 +356,7 @@ void CIrtBuilderVisitor::Visit(CPrintStatement *statement) {
     ) );
 }
 
-void CIrtBuilderVisitor::Visit( CIfElseStatement *statement ) {
+void CIrtBuilderVisitor::Visit(CIfElseStatement *statement ) {
     assert( statement != 0 );
 
     statement->getExpression()->Accept( this );
@@ -433,12 +433,16 @@ void CIrtBuilderVisitor::Visit(CWhileStatement *statement) {
     ) );
 }
 
-void CIrtBuilderVisitor::Visit(CListExpression *) {
-    //MOCK
+void CIrtBuilderVisitor::Visit(CListExpression *listExpression) {
+    // such calls should never happen
+    assert(false);
 }
 
-void CIrtBuilderVisitor::Visit(CNotExpression *) {
-    //MOCK
+void CIrtBuilderVisitor::Visit(CNotExpression *expression) {
+
+    expression->GetExpression()->Accept( this );
+
+    updateSubtreeWrapper( new IRTree::CNegateConditionalWrapper(subtreeWrapper) );
 }
 
 void CIrtBuilderVisitor::Visit(COperationExpression *expression) {
