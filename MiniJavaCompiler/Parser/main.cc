@@ -2,6 +2,7 @@
 
 #include <CommonInclude.h>
 #include <Visitors/IrtBuilderVisitor.h>
+#include <IRTree/Visitors/DotLangVisitor.h>
 
 // prototype of bison-generated parser function
 int yyparse();
@@ -29,7 +30,6 @@ int main(int argc, char **argv)
 	if (errors.size() == 0) {
 		std::string pathOutputFile("irt_");
 		std::string extension(".dot");
-		std::string openMode("w");
 
 		CSymbolTable symbolTable(analyzer.GetSymbolTable());
 		CIrtBuilderVisitor irtBuilder(symbolTable);
@@ -39,10 +39,11 @@ int main(int argc, char **argv)
 			std::string methodName = it->first;
 			methodName[0] = std::toupper( methodName[0] );
 			std::fstream outputStream( (pathOutputFile + methodName + extension).c_str(), std::fstream::out);
-            outputStream << methodName << "\n";
+
+            IRTree::CDotLangVisitor dotLangVisitor( false );
+            methodTrees.at( methodName )->Accept( &dotLangVisitor );
+            outputStream << dotLangVisitor.GetTraversalInDotLanguage() << std::endl;
             outputStream.close();
-			/*outputStream << ToDotLanguage( it->first ) << std::endl;
-			outputStream.close();*/
 		}
 	}
 	return 0;
