@@ -1,4 +1,5 @@
 #include <IRTree/Visitors/DoubleCallEliminationVisitor.h>
+#include <IRTree/Temporary.h>
 
 using namespace IRTree;
 
@@ -118,11 +119,14 @@ void CDoubleCallEliminationVisitor::Visit( const CCallExpression* expression ) {
     expression->Arguments()->Accept( this );
     std::shared_ptr<const CExpressionList> argumentsList( lastExpressionList );
 
+    CTemp temp;
     updateLastExpression(
-        new CCallExpression(
-            functionExpression,
-            argumentsList
-        )
+            new CEseqExpression(
+                    new CMoveStatement(
+                    new CTempExpression( temp ),
+                    new CCallExpression( functionExpression, argumentsList ) ),
+                    new CTempExpression( temp )
+            )
     );
 
     onNodeExit( nodeName );
