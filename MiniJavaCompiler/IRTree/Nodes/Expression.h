@@ -16,11 +16,13 @@ namespace IRTree {
 class IExpression : public IVisitorTarget {
 public:
     virtual ~IExpression() {}
+    virtual std::shared_ptr<const IExpression> Canonize( int eseqCount ) = 0;
 };
 
 class CExpression : public IExpression {
 public:
     virtual ~CExpression() {}
+    virtual std::shared_ptr<const IExpression> Canonize( int eseqCount );
 };
 
 enum class TOperatorType : char {
@@ -42,6 +44,7 @@ public:
     int Value() const { return value; }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
+    virtual std::shared_ptr<const IExpression> Canonize( int eseqCount );
 private:
     int value;
 };
@@ -55,6 +58,7 @@ public:
     const CLabel Label() const { return label; }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
+    virtual std::shared_ptr<const IExpression> Canonize( int eseqCount );
 
 private:
     CLabel label;
@@ -69,6 +73,8 @@ public:
     CTemp Temporary() const { return temporary; }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
+    virtual std::shared_ptr<const IExpression> Canonize( int eseqCount );
+
 private:
     CTemp temporary;
 };
@@ -85,6 +91,7 @@ public:
     const CExpression* RightOperand() const { return rightOperand.get(); }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
+    virtual std::shared_ptr<const IExpression> Canonize( int eseqCount );
 
 private:
     std::shared_ptr<const CExpression> leftOperand;
@@ -102,6 +109,7 @@ public:
     const CExpression* Address() const { return address.get(); }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
+    virtual std::shared_ptr<const IExpression> Canonize( int eseqCount );
 
 private:
     std::shared_ptr<const CExpression> address;
@@ -118,6 +126,7 @@ public:
     const CExpressionList* Arguments() const { return arguments.get(); }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
+    virtual std::shared_ptr<const IExpression> Canonize( int eseqCount );
 
 private:
     std::shared_ptr<const CExpression> function;
@@ -134,6 +143,7 @@ public:
     const CExpression* Expression() const { return expression.get(); }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
+    virtual std::shared_ptr<const IExpression> Canonize( int eseqCount );
 
 private:
     std::shared_ptr<const CStatement> statement;

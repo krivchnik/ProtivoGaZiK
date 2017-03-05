@@ -1,6 +1,7 @@
 #include <IRTree/Nodes/Statement.h>
 
 #include <IRTree/Nodes/Expression.h>
+#include <assert.h>
 
 using namespace IRTree;
 
@@ -20,9 +21,19 @@ CExpStatement::CExpStatement( std::shared_ptr<const CExpression> _expression )
     : expression( _expression ) {}
 CExpStatement::~CExpStatement() {}
 
+std::shared_ptr<const IStatement> CExpStatement::Canonize(int eseqCount) {
+    assert(false);
+    return CStatement::Canonize(eseqCount);
+}
+
 CJumpStatement::CJumpStatement( CLabel _target )
     : target( _target ) {}
 CJumpStatement::~CJumpStatement() {}
+
+std::shared_ptr<const IStatement> CJumpStatement::Canonize(int eseqCount) {
+    assert(false);
+    return CStatement::Canonize(eseqCount);
+}
 
 CJumpConditionalStatement::CJumpConditionalStatement( TLogicOperatorType _operation,
     const CExpression* left, const CExpression* right,
@@ -36,10 +47,25 @@ CJumpConditionalStatement::CJumpConditionalStatement( TLogicOperatorType _operat
         labelTrue( _labelTrue ), labelFalse( _labelFalse ), operation( _operation ) {}
 CJumpConditionalStatement::~CJumpConditionalStatement() {}
 
+std::shared_ptr<const IStatement> CJumpConditionalStatement::Canonize(int eseqCount) {
+    assert(false);
+    return CStatement::Canonize(eseqCount);
+}
+
 CSeqStatement::CSeqStatement(const CStatement* _left, const CStatement* _right )
     : leftStatement( _left ), rightStatement( _right ) {}
 CSeqStatement::CSeqStatement( std::shared_ptr<const CStatement> _left, std::shared_ptr<const CStatement> _right )
     : leftStatement( _left ), rightStatement( _right ) {}
 
+std::shared_ptr<const IStatement> CSeqStatement::Canonize(int eseqCount) {
+    assert(false);
+    return CStatement::Canonize(eseqCount);
+}
+
 CLabelStatement::CLabelStatement( CLabel _label ) : label( _label ) {}
 CLabelStatement::~CLabelStatement() {}
+
+std::shared_ptr<const IStatement> CLabelStatement::Canonize(int eseqCount) {
+    assert(false);
+    return CStatement::Canonize(eseqCount);
+}
