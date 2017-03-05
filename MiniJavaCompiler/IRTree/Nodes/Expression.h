@@ -15,12 +15,12 @@ namespace IRTree {
 
 class IExpression : public IVisitorTarget {
 public:
-    virtual ~IExpression();
+    virtual ~IExpression() {}
 };
 
 class CExpression : public IExpression {
 public:
-    virtual ~CExpression();
+    virtual ~CExpression() {}
 };
 
 enum class TOperatorType : char {
@@ -38,7 +38,6 @@ enum class TOperatorType : char {
 class CConstExpression : public CExpression {
 public:
     CConstExpression( int _value );
-    ~CConstExpression();
 
     int Value() const { return value; }
 
@@ -52,7 +51,6 @@ private:
 class CNameExpression : public CExpression {
 public:
     CNameExpression( CLabel _label );
-    ~CNameExpression();
 
     const CLabel Label() const { return label; }
 
@@ -67,7 +65,6 @@ private:
 class CTempExpression : public CExpression {
 public:
     CTempExpression( CTemp _temporary );
-    ~CTempExpression();
 
     CTemp Temporary() const { return temporary; }
 
@@ -82,7 +79,6 @@ class CBinaryExpression : public CExpression {
 public:
     CBinaryExpression( TOperatorType _operation, const CExpression* left, const CExpression* right );
     CBinaryExpression( TOperatorType _operation, std::shared_ptr<const CExpression> left, std::shared_ptr<const CExpression> right );
-    ~CBinaryExpression();
 
     TOperatorType Operation() const { return operation; }
     const CExpression* LeftOperand() const { return leftOperand.get(); }
@@ -102,7 +98,6 @@ class CMemExpression : public CExpression {
 public:
     CMemExpression( const CExpression* _address );
     CMemExpression( std::shared_ptr<const CExpression> _address );
-    ~CMemExpression();
 
     const CExpression* Address() const { return address.get(); }
 
@@ -118,7 +113,6 @@ class CCallExpression : public CExpression {
 public:
     CCallExpression( const CExpression* func, const CExpressionList* args );
     CCallExpression( std::shared_ptr<const CExpression> func, std::shared_ptr<const CExpressionList> args );
-    ~CCallExpression();
 
     const CExpression* Function() const { return function.get(); }
     const CExpressionList* Arguments() const { return arguments.get(); }
@@ -135,7 +129,6 @@ class CEseqExpression : public CExpression {
 public:
     CEseqExpression( const CStatement* _statement, const CExpression* _expression );
     CEseqExpression( std::shared_ptr<const CStatement> _statement, std::shared_ptr<const CExpression> _expression );
-    ~CEseqExpression();
 
     const CStatement* Statement() const { return statement.get(); }
     const CExpression* Expression() const { return expression.get(); }
