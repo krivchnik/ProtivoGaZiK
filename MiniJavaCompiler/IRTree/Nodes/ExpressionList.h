@@ -26,7 +26,8 @@ public:
     const std::vector< std::shared_ptr<const CExpression> >& Expressions() const { return expressions; }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
-
+    std::shared_ptr<const CExpressionList> Clone() const;
+    std::shared_ptr<const CExpressionList> Canonize();
 private:
     std::vector< std::shared_ptr<const CExpression> > expressions;
 };

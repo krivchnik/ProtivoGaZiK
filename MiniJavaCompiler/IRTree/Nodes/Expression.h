@@ -16,15 +16,15 @@ namespace IRTree {
 class IExpression : public IVisitorTarget {
 public:
     virtual ~IExpression() {}
-    virtual std::shared_ptr<const IExpression> Clone() const = 0;
-    virtual std::shared_ptr<const IExpression> Canonize() = 0;
+    virtual std::shared_ptr<const CExpression> Clone() const = 0;
+    virtual std::shared_ptr<const CExpression> Canonize() = 0;
 };
 
 class CExpression : public IExpression {
 public:
     virtual ~CExpression() {}
-    virtual std::shared_ptr<const IExpression> Canonize() override;
-    virtual std::shared_ptr<const IExpression> Clone() const override;
+    virtual std::shared_ptr<const CExpression> Canonize() override;
+    virtual std::shared_ptr<const CExpression> Clone() const override;
 };
 
 enum class TOperatorType : char {
@@ -46,8 +46,8 @@ public:
     int Value() const { return value; }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
-    virtual std::shared_ptr<const IExpression> Canonize() override;
-    virtual std::shared_ptr<const IExpression> Clone() const override;
+    virtual std::shared_ptr<const CExpression> Canonize() override;
+    virtual std::shared_ptr<const CExpression> Clone() const override;
 
 private:
     int value;
@@ -62,8 +62,8 @@ public:
     const CLabel Label() const { return label; }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
-    virtual std::shared_ptr<const IExpression> Canonize() override;
-    virtual std::shared_ptr<const IExpression> Clone() const override;
+    virtual std::shared_ptr<const CExpression> Canonize() override;
+    virtual std::shared_ptr<const CExpression> Clone() const override;
 
 private:
     CLabel label;
@@ -78,8 +78,8 @@ public:
     CTemp Temporary() const { return temporary; }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
-    virtual std::shared_ptr<const IExpression> Canonize() override;
-    virtual std::shared_ptr<const IExpression> Clone() const override;
+    virtual std::shared_ptr<const CExpression> Canonize() override;
+    virtual std::shared_ptr<const CExpression> Clone() const override;
 
 private:
     CTemp temporary;
@@ -97,8 +97,8 @@ public:
     const CExpression* RightOperand() const { return rightOperand.get(); }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
-    virtual std::shared_ptr<const IExpression> Canonize() override;
-    virtual std::shared_ptr<const IExpression> Clone() const override;
+    virtual std::shared_ptr<const CExpression> Canonize() override;
+    virtual std::shared_ptr<const CExpression> Clone() const override;
 
 private:
     std::shared_ptr<const CExpression> leftOperand;
@@ -116,8 +116,8 @@ public:
     const CExpression* Address() const { return address.get(); }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
-    virtual std::shared_ptr<const IExpression> Canonize() override;
-    virtual std::shared_ptr<const IExpression> Clone() const override;
+    virtual std::shared_ptr<const CExpression> Canonize() override;
+    virtual std::shared_ptr<const CExpression> Clone() const override;
 
 private:
     std::shared_ptr<const CExpression> address;
@@ -134,8 +134,8 @@ public:
     const CExpressionList* Arguments() const { return arguments.get(); }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
-    virtual std::shared_ptr<const IExpression> Canonize() override;
-    virtual std::shared_ptr<const IExpression> Clone() const override;
+    virtual std::shared_ptr<const CExpression> Canonize() override;
+    virtual std::shared_ptr<const CExpression> Clone() const override;
 
 private:
     std::shared_ptr<const CExpression> function;
@@ -152,8 +152,8 @@ public:
     const CExpression* Expression() const { return expression.get(); }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
-    virtual std::shared_ptr<const IExpression> Canonize() override;
-    virtual std::shared_ptr<const IExpression> Clone() const override;
+    virtual std::shared_ptr<const CExpression> Canonize() override;
+    virtual std::shared_ptr<const CExpression> Clone() const override;
 
 private:
     std::shared_ptr<const CStatement> statement;

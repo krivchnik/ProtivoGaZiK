@@ -6,20 +6,13 @@
 
 namespace IRTree {
 
-class IStatement : public IVisitorTarget {
+class CStatement : public IVisitorTarget {
 public:
-    virtual ~IStatement();
-    virtual std::shared_ptr<const IStatement> Canonize() = 0;
+    virtual ~CStatement();
+    virtual std::shared_ptr<const CStatement> Canonize() = 0;
     virtual std::shared_ptr<const CStatement> Clone() const = 0;
 };
 
-class CStatement : public IStatement {
-public:
-    CStatement();
-    virtual ~CStatement();
-    virtual std::shared_ptr<const IStatement> Canonize() override;
-    virtual std::shared_ptr<const CStatement> Clone() const override;
-};
 
 enum class TLogicOperatorType : char {
     LOT_EQ,
@@ -58,7 +51,7 @@ public:
     void Accept( IVisitor* visitor ) const override {
         visitor->Visit( this );
     }
-    virtual std::shared_ptr<const IStatement> Canonize() override;
+    virtual std::shared_ptr<const CStatement> Canonize() override;
     virtual std::shared_ptr<const CStatement> Clone() const override;
 
 private:
@@ -77,7 +70,7 @@ public:
     const CExpression* Expression() const { return expression.get(); }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
-    virtual std::shared_ptr<const IStatement> Canonize() override;
+    virtual std::shared_ptr<const CStatement> Canonize() override;
     virtual std::shared_ptr<const CStatement> Clone() const override;
 private:
     std::shared_ptr<const CExpression> expression;
@@ -93,7 +86,7 @@ public:
     CLabel Target() const { return target; }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
-    virtual std::shared_ptr<const IStatement> Canonize() override;
+    virtual std::shared_ptr<const CStatement> Canonize() override;
     virtual std::shared_ptr<const CStatement> Clone() const override;
 private:
     CLabel target;
@@ -124,7 +117,7 @@ public:
     TLogicOperatorType Operation() const { return operation; }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
-    virtual std::shared_ptr<const IStatement> Canonize() override;
+    virtual std::shared_ptr<const CStatement> Canonize() override;
     virtual std::shared_ptr<const CStatement> Clone() const override;
 private:
     std::shared_ptr<const CExpression> leftOperand;
@@ -145,7 +138,7 @@ public:
     const CStatement* RightStatement() const { return rightStatement.get(); }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
-    virtual std::shared_ptr<const IStatement> Canonize() override;
+    virtual std::shared_ptr<const CStatement> Canonize() override;
     virtual std::shared_ptr<const CStatement> Clone() const override;
 private:
     std::shared_ptr<const CStatement> leftStatement;
@@ -162,7 +155,7 @@ public:
     CLabel Label() const { return label; }
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
-    virtual std::shared_ptr<const IStatement> Canonize() override;
+    virtual std::shared_ptr<const CStatement> Canonize() override;
     virtual std::shared_ptr<const CStatement> Clone() const override;
 private:
     CLabel label;
