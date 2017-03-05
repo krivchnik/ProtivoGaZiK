@@ -1,6 +1,5 @@
 #include <Visitors/IrtBuilderVisitor.h>
 #include <CommonInclude.h>
-#include <IRTree/Frame.h>
 #include <unordered_set>
 
 void CIrtBuilderVisitor::StartVisit(INode *startNode) {
@@ -44,18 +43,18 @@ void CIrtBuilderVisitor::buildNewFrame( const std::string& className, const std:
                                         InputIteratorFields fieldsLeftIt, InputIteratorFields fieldsRightIt ) {
     frameCurrent = std::shared_ptr<IRTree::CFrame>( new IRTree::CFrame( className, methodName ) );
 
-    frameCurrent->AddThis();
+    frameCurrent->AddThisAddress();
     for ( auto it = fieldsLeftIt; it != fieldsRightIt; ++it ) {
-        frameCurrent->AddField( *it );
+        frameCurrent->AddFieldAddress(*it);
     }
     // arguments and locals should be added after fields
     // in order to overwrite them in the map of addresses in case of name collision
     for ( auto it = argumentsLeftIt; it != argumentsRightIt; ++it ) {
-        frameCurrent->AddArgument( *it );
+        frameCurrent->AddArgumentAddress(*it);
     }
-    frameCurrent->AddReturn();
+    frameCurrent->AddReturnAddress();
     for ( auto it = localsLeftIt; it != localsRightIt; ++it ) {
-        frameCurrent->AddLocal( *it );
+        frameCurrent->AddLocalAddress(*it);
     }
 }
 
@@ -131,31 +130,13 @@ void CIrtBuilderVisitor::Visit( CIdExpression* expression ) {
         if ( type == NONE_TYPE ) {
             // expression is a name of field
             updateSubtreeWrapper( new IRTree::CExpressionWrapper(
-                    new IRTree::CMemExpression(
-                            address->ToExpression(
-                                    std::shared_ptr<IRTree::CExpression>(
-                                            new IRTree::CMemExpression(
-                                                    frameCurrent->GetThis()->ToExpression(
-                                                            std::shared_ptr<IRTree::CExpression>(
-                                                                    new IRTree::CTempExpression( frameCurrent->FramePointer() )
-                                                            )
-                                                    )
-                                            )
-                                    )
-                            )
-                    )
+                    address->ToExpression()
             ) );
             type = symbolTable.GetClassInfo(frameCurrent->GetClassName()).GetFieldInfo(expression->GetName()).type;
         } else {
             // expression is a name of local var / argument
             updateSubtreeWrapper( new IRTree::CExpressionWrapper(
-                    new IRTree::CMemExpression(
-                            address->ToExpression(
-                                    std::shared_ptr<IRTree::CExpression>(
-                                            new IRTree::CTempExpression( frameCurrent->FramePointer() )
-                                    )
-                            )
-                    )
+                    address->ToExpression()
             ) );
         }
 
@@ -188,11 +169,9 @@ void CIrtBuilderVisitor::Visit( CMethod* declaration ) {
                                     new IRTree::CLabelStatement( IRTree::CLabel( methodFullName ) ),
                                     new IRTree::CSeqStatement(
                                             statementListWrapper->ToStatement(),
-                                            std::shared_ptr<const IRTree::CMoveStatement>(
+                                            std::shared_ptr<const IRTree::CStatement>(
                                                     new IRTree::CMoveStatement(
-                                                            std::shared_ptr<const IRTree::CTempExpression>(
-                                                                    new IRTree::CTempExpression( frameCurrent->ReturnValueTemp() )
-                                                            ),
+                                                            frameCurrent->GetReturnValueAddress()->ToExpression(),
                                                             expressionReturn
                                                     )
                                             )
@@ -206,9 +185,7 @@ void CIrtBuilderVisitor::Visit( CMethod* declaration ) {
                             new IRTree::CSeqStatement(
                                     new IRTree::CLabelStatement( IRTree::CLabel( methodFullName ) ),
                                     new IRTree::CMoveStatement(
-                                            std::shared_ptr<const IRTree::CTempExpression>(
-                                                    new IRTree::CTempExpression( frameCurrent->ReturnValueTemp() )
-                                            ),
+                                            frameCurrent->GetReturnValueAddress()->ToExpression(),
                                             expressionReturn
                                     )
                             )
@@ -219,7 +196,7 @@ void CIrtBuilderVisitor::Visit( CMethod* declaration ) {
         if ( statementListWrapper ) {
             updateSubtreeWrapper( new IRTree::CStatementWrapper(
                     new IRTree::CSeqStatement(
-                            std::shared_ptr<const IRTree::CLabelStatement>(
+                            std::shared_ptr<const IRTree::CStatement>(
                                     new IRTree::CLabelStatement( IRTree::CLabel( methodFullName ) )
                             ),
                             statementListWrapper->ToStatement()
@@ -316,22 +293,22 @@ void CIrtBuilderVisitor::Visit(CAssignItemStatement *statement) {
 
     updateSubtreeWrapper( new IRTree::CStatementWrapper(
             new IRTree::CMoveStatement(
-                    std::shared_ptr<const IRTree::CMemExpression>(
+                    std::shared_ptr<const IRTree::CExpression>(
                             new IRTree::CMemExpression(
                                     new IRTree::CBinaryExpression(
                                             IRTree::TOperatorType::OT_Plus,
                                             leftPartExpression,
-                                            std::shared_ptr<const IRTree::CBinaryExpression>(
+                                            std::shared_ptr<const IRTree::CExpression>(
                                                     new IRTree::CBinaryExpression(
                                                             IRTree::TOperatorType::OT_Times,
                                                             new IRTree::CBinaryExpression(
                                                                     IRTree::TOperatorType::OT_Plus,
                                                                     indexExpression,
-                                                                    std::shared_ptr<const IRTree::CConstExpression>(
+                                                                    std::shared_ptr<const IRTree::CExpression>(
                                                                             new IRTree::CConstExpression( 1 )
                                                                     )
                                                             ),
-                                                            new IRTree::CConstExpression( frameCurrent->WordSize() )
+                                                            new IRTree::CConstExpression(frameCurrent->GetWordSize() )
                                                     )
                                             )
                                     )
@@ -482,11 +459,9 @@ void CIrtBuilderVisitor::Visit(COperationExpression *expression) {
 
     expression->GetLeftOperand()->Accept( this );
     std::shared_ptr<IRTree::ISubtreeWrapper> wrapperLeft( subtreeWrapper );
-    // std::unique_ptr<const IRTree::CExpression> expressionLeft = std::move( subtreeWrapper->ToExpression() );
 
     expression->GetRightOperand()->Accept( this );
     std::shared_ptr<IRTree::ISubtreeWrapper> wrapperRight( subtreeWrapper );
-    // std::unique_ptr<const IRTree::CExpression> expressionRight = std::move( subtreeWrapper->ToExpression() );
 
     if ( expression->GetOperationType() == COperationExpression::OperationType::LESS ) {
         updateSubtreeWrapper( new IRTree::CRelativeConditionalWrapper(
@@ -543,7 +518,7 @@ void CIrtBuilderVisitor::Visit(CArrayConstructionExpression *expression ) {
                                                     expressionLength,
                                                     std::shared_ptr<IRTree::CConstExpression>( new IRTree::CConstExpression( 1 ) )
                                             ),
-                                            new IRTree::CConstExpression( frameCurrent->WordSize() )
+                                            new IRTree::CConstExpression(frameCurrent->GetWordSize() )
                                     )
                             )
                     )
@@ -565,7 +540,7 @@ void CIrtBuilderVisitor::Visit(CConstructClassExpression *expression) {
                                     new IRTree::CBinaryExpression(
                                             IRTree::TOperatorType::OT_Times,
                                             new IRTree::CConstExpression( fieldCount ),
-                                            new IRTree::CConstExpression( frameCurrent->WordSize() )
+                                            new IRTree::CConstExpression(frameCurrent->GetWordSize() )
                                     )
                             )
                     )
@@ -613,11 +588,7 @@ void CIrtBuilderVisitor::Visit(CMethodCallExpression *expression) {
 
 void CIrtBuilderVisitor::Visit(CThisExpression *) {
     updateSubtreeWrapper( new IRTree::CExpressionWrapper(
-            frameCurrent->GetThis()->ToExpression(
-                    std::shared_ptr<const IRTree::CExpression>(
-                            new IRTree::CTempExpression( frameCurrent->FramePointer() )
-                     )
-            )
+            frameCurrent->GetThisAddress()->ToExpression()
     ) );
     methodCallerClassName = classCurrentName;
 }
@@ -635,17 +606,17 @@ void CIrtBuilderVisitor::Visit(CGetItemExpression *expression) {
                     new IRTree::CBinaryExpression(
                             IRTree::TOperatorType::OT_Plus,
                             containerExpression,
-                            std::shared_ptr<const IRTree::CBinaryExpression>(
+                            std::shared_ptr<const IRTree::CExpression>(
                                     new IRTree::CBinaryExpression(
                                             IRTree::TOperatorType::OT_Times,
                                             new IRTree::CBinaryExpression(
                                                     IRTree::TOperatorType::OT_Plus,
                                                     indexExpression,
-                                                    std::shared_ptr<const IRTree::CConstExpression>(
+                                                    std::shared_ptr<const IRTree::CExpression>(
                                                             new IRTree::CConstExpression( 1 )
                                                     )
                                             ),
-                                            new IRTree::CConstExpression( frameCurrent->WordSize() )
+                                            new IRTree::CConstExpression(frameCurrent->GetWordSize() )
                                     )
                             )
                     )

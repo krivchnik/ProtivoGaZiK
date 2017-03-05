@@ -8,7 +8,7 @@ CConstExpression::CConstExpression( int _value ) : value( _value ) {}
 
 CNameExpression::CNameExpression( CLabel _label ) : label( _label ) {}
 
-CTempExpression::CTempExpression( CTemp _temporary ) : temporary( _temporary ) {}
+CTempExpression::CTempExpression( const CTemp& _temporary ) : temporary( _temporary ) {}
 
 CBinaryExpression::CBinaryExpression( TOperatorType _operation, const CExpression* left, const CExpression* right )
     : operation( _operation ), leftOperand( left ), rightOperand( right ) {}

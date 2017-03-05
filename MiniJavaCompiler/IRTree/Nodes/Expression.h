@@ -64,7 +64,7 @@ private:
 
 class CTempExpression : public CExpression {
 public:
-    CTempExpression( CTemp _temporary );
+    CTempExpression( const CTemp& _temporary );
 
     CTemp Temporary() const { return temporary; }
 
