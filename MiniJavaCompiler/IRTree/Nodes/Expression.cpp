@@ -8,7 +8,7 @@ using namespace IRTree;
 
 CConstExpression::CConstExpression(int _value) : value(_value) {}
 
-std::shared_ptr<const CExpression> CConstExpression::Canonize() {
+std::shared_ptr<const CExpression> CConstExpression::Canonize() const {
     return Clone();
 }
 
@@ -18,7 +18,7 @@ std::shared_ptr<const CExpression> CConstExpression::Clone() const {
 
 CNameExpression::CNameExpression(CLabel _label) : label(_label) {}
 
-std::shared_ptr<const CExpression> CNameExpression::Canonize() {
+std::shared_ptr<const CExpression> CNameExpression::Canonize() const {
     return Clone();
 }
 
@@ -28,7 +28,7 @@ std::shared_ptr<const CExpression> CNameExpression::Clone() const {
 
 CTempExpression::CTempExpression(const CTemp &_temporary) : temporary(_temporary) {}
 
-std::shared_ptr<const CExpression> CTempExpression::Canonize() {
+std::shared_ptr<const CExpression> CTempExpression::Canonize() const {
     return Clone();
 }
 
@@ -43,7 +43,7 @@ CBinaryExpression::CBinaryExpression(TOperatorType _operation, std::shared_ptr<c
                                      std::shared_ptr<const CExpression> right)
         : operation(_operation), leftOperand(left), rightOperand(right) {}
 
-std::shared_ptr<const CExpression> CBinaryExpression::Canonize() {
+std::shared_ptr<const CExpression> CBinaryExpression::Canonize() const {
     std::shared_ptr<const CExpression> expressionLeftCanon = leftOperand->Canonize();
     std::shared_ptr<const CExpression> expressionRightCanon = rightOperand->Canonize();
     std::shared_ptr<const CExpression> result;
@@ -124,7 +124,7 @@ CMemExpression::CMemExpression(const CExpression *_address) : address(_address) 
 CMemExpression::CMemExpression(std::shared_ptr<const CExpression>
                                _address) : address(_address) {}
 
-std::shared_ptr<const CExpression> CMemExpression::Canonize() {
+std::shared_ptr<const CExpression> CMemExpression::Canonize() const {
     assert(false);
     std::shared_ptr<const CExpression> expressionCanon = address->Canonize();
     std::shared_ptr<const CExpression> result;
@@ -162,7 +162,7 @@ CCallExpression::CCallExpression(std::shared_ptr<const CExpression>
                                  args)
         : function(func), arguments(args) {}
 
-std::shared_ptr<const CExpression> CCallExpression::Canonize() {
+std::shared_ptr<const CExpression> CCallExpression::Canonize() const {
     std::shared_ptr<const CExpression> functionCanon = function->Canonize();
     std::shared_ptr<const CExpressionList> argumentsCanon = arguments->Canonize();
     return std::shared_ptr<const CExpression>(
@@ -187,7 +187,7 @@ CEseqExpression::CEseqExpression(std::shared_ptr<const CStatement>
                                  _expression)
         : statement(_statement), expression(_expression) {}
 
-std::shared_ptr<const CExpression> CEseqExpression::Canonize() {
+std::shared_ptr<const CExpression> CEseqExpression::Canonize() const {
     std::shared_ptr<const CStatement> statementCanon = statement->Canonize();
     std::shared_ptr<const CExpression> expressionCanon = expression->Canonize();
 
@@ -222,7 +222,7 @@ std::shared_ptr<const CExpression> CEseqExpression::Clone() const {
     ));
 }
 
-std::shared_ptr<const CExpression> CExpression::Canonize() {
+std::shared_ptr<const CExpression> CExpression::Canonize() const {
     assert(false);
     return std::shared_ptr<const CExpression>();
 }

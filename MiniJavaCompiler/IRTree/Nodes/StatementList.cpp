@@ -8,7 +8,7 @@ namespace IRTree {
     std::shared_ptr<const CStatementList> CStatementList::Clone() const {
         CStatementList *newList = new CStatementList();
         for (auto it = statements.begin(); it != statements.end(); ++it) {
-            newList->Add(std::move((*it)->Clone()));
+            newList->Add((*it)->Clone());
 
         }
 
@@ -16,7 +16,7 @@ namespace IRTree {
 
     }
 
-    std::shared_ptr<const CStatementList> CStatementList::Canonize() {
+    std::shared_ptr<const CStatementList> CStatementList::Canonize() const {
         CStatementList *newList = new CStatementList();
         for (auto it = statements.begin(); it != statements.end(); ++it) {
             newList->Add((*it)->Canonize());

@@ -21,7 +21,7 @@ std::shared_ptr<const CStatement> CMoveStatement::Clone() const {
     ));
 }
 
-std::shared_ptr<const CStatement> CMoveStatement::Canonize() {
+std::shared_ptr<const CStatement> CMoveStatement::Canonize() const {
     std::shared_ptr<const CExpression> destinationCanon = destination->Canonize();
     std::shared_ptr<const CExpression> sourceCanon = source->Canonize();
 
@@ -54,7 +54,7 @@ CExpStatement::CExpStatement( std::shared_ptr<const CExpression> _expression )
     : expression( _expression ) {}
 CExpStatement::~CExpStatement() {}
 
-std::shared_ptr<const CStatement> CExpStatement::Canonize() {
+std::shared_ptr<const CStatement> CExpStatement::Canonize() const {
     std::shared_ptr<const CExpression> expressionCanon = expression->Canonize();
     std::shared_ptr<const CStatement> result;
     const CEseqExpression* eseqExpression = CastToEseqExpression( expressionCanon.get() );
@@ -83,7 +83,7 @@ CJumpStatement::CJumpStatement( CLabel _target )
     : target( _target ) {}
 CJumpStatement::~CJumpStatement() {}
 
-std::shared_ptr<const CStatement> CJumpStatement::Canonize() {
+std::shared_ptr<const CStatement> CJumpStatement::Canonize() const {
     assert(false);
     return CStatement::Canonize();
 }
@@ -104,7 +104,7 @@ CJumpConditionalStatement::CJumpConditionalStatement( TLogicOperatorType _operat
         labelTrue( _labelTrue ), labelFalse( _labelFalse ), operation( _operation ) {}
 CJumpConditionalStatement::~CJumpConditionalStatement() {}
 
-std::shared_ptr<const CStatement> CJumpConditionalStatement::Canonize() {
+std::shared_ptr<const CStatement> CJumpConditionalStatement::Canonize() const {
     assert(false);
     std::shared_ptr<const CExpression> expressionLeftCanon = leftOperand->Canonize();
     std::shared_ptr<const CExpression> expressionRightCanon = rightOperand->Canonize();
@@ -193,7 +193,7 @@ CSeqStatement::CSeqStatement(const CStatement* _left, const CStatement* _right )
 CSeqStatement::CSeqStatement( std::shared_ptr<const CStatement> _left, std::shared_ptr<const CStatement> _right )
     : leftStatement( _left ), rightStatement( _right ) {}
 
-std::shared_ptr<const CStatement> CSeqStatement::Canonize() {
+std::shared_ptr<const CStatement> CSeqStatement::Canonize() const {
     std::shared_ptr<const CStatement> statementLeftCanon = leftStatement->Canonize();
     std::shared_ptr<const CStatement> statementRightCanon = rightStatement->Canonize();
             return std::shared_ptr<const CStatement>(
@@ -212,7 +212,7 @@ std::shared_ptr<const CStatement> CSeqStatement::Clone() const {
 CLabelStatement::CLabelStatement( CLabel _label ) : label( _label ) {}
 CLabelStatement::~CLabelStatement() {}
 
-std::shared_ptr<const CStatement> CLabelStatement::Canonize() {
+std::shared_ptr<const CStatement> CLabelStatement::Canonize() const {
     return Clone();
 }
 
