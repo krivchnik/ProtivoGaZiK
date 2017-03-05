@@ -370,30 +370,53 @@ void CIrtBuilderVisitor::Visit(CIfElseStatement *statement ) {
     IRTree::CLabel labelFalse;
     IRTree::CLabel labelJoin;
 
+    IRTree::CLabel* resultLabelTrue = &labelJoin;
+    IRTree::CLabel* resultLabelFalse = &labelJoin;
+
+    std::shared_ptr<const IRTree::CStatement> suffix( new IRTree::CLabelStatement( labelJoin ) );
+
+    if ( wrapperTargetNegative ) {
+        resultLabelFalse = &labelFalse;
+
+        suffix = std::shared_ptr<const IRTree::CStatement>(
+                new IRTree::CSeqStatement(
+                        new IRTree::CLabelStatement( labelFalse ),
+                        new IRTree::CSeqStatement(
+                                wrapperTargetNegative->ToStatement(),
+                                suffix
+                        )
+                )
+        );
+        if ( wrapperTargetPositive ) {
+            suffix = std::shared_ptr<const IRTree::CStatement>(
+                    new IRTree::CSeqStatement(
+                            std::shared_ptr<const IRTree::CStatement>(
+                                    new IRTree::CJumpStatement( labelJoin )
+                            ),
+                            suffix
+                    )
+            );
+        }
+    }
+
+    if ( wrapperTargetPositive ) {
+        resultLabelTrue = &labelTrue;
+
+        suffix = std::shared_ptr<const IRTree::CStatement>(
+                new IRTree::CSeqStatement(
+                        new IRTree::CLabelStatement( labelTrue ),
+                        new IRTree::CSeqStatement(
+                                wrapperTargetPositive->ToStatement(),
+                                suffix
+                        )
+                )
+        );
+    }
+
     updateSubtreeWrapper( new IRTree::CStatementWrapper(
             new IRTree::CSeqStatement(
-                    wrapperCondition->ToConditional( labelTrue, labelFalse ),
-                    std::shared_ptr<const IRTree::CSeqStatement>(
-                            new IRTree::CSeqStatement(
-                                    new IRTree::CLabelStatement( labelTrue ),
-                                    new IRTree::CSeqStatement(
-                                            wrapperTargetPositive->ToStatement(),
-                                            std::shared_ptr<const IRTree::CSeqStatement>(
-                                                    new IRTree::CSeqStatement(
-                                                            new IRTree::CJumpStatement( labelJoin ),
-                                                            new IRTree::CSeqStatement(
-                                                                    new IRTree::CLabelStatement( labelFalse ),
-                                                                    new IRTree::CSeqStatement(
-                                                                            wrapperTargetNegative->ToStatement(),
-                                                                            std::shared_ptr<const IRTree::CLabelStatement>(
-                                                                                    new IRTree::CLabelStatement( labelJoin ) )
-                                                                    )
-                                                            )
-                                                    )
-                                            )
-                                    )
-                            )
-                    )
+                    wrapperCondition->ToConditional( *resultLabelTrue, *resultLabelFalse ),
+                    suffix
             )
     ) );
 }
@@ -409,23 +432,33 @@ void CIrtBuilderVisitor::Visit(CWhileStatement *statement) {
     IRTree::CLabel labelBody;
     IRTree::CLabel labelDone;
 
+    std::shared_ptr<const IRTree::CStatement> suffix(
+            new IRTree::CSeqStatement(
+                    new IRTree::CJumpStatement( labelLoop ),
+                    new IRTree::CLabelStatement( labelDone )
+            )
+    );
+
+    if ( wrapperBody ) {
+        suffix = std::shared_ptr<const IRTree::CStatement>(
+                new IRTree::CSeqStatement(
+                        wrapperBody->ToStatement(),
+                        suffix
+                )
+        );
+    }
+
     updateSubtreeWrapper( new IRTree::CStatementWrapper(
             new IRTree::CSeqStatement(
                     new IRTree::CLabelStatement( labelLoop ),
                     new IRTree::CSeqStatement(
                             wrapperCondition->ToConditional( labelBody, labelDone ),
-                            std::shared_ptr<const IRTree::CSeqStatement>(
+                            std::shared_ptr<const IRTree::CStatement>(
                                     new IRTree::CSeqStatement(
-                                            new IRTree::CLabelStatement( labelBody ),
-                                            new IRTree::CSeqStatement(
-                                                    wrapperBody->ToStatement(),
-                                                    std::shared_ptr<const IRTree::CSeqStatement>(
-                                                            new IRTree::CSeqStatement(
-                                                                    new IRTree::CJumpStatement( labelLoop ),
-                                                                    new IRTree::CLabelStatement( labelDone )
-                                                            )
-                                                    )
-                                            )
+                                            std::shared_ptr<const IRTree::CStatement>(
+                                                    new IRTree::CLabelStatement( labelBody )
+                                            ),
+                                            suffix
                                     )
                             )
                     )
@@ -517,7 +550,6 @@ void CIrtBuilderVisitor::Visit(CArrayConstructionExpression *expression ) {
             )
     )
     );
-
 }
 
 void CIrtBuilderVisitor::Visit(CConstructClassExpression *expression) {
@@ -526,7 +558,7 @@ void CIrtBuilderVisitor::Visit(CConstructClassExpression *expression) {
     int fieldCount = classInfo.variableDeclaration.size();
 
     updateSubtreeWrapper( new IRTree::CExpressionWrapper(
-            std::move( frameCurrent->ExternalCall(
+            frameCurrent->ExternalCall(
                     "malloc",
                     std::shared_ptr<const IRTree::CExpressionList>(
                             new IRTree::CExpressionList(
@@ -537,7 +569,7 @@ void CIrtBuilderVisitor::Visit(CConstructClassExpression *expression) {
                                     )
                             )
                     )
-            ) )
+            )
     ) );
 
     methodCallerClassName = expression->getClassID()->GetName();
