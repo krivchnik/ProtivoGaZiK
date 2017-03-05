@@ -16,7 +16,7 @@ namespace IRTree {
 
     }
 
-    std::shared_ptr<const CStatementList> CStatementList::Canonize() const {
+    std::shared_ptr<const CStatementList> CStatementList::Canonize() {
         CStatementList *newList = new CStatementList();
         for (auto it = statements.begin(); it != statements.end(); ++it) {
             newList->Add((*it)->Canonize());

@@ -9,16 +9,6 @@ using namespace IRTree;
 
 CStatement::~CStatement() {}
 
-std::shared_ptr<const CStatement> CStatement::Canonize() {
-    assert(false);
-    return std::shared_ptr<const CStatement>();
-}
-
-std::shared_ptr<const CStatement> CStatement::Clone() const {
-    assert(false);
-    return std::shared_ptr<const CStatement>();
-}
-
 CMoveStatement::CMoveStatement( const CExpression* _destination, const CExpression* _source )
     : destination( _destination ), source( _source ) {}
 CMoveStatement::CMoveStatement( std::shared_ptr<const CExpression> _destination, std::shared_ptr<const CExpression> _source )

@@ -26,7 +26,7 @@ public:
 
     void Accept( IVisitor* visitor ) const override { visitor->Visit( this ); }
     std::shared_ptr<const CStatementList> Clone() const;
-    std::shared_ptr<const CStatementList> Canonize() const;
+    std::shared_ptr<const CStatementList> Canonize();
 private:
     std::vector< std::shared_ptr<const CStatement> > statements;
 };
