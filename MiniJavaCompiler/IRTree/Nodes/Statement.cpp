@@ -28,16 +28,17 @@ std::shared_ptr<const CStatement> CMoveStatement::Canonize() const {
     std::shared_ptr<const CStatement> result;
     const CEseqExpression* sourceCanonEseq = CastToEseqExpression( sourceCanon.get() );
     if ( sourceCanonEseq ) {
+        std::shared_ptr<const CStatement> moveStatement(
+                new CMoveStatement(
+                        destinationCanon,
+                        sourceCanonEseq->Expression()->Clone()
+                )
+        );
         result = std::shared_ptr<const CStatement>(
                 new CSeqStatement(
                         sourceCanonEseq->Statement()->Clone(),
-                        std::shared_ptr<const CStatement>(
-                                new CMoveStatement(
-                                        destinationCanon,
-                                        sourceCanonEseq->Expression()->Clone()
-                                )
-                        ) )
-                );
+                        moveStatement->Canonize()
+                ));
     } else {
         result = std::shared_ptr<const CStatement>(
                 new CMoveStatement(
@@ -218,4 +219,20 @@ std::shared_ptr<const CStatement> CLabelStatement::Canonize() const {
 
 std::shared_ptr<const CStatement> CLabelStatement::Clone() const {
     return std::shared_ptr<const CStatement>( new CLabelStatement(label));
+}
+
+std::shared_ptr<const CStatement> CStatementList::Clone() const {
+    CStatementList* newList = new CStatementList();
+    for ( auto it = statements.begin(); it != statements.end(); ++it ) {
+        newList->Add( ( *it )->Clone() );
+    }
+    return std::shared_ptr<const CStatementList>( newList );
+}
+
+std::shared_ptr<const CStatement> CStatementList::Canonize() const {
+    CStatementList* newList = new CStatementList();
+    for ( auto it = statements.begin(); it != statements.end(); ++it ) {
+        newList->Add( ( *it )->Canonize() );
+    }
+    return std::shared_ptr<const CStatementList>( newList );
 }
