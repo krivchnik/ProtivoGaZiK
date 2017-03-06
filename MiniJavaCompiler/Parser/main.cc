@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 
         TMethodToIRTMap methodTreesWithoutDoubleCalls;
         TMethodToIRTMap methodTreesWithoutEseqs;
-        TMethodToIRTMap methodTreesLinearized;
+        //TMethodToIRTMap methodTreesLinearized;
         for ( auto it = methodTrees.begin(); it != methodTrees.end(); ++it ) {
             IRTree::CDoubleCallEliminationVisitor callEliminationVisitor( false );
             it->second->Accept( &callEliminationVisitor );
@@ -62,11 +62,16 @@ int main(int argc, char **argv)
             //methodTreesLinearized.emplace( it->first, seqLinearizerVisitor.ResultTree() );
         }
 
+		pathOutputFile = std::string("can1_");
+		extension = std::string(".dot");
         for ( auto it = methodTreesWithoutDoubleCalls.begin(); it != methodTreesWithoutDoubleCalls.end(); ++it ) {
             std::string methodName = it->first;
             methodName[0] = std::toupper( methodName[0] );
             std::fstream outputStream( pathOutputFile + "_" + methodName + extension, std::fstream::out );
-            outputStream << ToDotLanguage( methodTreesWithoutDoubleCalls.get(), it->first ) << std::endl;
+
+			IRTree::CDotLangVisitor dotLangVisitor( false );
+			methodTreesWithoutDoubleCalls.at( it->first )->Accept( &dotLangVisitor );
+			outputStream << dotLangVisitor.GetTraversalInDotLanguage() << std::endl;
             outputStream.close();
         }
 	}
