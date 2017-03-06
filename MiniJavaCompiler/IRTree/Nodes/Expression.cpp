@@ -125,7 +125,6 @@ CMemExpression::CMemExpression(std::shared_ptr<const CExpression>
                                _address) : address(_address) {}
 
 std::shared_ptr<const CExpression> CMemExpression::Canonize() const {
-    assert(false);
     std::shared_ptr<const CExpression> expressionCanon = address->Canonize();
     std::shared_ptr<const CExpression> result;
     const CEseqExpression *eseqExpressionCanon = CastToEseqExpression(expressionCanon.get());

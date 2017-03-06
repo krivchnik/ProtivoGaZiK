@@ -85,8 +85,7 @@ CJumpStatement::CJumpStatement( CLabel _target )
 CJumpStatement::~CJumpStatement() {}
 
 std::shared_ptr<const CStatement> CJumpStatement::Canonize() const {
-    assert(false);
-    return CStatement::Canonize();
+    return Clone();
 }
 
 std::shared_ptr<const CStatement> CJumpStatement::Clone() const {
@@ -106,7 +105,6 @@ CJumpConditionalStatement::CJumpConditionalStatement( TLogicOperatorType _operat
 CJumpConditionalStatement::~CJumpConditionalStatement() {}
 
 std::shared_ptr<const CStatement> CJumpConditionalStatement::Canonize() const {
-    assert(false);
     std::shared_ptr<const CExpression> expressionLeftCanon = leftOperand->Canonize();
     std::shared_ptr<const CExpression> expressionRightCanon = rightOperand->Canonize();
 
