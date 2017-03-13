@@ -557,7 +557,7 @@ void CIrtBuilderVisitor::Visit(CMethodCallExpression *expression) {
     const std::vector<std::shared_ptr<IExpression>>& arguments = expression->getArguments()->GetExpressions();
 
     IRTree::CExpressionList* expressionListIrt = new IRTree::CExpressionList();
-
+    expressionListIrt->Add( subtreeWrapper->ToExpression() );
     for ( auto it = arguments.begin(); it != arguments.end(); ++it ) {
         ( *it )->Accept( this );
         expressionListIrt->Add( subtreeWrapper->ToExpression() );
