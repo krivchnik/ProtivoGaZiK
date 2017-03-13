@@ -1,6 +1,5 @@
 #include <IRTree/Nodes/Expression.h>
 
-#include <IRTree/Nodes/Statement.h>
 #include <assert.h>
 #include <IRTree/Canonization.h>
 
