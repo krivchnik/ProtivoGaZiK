@@ -43,4 +43,4 @@ file(GLOB NodeList ${PARSER_NODES_DIR} "${PARSER_NODES_DIR}/Nodes/*.cpp" "${PARS
 
 INCLUDE_DIRECTORIES(${PARSER_SOURCE_DIR} ${PARSER_NODES_DIR} ${ROOT_DIR})
 
-add_executable(MiniJavaCompiler ${NodeList} ${BisonOutput} ${FlexOutput} ${PARSER_SOURCE_DIR}/main.cc MiniJavaCompiler/AbstractSyntaxTree/Analyzer/Errors.cpp MiniJavaCompiler/AbstractSyntaxTree/Analyzer/Errors.h MiniJavaCompiler/IRTree/Canonization.h MiniJavaCompiler/IRTree/Canonization.cpp MiniJavaCompiler/IRTree/Nodes/StatementList.cpp MiniJavaCompiler/IRTree/Nodes/ExpressionList.cpp)
+add_executable(MiniJavaCompiler ${NodeList} ${BisonOutput} ${FlexOutput} ${PARSER_SOURCE_DIR}/main.cc)
