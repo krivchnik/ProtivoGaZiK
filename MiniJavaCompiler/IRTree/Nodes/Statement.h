@@ -21,11 +21,27 @@ namespace IRTree {
         LOT_GT,
         LOT_LE,
         LOT_GE,
-        LOT_ULT,
-        LOT_ULE,
-        LOT_UGT,
-        LOT_UGE
     };
+
+    inline TLogicOperatorType GetInverseType(const TLogicOperatorType type) {
+        switch( type )
+        {
+            case TLogicOperatorType::LOT_EQ:
+                return TLogicOperatorType::LOT_NE;
+            case TLogicOperatorType::LOT_NE:
+                return TLogicOperatorType::LOT_EQ;
+            case TLogicOperatorType::LOT_LT:
+                return TLogicOperatorType::LOT_GE;
+            case TLogicOperatorType::LOT_GT:
+                return TLogicOperatorType::LOT_LE;
+            case TLogicOperatorType::LOT_LE:
+                return TLogicOperatorType::LOT_GT;
+            case TLogicOperatorType::LOT_GE:
+                return TLogicOperatorType::LOT_LT;
+            default:
+                assert( false );
+        }
+    }
 
     inline std::string to_string(TLogicOperatorType operation);
 //-----------------------------------------------------------------------------------------------//
@@ -201,7 +217,7 @@ namespace IRTree {
 
         void Add(std::shared_ptr<const CStatement> statement) { statements.push_back(statement); }
 
-        const std::vector<std::shared_ptr<const CStatement> > &Statements() const { return statements; }
+        std::vector<std::shared_ptr<const CStatement> > Statements() const { return statements; }
 
         void Accept(IVisitor *visitor) const override { visitor->Visit(this); }
 

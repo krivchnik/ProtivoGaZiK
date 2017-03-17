@@ -39,10 +39,6 @@ std::string CVisitor::operatorName( const TLogicOperatorType& type ) const {
         case TLogicOperatorType::LOT_GT: result = "GT"; break;
         case TLogicOperatorType::LOT_LE: result = "LE"; break;
         case TLogicOperatorType::LOT_GE: result = "GE"; break;
-        case TLogicOperatorType::LOT_ULT: result = "ULT"; break;
-        case TLogicOperatorType::LOT_ULE: result = "ULE"; break;
-        case TLogicOperatorType::LOT_UGT: result = "UGT"; break;
-        case TLogicOperatorType::LOT_UGE: result = "UGE"; break;
     }
     return result;
 }

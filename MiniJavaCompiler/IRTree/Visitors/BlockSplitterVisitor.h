@@ -21,7 +21,8 @@ namespace IRTree {
 
     class CBlockSplitterVisitor : public CVisitor {
     public:
-        CBlockSplitterVisitor( bool _verbose = false ) : CVisitor( _verbose ), oneBlock( nullptr ) {}
+        CBlockSplitterVisitor( bool _verbose = false )
+                : CVisitor( _verbose ), oneBlock( nullptr ), metLabel( false )  {}
 
         std::vector<std::shared_ptr<CStatementList>> GetAllBlocks();
 
@@ -45,8 +46,9 @@ namespace IRTree {
         void Visit( const CStatementList* list ) override;
 
     private:
-
+        bool metLabel;
         std::shared_ptr<CStatementList> oneBlock;
         std::vector<std::shared_ptr<CStatementList>> allBlocks;
+        void addNewLabel();
     };
 }

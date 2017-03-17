@@ -40,39 +40,55 @@ void CBlockSplitterVisitor::Visit(const CEseqExpression *expression) {
 
 void CBlockSplitterVisitor::Visit(const CExpStatement *statement) {
     assert( statement != 0 );
+    if( !metLabel ) {
+        addNewLabel();
+    }
     oneBlock->Add( std::shared_ptr<const CStatement>( statement ) );
 }
 
 void CBlockSplitterVisitor::Visit(const CJumpConditionalStatement *statement) {
     assert( statement != 0 );
+    if( !metLabel ) {
+        addNewLabel();
+    }
     oneBlock->Add( std::shared_ptr<const CStatement>( statement ) );
     allBlocks.push_back( oneBlock );
     oneBlock = nullptr;
+    metLabel = false;
 }
 
 void CBlockSplitterVisitor::Visit(const CJumpStatement *statement) {
     assert( statement != 0 );
+    if( !metLabel ) {
+        addNewLabel();
+    }
     oneBlock->Add( std::shared_ptr<const CStatement>( statement ) );
     allBlocks.push_back( oneBlock );
     oneBlock = nullptr;
+    metLabel = false;
 }
 
 void CBlockSplitterVisitor::Visit(const CLabelStatement *statement) {
-    assert( statement != 0 );
-    if( oneBlock != nullptr) {
-        oneBlock->Add( std::shared_ptr<const CStatement>( statement ) );
-    } else {
-        oneBlock = std::shared_ptr<CStatementList>( new CStatementList( statement ) );
+    metLabel = true;
+    if( oneBlock != nullptr ) {
+        oneBlock->Add(
+                new CJumpStatement(
+                        statement->Label()
+                )
+        );
+        allBlocks.push_back( oneBlock );
     }
+    oneBlock = std::shared_ptr<CStatementList>( new CStatementList( statement ) );
 }
 
 void CBlockSplitterVisitor::Visit(const CMoveStatement *statement) {
-    assert( statement != 0 );
+    if( !metLabel ) {
+        addNewLabel();
+    }
     oneBlock->Add( std::shared_ptr<const CStatement>( statement ) );
 }
 
 void CBlockSplitterVisitor::Visit(const CSeqStatement *statement) {
-    // ???
     assert( false );
 }
 
@@ -87,8 +103,23 @@ void CBlockSplitterVisitor::Visit(const CStatementList *list) {
         ( *it )->Accept( this );
     }
     if( oneBlock != nullptr ) {
+        oneBlock->Add(
+                new CJumpStatement(
+                        // Label with the biggest number
+                        CLabel( LabelTag::FINISH )
+                )
+        );
         allBlocks.push_back( oneBlock );
     }
+}
+
+void CBlockSplitterVisitor::addNewLabel() {
+    oneBlock = std::shared_ptr<CStatementList>(
+            new CStatementList(
+                    new CLabelStatement( CLabel() )
+            )
+    );
+    metLabel = true;
 }
 
 }
