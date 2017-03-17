@@ -42,14 +42,6 @@ public:
                 return "LE";
             case TLogicOperatorType::LOT_GE:
                 return "GE";
-            case TLogicOperatorType::LOT_ULT:
-                return "ULT";
-            case TLogicOperatorType::LOT_ULE:
-                return "ULE";
-            case TLogicOperatorType::LOT_UGT:
-                return "UGT";
-            case TLogicOperatorType::LOT_UGE:
-                return "UGE";
             default:
                 assert(false);
         }
