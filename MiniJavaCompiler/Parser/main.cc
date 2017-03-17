@@ -6,6 +6,7 @@
 #include <IRTree/Visitors/DoubleCallEliminationVisitor.h>
 #include <IRTree/Visitors/SeqLinearizerVisitor.h>
 #include <IRTree/Visitors/BlockSplitterVisitor.h>
+#include <IRTree/BlockLinearizer.h>
 
 // prototype of bison-generated parser function
 int yyparse();
@@ -88,10 +89,21 @@ int main(int argc, char **argv)
 			std::string methodName = it->first;
 			it->second->Accept( &splitter );
 			std::vector<std::shared_ptr<IRTree::CStatementList>> blocks = splitter.GetAllBlocks();
-			for ( int i = 0; i < blocks.size(); ++i ) {
+            IRTree::CBlockLinearizer blockLinearizer;
+            std::vector<IRTree::Block> linearizedBlocks = blockLinearizer.Linearize( blocks );
+
+            std::vector<std::shared_ptr<IRTree::CStatementList>> newBlocks;
+            for ( int i = 0; i < linearizedBlocks.size(); ++i ) {
+                std::shared_ptr<IRTree::CStatementList> newList( new IRTree::CStatementList() );
+                for ( int j = 0; j < linearizedBlocks[i].size(); ++j ) {
+                    newList->Add( linearizedBlocks[i][j] );
+                }
+                newBlocks.push_back( newList );
+            }
+			for ( int i = 0; i < newBlocks.size(); ++i ) {
 				std::fstream outputStream( pathOutputFile + "_" + methodName + "_block_" + std::to_string( i ) + extension, std::fstream::out );
 				IRTree::CDotLangVisitor dotLangVisitor( false );
-				( blocks[i] )->Accept( &dotLangVisitor );
+				( newBlocks[i] )->Accept( &dotLangVisitor );
 				outputStream << dotLangVisitor.GetTraversalInDotLanguage() << std::endl;
 				outputStream.close();
 			}

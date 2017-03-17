@@ -22,60 +22,64 @@ std::vector<Block> CBlockLinearizer::Linearize(std::vector<std::shared_ptr<CStat
 
     std::vector<Block> linearizedBlocks;
     while( !blocks.empty() ) {
+        std::cout << blocks.size() << "\n";
         auto currentBlock = blocks.begin();
         while( currentBlock != blocks.end() ) {
 
             std::shared_ptr<const CStatement> lastStatement = currentBlock->second.back();
-            auto nextBlock = blocks.end();
 
             //last statement is either jump or conditional jump
-            if( typeid( lastStatement.get() ) == typeid( const CJumpStatement* )) {
-                CLabel jumpLabel = static_cast<const CJumpStatement* >( lastStatement.get() )->Target();
-                nextBlock = blocks.find( jumpLabel );
+            if( auto jumpStatement = dynamic_cast<const CJumpStatement*>( lastStatement.get() ) ) {
+                CLabel jumpLabel = jumpStatement->Target();
+                linearizedBlocks.push_back(currentBlock->second);
+                blocks.erase(currentBlock);
+                currentBlock = blocks.find(jumpLabel);
 
-            } else {
-                const CJumpConditionalStatement* jumpStatement
-                        = static_cast<const CJumpConditionalStatement* >( lastStatement.get() );
+            } else if( auto jumpStatement = dynamic_cast<const CJumpConditionalStatement*>( lastStatement.get() ) ) {
+
                 CLabel trueLabel = jumpStatement->TrueLabel();
                 CLabel falseLabel = jumpStatement->FalseLabel();
-                auto nextBlock = blocks.find( falseLabel );
-                if( nextBlock == blocks.end() ) {
-                    nextBlock = blocks.find( trueLabel );
-                    if( nextBlock != blocks.end() ) {
+                auto nextBlock = blocks.find(falseLabel);
+                if (nextBlock == blocks.end()) {
+                    nextBlock = blocks.find(trueLabel);
+                    if (nextBlock != blocks.end()) {
 
                         //invert operation and swap labels
-                        currentBlock->second[ currentBlock->second.size() - 1] =
-                            std::shared_ptr<const CJumpConditionalStatement> (
-                                    new CJumpConditionalStatement(
-                                            GetInverseType( jumpStatement->Operation() ),
-                                            jumpStatement->LeftOperand(),
-                                            jumpStatement->RightOperand(),
-                                            jumpStatement->FalseLabel(),
-                                            jumpStatement->TrueLabel()
-                                    )
-                            );
+                        currentBlock->second[currentBlock->second.size() - 1] =
+                                std::shared_ptr<const CJumpConditionalStatement>(
+                                        new CJumpConditionalStatement(
+                                                GetInverseType(jumpStatement->Operation()),
+                                                jumpStatement->LeftOperand(),
+                                                jumpStatement->RightOperand(),
+                                                jumpStatement->FalseLabel(),
+                                                jumpStatement->TrueLabel()
+                                        )
+                                );
+                        linearizedBlocks.push_back(currentBlock->second);
+                        blocks.erase(currentBlock);
+                        currentBlock = blocks.find(trueLabel);
 
                     } else {
 
                         //add new Block
                         CLabel newLabel;
-                        std::shared_ptr<const CLabelStatement> labelStatement (
-                                new CLabelStatement (
+                        std::shared_ptr<const CLabelStatement> labelStatement(
+                                new CLabelStatement(
                                         newLabel
                                 )
                         );
-                        std::shared_ptr<const CJumpStatement> newJumpStatement (
-                                new CJumpStatement (
+                        std::shared_ptr<const CJumpStatement> newJumpStatement(
+                                new CJumpStatement(
                                         falseLabel
                                 )
                         );
-                        std::vector< std::shared_ptr<const CStatement> > newBlock;
-                        newBlock.push_back( labelStatement );
-                        newBlock.push_back( newJumpStatement );
-                        blocks.emplace( newLabel, newBlock );
+                        std::vector<std::shared_ptr<const CStatement> > newBlock;
+                        newBlock.push_back(labelStatement);
+                        newBlock.push_back(newJumpStatement);
+                        blocks.emplace(newLabel, newBlock);
 
-                        currentBlock->second[ currentBlock->second.size() - 1] =
-                                std::shared_ptr<const CJumpConditionalStatement> (
+                        currentBlock->second[currentBlock->second.size() - 1] =
+                                std::shared_ptr<const CJumpConditionalStatement>(
                                         new CJumpConditionalStatement(
                                                 jumpStatement->Operation(),
                                                 jumpStatement->LeftOperand(),
@@ -85,12 +89,17 @@ std::vector<Block> CBlockLinearizer::Linearize(std::vector<std::shared_ptr<CStat
                                         )
                                 );
 
-                        nextBlock = blocks.find( newLabel );
+                        linearizedBlocks.push_back(currentBlock->second);
+                        blocks.erase(currentBlock);
+                        currentBlock = blocks.find(newLabel);
                     }
                 }
-                linearizedBlocks.push_back( currentBlock->second );
-                blocks.erase( currentBlock );
-                currentBlock = nextBlock;
+
+                linearizedBlocks.push_back(currentBlock->second);
+                blocks.erase(currentBlock);
+                currentBlock = blocks.find(falseLabel);
+            } else {
+                assert(false);
             }
         }
     }
