@@ -83,7 +83,7 @@ int main(int argc, char **argv)
         std::cout << "end canonization phase\n";
 		pathOutputFile = std::string("can_blocks");
 		extension = std::string(".dot");
-        for ( auto it = methodTreesLinearized.begin(); it != methodTreesLinearized.end(); ++it ) {
+        for ( auto it = ++methodTreesLinearized.begin(); it != methodTreesLinearized.end(); ++it ) {
             IRTree::CBlockSplitterVisitor splitter( false );
 			std::string methodName = it->first;
 			it->second->Accept( &splitter );
@@ -95,7 +95,7 @@ int main(int argc, char **argv)
 				outputStream << dotLangVisitor.GetTraversalInDotLanguage() << std::endl;
 				outputStream.close();
 			}
-        }
+		}
 	}
 	return 0;
 }

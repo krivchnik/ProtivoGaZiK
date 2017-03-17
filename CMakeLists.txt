@@ -12,6 +12,7 @@ SET(PARSER_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/MiniJavaCompiler/Output")
 SET(PARSER_NODES_DIR  "${CMAKE_CURRENT_SOURCE_DIR}/MiniJavaCompiler/AbstractSyntaxTree")
 SET(ROOT_DIR          "${CMAKE_CURRENT_SOURCE_DIR}/MiniJavaCompiler")
 SET(IRTREE_DIR        "${CMAKE_CURRENT_SOURCE_DIR}/MiniJavaCompiler/IRTree")
+SET(CODEGEN_DIR       "${CMAKE_CURRENT_SOURCE_DIR}/MiniJavaCompiler/CodeGeneration")
 
 SET(BisonOutput ${PARSER_OUTPUT_DIR}/parser.cpp)
 SET(BISON_EXECUTABLE /usr/bin/bison)
@@ -39,7 +40,8 @@ ADD_CUSTOM_COMMAND(
 )
 
 file(GLOB NodeList ${PARSER_NODES_DIR} "${PARSER_NODES_DIR}/Nodes/*.cpp" "${PARSER_NODES_DIR}/Visitors/*.cpp"
-        "${PARSER_NODES_DIR}/Analyzer/*.cpp" "${IRTREE_DIR}/*.cpp" "${IRTREE_DIR}/Nodes/*.cpp" "${IRTREE_DIR}/Visitors/*.cpp")
+        "${PARSER_NODES_DIR}/Analyzer/*.cpp" "${IRTREE_DIR}/*.cpp" "${IRTREE_DIR}/Nodes/*.cpp" "${IRTREE_DIR}/Visitors/*.cpp"
+        "${CODEGEN_DIR}/*.cpp)
 
 INCLUDE_DIRECTORIES(${PARSER_SOURCE_DIR} ${PARSER_NODES_DIR} ${ROOT_DIR})
 
