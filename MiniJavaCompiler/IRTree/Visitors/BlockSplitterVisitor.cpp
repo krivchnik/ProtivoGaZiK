@@ -102,7 +102,7 @@ void CBlockSplitterVisitor::Visit(const CStatementList *list) {
         oneBlock->Add(
                 new CJumpStatement(
                         // Label with the biggest number
-                        CLabel()
+                        CLabel( LabelTag::FINISH )
                 )
         );
         allBlocks.push_back( oneBlock );

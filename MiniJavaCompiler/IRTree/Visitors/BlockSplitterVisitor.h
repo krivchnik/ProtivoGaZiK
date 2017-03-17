@@ -49,7 +49,6 @@ namespace IRTree {
         bool metLabel;
         std::shared_ptr<CStatementList> oneBlock;
         std::vector<std::shared_ptr<CStatementList>> allBlocks;
-
         void addNewLabel();
     };
 }
