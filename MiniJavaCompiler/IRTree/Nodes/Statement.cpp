@@ -6,9 +6,6 @@
 
 using namespace IRTree;
 
-
-CStatement::~CStatement() {}
-
 CMoveStatement::CMoveStatement( const CExpression* _destination, const CExpression* _source )
     : destination( _destination ), source( _source ) {}
 CMoveStatement::CMoveStatement( std::shared_ptr<const CExpression> _destination, std::shared_ptr<const CExpression> _source )
@@ -224,7 +221,7 @@ std::shared_ptr<const CStatement> CStatementList::Clone() const {
     for ( auto it = statements.begin(); it != statements.end(); ++it ) {
         newList->Add( ( *it )->Clone() );
     }
-    return std::shared_ptr<const CStatementList>( newList );
+    return std::shared_ptr<const CStatement>( newList );
 }
 
 std::shared_ptr<const CStatement> CStatementList::Canonize() const {

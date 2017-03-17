@@ -39,22 +39,26 @@ void CBlockSplitterVisitor::Visit(const CEseqExpression *expression) {
 }
 
 void CBlockSplitterVisitor::Visit(const CExpStatement *statement) {
+    assert( statement != 0 );
     oneBlock->Add( std::shared_ptr<const CStatement>( statement ) );
 }
 
 void CBlockSplitterVisitor::Visit(const CJumpConditionalStatement *statement) {
+    assert( statement != 0 );
     oneBlock->Add( std::shared_ptr<const CStatement>( statement ) );
     allBlocks.push_back( oneBlock );
     oneBlock = nullptr;
 }
 
 void CBlockSplitterVisitor::Visit(const CJumpStatement *statement) {
+    assert( statement != 0 );
     oneBlock->Add( std::shared_ptr<const CStatement>( statement ) );
     allBlocks.push_back( oneBlock );
     oneBlock = nullptr;
 }
 
 void CBlockSplitterVisitor::Visit(const CLabelStatement *statement) {
+    assert( statement != 0 );
     if( oneBlock != nullptr) {
         oneBlock->Add( std::shared_ptr<const CStatement>( statement ) );
     } else {
@@ -63,6 +67,7 @@ void CBlockSplitterVisitor::Visit(const CLabelStatement *statement) {
 }
 
 void CBlockSplitterVisitor::Visit(const CMoveStatement *statement) {
+    assert( statement != 0 );
     oneBlock->Add( std::shared_ptr<const CStatement>( statement ) );
 }
 
@@ -76,6 +81,7 @@ void CBlockSplitterVisitor::Visit(const CExpressionList *list) {
 }
 
 void CBlockSplitterVisitor::Visit(const CStatementList *list) {
+    assert( list != 0 );
     std::vector<std::shared_ptr<const CStatement>> statements = list->Statements();
     for( auto it = statements.begin(); it != statements.end(); ++it ) {
         ( *it )->Accept( this );
