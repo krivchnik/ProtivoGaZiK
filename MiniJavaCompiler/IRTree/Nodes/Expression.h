@@ -10,6 +10,7 @@
 #include <IRTree/Nodes/ExpressionList.h>
 #include <IRTree/Nodes/Statement.h>
 #include <IRTree/Nodes/VisitorTarget.h>
+#include <assert.h>
 
 namespace IRTree {
 
@@ -27,15 +28,56 @@ public:
     virtual std::shared_ptr<const CExpression> Clone() const override;
 };
 
-enum class TOperatorType : char {
-    OT_Plus,
-    OT_Minus,
-    OT_Times,
-    OT_Div,
-    OT_Mod,
-    OT_And,
-    OT_Or
-};
+    std::string to_string(TLogicOperatorType operation) {
+        switch (operation){
+            case TLogicOperatorType::LOT_EQ:
+                return "EQ";
+            case TLogicOperatorType::LOT_NE:
+                return "NE";
+            case TLogicOperatorType::LOT_LT:
+                return "LT";
+            case TLogicOperatorType::LOT_GT:
+                return "GT";
+            case TLogicOperatorType::LOT_LE:
+                return "LE";
+            case TLogicOperatorType::LOT_GE:
+                return "GE";
+            default:
+                assert(false);
+        }
+    }
+    enum class TOperatorType : char {
+        OT_Plus,
+        OT_Minus,
+        OT_Times,
+        OT_Div,
+        OT_Mod,
+        OT_And,
+        OT_Or
+    };
+
+    inline std::string to_string(TOperatorType operation) {
+        switch (operation){
+            case TOperatorType::OT_Plus:
+                return "ADD";
+            case TOperatorType::OT_Minus:
+                return "SUB";
+            case TOperatorType::OT_Times:
+                return "MULT";
+            case TOperatorType::OT_Div:
+                return "DIV";
+            case TOperatorType::OT_Mod:
+                return "MOD";
+            case TOperatorType::OT_And:
+                assert(false);
+                return "AND";
+            case TOperatorType::OT_Or:
+                assert(false);
+                return "OR";
+            default:
+                assert(false);
+        }
+    }
 
 //-----------------------------------------------------------------------------------------------//
 
@@ -110,8 +152,8 @@ private:
 
 class CMemExpression : public CExpression {
 public:
-    CMemExpression( const CExpression* _address );
-    CMemExpression( std::shared_ptr<const CExpression> _address );
+    CMemExpression( const CExpression* address );
+    CMemExpression( std::shared_ptr<const CExpression> address );
 
     const CExpression* Address() const { return address.get(); }
 

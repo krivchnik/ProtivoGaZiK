@@ -8,8 +8,6 @@ namespace IRTree {
 
     class CStatement : public IVisitorTarget {
     public:
-        virtual ~CStatement();
-
         virtual std::shared_ptr<const CStatement> Canonize() const = 0;
 
         virtual std::shared_ptr<const CStatement> Clone() const = 0;
@@ -45,6 +43,7 @@ namespace IRTree {
         }
     }
 
+    inline std::string to_string(TLogicOperatorType operation);
 //-----------------------------------------------------------------------------------------------//
     class CExpression;
 

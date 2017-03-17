@@ -39,6 +39,7 @@ void CBlockSplitterVisitor::Visit(const CEseqExpression *expression) {
 }
 
 void CBlockSplitterVisitor::Visit(const CExpStatement *statement) {
+    assert( statement != 0 );
     if( !metLabel ) {
         addNewLabel();
     }
@@ -46,6 +47,7 @@ void CBlockSplitterVisitor::Visit(const CExpStatement *statement) {
 }
 
 void CBlockSplitterVisitor::Visit(const CJumpConditionalStatement *statement) {
+    assert( statement != 0 );
     if( !metLabel ) {
         addNewLabel();
     }
@@ -56,6 +58,7 @@ void CBlockSplitterVisitor::Visit(const CJumpConditionalStatement *statement) {
 }
 
 void CBlockSplitterVisitor::Visit(const CJumpStatement *statement) {
+    assert( statement != 0 );
     if( !metLabel ) {
         addNewLabel();
     }
@@ -94,6 +97,7 @@ void CBlockSplitterVisitor::Visit(const CExpressionList *list) {
 }
 
 void CBlockSplitterVisitor::Visit(const CStatementList *list) {
+    assert( list != 0 );
     std::vector<std::shared_ptr<const CStatement>> statements = list->Statements();
     for( auto it = statements.begin(); it != statements.end(); ++it ) {
         ( *it )->Accept( this );
