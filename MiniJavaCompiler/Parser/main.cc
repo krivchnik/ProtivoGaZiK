@@ -5,6 +5,7 @@
 #include <IRTree/Visitors/DotLangVisitor.h>
 #include <IRTree/Visitors/DoubleCallEliminationVisitor.h>
 #include <IRTree/Visitors/SeqLinearizerVisitor.h>
+#include <IRTree/Visitors/BlockSplitterVisitor.h>
 
 // prototype of bison-generated parser function
 int yyparse();
@@ -48,6 +49,7 @@ int main(int argc, char **argv)
             outputStream.close();
 		}
 
+        //TMethodToIRTMap = std::unordered_map<std::string, std::shared_ptr<const IRTree::CStatement>>
         TMethodToIRTMap methodTreesWithoutDoubleCalls;
         TMethodToIRTMap methodTreesWithoutEseqs;
         TMethodToIRTMap methodTreesLinearized;
@@ -55,6 +57,7 @@ int main(int argc, char **argv)
             IRTree::CDoubleCallEliminationVisitor callEliminationVisitor( false );
             it->second->Accept( &callEliminationVisitor );
 
+            //std::pair<iterator, bool>
             auto res = methodTreesWithoutDoubleCalls.emplace( it->first, callEliminationVisitor.ResultTree() );
             auto res2 = methodTreesWithoutEseqs.emplace( it->first, res.first->second->Canonize() );
 
@@ -63,18 +66,35 @@ int main(int argc, char **argv)
             methodTreesLinearized.emplace( it->first, seqLinearizerVisitor.ResultTree() );
         }
 
-		pathOutputFile = std::string("can");
+//		pathOutputFile = std::string("can");
+//		extension = std::string(".dot");
+//      for ( auto it = methodTreesLinearized.begin(); it != methodTreesLinearized.end(); ++it ) {
+//          std::string methodName = it->first;
+//          methodName[0] = std::toupper( methodName[0] );
+//          std::fstream outputStream( pathOutputFile + "_" + methodName + extension, std::fstream::out );
+//
+//			IRTree::CDotLangVisitor dotLangVisitor( false );
+//			//methodTreesWithoutDoubleCalls.at( it->first )->Accept( &dotLangVisitor );
+//			methodTreesLinearized.at( it->first )->Accept( &dotLangVisitor );
+//			outputStream << dotLangVisitor.GetTraversalInDotLanguage() << std::endl;
+//          outputStream.close();
+//      }
+
+        std::cout << "end canonization phase\n";
+		pathOutputFile = std::string("can_blocks");
 		extension = std::string(".dot");
         for ( auto it = methodTreesLinearized.begin(); it != methodTreesLinearized.end(); ++it ) {
-            std::string methodName = it->first;
-            methodName[0] = std::toupper( methodName[0] );
-            std::fstream outputStream( pathOutputFile + "_" + methodName + extension, std::fstream::out );
-
-			IRTree::CDotLangVisitor dotLangVisitor( false );
-			//methodTreesWithoutDoubleCalls.at( it->first )->Accept( &dotLangVisitor );
-			methodTreesLinearized.at( it->first )->Accept( &dotLangVisitor );
-			outputStream << dotLangVisitor.GetTraversalInDotLanguage() << std::endl;
-            outputStream.close();
+            IRTree::CBlockSplitterVisitor splitter( false );
+			std::string methodName = it->first;
+			it->second->Accept( &splitter );
+			std::vector<std::shared_ptr<IRTree::CStatementList>> blocks = splitter.GetAllBlocks();
+			for ( int i = 0; i < blocks.size(); ++i ) {
+				std::fstream outputStream( pathOutputFile + "_" + methodName + "_block_" + std::to_string( i ) + extension, std::fstream::out );
+				IRTree::CDotLangVisitor dotLangVisitor( false );
+				( blocks[i] )->Accept( &dotLangVisitor );
+				outputStream << dotLangVisitor.GetTraversalInDotLanguage() << std::endl;
+				outputStream.close();
+			}
         }
 	}
 	return 0;
