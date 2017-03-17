@@ -7,6 +7,7 @@
 #include <IRTree/Visitors/SeqLinearizerVisitor.h>
 #include <IRTree/Visitors/BlockSplitterVisitor.h>
 #include <IRTree/BlockLinearizer.h>
+#include <CodeGeneration/HolyPatricVisitor.h>
 
 // prototype of bison-generated parser function
 int yyparse();
@@ -100,13 +101,17 @@ int main(int argc, char **argv)
                 }
                 newBlocks.push_back( newList );
             }
-			for ( int i = 0; i < newBlocks.size(); ++i ) {
-				std::fstream outputStream( pathOutputFile + "_" + methodName + "_block_" + std::to_string( i ) + extension, std::fstream::out );
-				IRTree::CDotLangVisitor dotLangVisitor( false );
-				( newBlocks[i] )->Accept( &dotLangVisitor );
-				outputStream << dotLangVisitor.GetTraversalInDotLanguage() << std::endl;
-				outputStream.close();
-			}
+//			for ( int i = 0; i < newBlocks.size(); ++i ) {
+//				std::fstream outputStream( pathOutputFile + "_" + methodName + "_block_" + std::to_string( i ) + extension, std::fstream::out );
+//				IRTree::CDotLangVisitor dotLangVisitor( false );
+//				( newBlocks[i] )->Accept( &dotLangVisitor );
+//				outputStream << dotLangVisitor.GetTraversalInDotLanguage() << std::endl;
+//				outputStream.close();
+//			}
+
+            IRTree::HolyPatricVisitor codeGenerator;
+            newBlocks[0]->Accept( &codeGenerator );
+            std::cout << codeGenerator.GetResultProgram() << "\n";
 		}
 	}
 	return 0;

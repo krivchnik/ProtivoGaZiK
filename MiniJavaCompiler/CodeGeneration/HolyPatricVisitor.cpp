@@ -103,7 +103,9 @@ namespace IRTree {
 
     void HolyPatricVisitor::Visit(const CStatementList *list) {
         assert( list != 0 );
-        assert(false);
+        for( auto it = list->Statements().begin(); it != list->Statements().end(); ++it ) {
+            ( *it )->Accept( this );
+        }
     }
 
     std::string HolyPatricVisitor::GetResultProgram() {
