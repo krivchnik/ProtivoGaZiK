@@ -16,6 +16,8 @@ public:
     CLabel( std::string _label ) : label( _label ) {}
 
     std::string ToString() const { return label; }
+
+    bool operator<( const CLabel& other ) const { return label < other.label; }
 private:
     std::string label;
     LabelTag tag;
