@@ -9,7 +9,8 @@ namespace IRTree {
     void HolyPatricVisitor::Visit(const CConstExpression *expression) {
         assert(expression != 0);
         registerId[expression] = ++nRegisters;
-        resultAssemblerPrograms.push_back("LI " + std::to_string(expression->Value()) + "\n");
+        resultAssemblerPrograms.push_back("MOV " + constructRegister(registerId[expression]) + " " +
+                                                  std::to_string(expression->Value()) + "\n");
     }
 
     void HolyPatricVisitor::Visit(const CNameExpression *expression) {
@@ -20,14 +21,17 @@ namespace IRTree {
     void HolyPatricVisitor::Visit(const CTempExpression *expression) {
         assert(expression != 0);
         registerId[expression] = ++nRegisters;
+        resultAssemblerPrograms.push_back("MOV");
+        resultAssemblerPrograms.push_back(constructRegister(registerId[expression]));
+        resultAssemblerPrograms.push_back(expression->Temporary().ToString() + "\n");
     }
 
     void HolyPatricVisitor::Visit(const CBinaryExpression *expression) {
         assert(expression != 0);
         expression->LeftOperand()->Accept(this);
         expression->RightOperand()->Accept(this);
-        resultAssemblerPrograms.push_back(to_string(expression->Operation()) + " ");
-        resultAssemblerPrograms.push_back(constructRegister(registerId[expression->LeftOperand()]) + " ");
+        resultAssemblerPrograms.push_back(to_string(expression->Operation()));
+        resultAssemblerPrograms.push_back(constructRegister(registerId[expression->LeftOperand()]));
         resultAssemblerPrograms.push_back(constructRegister(registerId[expression->RightOperand()]) + "\n");
         registerId[expression] = registerId[expression->LeftOperand()];
     }
@@ -35,8 +39,12 @@ namespace IRTree {
     void HolyPatricVisitor::Visit(const CMemExpression *expression) {
         assert(expression != 0);
         expression->Address()->Accept(this);
-        resultAssemblerPrograms.push_back("MEM ");
-        resultAssemblerPrograms.push_back(constructRegister(registerId[expression->Address()]) + "\n");
+        resultAssemblerPrograms.push_back("MOV");
+        registerId[expression] = ++nRegisters;
+        resultAssemblerPrograms.push_back(constructRegister(registerId[expression]));
+
+
+        resultAssemblerPrograms.push_back("[" + constructRegister(registerId[expression->Address()]) + "]\n");
     }
 
     void HolyPatricVisitor::Visit(const CCallExpression *expression) {
@@ -102,7 +110,12 @@ namespace IRTree {
 
     void HolyPatricVisitor::Visit(const CStatementList *list) {
         assert( list != 0 );
-        for( auto it = list->Statements().begin(); it != list->Statements().end(); ++it ) {
+        std::vector<std::shared_ptr<const CStatement>> statements = list->Statements();
+        std::cout << statements.size() << "\n";
+        std::shared_ptr<const CStatement> firstStatement(statements[0]);
+        const CLabelStatement* rawStatement = dynamic_cast<const CLabelStatement*>(firstStatement.get());
+        std::cout << rawStatement->Label().ToString() << "\n";
+        for( auto it = statements.begin(); it != statements.end(); ++it ) {
             ( *it )->Accept( this );
         }
     }
