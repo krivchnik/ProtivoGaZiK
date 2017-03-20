@@ -8,9 +8,8 @@ namespace IRTree {
 
     void HolyPatricVisitor::Visit(const CConstExpression *expression) {
         assert(expression != 0);
-        registerId[expression] = registerId.size();
+        registerId[expression] = ++nRegisters;
         resultAssemblerPrograms.push_back("LI " + std::to_string(expression->Value()) + "\n");
-        assert( false );
     }
 
     void HolyPatricVisitor::Visit(const CNameExpression *expression) {
@@ -20,7 +19,7 @@ namespace IRTree {
 
     void HolyPatricVisitor::Visit(const CTempExpression *expression) {
         assert(expression != 0);
-        registerId[expression] = registerId.size();
+        registerId[expression] = ++nRegisters;
     }
 
     void HolyPatricVisitor::Visit(const CBinaryExpression *expression) {
@@ -30,6 +29,7 @@ namespace IRTree {
         resultAssemblerPrograms.push_back(to_string(expression->Operation()) + " ");
         resultAssemblerPrograms.push_back(constructRegister(registerId[expression->LeftOperand()]) + " ");
         resultAssemblerPrograms.push_back(constructRegister(registerId[expression->RightOperand()]) + "\n");
+        registerId[expression] = registerId[expression->LeftOperand()];
     }
 
     void HolyPatricVisitor::Visit(const CMemExpression *expression) {
@@ -57,7 +57,6 @@ namespace IRTree {
     void HolyPatricVisitor::Visit(const CExpStatement *statement) {
         assert( statement != 0 );
         statement->Expression()->Accept(this);
-        assert(false);
     }
 
     void HolyPatricVisitor::Visit(const CJumpConditionalStatement *statement) {
@@ -118,6 +117,10 @@ namespace IRTree {
 
     std::string HolyPatricVisitor::constructRegister(int index) const {
         return "R" + std::to_string(index);
+    }
+
+    HolyPatricVisitor::HolyPatricVisitor(bool _verbose) : CVisitor( _verbose ) {
+        nRegisters = 0;
     }
 
 }

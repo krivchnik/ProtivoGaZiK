@@ -20,7 +20,7 @@ namespace IRTree {
 // генерация ассемблерного кода
     class HolyPatricVisitor : public CVisitor {
     public:
-        HolyPatricVisitor( bool _verbose = false ) : CVisitor( _verbose ) {}
+        HolyPatricVisitor( bool _verbose = false );
 
         std::string GetResultProgram();
 
@@ -47,6 +47,8 @@ namespace IRTree {
         std::vector<std::string> resultAssemblerPrograms;
         // номер регистра в который мы запишем результат работы данной вершины
         std::map<const IVisitorTarget*, int> registerId;
+        // количество используемых регистров
+        int nRegisters;
         std::string constructRegister(int index) const;
     };
 }
