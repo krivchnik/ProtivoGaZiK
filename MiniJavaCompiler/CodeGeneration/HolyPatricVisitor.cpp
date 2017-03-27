@@ -74,7 +74,7 @@ namespace IRTree {
         resultAssemblerPrograms.push_back(to_string(statement->Operation()) + " ");
         resultAssemblerPrograms.push_back(constructRegister(registerId[statement->LeftOperand()]) + " ");
         resultAssemblerPrograms.push_back(constructRegister(registerId[statement->RightOperand()]) + "\n");
-        resultAssemblerPrograms.push_back("CJUMP " + statement->TrueLabel().ToString() + "\n");
+        resultAssemblerPrograms.push_back(to_jump_string(statement->Operation()) + " " + statement->TrueLabel().ToString() + "\n");
     }
 
     void HolyPatricVisitor::Visit(const CJumpStatement *statement) {
@@ -134,6 +134,26 @@ namespace IRTree {
 
     HolyPatricVisitor::HolyPatricVisitor(bool _verbose) : CVisitor( _verbose ) {
         nRegisters = 0;
+    }
+
+    std::string HolyPatricVisitor::to_jump_string(TLogicOperatorType type) const {
+        switch( type )
+        {
+            case TLogicOperatorType::LOT_EQ:
+                return std::string("JE");
+            case TLogicOperatorType::LOT_NE:
+                return std::string("JNE");
+            case TLogicOperatorType::LOT_LT:
+                return std::string("JL");
+            case TLogicOperatorType::LOT_GT:
+                return std::string("JG");
+            case TLogicOperatorType::LOT_LE:
+                return std::string("JLE");
+            case TLogicOperatorType::LOT_GE:
+                return std::string("JGE");
+            default:
+                assert( false );
+        }
     }
 
 }

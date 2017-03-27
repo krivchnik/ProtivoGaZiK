@@ -50,5 +50,6 @@ namespace IRTree {
         // количество используемых регистров
         int nRegisters;
         std::string constructRegister(int index) const;
+        std::string to_jump_string(TLogicOperatorType operation) const;
     };
 }
