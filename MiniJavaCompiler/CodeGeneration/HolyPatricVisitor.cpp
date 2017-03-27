@@ -22,11 +22,12 @@ namespace IRTree {
         assert(expression != 0);
         if( registerIdForTemps.find(expression->Temporary().ToString()) == registerIdForTemps.end() ) {
             registerId[expression] = ++nRegisters;
-            registerIdForTemps[expression->Temporary().ToString()] = nRegisters;
             if( expression->Temporary().ToString()[0] == '$') {
                 resultAssemblerPrograms.push_back("MOV");
                 resultAssemblerPrograms.push_back(constructRegister(registerId[expression]));
                 resultAssemblerPrograms.push_back(expression->Temporary().ToString() + "\n");
+            } else {
+                registerIdForTemps[expression->Temporary().ToString()] = nRegisters;
             }
         } else {
             registerId[expression] = registerIdForTemps[expression->Temporary().ToString()];
