@@ -47,6 +47,7 @@ namespace IRTree {
         std::vector<std::string> resultAssemblerPrograms;
         // номер регистра в который мы запишем результат работы данной вершины
         std::map<const IVisitorTarget*, int> registerId;
+        std::map<std::string, int> registerIdForTemps;
         // количество используемых регистров
         int nRegisters;
         std::string constructRegister(int index) const;

@@ -110,7 +110,9 @@ int main(int argc, char **argv)
 //			}
 
             IRTree::HolyPatricVisitor codeGenerator;
-            newBlocks[0]->Accept( &codeGenerator );
+            for( int i = 0; i < newBlocks.size(); ++i ) {
+                newBlocks[i]->Accept(&codeGenerator);
+            }
             std::cout << codeGenerator.GetResultProgram() << "\n";
 		}
 	}

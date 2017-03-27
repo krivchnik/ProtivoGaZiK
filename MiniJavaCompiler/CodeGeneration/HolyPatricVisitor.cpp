@@ -20,10 +20,17 @@ namespace IRTree {
 
     void HolyPatricVisitor::Visit(const CTempExpression *expression) {
         assert(expression != 0);
-        registerId[expression] = ++nRegisters;
-        resultAssemblerPrograms.push_back("MOV");
-        resultAssemblerPrograms.push_back(constructRegister(registerId[expression]));
-        resultAssemblerPrograms.push_back(expression->Temporary().ToString() + "\n");
+        if( registerIdForTemps.find(expression->Temporary().ToString()) == registerIdForTemps.end() ) {
+            registerId[expression] = ++nRegisters;
+            registerIdForTemps[expression->Temporary().ToString()] = nRegisters;
+            if( expression->Temporary().ToString()[0] == '$') {
+                resultAssemblerPrograms.push_back("MOV");
+                resultAssemblerPrograms.push_back(constructRegister(registerId[expression]));
+                resultAssemblerPrograms.push_back(expression->Temporary().ToString() + "\n");
+            }
+        } else {
+            registerId[expression] = registerIdForTemps[expression->Temporary().ToString()];
+        }
     }
 
     void HolyPatricVisitor::Visit(const CBinaryExpression *expression) {
@@ -42,8 +49,6 @@ namespace IRTree {
         resultAssemblerPrograms.push_back("MOV");
         registerId[expression] = ++nRegisters;
         resultAssemblerPrograms.push_back(constructRegister(registerId[expression]));
-
-
         resultAssemblerPrograms.push_back("[" + constructRegister(registerId[expression->Address()]) + "]\n");
     }
 
@@ -51,11 +56,15 @@ namespace IRTree {
         assert(expression != 0);
         expression->Arguments()->Accept(this);
         for( int i = expression->Arguments()->Expressions().size() - 1; i >= 0 ; --i){
-            resultAssemblerPrograms.push_back("PULL " + constructRegister(
+            resultAssemblerPrograms.push_back("PUSH " + constructRegister(
                     registerId[(expression->Arguments()->Expressions()[i]).get()]) + "\n");
         }
-        resultAssemblerPrograms.push_back("CALL ");
+        resultAssemblerPrograms.push_back("CALL");
         expression->Function()->Accept(this);
+        for( int i = expression->Arguments()->Expressions().size() - 1; i >= 0 ; --i){
+            resultAssemblerPrograms.push_back("POP " + constructRegister(
+                    registerId[(expression->Arguments()->Expressions()[i]).get()]) + "\n");
+        }
     }
 
     void HolyPatricVisitor::Visit(const CEseqExpression *expression) {
@@ -91,7 +100,7 @@ namespace IRTree {
         assert( statement != 0 );
         statement->Destination()->Accept(this);
         statement->Source()->Accept(this);
-        resultAssemblerPrograms.push_back("MOVE ");
+        resultAssemblerPrograms.push_back("MOV");
         resultAssemblerPrograms.push_back(constructRegister(registerId[statement->Destination()]));
         resultAssemblerPrograms.push_back(constructRegister(registerId[statement->Source()]) + "\n");
     }
@@ -111,10 +120,10 @@ namespace IRTree {
     void HolyPatricVisitor::Visit(const CStatementList *list) {
         assert( list != 0 );
         std::vector<std::shared_ptr<const CStatement>> statements = list->Statements();
-        std::cout << statements.size() << "\n";
-        std::shared_ptr<const CStatement> firstStatement(statements[0]);
-        const CLabelStatement* rawStatement = dynamic_cast<const CLabelStatement*>(firstStatement.get());
-        std::cout << rawStatement->Label().ToString() << "\n";
+//        std::cout << statements.size() << "\n";
+//        std::shared_ptr<const CStatement> firstStatement(statements[0]);
+//        const CLabelStatement* rawStatement = dynamic_cast<const CLabelStatement*>(firstStatement.get());
+//        std::cout << rawStatement->Label().ToString() << "\n";
         for( auto it = statements.begin(); it != statements.end(); ++it ) {
             ( *it )->Accept( this );
         }
