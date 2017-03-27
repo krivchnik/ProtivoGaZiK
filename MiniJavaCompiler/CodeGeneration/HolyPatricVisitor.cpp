@@ -11,11 +11,13 @@ namespace IRTree {
         registerId[expression] = ++nRegisters;
         resultAssemblerPrograms.push_back("MOV " + constructRegister(registerId[expression]) + " " +
                                                   std::to_string(expression->Value()) + "\n");
+        isMemSubexpression = false;
     }
 
     void HolyPatricVisitor::Visit(const CNameExpression *expression) {
         assert(expression != 0);
         resultAssemblerPrograms.push_back(expression->Label().ToString() + "\n");
+        isMemSubexpression = false;
     }
 
     void HolyPatricVisitor::Visit(const CTempExpression *expression) {
@@ -32,6 +34,7 @@ namespace IRTree {
         } else {
             registerId[expression] = registerIdForTemps[expression->Temporary().ToString()];
         }
+        isMemSubexpression = false;
     }
 
     void HolyPatricVisitor::Visit(const CBinaryExpression *expression) {
@@ -42,15 +45,17 @@ namespace IRTree {
         resultAssemblerPrograms.push_back(constructRegister(registerId[expression->LeftOperand()]));
         resultAssemblerPrograms.push_back(constructRegister(registerId[expression->RightOperand()]) + "\n");
         registerId[expression] = registerId[expression->LeftOperand()];
+        isMemSubexpression = false;
     }
 
     void HolyPatricVisitor::Visit(const CMemExpression *expression) {
         assert(expression != 0);
         expression->Address()->Accept(this);
-        resultAssemblerPrograms.push_back("MOV");
-        registerId[expression] = ++nRegisters;
-        resultAssemblerPrograms.push_back(constructRegister(registerId[expression]));
-        resultAssemblerPrograms.push_back("[" + constructRegister(registerId[expression->Address()]) + "]\n");
+        //resultAssemblerPrograms.push_back("MOV");
+        registerId[expression] = registerId[expression->Address()];
+        isMemSubexpression = true;
+        //resultAssemblerPrograms.push_back(constructRegister(registerId[expression]));
+        //resultAssemblerPrograms.push_back("[" + constructRegister(registerId[expression->Address()]) + "]\n");
     }
 
     void HolyPatricVisitor::Visit(const CCallExpression *expression) {
@@ -66,6 +71,7 @@ namespace IRTree {
             resultAssemblerPrograms.push_back("POP " + constructRegister(
                     registerId[(expression->Arguments()->Expressions()[i]).get()]) + "\n");
         }
+        isMemSubexpression = false;
     }
 
     void HolyPatricVisitor::Visit(const CEseqExpression *expression) {
@@ -100,10 +106,25 @@ namespace IRTree {
     void HolyPatricVisitor::Visit(const CMoveStatement *statement) {
         assert( statement != 0 );
         statement->Destination()->Accept(this);
+        bool isLeftMemExpression = isMemSubexpression;
         statement->Source()->Accept(this);
+        bool isRightMemExpression = isMemSubexpression;
+
         resultAssemblerPrograms.push_back("MOV");
-        resultAssemblerPrograms.push_back(constructRegister(registerId[statement->Destination()]));
-        resultAssemblerPrograms.push_back(constructRegister(registerId[statement->Source()]) + "\n");
+
+        std::string leftArgument = isLeftMemExpression ? "[" : "";
+        leftArgument.append(constructRegister(registerId[statement->Destination()]));
+        if( isLeftMemExpression ) {
+            leftArgument.append("]");
+        }
+
+        std::string rightArgument = isRightMemExpression ? "[" : "";
+        rightArgument.append(constructRegister(registerId[statement->Source()]));
+        if( isRightMemExpression ) {
+            rightArgument.append("]");
+        }
+        resultAssemblerPrograms.push_back(leftArgument);
+        resultAssemblerPrograms.push_back(rightArgument + "\n");
     }
 
     void HolyPatricVisitor::Visit(const CSeqStatement *statement) {
@@ -142,9 +163,8 @@ namespace IRTree {
         return "R" + std::to_string(index);
     }
 
-    HolyPatricVisitor::HolyPatricVisitor(bool _verbose) : CVisitor( _verbose ) {
-        nRegisters = 0;
-    }
+    HolyPatricVisitor::HolyPatricVisitor(bool _verbose)
+            : CVisitor( _verbose ), nRegisters( 0 ), isMemSubexpression( false ) {}
 
     std::string HolyPatricVisitor::to_jump_string(TLogicOperatorType type) const {
         switch( type )

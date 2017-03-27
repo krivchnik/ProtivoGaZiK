@@ -50,6 +50,8 @@ namespace IRTree {
         std::map<std::string, int> registerIdForTemps;
         // количество используемых регистров
         int nRegisters;
+
+        bool isMemSubexpression;
         std::string constructRegister(int index) const;
         std::string to_jump_string(TLogicOperatorType operation) const;
     };
